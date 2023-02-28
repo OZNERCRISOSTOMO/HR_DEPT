@@ -33,4 +33,24 @@ class Admin {
         unset($this->database);
     }
 
+    public function getAdmin(){
+        $admin = $this->database->connect()->query("SELECT * FROM hr_dept WHERE id = 1")->fetch();
+        return $admin;
+        exit();
+    }
+
+    public function getTotalEmployees(){
+        $count = $this->database->connect()->query("SELECT count(*) FROM employees")->fetchColumn();
+
+        return $count;
+        exit();
+    }
+
+    public function getEmployees(){
+        $employees = $this->database->connect()->query("SELECT * FROM employees")->fetchAll();
+
+        return $employees;
+        exit();
+    }
+
 }

@@ -1,6 +1,7 @@
 <?php
 
 if ($_POST['email'] !== '' && $_POST['password'] !== '') {
+
 require '../Classes/admin.php';
 require '../Classes/database.php';
 
@@ -28,6 +29,10 @@ require '../Classes/database.php';
           header("Location:../index.php?error=errorPassword");
         exit();
     }
+
+     //start session 
+    session_start();
+    $_SESSION["admin_id"] = $adminData["id"];
 
     header("Location: ../Pages/dashboard.php");
     exit();

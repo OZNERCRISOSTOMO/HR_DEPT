@@ -1,0 +1,33 @@
+.dashboard {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.count-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.count-container {
+    border: 1px solid black;
+    padding: 1em;
+}
+
+.main {
+    background: #f2f2f2;
+}
+
+.employee-list-wrapper {
+    border: 1px solid black;
+    height: 35rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    overflow-y: scroll;
+    gap: 1rem;
+}
+
+.employee-list-container {
+    border-radius: 10px;
+    border: 1px solid black;
+}
