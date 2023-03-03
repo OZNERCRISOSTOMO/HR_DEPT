@@ -30,6 +30,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         <link href="dashboard.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
+        <!-- JQUERY -->      
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+        <!-- CSS -->
         <link rel="stylesheet" href="../assets/css/dashboard-style.css">
 
         <!-- SWEET ALERT -->
@@ -122,7 +126,19 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
             </div>
 
             <div>
-                <h1>Employee List</h1>
+                <div>
+                    <h1>Employee List</h1>
+
+                    <!-- DROPDOWN FILTER EMPLOYEE -->
+                    <div>
+
+                    </div>
+
+                    <!-- SEARCH EMPLOYEE -->
+                    <div>
+                        <input type="text" id="search" placeholder="Search" name="search-employee"/>
+                    </div>
+                </div>
 
                 <div class="employee-list-wrapper">
                 <?php
@@ -196,7 +212,36 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     
 })
 
-            
+        // SEARCH EMPLOYEE
+    $(document).ready(function() {
+       $("#search").keyup(function(){
+            var input = $(this).val();
+
+           if (input == ""){
+                 $.ajax({
+                    url:"../Functions/admin-livesearch.php",
+                    type: "POST",
+                    data: {search:"all"},
+
+                    success:function(data){
+                        $(".employee-list-wrapper").html(data);
+                    }
+                })
+            }else{
+                
+                   $.ajax({
+                    url:"../Functions/admin-livesearch.php",
+                    type: "POST",
+                    data: {search:input},
+
+                    success:function(data){
+                        $(".employee-list-wrapper").html(data);
+                    }
+                })
+            }
+       })
+    })
+   
     </script>
     </body>
 </html>

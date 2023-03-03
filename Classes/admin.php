@@ -53,4 +53,10 @@ class Admin {
         exit();
     }
 
+    public function searchEmployees($name){
+        $data =  $this->database->connect()->query("SELECT * FROM employees WHERE first_name LIKE '{$name}%' OR last_name LIKE '{$name}%' ")->fetchAll();
+        return $data;
+        exit();
+    }
+
 }
