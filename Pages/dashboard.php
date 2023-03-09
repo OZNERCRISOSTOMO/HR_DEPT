@@ -60,7 +60,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
             </li>
 
             <li>
-                <a href="">Payroll</a>
+                <a href="prlist.php">Payroll</a>
             </li>
         </ul>
 
