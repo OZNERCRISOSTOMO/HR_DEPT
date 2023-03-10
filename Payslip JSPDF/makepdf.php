@@ -9,26 +9,112 @@ $email = $_POST['email'];
 $date = $_POST['date-from'];
 $date1 = $_POST['date-to'];
 $present = $_POST['present'];
+$overtime = $_POST['overtime'];
 $salary = $_POST['salary'];
+
+
+$sss = $_POST['sss'];
+$philhealth = $_POST['philhealth'];
+$pagibig = $_POST['pagibig'];
 
 $mdpf = new Mpdf\Mpdf();
 
 $data = '';
 
-$data = file_get_contents("content.php");
-$data .= '<h1 style="text-align: center; font-family: Century Gothic;">Amity Company Inc.</h1>';
-$data .= '<h3 style="text-align: center; font-family: Century Gothic;">Generated Payslip</h3>';
+$data = '
+<style type="text/css">
+table {
+    width: 100%;
+    background: #eee;
+    padding: 10px;
+    font-size: 13px;
+    font-family: Arial;
+    border-spacing: 0;
+}
+th {
+    background-color: #ddd;
+    padding: 4px;
+    width: 100px;
+}
+td {
+    padding: 4px;
+    border-bottom: solid thin #ddd;
+}
+h1 {
+    text-align: center; 
+    font-family: Century Gothic;
+}
+h3 {
+    text-align: center; 
+    font-family: Century Gothic;
+}
+caption {
+    text-align: center; 
+    border: 2px solid black;
+}
+</style>
+<div style = "font-family: Century Gothic;">
+        <center><h1>Company Name</h1></center>
+        <center><h3>Generated Payslip</h3></center>
 
-$data .= '<strong style="margin left: 15%;">Full Name: </strong>' . $fname . ' ';
-$data .= '<strong>Position: </strong>' . $position . 'br /';
-$data .= '<strong>Branch: </strong>' . $branch . '<br />';
-$data .= '<strong>Email: </strong>' . $email . '<br />';
-$data .= '<strong>From Date: </strong>' . $date . '<br />';
-$data .= '<strong>To Date: </strong>' . $date1 . '<br />';
-$data .= '<strong>Number of Present: </strong>' . $present . '<br />';
-$data .= '<strong>Salary: </strong>' . $salary . '<br />';
+
+            <table>
+                    <caption>Payroll Details</caption>
+                    <tr>
+                        <th>Full Name:</th>
+                        <td>'. $fname .'</td>
+
+                        <th>Position:</th>
+                        <td>'. $position .'</td>
+                    </tr>
+
+                    <tr>
+                        <th>Branch:</th>
+                        <td>'. $branch. '</td>
+
+                        <th>Email:</th>
+                        <td>'. $email .'</td>
+                    </tr>
+
+                    <tr>
+                        <th>From Date:</th>
+                        <td>'. $date .'</td>
+
+                        <th>To Date:</th>
+                        <td>'. $date1 .'</td>
+                    </tr>
+
+                    <tr>
+                        <th>Number of Present:</th>
+                        <td>'. $present .'</td>
+
+                        <th>Number of Overtime:</th>
+                        <td>'. $overtime .'</td>
+                    </tr>
+
+                    <tr>
+                        <th>Total Salary:</th>
+                        <td>' . '₱' . $salary .'</td>
+                    </tr>
+            </table>
+
+            <table>
+                    <caption>Deductions:</caption>
+                    <tr>
+                        <th>SSS: </th>
+                        <td>di pa to tapos, iniisip ko pa lang kung pano gawin. :></td>
+
+                        <th>Pag-ibig: </th>
+                        <td>di pa to tapos, iniisip ko pa lang kung pano gawin. :></td>
+
+                        <th>Philhealth: </th>
+                        <td>di pa to tapos, iniisip ko pa lang kung pano gawin. :></td>
+                    </tr>
+            </table>
+</div>';
 
 
 $mdpf->WriteHTML($data);
 
-$mdpf->Output($lname . '_' . $date . ' - payslip.pdf', 'D');
+$mdpf->Output($fname . '_' . $date . ' - payslip.pdf', 'D');
+?>

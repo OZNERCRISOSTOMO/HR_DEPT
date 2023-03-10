@@ -45,20 +45,33 @@
             <input type="date" name="date-to" id="date-to" class="form-control" placeholder="To" required>
             </div>
 
-            <div class="mb-2">
-            <input type="number" name="present" id="present" placeholder="Number of Present" class="form-control" required>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <input type="number" name="present" id="present" placeholder="Number of Present" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <input type="number" name="overtime" placeholder="Number of Overtime (per mins)" class="form-control" required>
+                </div>
             </div>
             
             <div class="mb-2">
             <input type="number" name="salary" id="salary" placeholder="Salary" class="form-control" required>
             </div>
-            
-            <button type="submit" class="btn btn-success btn-lg btn-block">Generate Payslip</button>
 
+            <div class="deductions">
+                <p><b>Membership/Beneficiaries:</b></p>
+                    <input type="checkbox" id="sss" name="sss" value="sss">
+                        <label for="beneficiaries1">SSS Beneficiaries</label><br>
+                    <input type="checkbox" id="pagibig" name="pagibig" value="pagibig">
+                        <label for="beneficiaries2">Pag Ibig Beneficiaries</label><br>
+                    <input type="checkbox" id="philhealth" name="philhealth" value="philhealth">
+                        <label for="beneficiaries3">Philhealth Beneficiaries</label><br /><br />
+            </div>
 
+                 <button type="submit" class="btn btn-success btn-lg btn block">Generate Payslip</button>
         </form>
-
-
     </div>
 </body>
 </html>
