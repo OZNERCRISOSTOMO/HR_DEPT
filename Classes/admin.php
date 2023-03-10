@@ -58,5 +58,18 @@ class Admin {
         return $data;
         exit();
     }
+}
 
+class Payroll{
+    private $database;
+
+    public function __construct(Database $database) {
+        $this->database = $database;
+
+    }
+    public function payrollList(){
+        $prlist =  $this->database->connect()->query("SELECT * FROM prlist")->fetchAll();
+        return $prlist;
+        exit();
+}
 }
