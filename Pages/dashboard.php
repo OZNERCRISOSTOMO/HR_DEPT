@@ -118,8 +118,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
                 <div class="count-container">
                     <?php
-                    $totalEmployee = $admin->getTotalEmployees();
-                         echo '<p class="">'. $totalEmployee. ' Employees </p>';    
+                    $totalEmployee = $admin->getTotalPendingEmployees();
+                         echo '<p class="">'. $totalEmployee. ' Pending  </p>';    
                     ?>
                 </div>
          
@@ -149,10 +149,12 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     <div class="employee-list-container">
                         <?php
                           echo '<p class="">'. $employee["first_name"]." " . $employee["last_name"] . '  </p>';           
-                          echo '<p class="">'. $employee["email"]. '  </p>'; 
-                          echo '<p class="">'. $employee["department"]. '  </p>'; 
+                          echo '<p class="">'. $employee["email"]. '  </p>';
+                          echo '<p class="">'. $employee["address"]. '  </p>';
+                           echo '<p class="">'. $employee["gender"]. '  </p>';                
                           echo '<p class="">'. $employee["contact"]. '  </p>'; 
-                          echo '<p class="">'. $employee["date_hired"]. '  </p>'; 
+                          $formatted_date = date('M d Y, h:i A', strtotime($employee["date_applied"]));
+                          echo '<p class=""> Date hired : '. $formatted_date. '  </p>';
                         ?>
                     </div>
                 <?php

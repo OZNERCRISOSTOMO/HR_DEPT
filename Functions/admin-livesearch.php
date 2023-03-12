@@ -25,10 +25,13 @@ if (isset($_POST['search'])) {
         echo "<div class='employee-list-container'>";
            
                 echo '<p class="">'. $employee["first_name"]." " . $employee["last_name"] . '  </p>';           
-                echo '<p class="">'. $employee["email"]. '  </p>'; 
+                echo '<p class="">'. $employee["email"]. '  </p>';
+                 echo '<p class="">'. $employee["gender"]. '  </p>';  
                 echo '<p class="">'. $employee["department"]. '  </p>'; 
                 echo '<p class="">'. $employee["contact"]. '  </p>'; 
-                echo '<p class="">'. $employee["date_hired"]. '  </p>'; 
+                     $formatted_date = date('M d Y, h:i A', strtotime($employee["date_applied"]));
+                          echo '<p class="">'. $formatted_date. '  </p>';
+       
              
         echo "</div>";
     }

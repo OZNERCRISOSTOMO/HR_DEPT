@@ -40,14 +40,23 @@ class Admin {
     }
 
     public function getTotalEmployees(){
-        $count = $this->database->connect()->query("SELECT count(*) FROM employees")->fetchColumn();
+        $count = $this->database->connect()->query("SELECT count(*) FROM employees WHERE status = '1' ")->fetchColumn();
+
+        return $count;
+        exit();
+    }
+
+    public function getTotalPendingEmployees(){
+        $count = $this->database->connect()->query("SELECT count(*) FROM employees WHERE status = '0' ")->fetchColumn();
 
         return $count;
         exit();
     }
 
     public function getEmployees(){
-        $employees = $this->database->connect()->query("SELECT * FROM employees")->fetchAll();
+        $employees = $this->database->connect()->query("SELECT employees.*, employee_details.department,employee_details.date_applied FROM employees 
+                                                        JOIN employee_details ON employees.id = employee_details.employee_id
+                                                        WHERE employees.status = '1'")->fetchAll();
 
         return $employees;
         exit();

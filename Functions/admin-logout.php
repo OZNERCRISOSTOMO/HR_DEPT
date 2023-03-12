@@ -1,6 +1,6 @@
 <?php
   session_start();
-  session_unset($_SESSION["admin_id"]);
+  session_unset();
   session_destroy();
 
   //Go back to admin-login
