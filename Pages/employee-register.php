@@ -29,7 +29,7 @@
             <input type="text" id="contact-no"  maxlength="11" name="contact-no">
         </div>
             <label for="address">Address</label>
-            <input type="text" id="address"  maxlength="11" name="address">
+            <input type="text" id="address"   name="address">
         <div>
 
         </div>

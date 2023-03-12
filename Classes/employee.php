@@ -109,6 +109,9 @@ class Employee{
             exit();
         }
 
+        //send email
+        $this->database->sendEmail($employeeData['email'],"Succesfully register","Your application has been submitted");
+
         //if sucess uploading file, go to this 👇 page
         header("Location: ../Pages/employee-register-confirmation.php"); 
         exit();

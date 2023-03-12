@@ -1,4 +1,12 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+require '../Vendor/phpmailer/src/PHPMailer.php';
+require '../Vendor/phpmailer/src/Exception.php';
+require '../Vendor/phpmailer/src/SMTP.php';
+
 
 class Database
 {
@@ -14,5 +22,31 @@ class Database
         $connect->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
 
         return $connect;    
+    }
+
+    public function sendEmail($recipient,$subject, $message){
+       
+        // create a new PHPMailer object
+        $mail = new PHPMailer(true);
+
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'jason.yecyec023@gmail.com';
+        $mail->Password = 'nbnxjownslkpgfqx';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        //recipients
+        $mail->setFrom('company@company.com','Company name');
+        $mail->addAddress($recipient);
+        $mail->Subject = $subject;
+        $mail->Body = $message;
+
+        //Send the email
+        if (!$mail->send()) {
+            echo 'Email could not be sent. Error: ' . $mail->ErrorInfo;
+        } 
     }
 }
