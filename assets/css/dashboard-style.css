@@ -14,9 +14,18 @@
     padding: 1em;
 }
 
+.count-container:hover {
+    cursor: pointer;
+}
+
 .main {
     background: #f2f2f2;
     height: 100vh;
+}
+
+.main-content-container {
+    padding: 1.5em;
+
 }
 
 .employee-list-wrapper {
@@ -31,4 +40,12 @@
 .employee-list-container {
     border-radius: 10px;
     border: 1px solid black;
+}
+
+.table {
+    background: white;
+}
+
+.hide-container {
+    display: none;
 }

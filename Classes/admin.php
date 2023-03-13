@@ -67,6 +67,24 @@ class Admin {
         return $data;
         exit();
     }
+
+    public function getPendingEmployees(){
+          $pendingEmployees = $this->database->connect()->query("SELECT employees.*, employee_details.resume_name,
+                                                                                     employee_details.resume_path,
+                                                                                     employee_details.department,
+                                                                                     employee_details.date_applied FROM employees 
+                                                        JOIN employee_details ON employees.id = employee_details.employee_id
+                                                        WHERE employees.status = '0'")->fetchAll();
+
+        return $pendingEmployees;
+        exit();
+    }
+
+    public function formatDate($date){
+         $formatted_date = date('M d Y, h:i A', strtotime($date));
+
+         return $formatted_date;
+    }
 }
 
 class Payroll{
