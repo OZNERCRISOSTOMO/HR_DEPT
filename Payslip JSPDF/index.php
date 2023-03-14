@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <input type="number" name="overtime" placeholder="Number of Overtime (per mins)" class="form-control" required>
+                    <input type="number" name="overtime" placeholder="Number of Overtime (per hour)" class="form-control" required>
                 </div>
             </div>
             
@@ -62,11 +62,11 @@
 
             <div class="deductions">
                 <p><b>Membership/Beneficiaries:</b></p>
-                    <input type="checkbox" id="sss" name="sss" value="sss">
+                    <input type="checkbox" id="sss" name="sss" value="0.04">
                         <label for="beneficiaries1">SSS Beneficiaries</label><br>
-                    <input type="checkbox" id="pagibig" name="pagibig" value="pagibig">
+                    <input type="checkbox" id="pagibig" name="pagibig" value="0.02">
                         <label for="beneficiaries2">Pag Ibig Beneficiaries</label><br>
-                    <input type="checkbox" id="philhealth" name="philhealth" value="philhealth">
+                    <input type="checkbox" id="philhealth" name="philhealth" value="0.05">
                         <label for="beneficiaries3">Philhealth Beneficiaries</label><br /><br />
             </div>
 

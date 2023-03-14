@@ -17,6 +17,35 @@ $sss = $_POST['sss'];
 $philhealth = $_POST['philhealth'];
 $pagibig = $_POST['pagibig'];
 
+isset($_POST['sss']);
+
+if (filter_has_var(INPUT_POST, 'sss')) {
+        $num1 = $_POST['salary'];
+        $sss_result = $num1 * 0.04;
+}
+else {
+        $sss_result = '0 - not a member';
+}
+
+if (filter_has_var(INPUT_POST, 'philhealth')) {
+        $num1 = $_POST['salary'];
+        $phil_result = $num1 * 0.05;
+}
+else {
+        $phil_result = '0 - not a member';
+}
+
+if (filter_has_var(INPUT_POST, 'pagibig')) {
+        $num1 = $_POST['salary'];
+        $love_result = $num1 * 0.02;
+}
+else {
+        $love_result = '0 - not a member';
+}
+$salaryOT = $salary + ($overtime * 60);
+
+$networth = $salaryOT - ($sss_result + $phil_result + $love_result);
+
 $mdpf = new Mpdf\Mpdf();
 
 $data = '';
@@ -51,6 +80,13 @@ h3 {
 caption {
     text-align: center; 
     border: 2px solid black;
+}
+p {
+    text-align: center;
+    border: 1px solid black;
+    float: right;
+    height: 25px;
+    width: 20%;
 }
 </style>
 <div style = "font-family: Century Gothic;">
@@ -88,13 +124,16 @@ caption {
                         <th>Number of Present:</th>
                         <td>'. $present .'</td>
 
-                        <th>Number of Overtime:</th>
+                        <th>Overtime per hr/s:</th>
                         <td>'. $overtime .'</td>
                     </tr>
 
                     <tr>
-                        <th>Total Salary:</th>
+                        <th>Basic Salary:</th>
                         <td>' . '₱' . $salary .'</td>
+
+                        <th>Base Salary plus OT:</th>
+                        <td>' . '₱' . $salaryOT .'</td>
                     </tr>
             </table>
 
@@ -102,15 +141,17 @@ caption {
                     <caption>Deductions:</caption>
                     <tr>
                         <th>SSS: </th>
-                        <td>di pa to tapos, iniisip ko pa lang kung pano gawin. :></td>
+                        <td>' . '₱' . $sss_result .'</td>
 
                         <th>Pag-ibig: </th>
-                        <td>di pa to tapos, iniisip ko pa lang kung pano gawin. :></td>
+                        <td>' . '₱' . $love_result .'</td>
 
                         <th>Philhealth: </th>
-                        <td>di pa to tapos, iniisip ko pa lang kung pano gawin. :></td>
+                        <td>' . '₱' . $phil_result .'</td>
                     </tr>
             </table>
+
+            <p><b>Total Salary:</b> ' . '₱' . $networth . '</p>
 </div>';
 
 
