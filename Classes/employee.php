@@ -59,6 +59,8 @@ class Employee{
         }
     }
 
+
+
     public function registerEmployee($employeeData,$resume_name, $resume_path){
 
         // prepare insert statement for employee table
@@ -113,9 +115,15 @@ class Employee{
         $this->database->sendEmail($employeeData['email'],"Succesfully register","Your application has been submitted");
 
         //if sucess uploading file, go to this 👇 page
-        header("Location: ../Pages/employee-register-confirmation.php"); 
+        header("Location: ../Pages/employee-register-confirmation.php?success=success"); 
         exit();
 
+    }
+
+    public function acceptEmployee($employeeData){
+        // prepared statement
+         $stmt = $this->database->connect()->prepare("INSERT INTO employees (first_name,last_name, email, gender, address, contact, status)
+            VALUES (?,?,?,?,?,?,?);");
     }
 }
 

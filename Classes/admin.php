@@ -3,9 +3,12 @@
 class Admin {
 
     private $database;
+    private $date;
 
     public function __construct(Database $database) {
         $this->database = $database;
+        date_default_timezone_set('Asia/Manila');
+        $this->date =  date('Y-m-d H:i:s');
     }
 
     public function findByEmail($email) {
@@ -85,7 +88,109 @@ class Admin {
 
          return $formatted_date;
     }
+
+     public function acceptEmployee($employeeData){
+        // prepared statement
+         $stmt = $this->database->connect()->prepare("UPDATE employees AS e
+                                                      INNER JOIN employee_details AS ed ON e.id = ed.employee_id
+                                                      SET e.status = ?, ed.salary = ?, ed.working_hours = ?, ed.department = ?, ed.date_hired = ?
+                                                      WHERE e.id = ?");
+
+        //if execution fail
+        if (!$stmt->execute(['1',
+                             $employeeData['salary'],
+                             $employeeData['workingHours'],
+                             $employeeData['department'],
+                             $this->date,
+                             $employeeData['employeeId']
+                             ])) {
+            header("Location: ../Pages/employee-register.php?error=stmtfail");
+
+            exit();
+        }
+
+        $sql = "UPDATE employees as e 
+                INNER JOIN employee_details AS ed ON e.id = ed.employee_id
+                SET ";
+        $values = array();
+
+        // Build the SQL query and parameter values based on the checkboxes that are checked
+        foreach ($employeeData['beneficiaries'] as $key => $value) {
+        // Append the column name and parameter value to the SQL query
+            // $columnName = 'column' . ($key + 1);
+            $sql .= $value . ' = ?, ';
+    
+            // Append the parameter value to the array of parameter values
+            $values[] = '1';
+        }
+
+        // Remove the trailing comma and space from the query
+        $sql = rtrim($sql, ", ");
+        $sql .= " WHERE e.id = ?";
+
+        // Prepare the statement
+        $stmt2 = $this->database->connect()->prepare($sql);
+        $params = array_merge($values, array($employeeData['employeeId']));
+
+
+         //if execution fail
+        if (!$stmt2->execute($params)) {
+            header("Location: ../Pages/employee-register.php?error=stmtfail");
+
+            exit();
+        }
+
+        //generate employee account
+        $employeeAccount = $this->generateEmployeeIDAndPassword($employeeData['employeeLastName']);
+
+        //save account to database
+        $this->saveEmployeeIDAndPassword($employeeAccount[0],$employeeAccount[1],$employeeData['employeeEmail'],$employeeData['employeeId']);
+
+        //if success go to dashboard
+        header("Location: ../Pages/dashboard.php");
+
+        exit();
+    }
+
+    public function generateEmployeeIDAndPassword($employeeLastName){
+
+        // Generate a random 4-digit number
+        $randomNumber = rand(1000, 9999);
+
+        // Convert the number to a string and concatenate lastname
+        $employeID = strval($randomNumber).strtoupper($employeeLastName);
+
+        //return the id and password
+        return [$employeID,$employeeLastName];
+
+    }
+
+    public function saveEmployeeIDAndPassword($employeeUserID, $employeePassword,$employeeEmail,$employeeId){
+        // prepare insert statement for employee_login table
+         $sql = "INSERT INTO employee_login (login_id,login_password,employee_id) VALUES (?,?,?);";
+
+         // prepared statement
+         $stmt = $this->database->connect()->prepare($sql);
+
+         //hash password
+        $hashedpwd = password_hash($employeePassword, PASSWORD_DEFAULT);
+         //if execution fail
+        if (!$stmt->execute([$employeeUserID,$hashedpwd,$employeeId])) {
+            header("Location: ../Pages/dashboard.php?error=stmtfail");
+            exit();
+        }
+
+        //send email employee his/her id and password 
+        $this->database->sendEmail($employeeEmail,"Congratulations! Your Job Application has been Accepted",
+                                                  "User Id:".$employeeUserID ."\n Password: ".$employeePassword);
+
+        //if success saving account 
+        header("Location: ../Pages/dashboard.php?success=acceptEmployee");
+        exit();
+    }
 }
+
+    
 
 class Payroll{
     private $database;

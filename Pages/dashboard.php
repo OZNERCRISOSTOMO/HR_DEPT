@@ -172,60 +172,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                 </div>
 
                 <!--============== PENDING EMPLOYEE ======================= -->
-                <div class="pending-employee-list hide-container">
-                    <div>
-                        <h1>Pending Employees</h1>
-                    </div>
-
-                    <div class="pending-employee-list-wrapper">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Contact No</th>
-                                    <th scope="col">Resume</th>
-                                    <th scope="col">Date Applied</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    $pendingEmployees = $admin->getPendingEmployees();
-                                
-                                    foreach($pendingEmployees as $employee){
-
-                                    echo '<tr>';
-                                        echo '<th scope="row">1 </th>';
-                                        echo '<td>'. $employee["first_name"] ." ". $employee["last_name"] .'</td>';
-                                        echo '<td>'. $employee["email"] .'</td>';
-                                        echo '<td>'. $employee["gender"] .'</td>';
-                                        echo '<td>'. $employee["contact"] .'</td>';
-                                    ?>
-                                        <td>
-                                            <a href="../Uploads/<?php echo $employee['resume_path']?>" target="_thapa">
-                                                <?php echo $employee['resume_name']?>
-                                            </a>
-                                        </td>
-                                     <?php
-                                         echo '<td>'. $admin->formatDate($employee["date_applied"]) .'</td>';
-                                     ?>
-                                        <td>
-                                            <input type="hidden" name="doc_id" value="<?php echo $employee["id"] ?>">
-                                            <button type="button" class="btn btn-outline-success acceptBtn"> Accept</button>
-                                            <button type="button" class="btn btn-outline-danger declineBtn">Decline</button>
-                                        </td>
-                                     <?php
-                                    echo "</tr>";
-
-                                    }
-                                    ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                    <?php include "pending-employee.php" ?>
+                     
                 <!-- ============================================== -->
 
             </div>
@@ -257,6 +205,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     </script>
 
     <script>
+    const action = document.querySelector('.action');
     const logoutBtn = document.querySelector('.logout');
     const totalEmployees = document.querySelector(".total-employees")
     const totalPendingEmployees = document.querySelector(".total-pending-employees")
@@ -285,6 +234,29 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         })
 
     })
+
+    //Accept pending employee
+         //Accept button function 
+        action.addEventListener('click', function(e) {
+            if (e.target.classList.contains('acceptBtn')) {
+                $('#acceptModal').modal('show');
+                const targetParent = e.target.closest('td')
+                
+                const employeeId = targetParent.firstElementChild.value        
+                const employeeEmail = targetParent.firstElementChild.nextElementSibling.value
+                const employeeLastName = targetParent.firstElementChild.nextElementSibling.nextElementSibling.value
+            
+                document.querySelector('#employee_id_accept').value = employeeId;
+                document.querySelector('#employee_email_accept').value = employeeEmail;
+                document.querySelector('#employee_lastname_accept').value = employeeLastName;
+            }
+
+            if (e.target.classList.contains('declineBtn')) {
+                $('#declineModal').modal('show');
+                // const docId = e.target.closest('td').firstElementChild.value
+                // document.querySelector('#ebooks_id_decline').value = docId;
+            }
+        })
 
 
 
@@ -353,5 +325,4 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
     </script>
 </body>
-
 </html>

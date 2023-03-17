@@ -1,3 +1,11 @@
+<?php
+
+//if no success in url, redirect to employee-register
+if(!isset($_GET["success"])){
+    header("Location: employee-register.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
