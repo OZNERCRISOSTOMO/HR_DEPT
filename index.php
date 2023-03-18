@@ -8,7 +8,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
    header("Location: Pages/dashboard.php");
 
 } 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,116 +20,70 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<style>
-body {
-	color: #fff;
-	background: #c2d4dd;
-}
-.form-control {
-	min-height: 41px;
-	background: #fff;
-	box-shadow: none !important;
-	border-color: #e3e3e3;
-}
-.form-control:focus {
-	border-color: #70c5c0;
-}
-.form-control, .btn {        
-	border-radius: 2px;
-}
-.login-form {
-	width: 350px;
-	margin: 0 auto;
-	padding: 100px 0 30px;		
-}
-.login-form form {
-	color: #7a7a7a;
-	border-radius: 2px;
-	margin-bottom: 15px;
-	font-size: 13px;
-	background: #ececec;
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-	padding: 30px;	
-	position: relative;	
-}
-.login-form h2 {
-	font-size: 22px;
-	margin: 35px 0 25px;
-}
-/* .login-form .avatar {
-	position: absolute;
-	margin: 0 auto;
-	left: 0;
-	right: 0;
-	top: -50px;
-	width: 95px;
-	height: 95px;
-	border-radius: 50%;
-	z-index: 9;
-	background: #c2d4dd;
-	padding: 15px;
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-} */
-.login-form .avatar img {
-    position: absolute;
-	margin: 0 auto;
-	left: 0;
-	right: 0;
-	top: -45px;
-	width: 95px;
-    height: 95px;
-    border-radius: 80%;
-}	
-.login-form input[type="checkbox"] {
-	position: relative;
-	top: 1px;
-}
-.login-form .btn, .login-form .btn:active {        
-	font-size: 16px;
-	font-weight: bold;
-	background: #618685 !important;
-	border: none;
-	margin-bottom: 20px;
-}
-.login-form .btn:hover, .login-form .btn:focus {
-	background: #50b8b3 !important;
-}    
-.login-form a {
-	color: #fff;
-	text-decoration: underline;
-}
-.login-form a:hover {
-	text-decoration: none;
-}
-.login-form form a {
-	color: #7a7a7a;
-	text-decoration: none;
-}
-.login-form form a:hover {
-	text-decoration: underline;
-}
-.login-form .bottom-action {
-	font-size: 14px;
-}
-</style>
+
+<script src="https://kit.fontawesome.com/53a2b7f096.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="login-form">
-    <form action="Functions/admin-login.php" method="POST">
-		<div class="avatar">
-			<img src="image.png" alt="Avatar">
-		</div>
-        <h2 class="text-center">HR Admin Login</h2>   
-        <div class="form-group">
-        	<input type="text" class="form-control" name="email" placeholder="Email" required="required">
-        </div>
-		<div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
-        </div>        
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
+
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-sm-6 ">
+	<nav class="navbar bg-body-tertiary">
+  <div class="container">
+    <a class="navbar-brand color-black" href="#">
+      <img src="./images/Google-Admin-900x0.png" alt="Admin" width="70" height="50">
+	  ADMIN
+    </a>
+  </div>
+</nav>
+
+<div class="container m-auto ">
+<h4 class="text-center my-3">Start your day with hello Kitty</h4>
+<img src="./images/pngtree-cartoon-company-employee-who-is-working-in-the-office-image_1377082-removebg-preview.png" class="img-fluid mx-auto d-block">
 </div>
+
+
+	</div>
+
+    <div class="col-sm-6 d-flex justify-content-md-center align-items-center vh-100">
+
+	<div class="container col-9 shadow-lg p-4"> 
+	<div class="login-form ">
+    <form action="Functions/admin-login.php" method="POST">
+        <h4 class="text-center">Company Name</h4>   
+
+
+        <div class="form-group py-2">
+			<label for="exampleInputEmail1" class="form-label">Email</label>
+
+			<div class="input-group">
+			<div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-user"></i></div>
+        	<input type="text" class="form-control  border-left-0" name="email" placeholder="Email" required="required">
+		</div>
+		</div>
+        </div>
+
+		<div class="form-group py-1">
+		<label for="examplePassword" class="form-label">Password</label>
+
+		<div class="input-group">
+			<div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-lock"></i></div>
+            <input type="password" class="form-control border-left-0" name="password" placeholder="Password" required="required">
+		
+		</div>
+		</div>        
+
+        <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary btn-md btn-block">Log in</button>
+	</div>
         </form>
+		</div>
+	</div>
+  </div>
+
+
        
             <?php
                 if (isset($_GET["error"])) {
