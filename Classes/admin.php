@@ -36,6 +36,31 @@ class Admin {
         unset($this->database);
     }
 
+    public function findEmployeeById($id){
+          // prepare the SQL statement using the database property
+        $stmt = $this->database->connect()->prepare("SELECT * FROM employees WHERE id=?");
+
+         //if execution fail
+        if (!$stmt->execute([$id])) {
+            header("Location: ../index.php?error=stmtfail");
+            exit();
+        }
+
+        //fetch the result
+        $result = $stmt->fetch();
+        
+          //if has result return it, else return false
+        if ($result) {
+            return $result;
+        } else {
+            $result = false;
+            return $result;
+        }
+
+        //close connection
+        unset($this->database);
+    }
+
     public function getAdmin(){
         $admin = $this->database->connect()->query("SELECT * FROM hr_dept WHERE id = 1")->fetch();
         return $admin;
@@ -66,7 +91,7 @@ class Admin {
     }
 
     public function searchEmployees($name){
-        $data =  $this->database->connect()->query("SELECT * FROM employees WHERE first_name LIKE '{$name}%' OR last_name LIKE '{$name}%' ")->fetchAll();
+        $data =  $this->database->connect()->query("SELECT * FROM employees WHERE (first_name LIKE '{$name}%' OR last_name LIKE '{$name}%') AND status = '1' ")->fetchAll();
         return $data;
         exit();
     }

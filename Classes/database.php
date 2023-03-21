@@ -24,7 +24,7 @@ class Database
         return $connect;    
     }
 
-    public function sendEmail($recipient,$subject, $message){
+    public function sendEmail($recipient,$subject, $message, $attachment= 'default'){
        
         // create a new PHPMailer object
         $mail = new PHPMailer(true);
@@ -43,6 +43,9 @@ class Database
         $mail->addAddress($recipient);
         $mail->Subject = $subject;
         $mail->Body = $message;
+        if($attachment != 'default'){
+            $mail->addAttachment($attachment['tmpName'],$attachment['name']);
+        }
 
         //Send the email
         if (!$mail->send()) {

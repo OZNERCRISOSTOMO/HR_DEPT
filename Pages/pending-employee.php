@@ -134,5 +134,85 @@
                 </div>
             </div>
             <!-- ============================================= -->
+
+            <!--============= DECLINE MODAL =============== -->
+
+            <div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                            
+                    <div class="modal-body">
+                        <form method="POST" action="../Functions/employee-accept-pending.php">
+                            <!--==== DEPARTMENT ===== -->
+                            <div class="mb-3">
+                                <select class="form-select" aria-label="Default select example" name="department">
+                                <option selected>Select department</option>
+                                <option value="sales">Sales</option>
+                                <option value="inventory">Inventory</option>
+                                </select>
+                            </div>
+                            
+                            <!--===== POSITION ====== -->
+                            <div class="mb-3 d-flex">
+                                Position : 
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" value="employee" id="employee" name="position" required>
+                                    <label class="form-check-label" for="employee">Employee</label>
+                                </div>
+            
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" value="admin" id="admin" name="position" required>
+                                    <label class="form-check-label" for="admin">Admin</label>
+                                </div>
+                            </div>
+                            
+                            <!--==== SALARY ======== -->
+                            <div class="mb-3">
+                                <label for="salary" class="col-form-label">Salary</label>
+                                <input type="number" class="form-control" id="salary" name="salary">
+                            </div>
+                            
+                            <!--===== WORKING HOURS ===== -->
+                            <div class="mb-3">
+                                <label for="working-hours" class="col-form-label">Working hours</label>
+                                <input type="number" class="form-control" id="working-hours" name="working-hours">
+                            </div>
+                            
+                            <!-- BENEFICARIES -->
+                            <div class="col-12 ">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="sss" id="sss" name="beneficiaries[]">
+                                    <label class="form-check-label" for="sss"> SSS </label>
+                                </div>
+            
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="pagibig" id="pagibig" name="beneficiaries[]">
+                                    <label class="form-check-label" for="pagibig"> Pagibig </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="philhealth" id="philhealth" name="beneficiaries[]">
+                                     <label class="form-check-label" for="philhealth"> Philhealth </label>
+                                </div> 
+                            </div>
+
+                            <!-- HIDDEN INPUT TO STORE EMPLOYEE ID -->
+                            <input type="hidden" name="employee_id" id="employee_id_decline">
+                            <input type="hidden" name="employee_email" id="employee_email_decline">
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button name="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+      
+                    </div>
+                </div>
+            </div>
     </div>
 </div>

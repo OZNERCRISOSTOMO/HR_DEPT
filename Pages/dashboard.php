@@ -31,8 +31,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <link href="dashboard.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
-    <!-- JQUERY -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
     <!-- CSS -->
     <link rel="stylesheet" href="../assets/css/dashboard-style.css">
@@ -43,6 +41,16 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <!-- BOOTSTRAP 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <!-- Select2 CSS --> 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
+
+<!-- jQuery --> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
+<!-- Select2 JS --> 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+        
 
 </head>
 
@@ -125,7 +133,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                 <div class="count-container total-pending-employees">
                     <?php
                     $totalEmployee = $admin->getTotalPendingEmployees();
-                         echo '<p class="">'. $totalEmployee. ' Pending  </p>';    
+                         echo '<p class="">'. $totalEmployee. ' Pending  Employees</p>';    
                     ?>
                 </div>
             </div>
@@ -183,6 +191,39 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         <!------------ SIDEBAR ---------- -->
         <div class="sidebar">
 
+            <!--==== SEND EMPLOYEE EMAIL -->
+            <div>
+                <form action="../Functions/admin-sendEmail.php" method="POST" enctype="multipart/form-data">
+
+                    <div class="search-select-box">                     
+                        <!-- Dropdown --> 
+                        <select id='select-employee' name="employee-id">
+                            <option value="0">Select employee</option>
+                         <?php
+                             $employees = $admin->getEmployees();
+
+                             foreach($employees as $employee){
+                                echo "<option value='".$employee['id'] ."'>". $employee['first_name']." ".$employee['last_name']  ."</option> ";
+                             }
+                         ?>
+                        </select>
+
+                    </div>
+
+                    <div>
+                        <input type="text" placeholder="subject" name="subject" required>
+                    </div>
+
+                    <div>
+                        <textarea name="message" id="" cols="30" rows="10" placeholder="Message" required></textarea>
+                    </div>
+
+                     <input type="file" id="attachment" name="attachment" accept="application/pdf">
+                    
+                    <input type="hidden" id="" name="">
+                    <button name="submit" id="send-email">Send</button>
+                </form>
+            </div>
         </div>
         <!------------------------------- -->
     </main>
@@ -192,17 +233,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-    </script>
-    <script src="js/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    <script src="js/datatables-simple-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
+
 
     <script>
     const action = document.querySelector('.action');
@@ -212,6 +246,33 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
    
     const listOfContainer = [".employee-list",".pending-employee-list"]
     let currentMainContent = listOfContainer[0];
+
+
+    //SELECT PICKER 
+    // const selectBox = document.querySelector("#search-select-box")
+    // dselect(selectBox,{
+    //     search:true
+    // })
+
+    $(document).ready(function(){
+  
+    // Initialize select2
+    $("#select-employee").select2();
+    
+    $("#send-email").prop("disabled",true)
+
+    // Read selected option
+    $('#select-employee').on('change', function() {
+        var selectedValue = $(this).val();
+        console.log(selectedValue);
+        if(selectedValue != '0'){
+            $("#send-email").prop("disabled",false)
+        }else{
+            $("#send-email").prop("disabled",true)
+        }
+        
+        });
+    });
 
     // SWEET ALERT CONFIRMATION FOR LOGOUT
     logoutBtn.addEventListener('click', function(e) {
