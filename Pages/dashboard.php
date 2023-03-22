@@ -32,8 +32,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/dashboard-style.css">
+    
 
     <!-- SWEET ALERT -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -56,85 +55,105 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
 <body>
 
-    <main class="dashboard">
+    
         <!----------- SIDEBAR ---------- -->
-        <div class="sidebar">
-
-            <ul>
-                <li>
-                    <a href="">Dashboard</a>
-                </li>
-
-                <li>
-                    <a href="">Employee</a>
-                </li>
-
-                <li>
-                    <a href="">Attendance</a>
-                </li>
-
-                <li>
-                    <a href="../admin/prlist.php">Payroll</a>
-                </li>
-            </ul>
-
-            <div>
-                ======== Sa baba to mga idol========
-                <!-- DISPLAY ADMIN DATA  -->
-                <?php
-                $adminData = $admin->getAdmin();                          
-                 echo '<p class="">'. ucfirst($adminData['first_name']) .' '. strtoupper($adminData['last_name'][0]). '</p>';                                   
-                ?>
-
-                <!-- LOGOUT BUTTON -->
-                <a href="../functions/admin-logout.php" class="logout">
-                    Logout
+        <div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class=" col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
                 </a>
-                ===================================
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                  
+                  
+                <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span></a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Employee</span></a>
+                    </li>
+                   
+                 
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Attendance</span> </a>
+                    </li>
+                    <li>
+                        <a href="../admin/prlist.php" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Payroll</span> </a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="dropdown pb-4">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../Images/1x1 photo.png" alt="hugenerd" width="38" height="35" class="rounded-circle">
+                        <span class="d-none d-sm-inline mx-1">Admin</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                        
+                        <li><a class="dropdown-item" href="../functions/admin-logout.php">Sign out</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <!------------------------------ -->
 
         <!------------ MAIN ------------ -->
-        <div class="main">
+       
 
+        <div class="col-sm-8">
 
-            <div class="count-wrapper">
+            <div class="container">
+                    <div class="row">
                 <!-- TOTAL EMPLOYEES  -->
-                <div class="count-container total-employees">
+                <div class="col">
+                <button class="count-container total-employees">
                     <?php
                     $totalEmployee = $admin->getTotalEmployees();
                          echo '<p class="">'. $totalEmployee. ' Employees </p>';    
                     ?>
-                </div>
-
+                </button>
+</div>
                 <!-- TOTAL PRESENT EMPLOYEES  -->
+                <div class="col">
                 <div class="count-container">
                     <?php
                     $totalEmployee = $admin->getTotalEmployees();
                          echo '<p class="">'. $totalEmployee. ' Employees </p>';    
                     ?>
                 </div>
-
+                </div>
+                <div class="col">
                 <div class="count-container">
                     <?php
                     $totalEmployee = $admin->getTotalEmployees();
                          echo '<p class="">'. $totalEmployee. ' Employees </p>';    
                     ?>
                 </div>
+                </div>
 
+                <div class="col">
                 <div class="count-container">
                     <?php
                     $totalEmployee = $admin->getTotalEmployees();
                          echo '<p class="">'. $totalEmployee. ' Employees </p>';    
                     ?>
                 </div>
+                </div>
 
+                <div class="col">
                 <div class="count-container total-pending-employees">
                     <?php
                     $totalEmployee = $admin->getTotalPendingEmployees();
                          echo '<p class="">'. $totalEmployee. ' Pending  Employees</p>';    
                     ?>
+                </div>
+                </div>
+
                 </div>
             </div>
             <!-- =================================================-->
@@ -143,29 +162,47 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
                 <!-- ================ EMPLOYEE LIST ========================== -->
                 <div class="employee-list ">
-                    <div>
-                        <h1>Employee List</h1>
+                    <div class="row">
+                    <div class="col-5">
+                    <h5>Employee List</h5>
+                        </div>
+                        
 
                         <!-- DROPDOWN FILTER EMPLOYEE -->
-                        <div>
+                        <div class="col-3">
+                    
+                        <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown button
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                        </div>
 
                         </div>
 
                         <!-- SEARCH EMPLOYEE -->
-                        <div>
+                        <div class="col-3">
                             <input type="text" id="search" placeholder="Search" name="search-employee" />
                         </div>
                     </div>
 
-                    <div class="employee-list-wrapper">
+                    <div class="container">
+                        <div class="row">
                         <?php
                     $employees = $admin->getEmployees();
 
+                    
                     foreach($employees as $employee){
                          ?>
-                        <div class="employee-list-container">
+                       <div class="card" style="width: 18rem;">
+                       <div class="card-body">
                             <?php
-                          echo '<p class="">'. $employee["first_name"]." " . $employee["last_name"] . '  </p>';           
+                            echo '<img src="../Images/1x1 photo.png" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle">';
+                          echo '<h5 class="card-title text-center">'. $employee["first_name"]." " . $employee["last_name"] . '  </h5>';           
                           echo '<p class="">'. $employee["email"]. '  </p>';
                           echo '<p class="">'. $employee["address"]. '  </p>';
                           echo '<p class="">'. $employee["gender"]. '  </p>';                
@@ -173,10 +210,12 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                           echo '<p class=""> Date hired : '. $admin->formatDate($employee["date_applied"]) . '</p>';
                         ?>
                         </div>
+                    </div>
                         <?php
                     }
                         ?>
                     </div>
+                </div>
                 </div>
 
                 <!--============== PENDING EMPLOYEE ======================= -->
@@ -185,11 +224,14 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                 <!-- ============================================== -->
 
             </div>
-        </div>
+        
+                </div>
         <!-- --------------------------- -->
 
+
+        <div class="col-2 bg-secondary ">
         <!------------ SIDEBAR ---------- -->
-        <div class="sidebar">
+        
 
             <!--==== SEND EMPLOYEE EMAIL -->
             <div>
@@ -215,18 +257,20 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     </div>
 
                     <div>
-                        <textarea name="message" id="" cols="30" rows="10" placeholder="Message" required></textarea>
+                        <textarea name="message" id="" cols="20" rows="10" placeholder="Message" required></textarea>
                     </div>
 
-                     <input type="file" id="attachment" name="attachment" accept="application/pdf">
+                     <input class="col-2" type="file" id="attachment" name="attachment" accept="application/pdf">
                     
                     <input type="hidden" id="" name="">
                     <button name="submit" id="send-email">Send</button>
                 </form>
             </div>
-        </div>
+       
+                            </div>
         <!------------------------------- -->
-    </main>
+                            </div>
+                            </div>
 
 
 
