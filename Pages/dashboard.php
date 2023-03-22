@@ -27,15 +27,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>HR Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/dashboard-style.css">
-
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-<!-- or -->
-<link rel="stylesheet"
-href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-   
+    <link href="dashboard.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
 
@@ -61,25 +54,58 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 </head>
 
 <body>
-<!----------- SIDEBAR ---------- -->
-<div class="l-navbar" id="nav-bar">
-        <nav class="nav">
-            <div> <a href="#" class="text-decoration-none nav_logo">  <span class="nav_logo-name">COMPANY</span> </a>
-                <div class="nav_list">
-                 <a href="#" class="text-decoration-none nav_link active"><i class='bx bx-grid-alt nav_icon'></i>  <span class="nav_name">Dashboard</span> </a>
-                 <a href="#" class="text-decoration-none nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Employes</span> </a> 
-                <a href="#" class="text-decoration-none nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Attendance</span> </a>
-                <a href="../admin/prlist.php" class="text-decoration-none nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Payroll</span> </a> </div>
-            </div>
-             <a href="../functions/admin-logout.php" class="text-decoration-none nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
-        </nav>
-    </div>
-        <!---------------------------->
+
+    
+        <!----------- SIDEBAR ---------- -->
         <div class="container-fluid">
     <div class="row flex-nowrap">
+        <div class=" col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                  
+                  
+                <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span></a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Employee</span></a>
+                    </li>
+                   
+                 
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Attendance</span> </a>
+                    </li>
+                    <li>
+                        <a href="../admin/prlist.php" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Payroll</span> </a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="dropdown pb-4">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../Images/1x1 photo.png" alt="hugenerd" width="38" height="35" class="rounded-circle">
+                        <span class="d-none d-sm-inline mx-1">Admin</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                        
+                        <li><a class="dropdown-item" href="../functions/admin-logout.php">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!------------------------------ -->
 
         <!------------ MAIN ------------ -->
-        <div class="main col-lg-10" >
+       
+
+        <div class="col-sm-8">
 
             <div class="container">
                     <div class="row">
@@ -203,17 +229,15 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
         <!-- --------------------------- -->
 
 
-        <div class="col">
+        <div class="col-2 bg-secondary ">
         <!------------ SIDEBAR ---------- -->
         
 
             <!--==== SEND EMPLOYEE EMAIL -->
-            <div class="sidebar pe-2">
+            <div>
                 <form action="../Functions/admin-sendEmail.php" method="POST" enctype="multipart/form-data">
-   
-                   <div class="mb-2">
-                   <div class="dropdown">      
-                                   
+
+                    <div class="search-select-box">                     
                         <!-- Dropdown --> 
                         <select id='select-employee' name="employee-id">
                             <option value="0">Select employee</option>
@@ -225,27 +249,21 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                              }
                          ?>
                         </select>
-                        </div>
-                       
-                            </div>
 
-                    <div class="mb-2">
-                        <input type="text" class="form-control" placeholder="Subject" name="Subject" required>
                     </div>
 
-                    <div class="mb-2">
-
-                        <textarea class="form-control" name="message"  rows="4" placeholder="Message" required></textarea>
+                    <div>
+                        <input type="text" placeholder="subject" name="subject" required>
                     </div>
 
-                    <div class="mb-2">
-                     <input class="col-2 form-control" type="file" id="attachment" name="attachment" accept="application/pdf">
-                            </div>
+                    <div>
+                        <textarea name="message" id="" cols="20" rows="10" placeholder="Message" required></textarea>
+                    </div>
 
+                     <input class="col-2" type="file" id="attachment" name="attachment" accept="application/pdf">
+                    
                     <input type="hidden" id="" name="">
-                    <div class="d-grid gap-2 ">
-                    <button  class=" btn btn-primary" name="submit" id="send-email">Send</button>
-                            </div>  
+                    <button name="submit" id="send-email">Send</button>
                 </form>
             </div>
        
