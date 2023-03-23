@@ -229,4 +229,12 @@ class Payroll{
         return $prlist;
         exit();
 }
+public function Insertpayroll($prlist){
+    $sql = "INSERT INTO prlist (date, code, start, end, type)
+       VALUES (?,?,?,?,?);";
+
+   $stmt = $this->database->connect()->prepare($sql);
+       exit();
+       }
 }
+
