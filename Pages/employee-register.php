@@ -49,7 +49,8 @@
             <select name="department" id="department">
                 <option value="">--Please choose an option--</option>
                 <option value="sales">Sales</option>
-                <option value="inventory">Inventory</option>          
+                <option value="purchaser">Purchaser</option>
+                <option value="warehouse">Warehouse</option>                  
             </select>   
         </div>
 
@@ -58,10 +59,22 @@
 
             <input type="file"
                    id="resume" name="resume"
-                   accept="application/pdf">
+                   accept="application/pdf" required>
         </div>
 
         <button  name="submit">Submit</button>
     </form>
+
+     <?php
+                if (isset($_GET["error"])) {
+
+                    if ($_GET["error"] == "alreadyExist") {
+                        echo '<p class=""> Email already exist.</p>';
+                    }else if ($_GET["error"] == "emptyInput") {
+                        echo '<p class=""> Empty Input</p>';
+                    }
+                }
+             
+            ?> 
 </body>
 </html>
