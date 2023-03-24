@@ -35,8 +35,34 @@ class Admin {
         //close connection
         unset($this->database);
     }
+     public function findEmployeeById($id){
+        
+          // prepare the SQL statement using the database property
+        $stmt = $this->database->connect()->prepare("SELECT * FROM employees
+                                                     WHERE id=?");
 
-    public function findEmployeeById($id){
+         //if execution fail
+        if (!$stmt->execute([$id])) {
+            header("Location: ../index.php?error=stmtfail");
+            exit();
+        }
+
+        //fetch the result
+        $result = $stmt->fetchAll();
+        
+          //if has result return it, else return false
+        if ($result) {
+            return $result;
+        } else {
+            $result = false;
+            return $result;
+        }
+
+        //close connection
+        unset($this->database);
+    }
+
+    public function getEmployeePayslip($id){
         
           // prepare the SQL statement using the database property
         $stmt = $this->database->connect()->prepare("SELECT employees.*, employee_details.department, employee_details.salary, employee_details.sss,employee_details.pagibig ,employee_details.philhealth  FROM employees

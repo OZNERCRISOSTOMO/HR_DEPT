@@ -232,12 +232,12 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                             </div>
 
                     <div class="mb-2">
-                        <input type="text" class="form-control" placeholder="Subject" name="Subject" required>
+                        <input type="text" class="form-control" placeholder="Subject" name="subject" required>
                     </div>
 
                     <div class="mb-2">
 
-                        <textarea class="form-control" name="message"  rows="4" placeholder="Message" required></textarea>
+                        <textarea class="form-control" name="message"  rows="4" placeholder="message" required></textarea>
                     </div>
 
                     <div class="mb-2">

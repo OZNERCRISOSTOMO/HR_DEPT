@@ -12,7 +12,7 @@ if (isset($_POST['id'])) {
 //Search box value assigning to $name variable.
    $employeeId = $_POST['id'];
 
-    $employeeData = $admin->findEmployeeById($employeeId);
+    $employeeData = $admin->getEmployeePayslip($employeeId);
     
     echo json_encode($employeeData);
 

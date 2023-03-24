@@ -11,9 +11,11 @@ if(isset($_POST['submit'])){
     $message = $_POST['message'];
 
 
-    $employee = $admin->findEmployeeById($employeeId);
+    [$employee] = $admin->findEmployeeById($employeeId);
 
-
+    // var_dump($employee);
+    // echo $employee['email'];
+    // exit();
     //if there is attachment
     if(isset($_FILES['attachment']) && $_FILES['attachment']['error'] === UPLOAD_ERR_OK){
         $attachmentData = array(
