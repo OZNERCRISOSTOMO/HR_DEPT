@@ -104,7 +104,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     <input type="checkbox" id="philhealth" name="philhealth" value="0.05" >
                         <label for="beneficiaries3">Philhealth Beneficiaries</label><br /><br />
             </div>
-
+                 <input type="hidden" id="employee-name" name="employee-name">
                  <button type="submit" class="btn btn-success btn-lg btn block">Generate Payslip</button>
         </form>
     </div>
@@ -133,7 +133,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                         const [employeeData] = JSON.parse(data)
                         $("#salary").val(employeeData.salary)
                          $("#email").val(employeeData.email)
-                        
+                        $("#employee-name").val(employeeData.first_name + " " + employeeData.last_name)
                          const beneficiaries = [{type:"sss",
                                                  value:employeeData.sss
                                                 },

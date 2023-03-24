@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$fname = $_POST['fname'];
+$fname = $_POST['employee-name'];
 $position = $_POST['position'];
 $branch = $_POST['branch'];
 $email = $_POST['email'];
