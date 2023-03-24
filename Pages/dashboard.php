@@ -73,7 +73,9 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                 <a href="../Payslip JSPDF/index.php" class="text-decoration-none nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Payslip</span> </a>
              </div>
             </div>
-             <a href="../functions/admin-logout.php" class="text-decoration-none nav_link logout"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+             <a href="../functions/admin-logout.php" class="text-decoration-none nav_link logout">
+                 <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
+             </a>
         </nav>
     </div>
         <!---------------------------->
@@ -317,7 +319,8 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
         }).then((result) => {
             if (result.isConfirmed) {
                 // e.target.href
-                window.location.href = `${e.target.href}`
+                // console.log(e.target.closest(".logout").href)
+                window.location.href = `${e.target.closest(".logout").href}`
 
             }
         })
