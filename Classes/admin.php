@@ -37,8 +37,11 @@ class Admin {
     }
 
     public function findEmployeeById($id){
+        
           // prepare the SQL statement using the database property
-        $stmt = $this->database->connect()->prepare("SELECT * FROM employees WHERE id=?");
+        $stmt = $this->database->connect()->prepare("SELECT employees.*, employee_details.department, employee_details.salary, employee_details.sss,employee_details.pagibig ,employee_details.philhealth  FROM employees
+                                                     JOIN employee_details ON employees.id = employee_details.employee_id
+                                                     WHERE employees.id=?");
 
          //if execution fail
         if (!$stmt->execute([$id])) {
@@ -47,7 +50,7 @@ class Admin {
         }
 
         //fetch the result
-        $result = $stmt->fetch();
+        $result = $stmt->fetchAll();
         
           //if has result return it, else return false
         if ($result) {
@@ -91,7 +94,9 @@ class Admin {
     }
 
     public function searchEmployees($name){
-        $data =  $this->database->connect()->query("SELECT * FROM employees WHERE (first_name LIKE '{$name}%' OR last_name LIKE '{$name}%') AND status = '1' ")->fetchAll();
+        $data =  $this->database->connect()->query("SELECT employees.*, employee_details.department,employee_details.date_applied FROM employees 
+                                                    JOIN employee_details ON employees.id = employee_details.employee_id 
+                                                    WHERE (first_name LIKE '{$name}%' OR last_name LIKE '{$name}%') AND status = '1' ")->fetchAll();
         return $data;
         exit();
     }

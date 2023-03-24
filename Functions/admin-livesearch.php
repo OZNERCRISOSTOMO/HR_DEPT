@@ -21,19 +21,21 @@ if (isset($_POST['search'])) {
     
 
     // var_dump($employees);
-    foreach($employees as $employee){
-        echo "<div class='employee-list-container'>";
-           
-                echo '<p class="">'. $employee["first_name"]." " . $employee["last_name"] . '  </p>';           
+    foreach($employees as $employee){;
+        echo '<div class="card" style="width: 18rem;">';
+        echo "<div class='card-body'>";
+
+            echo '<img src="../Images/1x1 photo.png" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle">';
+             echo '<h5 class="card-title text-center">'. $employee["first_name"]." " . $employee["last_name"] . '  </h5>';         
                 echo '<p class="">'. $employee["email"]. '  </p>';
                  echo '<p class="">'. $employee["gender"]. '  </p>';  
                 echo '<p class="">'. $employee["department"]. '  </p>'; 
                 echo '<p class="">'. $employee["contact"]. '  </p>'; 
-                     $formatted_date = date('M d Y, h:i A', strtotime($employee["date_applied"]));
-                          echo '<p class="">'. $formatted_date. '  </p>';
+                 echo '<p class=""> Date hired : '. $admin->formatDate($employee["date_applied"]) . '</p>';
        
              
         echo "</div>";
+         echo "</div>";
     }
 
 }else{

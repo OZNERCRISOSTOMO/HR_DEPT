@@ -69,9 +69,11 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                  <a href="#" class="text-decoration-none nav_link active"><i class='bx bx-grid-alt nav_icon'></i>  <span class="nav_name">Dashboard</span> </a>
                  <a href="#" class="text-decoration-none nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Employes</span> </a> 
                 <a href="#" class="text-decoration-none nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Attendance</span> </a>
-                <a href="../admin/prlist.php" class="text-decoration-none nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Payroll</span> </a> </div>
+                <a href="../admin/prlist.php" class="text-decoration-none nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Payroll</span> </a>
+                <a href="../Payslip JSPDF/index.php" class="text-decoration-none nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Payslip</span> </a>
+             </div>
             </div>
-             <a href="../functions/admin-logout.php" class="text-decoration-none nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+             <a href="../functions/admin-logout.php" class="text-decoration-none nav_link logout"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
         </nav>
     </div>
         <!---------------------------->
@@ -165,14 +167,14 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                     </div>
 
                     <div class="container">
-                        <div class="row">
+                        <div class="row employee-list-wrapper">
                         <?php
                     $employees = $admin->getEmployees();
 
                     
                     foreach($employees as $employee){
                          ?>
-                       <div class="card" style="width: 18rem;">
+                    <div class="card" style="width: 18rem;">
                        <div class="card-body">
                             <?php
                             echo '<img src="../Images/1x1 photo.png" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle">';
