@@ -125,5 +125,11 @@ class Employee{
          $stmt = $this->database->connect()->prepare("INSERT INTO employees (first_name,last_name, email, gender, address, contact, status)
             VALUES (?,?,?,?,?,?,?);");
     }
+    public function attendanceList(){
+        $attlist =  $this->database->connect()->query("SELECT * FROM attendance")->fetchAll();
+        return $attlist;
+        exit();
+    }
+
 }
 
