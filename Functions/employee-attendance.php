@@ -26,7 +26,7 @@
 			$id = $row['id'];
             $date_now = date('Y-m-d');
             if($status == "in"){
-                $sql = "SELECT * FROM attendance WHERE employee_id = '$id' AND date = '$date_now' AND time_in IS NOT NULL";
+                $sql = "SELECT *,attendance.id AS uid FROM attendance WHERE employee_id = '$id' AND date = '$date_now' AND time_in IS NOT NULL";
 				$query = $conn->query($sql);
 				if($query->num_rows > 0){
 					echo "You have time in for today!";
@@ -50,22 +50,24 @@
                 }
 
             }else{
-            $sql = "SELECT * FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id WHERE attendance.employee_id = '$id' AND date = '$date_now'";
+            $sql = "SELECT *,attendance.id AS uid FROM attendance LEFT JOIN employees ON employees.id=attendance.employee_id WHERE attendance.employee_id = '$id' AND date = '$date_now'";
 				$query = $conn->query($sql);
 				if($query->num_rows < 1){
 		
 					echo 'Cannot Timeout. No time in.';
 				}else{
-                    $row1 = $query->fetch_assoc();
-                    $id = $row1['employee_id'];
+                    $row = $query->fetch_assoc();
+                    if($row['time_out'] != '00:00:00'){
+                        echo 'You have timed out for today';
+                    }else{
 					$timezone = 'Asia/Manila';
 	                date_default_timezone_set($timezone);
                     $lognow = date('H:i:s');
-                    $sql = "UPDATE attendance SET time_out = '$lognow' WHERE employee_id = '$id'";
+                    $sql = "UPDATE attendance SET time_out = '$lognow' WHERE id = '".$row['uid']."'";
                     if($conn->query($sql)){
                         echo "Time out "."$lognow"." ".$row['first_name']. " "  .$row['last_name']. " ";
 
-                        $sql = "SELECT * FROM attendance WHERE employee_id = '$id'";
+                        $sql = "SELECT * FROM attendance WHERE id = '".$row['uid']."'";
                         $query = $conn->query($sql);
                         $urow = $query->fetch_assoc();
 
@@ -89,22 +91,23 @@
                         $interval = $time_in->diff($time_out);
                         $hrs = $interval->format('%h');
                         $mins = $interval->format('%i');
-                        $mins = $mins/60;
-                        $int = $hrs + $mins;
+                        $mins2 = $mins/60;
+                        $int = $hrs + $mins2;
                         if($int > 4){
                             $int = $int - 1;
                         }
-                        $sql = "UPDATE attendance SET num_hr = '$int' WHERE id = '$id'";
+                        $sql = "UPDATE attendance SET num_hr = '$int' WHERE id = '".$row['uid']."'";
 						$conn->query($sql);
                     }
                     else{
                         echo $conn->error;
                     }
                 }
+                }
             }
         }
-    }
     else{
         echo 'Employee ID not found';
     }
+}
 ?>
