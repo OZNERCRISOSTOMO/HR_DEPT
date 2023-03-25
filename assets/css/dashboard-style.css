@@ -30,7 +30,7 @@
     --z-fixed: 100}*,::before,::after{box-sizing: border-box}
 
     .main{
-        background-color: #F0F0F0;
+        background-color: #eee;
 
     }
     

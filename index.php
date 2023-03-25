@@ -54,8 +54,22 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <form action="Functions/admin-login.php" method="POST">
         <h4 class="text-center">Company Name</h4>   
 
-
-        <div class="form-group py-2">
+        <?php
+       
+                if (isset($_GET["error"])) {
+                    echo '<div class="container rounded shadow text-center p-3 text-danger" style="background-color: #ff9694;">';
+                    if ($_GET["error"] == "errorPassword") {
+                        echo '<h5 class=""> Wrong password!</h5>';
+                    } else if ($_GET["error"] == "errorEmail") {
+                        echo '<p class=""> Email does not exist!!</p>';
+                    }else if ($_GET["error"] == "emptyInput") {
+                        echo '<p class=""> Empty Input</p>';
+                    }
+                    echo '</div>';
+                }
+                
+            ?> 
+        <div class="form-group py-2" >
 			<label for="exampleInputEmail1" class="form-label">Email</label>
 
 			<div class="input-group">
@@ -85,18 +99,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
 
        
-            <?php
-                if (isset($_GET["error"])) {
-
-                    if ($_GET["error"] == "errorPassword") {
-                        echo '<p class=""> Wrong password!</p>';
-                    } else if ($_GET["error"] == "errorEmail") {
-                        echo '<p class=""> Email does not exist!!</p>';
-                    }else if ($_GET["error"] == "emptyInput") {
-                        echo '<p class=""> Empty Input</p>';
-                    }
-                }
-             
-            ?> 
+            
 </body>
 </html>
