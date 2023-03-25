@@ -1,6 +1,3 @@
-<?php
-	include '../Functions/time_zone.php';
-?>
 <!DOCTYPE html>
 <html>
 <head>
