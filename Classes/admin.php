@@ -250,9 +250,12 @@ class Admin {
 
 class Payroll{
     private $database;
+    private $date;
 
     public function __construct(Database $database) {
         $this->database = $database;
+        date_default_timezone_set('Asia/Manila');
+        $this->date =  date('Y-m-d H:i:s');
 
     }
     public function payrollList(){
@@ -265,7 +268,33 @@ public function Insertpayroll($prlist){
        VALUES (?,?,?,?,?);";
 
    $stmt = $this->database->connect()->prepare($sql);
+   if (!$stmt->execute([$this->date,
+    $prlist['code'],
+    $prlist['start'],
+    $prlist['end'],
+    $prlist['type']
+    ])) {
+    header("Location: ../admin/prlist.php?error=stmtfail");
        exit();
        }
 }
+}
 
+class Payslip{
+    private $database;
+    private $date;
+
+    public function __construct(Database $database) {
+        $this->database = $database;
+        date_default_timezone_set('Asia/Manila');
+        $this->date =  date('Y-m-d H:i:s');
+
+    }
+    public function payslipList(){
+        $pslist =  $this->database->connect()->query("SELECT prlist.id, prlist.date, employees.last_name, employees.first_name, employee_details.salary FROM prlist 
+                                                    JOIN employees ON prlist.id = employees.id
+                                                    JOIN employee_details ON employees.id = employee_details.employee_id")->fetchAll();
+        return $pslist;
+        exit();
+}
+}

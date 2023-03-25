@@ -32,8 +32,9 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
    <div class="col-sm-8">
     <?php echo $deleteMsg??''; ?>
     <div class="table-responsive">
-      <h1>List of Payroll</h1>
-      <div id="payroll"><button type="button" data-toggle="modal" data-target="#payroll-modal">Create New</button></div>
+      <h4>List of Payroll
+        <button type="button" data-toggle="modal" data-target="#payroll-modal">Create New</button>
+      </h4>
       <div id="payroll-modal" class="modal fade" role="dialog">
 	    <div class="modal-dialog">
 		  <div class="modal-content">
@@ -41,7 +42,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 				<a class="close" data-dismiss="modal">×</a>
 				<h3>Add New Payroll</h3>
 			</div>
-			<form id="prForm" name="payroll" role="form">
+			<form id="prForm" name="payroll" role="form" action="../Functions/admin-payroll.php" method="POST">
 				<div class="modal-body">				
 					<div class="form-group">
 						<label for="code">Payroll Code</label>
@@ -57,7 +58,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 					</div>
           <div class="form-group">
 						<label for="type">Payroll Type</label>
-						<select class="form-control">  
+						<select class="form-control" name="type">  
               <option value="weekly">Weekly</option> 
               <option value="semimonthly">Semi-Monthly</option>  
               <option value="monthly">Monthly</option>    
@@ -66,7 +67,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 				</div>
 				<div class="modal-footer">					
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<input type="submit" class="btn btn-success" id="submit">
+					<input type="submit" class="btn btn-success" id="submit" name="submit">
 				</div>
 			</form>
 		</div>
@@ -94,6 +95,11 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       <td><?php echo $list['start']; ?> </td>
       <td><?php echo $list['end']; ?> </td>
       <td><?php echo $list['type']; ?> </td>
+      <td>
+      <button onclick="location.href='../admin/pslist.php'" type="button">View</button>
+        <button>Edit</button>
+        <button>Delete</button>
+      </td>
     </tr>
     <?php
       }
