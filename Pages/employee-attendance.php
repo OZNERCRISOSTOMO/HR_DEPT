@@ -62,7 +62,7 @@
       <span class="result"><i class="icon fa fa-warning"></i> <span class="message"></span></span>
     </div>
 
-    <?php include '../Functions/scripts.php' ?>
+    
   		
 </div>
 </body>
