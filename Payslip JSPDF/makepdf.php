@@ -21,12 +21,8 @@ $pagibig = $_POST['pagibig'];
 isset($_POST['sss']);
 
 if (filter_has_var(INPUT_POST, 'sss')) {
-        $num1 = $_POST['salary'];
-        
-        if ($num1 <= 10000)
-        {
-        $sss_result = $num1 * 0.04;
-        }
+        $num1 = $_POST['salary'];       
+        $sss_result = $num1 * 0.045;
 }
 else {
         $sss_result = '0 - not a member';
@@ -34,7 +30,7 @@ else {
 
 if (filter_has_var(INPUT_POST, 'philhealth')) {
         $num1 = $_POST['salary'];
-        $phil_result = $num1 * 0.05;
+        $phil_result = $num1 * 0.045;
 }
 else {
         $phil_result = '0 - not a member';
@@ -42,7 +38,19 @@ else {
 
 if (filter_has_var(INPUT_POST, 'pagibig')) {
         $num1 = $_POST['salary'];
-        $love_result = $num1 * 0.02;
+
+        if ($num1 <= 1499){
+            $love_result = $num1 * 0.02;
+            }
+        else if ($num1 >= 1500 || $num1 <= 4999){
+            $love_result = $num1 * 0.02;
+        }
+        else if ($num1 >= 5000) {
+            $love_result = $num1 * 0.03;
+        }
+        else {
+            'error';
+        }
 }
 else {
         $love_result = '0 - not a member';
@@ -109,10 +117,11 @@ caption {
 }
 p {
     text-align: center;
+    font-size: 18px;
     border: 1px solid black;
     float: right;
     height: 25px;
-    width: 20%;
+    width: 30%;
 }
 </style>
 <div style = "font-family: Century Gothic;">
@@ -175,7 +184,7 @@ p {
                         <th>Philhealth: </th>
                         <td>' . '₱' . $phil_result .'</td>
 
-                        <th>Tax: </th>
+                        <th>Withholding Tax: </th>
                         <td>' . '₱' . $tax .'</td>
                     </tr>
             </table>
