@@ -63,7 +63,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
             </div>
 
             <div class="mb-2">
-            <input type="text" name="branch" placeholder="Branch" class="form-control" required>
+            <input type="text" name="branch" placeholder="Branch" class="form-control" id="branch" required>
             </div>
 
             <div class="mb-2">
@@ -134,6 +134,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                         $("#salary").val(employeeData.salary)
                          $("#email").val(employeeData.email)
                          $("#position").val(employeeData.position)
+                         $("#branch").val(employeeData.branch)
                         $("#employee-name").val(employeeData.first_name + " " + employeeData.last_name)
                          const beneficiaries = [{type:"sss",
                                                  value:employeeData.sss

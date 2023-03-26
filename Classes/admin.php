@@ -65,7 +65,7 @@ class Admin {
     public function getEmployeePayslip($id){
         
           // prepare the SQL statement using the database property
-        $stmt = $this->database->connect()->prepare("SELECT employees.*, employee_details.department, employee_details.salary, employee_details.sss,employee_details.pagibig ,employee_details.philhealth, employee_details.position  FROM employees
+        $stmt = $this->database->connect()->prepare("SELECT employees.*, employee_details.department, employee_details.salary, employee_details.sss,employee_details.pagibig ,employee_details.philhealth, employee_details.position, employee_details.branch  FROM employees
                                                      JOIN employee_details ON employees.id = employee_details.employee_id
                                                      WHERE employees.id=?");
 
