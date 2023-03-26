@@ -57,7 +57,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                 </div>
 
                 <div class="col-md-6">
-                    <input type="text" name="position" placeholder="Position" class="form-control" required>
+                    <input type="text" name="position" placeholder="Position" class="form-control" id="position" required>
                 </div>
 
             </div>
@@ -133,6 +133,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                         const [employeeData] = JSON.parse(data)
                         $("#salary").val(employeeData.salary)
                          $("#email").val(employeeData.email)
+                         $("#position").val(employeeData.position)
                         $("#employee-name").val(employeeData.first_name + " " + employeeData.last_name)
                          const beneficiaries = [{type:"sss",
                                                  value:employeeData.sss

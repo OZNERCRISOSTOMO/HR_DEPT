@@ -17,11 +17,16 @@ $sss = $_POST['sss'];
 $philhealth = $_POST['philhealth'];
 $pagibig = $_POST['pagibig'];
 
+
 isset($_POST['sss']);
 
 if (filter_has_var(INPUT_POST, 'sss')) {
         $num1 = $_POST['salary'];
+        
+        if ($num1 <= 10000)
+        {
         $sss_result = $num1 * 0.04;
+        }
 }
 else {
         $sss_result = '0 - not a member';
@@ -42,9 +47,30 @@ if (filter_has_var(INPUT_POST, 'pagibig')) {
 else {
         $love_result = '0 - not a member';
 }
+
 $salaryOT = $salary + ($overtime * 60);
 
 $networth = $salaryOT - ($sss_result + $phil_result + $love_result);
+
+if ($tax <= 10000) {
+    $tax = $salaryOT * 0.05;
+}
+else if ($tax >=10001 || $tax <=30000) {
+    $tax = $salaryOT * 0.10;
+}
+else if ($tax >=30001 || $tax <=70000) {
+    $tax = $salaryOT * 0.15;
+}
+else if ($tax >=70001 || $tax <=140000) {
+    $tax = $salaryOT * 0.20;
+}
+else if ($tax >=140001 || $tax <=250000) {
+    $tax = $salaryOT * 0.25;
+}
+else if ($tax >=250001 || $tax <=500000) {
+    $tax = $salaryOT * 0.30;
+}
+else $tax = ($tax >=500001) ? $salaryOT * 0.32 : 'error';
 
 $mdpf = new Mpdf\Mpdf();
 
@@ -129,10 +155,10 @@ p {
                     </tr>
 
                     <tr>
-                        <th>Basic Salary:</th>
+                        <th>Gross Pay:</th>
                         <td>' . '₱' . $salary .'</td>
 
-                        <th>Base Salary plus OT:</th>
+                        <th>Gross plus OT:</th>
                         <td>' . '₱' . $salaryOT .'</td>
                     </tr>
             </table>
@@ -148,10 +174,13 @@ p {
 
                         <th>Philhealth: </th>
                         <td>' . '₱' . $phil_result .'</td>
+
+                        <th>Tax: </th>
+                        <td>' . '₱' . $tax .'</td>
                     </tr>
             </table>
 
-            <p><b>Total Salary:</b> ' . '₱' . $networth . '</p>
+            <p><b>Net Pay:</b> ' . '₱' . $networth . '</p>
 </div>';
 
 
