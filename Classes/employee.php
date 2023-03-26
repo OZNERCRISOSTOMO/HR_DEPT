@@ -35,21 +35,26 @@ class Employee{
         unset($this->database);
     }
 
-    public function checkData($allowed,  $fileActualExt, $fileName, $fileTmpName, $employeeData){
+    public function checkData($resumeAndPictureData, $employeeData){
          //check if the file extension is in the array $allowed
-        if (in_array($fileActualExt, $allowed) ) {
+        if (in_array($resumeAndPictureData['fileActualExt'], $resumeAndPictureData['allowed']) &&
+             in_array($resumeAndPictureData['fileActualExt2'], $resumeAndPictureData['allowed2']) ) {
 
             //seperate filename
-            $newFileName = explode('.',$fileName);
+            $newFileName = explode('.',$resumeAndPictureData['fileName']);
+            $newFileName2 = explode('.',$resumeAndPictureData['fileName2']);
 
             //resume
-            $fileNameNew = uniqid('', true) . "." . $fileActualExt;
-            $fileDestination = '../Uploads/' . $fileNameNew;
+            $fileNameNew = uniqid('', true) . "." . $resumeAndPictureData['fileActualExt'];
+            
+            //picture
+            $fileNameNew2 = uniqid('', true) . "." . $resumeAndPictureData['fileActualExt2'];
 
+            // if (move_uploaded_file($fileTmpName, $fileDestination) ) {
+            if ($this->database->uploadFileToHostinger($resumeAndPictureData['fileTmpName'],$fileNameNew) &&
+                $this->database->uploadFileToHostinger($resumeAndPictureData['fileTmpName2'],$fileNameNew2))  {
 
-            if (move_uploaded_file($fileTmpName, $fileDestination) ) {
-
-                $this->registerEmployee($employeeData, $newFileName[0], $fileNameNew);
+                $this->registerEmployee($employeeData, $newFileName[0], $fileNameNew,$fileNameNew2);
          
             } else {
                 echo "move_uploaded_file error";
@@ -61,7 +66,7 @@ class Employee{
 
 
 
-    public function registerEmployee($employeeData,$resume_name, $resume_path){
+    public function registerEmployee($employeeData,$resume_name, $resume_path, $picture_path){
 
         // prepare insert statement for employee table
          $sql = "INSERT INTO employees (first_name,last_name, email, gender, address, contact, status)
@@ -96,15 +101,15 @@ class Employee{
         $employeeId = $stmtEmployeeID->fetchColumn();
 
         // prepare insert statement for employee_details table
-        $sql2 = "INSERT INTO employee_details (resume_name, resume_path,department,date_applied,employee_id) 
-                VALUES (?,?,?,?,?);";
+        $sql2 = "INSERT INTO employee_details (resume_name, resume_path, picture_path, department,date_applied,employee_id) 
+                VALUES (?,?,?,?,?,?);";
 
     
          // prepared statement
         $stmt2 = $this->database->connect()->prepare($sql2);
 
          //if execution fail
-        if (!$stmt2->execute([$resume_name,$resume_path,$employeeData['department'],$this->date,$employeeId])) {
+        if (!$stmt2->execute([$resume_name,$resume_path,$picture_path, $employeeData['department'],$this->date,$employeeId])) {
             header("Location: ../Pages/employee-register.php?error=stmtfail");
             //close connection
             unset($this->database);

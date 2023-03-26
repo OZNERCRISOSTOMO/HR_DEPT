@@ -107,6 +107,13 @@
                    accept="application/pdf" required>
                     </div>
 
+                    <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupFile01">Upload Picture</label>
+                    <input type="file" class="form-control"
+                   id="picture" name="picture"
+                   accept="image/jpeg, image/png" required>
+                    </div>
+
 
 
                    <div>

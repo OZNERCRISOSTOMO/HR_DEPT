@@ -30,11 +30,35 @@ if(isset($_POST['submit'])){
 
     );
 
+    $fileData2 = array(
+        'fileName' => $_FILES['picture']['name'],
+        'fileTmpName' => $_FILES['picture']['tmp_name'],
+        'fileSize' => $_FILES['picture']['size'],
+        'fileError' => $_FILES['picture']['error'],
+        'fileType' => $_FILES['picture']['type'],
+
+    );
+
     //seperate the filename and its extension - file
     $fileExt = explode('.', $fileData['fileName']);
     $fileActualExt = strtolower(end($fileExt));
-
     $allowed = array('pdf');
+
+    $fileExt2 = explode('.', $fileData2['fileName']);
+    $fileActualExt2 = strtolower(end($fileExt2));
+    $allowed2 = array('jpeg','png');
+
+    //resume and picture data
+    $resumeAndPictureData = array(
+        'allowed' => $allowed,
+        'allowed2' => $allowed2,
+        'fileActualExt' => $fileActualExt,
+        'fileActualExt2' => $fileActualExt2,
+        'fileName' => $fileData['fileName'],
+        'fileName2' => $fileData2['fileName'],
+        'fileTmpName' => $fileData['fileTmpName'],
+        'fileTmpName2' => $fileData2['fileTmpName']
+    );
 
     //check if any input is  empty
     foreach($employeeData as $data){
@@ -56,9 +80,10 @@ if(isset($_POST['submit'])){
 
 
     //if theres no error from the resume file
-    if ($fileData['fileError'] === 0 ) {
+    if ( $fileData['fileError'] === 0 && $fileData2['fileError'] === 0) {
 
-        $employee->checkData($allowed,  $fileActualExt, $fileData['fileName'], $fileData['fileTmpName'], $employeeData);
+        $employee->checkData($resumeAndPictureData,
+                             $employeeData);
     } else {
         echo "There was an error while uploading the file";
         exit();

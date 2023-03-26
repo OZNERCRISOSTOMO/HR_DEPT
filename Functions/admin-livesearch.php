@@ -25,7 +25,7 @@ if (isset($_POST['search'])) {
         echo '<div class="card" style="width: 18rem;">';
         echo "<div class='card-body'>";
 
-            echo '<img src="../Images/1x1 photo.png" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle">';
+            echo '<img src="../Uploads/' . $employee['picture_path'] . '" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle">';
              echo '<h5 class="card-title text-center">'. $employee["first_name"]." " . $employee["last_name"] . '  </h5>';         
                 echo '<p class="">'. $employee["email"]. '  </p>';
                  echo '<p class="">'. $employee["gender"]. '  </p>';  

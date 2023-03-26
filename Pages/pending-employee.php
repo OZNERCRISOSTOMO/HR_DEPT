@@ -13,6 +13,7 @@
                                     <th scope="col">Gender</th>
                                     <th scope="col">Contact No</th>
                                     <th scope="col">Resume</th>
+                                     <th scope="col">Picture</th>
                                     <th scope="col">Date Applied</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -33,6 +34,11 @@
                                         <td>
                                             <a href="../Uploads/<?php echo $employee['resume_path']?>" target="_thapa">
                                                 <?php echo $employee['resume_name']?>
+                                            </a>
+                                        </td>
+                                        <td>
+                                             <a href="../Uploads/<?php echo $employee['picture_path']?>" target="_thapa">
+                                                Picture
                                             </a>
                                         </td>
                                      <?php
@@ -70,7 +76,8 @@
                                 <select class="form-select" aria-label="Default select example" name="department">
                                 <option selected>Select department</option>
                                 <option value="sales">Sales</option>
-                                <option value="inventory">Inventory</option>
+                                <option value="purchaser">Purchaser</option>
+                                <option value="warehouse">Warehouse</option>
                                 </select>
                             </div>
                             
@@ -85,6 +92,20 @@
                                 <div class="form-check ms-3">
                                     <input class="form-check-input" type="radio" value="admin" id="admin" name="position" required>
                                     <label class="form-check-label" for="admin">Admin</label>
+                                </div>
+                            </div>
+
+                              <!--===== SCHEDULE ====== -->
+                            <div class="mb-3 d-flex">
+                                Schedule : 
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" value="1" id="1" name="schedule" required>
+                                    <label class="form-check-label" for="employee">8:00 AM - 5:00 PM</label>
+                                </div>
+            
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" value="2" id="2" name="schedule" required>
+                                    <label class="form-check-label" for="admin">6:00 PM - 10:00 PM</label>
                                 </div>
                             </div>
                             

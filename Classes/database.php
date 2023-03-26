@@ -52,4 +52,82 @@ class Database
             echo 'Email could not be sent. Error: ' . $mail->ErrorInfo;
         } 
     }
+
+    public function uploadFileToHostinger($fileTmpName,$fileName){
+        // FTP login details
+        $ftp_server = "217.21.73.231";
+        $ftp_username = "u839345553";
+        $ftp_password = "SBIT3G_qcu";
+
+        // Local file to upload
+        $local_file = $fileTmpName;
+
+        // Remote file name
+        $remote_file = "/public_html/uploads/" . $fileName;
+
+        // Connect to FTP server
+        $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to FTP server");
+
+        // Login to FTP server
+        ftp_login($ftp_conn, $ftp_username, $ftp_password) or die("Could not login to FTP server");
+
+        // Upload file to FTP server
+        if (ftp_put($ftp_conn, $remote_file, $local_file, FTP_BINARY)) {
+            // echo "File uploaded successfully";
+            // Close FTP connection
+            ftp_close($ftp_conn);
+            return true;
+        } else {
+            // echo "Error uploading file";
+                  // Close FTP connection
+            ftp_close($ftp_conn);
+            return false;
+        }
+
+  
+    }
+
+    public function fetchFileFromHostinger(){
+       // Turn off error reporting
+    error_reporting(0);
+
+        // FTP login details
+        $ftp_server = "217.21.73.231";
+        $ftp_username = "u839345553";
+        $ftp_password = "SBIT3G_qcu";
+
+        // Local directory to save files to
+        $local_directory = "C:/xampp/htdocs/HR_DEPT/Uploads";
+
+        // Connect to FTP server
+        $ftp_conn = ftp_connect($ftp_server) or die("Could not connect to FTP server");
+
+        // Login to FTP server
+        ftp_login($ftp_conn, $ftp_username, $ftp_password) or die("Could not login to FTP server");
+
+        // Switch to passive mode
+        ftp_pasv($ftp_conn, true);
+
+// Enable debugging mode
+// ftp_set_option($ftp_conn, FTP_DEBUG_INFO, true);
+
+// Set the directory to download files from
+$directory = "/public_html/uploads";
+
+// Get the list of files in the directory
+if ($file_list = ftp_nlist($ftp_conn, $directory)) {
+    // Download each file to the local directory
+    foreach ($file_list as $file) {
+        $local_file = $local_directory . "/" . basename($file);
+          ftp_get($ftp_conn, $local_file, $file);
+    }
+} else {
+    echo "Error retrieving file list from remote server\n";
+}
+
+// Close FTP connection
+ftp_close($ftp_conn);
+// Turn on error reporting
+error_reporting(E_ALL);
+    }
 }

@@ -50,9 +50,19 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       <td><?php echo $list['id']; ?> </td>
       <td><?php echo $list['employee_id']; ?> </td>
       <td><?php echo $list['date']; ?> </td>
-      <td><?php echo $list['time_in']; ?> </td>
+      <td><?php            
+           $time = DateTime::createFromFormat('H:i:s', $list['time_in']);
+          $formattedTimeIn = $time->format('h:i:s A'); 
+           echo $formattedTimeIn;
+            ?>
+      </td>
       <td><?php echo $list['status']; ?> </td>
-      <td><?php echo $list['time_out']; ?> </td>
+      <td><?php 
+            $time = DateTime::createFromFormat('H:i:s', $list['time_out']);
+            $formattedTimeOut = $time->format('h:i:s A'); 
+            echo $formattedTimeOut;
+          ?> 
+      </td>
     </tr>
     <?php
       }

@@ -111,7 +111,7 @@ class Admin {
     }
 
     public function getEmployees(){
-        $employees = $this->database->connect()->query("SELECT employees.*, employee_details.department,employee_details.date_applied FROM employees 
+        $employees = $this->database->connect()->query("SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,employee_details.date_applied FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
                                                         WHERE employees.status = '1'")->fetchAll();
 
@@ -130,6 +130,7 @@ class Admin {
     public function getPendingEmployees(){
           $pendingEmployees = $this->database->connect()->query("SELECT employees.*, employee_details.resume_name,
                                                                                      employee_details.resume_path,
+                                                                                     employee_details.picture_path,
                                                                                      employee_details.department,
                                                                                      employee_details.date_applied FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
@@ -149,15 +150,17 @@ class Admin {
         // prepared statement
          $stmt = $this->database->connect()->prepare("UPDATE employees AS e
                                                       INNER JOIN employee_details AS ed ON e.id = ed.employee_id
-                                                      SET e.status = ?, ed.salary = ?, ed.working_hours = ?, ed.department = ?, ed.date_hired = ?
+                                                      SET e.schedule_id = ?, e.status = ?, ed.salary = ?, ed.working_hours = ?, ed.department = ?, ed.date_hired = ?, ed.position = ?
                                                       WHERE e.id = ?");
 
         //if execution fail
-        if (!$stmt->execute(['1',
+        if (!$stmt->execute([$employeeData['schedule'],
+                            '1',
                              $employeeData['salary'],
                              $employeeData['workingHours'],
                              $employeeData['department'],
                              $this->date,
+                             $employeeData['position'],
                              $employeeData['employeeId']
                              ])) {
             header("Location: ../Pages/employee-register.php?error=stmtfail");
