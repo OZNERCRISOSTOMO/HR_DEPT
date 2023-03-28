@@ -100,6 +100,8 @@ class Admin {
         $count = $this->database->connect()->query("SELECT count(*) FROM employees WHERE status = '1' ")->fetchColumn();
 
         return $count;
+        //close connection
+        unset($this->database);
         exit();
     }
 
@@ -107,6 +109,8 @@ class Admin {
         $count = $this->database->connect()->query("SELECT count(*) FROM employees WHERE status = '0' ")->fetchColumn();
 
         return $count;
+        //close connection
+        unset($this->database);
         exit();
     }
 
@@ -120,7 +124,7 @@ class Admin {
     }
 
     public function searchEmployees($name){
-        $data =  $this->database->connect()->query("SELECT employees.*, employee_details.department,employee_details.date_applied FROM employees 
+        $data =  $this->database->connect()->query("SELECT employees.*,employee_details.picture_path, employee_details.department,employee_details.date_applied FROM employees 
                                                     JOIN employee_details ON employees.id = employee_details.employee_id 
                                                     WHERE (first_name LIKE '{$name}%' OR last_name LIKE '{$name}%') AND status = '1' ")->fetchAll();
         return $data;
@@ -150,7 +154,7 @@ class Admin {
         // prepared statement
          $stmt = $this->database->connect()->prepare("UPDATE employees AS e
                                                       INNER JOIN employee_details AS ed ON e.id = ed.employee_id
-                                                      SET e.schedule_id = ?, e.status = ?, ed.salary = ?, ed.working_hours = ?, ed.department = ?, ed.date_hired = ?, ed.position = ?
+                                                      SET e.schedule_id = ?, e.status = ?, ed.salary = ?, ed.working_hours = ?, ed.department = ?, ed.date_hired = ?, ed.position = ?, ed.branch = ?
                                                       WHERE e.id = ?");
 
         //if execution fail
@@ -161,6 +165,7 @@ class Admin {
                              $employeeData['department'],
                              $this->date,
                              $employeeData['position'],
+                             $employeeData['branch'],
                              $employeeData['employeeId']
                              ])) {
             header("Location: ../Pages/employee-register.php?error=stmtfail");

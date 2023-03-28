@@ -87,51 +87,94 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
             <div class="container">
                     <div class="row">
+
                 <!-- TOTAL EMPLOYEES  -->
                 <div class="col">
-                <button class="count-container total-employees">
+                <div class="count-container">
+                <button class="count-container total-employees btn btn-outline-primary">
                     <?php
                     $totalEmployee = $admin->getTotalEmployees();
                          echo '<p class="">'. $totalEmployee. ' Employees </p>';    
                     ?>
                 </button>
-</div>
+                </div>
+                </div>
+
                 <!-- TOTAL PRESENT EMPLOYEES  -->
                 <div class="col">
                 <div class="count-container">
-                    <?php
-                    $totalEmployee = $admin->getTotalEmployees();
-                         echo '<p class="">'. $totalEmployee. ' Employees </p>';    
+                    <button class="btn btn-outline-primary">
+                         <?php
+                    // $totalEmployee = $admin->getTotalEmployees();
+                    //      echo '<p class="">'. $totalEmployee. ' Employees </p>';   
+                    echo "1 Employees"; 
                     ?>
-                </div>
-                </div>
-                <div class="col">
-                <div class="count-container">
-                    <?php
-                    $totalEmployee = $admin->getTotalEmployees();
-                         echo '<p class="">'. $totalEmployee. ' Employees </p>';    
-                    ?>
+                    </button>
+                   
                 </div>
                 </div>
 
                 <div class="col">
                 <div class="count-container">
-                    <?php
-                    $totalEmployee = $admin->getTotalEmployees();
-                         echo '<p class="">'. $totalEmployee. ' Employees </p>';    
+                    <button class="btn btn-outline-primary">
+                         <?php
+                    // $totalEmployee = $admin->getTotalEmployees();
+                    //      echo '<p class="">'. $totalEmployee. ' Employees </p>';   
+                    echo "1 Employees"; 
                     ?>
+                    </button>
                 </div>
                 </div>
 
+                <div class="col">
+                <div class="count-container">
+                    <button class="btn btn-outline-primary">
+                         <?php
+                    // $totalEmployee = $admin->getTotalEmployees();
+                    //      echo '<p class="">'. $totalEmployee. ' Employees </p>';   
+                    echo "1 Employees"; 
+                    ?>
+                    </button>
+                </div>
+                </div>
+
+                <!-- TOTAL PENDING EMPLOYEES  -->
                 <div class="col">
                 <div class="count-container total-pending-employees">
-                    <?php
-                    $totalEmployee = $admin->getTotalPendingEmployees();
-                         echo '<p class="">'. $totalEmployee. ' Pending  Employees</p>';    
-                    ?>
-                </div>
-                </div>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <?php
+                            $totalEmployee = $admin->getTotalPendingEmployees();
+                             echo '<p class="">'. $totalEmployee. ' Pending  Employees</p>'; 
+                         
+                        ?>
+                    </button>
 
+                    <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                         <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                              <?php
+                                //  $database->fetchFileFromHostinger(); c
+                                include "pending-employee.php";
+
+                               ?>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+                <!-- =========================== -->
                 </div>
             </div>
             <!-- =================================================-->
@@ -195,15 +238,6 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                     </div>
                 </div>
                 </div>
-
-                <!--============== PENDING EMPLOYEE ======================= -->
-                    <?php
-                        $database->fetchFileFromHostinger(); 
-                        include "pending-employee.php";
-                    ?>
-                     
-                <!-- ============================================== -->
-
             </div>
         
                 </div>
@@ -281,11 +315,6 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     let currentMainContent = listOfContainer[0];
 
 
-    //SELECT PICKER 
-    // const selectBox = document.querySelector("#search-select-box")
-    // dselect(selectBox,{
-    //     search:true
-    // })
 
     $(document).ready(function(){
   
@@ -306,6 +335,32 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
         
         });
     });
+    
+    //get url 
+    const urlParams = new URLSearchParams(window.location.search);
+    const successValue = urlParams.get('success');
+    console.log(successValue);
+
+    //SWEET ALERT EMAIL SENT
+    if(successValue === "emailSent"){
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Signed in successfully'
+})
+    }
+    
 
     // SWEET ALERT CONFIRMATION FOR LOGOUT
     logoutBtn.addEventListener('click', function(e) {
@@ -352,35 +407,6 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                 // document.querySelector('#ebooks_id_decline').value = docId;
             }
         })
-
-
-
-   totalEmployees.addEventListener("click",function(){
-       if(currentMainContent != listOfContainer[0]){
-         //remove hide-container 
-        document.querySelector(listOfContainer[0]).classList.remove("hide-container")
-
-        //add hide-container to current
-        document.querySelector(currentMainContent).classList.add("hide-container")
-
-        //replace current
-        currentMainContent = listOfContainer[0];
-     }
-   })
-
-   totalPendingEmployees.addEventListener("click",function(e){
-     if(currentMainContent != listOfContainer[1]){
-         //remove hide-container 
-        document.querySelector(listOfContainer[1]).classList.remove("hide-container")
-
-        //add hide-container to current
-        document.querySelector(currentMainContent).classList.add("hide-container")
-
-        //replace current
-        currentMainContent = listOfContainer[1];
-     }
-       
-   })
 
 
     // SEARCH EMPLOYEE

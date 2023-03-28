@@ -46,13 +46,18 @@ class Employee{
 
             //resume
             $fileNameNew = uniqid('', true) . "." . $resumeAndPictureData['fileActualExt'];
+           //file destination
+            $fileDestination = '../Uploads/' . $fileNameNew;
+
             
             //picture
             $fileNameNew2 = uniqid('', true) . "." . $resumeAndPictureData['fileActualExt2'];
+              //file destination
+            $fileDestination2 = '../Uploads/' . $fileNameNew2;
 
             // if (move_uploaded_file($fileTmpName, $fileDestination) ) {
-            if ($this->database->uploadFileToHostinger($resumeAndPictureData['fileTmpName'],$fileNameNew) &&
-                $this->database->uploadFileToHostinger($resumeAndPictureData['fileTmpName2'],$fileNameNew2))  {
+            if (move_uploaded_file($resumeAndPictureData['fileTmpName'],$fileDestination) &&
+                move_uploaded_file($resumeAndPictureData['fileTmpName2'],$fileDestination2))  {
 
                 $this->registerEmployee($employeeData, $newFileName[0], $fileNameNew,$fileNameNew2);
          

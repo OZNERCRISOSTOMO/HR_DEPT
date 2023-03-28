@@ -1,4 +1,4 @@
-     <div class="pending-employee-list hide-container">
+     <div class="pending-employee-list ">
         <div>
             <h1>Pending Employees</h1>
                 </div>
@@ -37,7 +37,8 @@
                                             </a>
                                         </td>
                                         <td>
-                                             <a href="../Uploads/<?php echo $employee['picture_path']?>" target="_thapa">
+                                             <a href="../Uploads/<?php echo $employee['picture_path'];
+                                                                        ?>" target="_thapa">
                                                 Picture
                                             </a>
                                         </td>
@@ -100,15 +101,21 @@
                                 Schedule : 
                                 <div class="form-check ms-3">
                                     <input class="form-check-input" type="radio" value="1" id="1" name="schedule" required>
-                                    <label class="form-check-label" for="employee">8:00 AM - 5:00 PM</label>
+                                    <label class="form-check-label" for="1">8:00 AM - 5:00 PM</label>
                                 </div>
             
                                 <div class="form-check ms-3">
                                     <input class="form-check-input" type="radio" value="2" id="2" name="schedule" required>
-                                    <label class="form-check-label" for="admin">6:00 PM - 10:00 PM</label>
+                                    <label class="form-check-label" for="2">6:00 PM - 10:00 PM</label>
                                 </div>
                             </div>
                             
+                              <!--==== BRANCH ======== -->
+                            <div class="mb-3">
+                                <label for="branch" class="col-form-label">Branch</label>
+                                <input type="text" class="form-control" id="branch" name="branch">
+                            </div>
+
                             <!--==== SALARY ======== -->
                             <div class="mb-3">
                                 <label for="salary" class="col-form-label">Salary</label>

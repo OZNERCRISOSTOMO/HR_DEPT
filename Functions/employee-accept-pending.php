@@ -15,6 +15,7 @@ if(isset($_POST['submit'])){
         'department'  => $_POST['department'],
         'position'  => $_POST['position'],
         'schedule'  => $_POST['schedule'],
+        'branch'  => trim($_POST['branch']),
         'salary'  => trim($_POST['salary']),
         'workingHours'  => trim($_POST['working-hours']),
         'beneficiaries'  => $_POST['beneficiaries'],
