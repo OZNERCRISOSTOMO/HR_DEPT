@@ -25,14 +25,24 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
 
 <!--Time and Date-->
-  <div class="container-fluid d-flex justify-content-center align-items-center mt-4">
-    <h5 style="font-weight:bolder;"> 
-      <script>                   
-        document.write(new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, day: 'numeric', month: 'short', year: 'numeric' }).toUpperCase());
-      </script>    
-    </h5>  
-  </div>
-  <!------End----->
+<div class="container-fluid d-flex justify-content-center align-items-center mt-4">
+                <h5 style="font-weight:bolder;"> 
+                <script>                   
+                    function updateTime() {
+                    const now = new Date();
+                    const date = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+                    document.getElementById('datetime').textContent = `${date} ${time}`;
+                    }
+
+                    setInterval(updateTime, 1000);
+
+                </script> 
+                <span id="datetime"></span>  
+                </h5>  
+            </div>
+            <!------End----->
+            <div class="container">
 
 <!--Create New Button-->
 <div class="container">
