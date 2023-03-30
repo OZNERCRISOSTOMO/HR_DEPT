@@ -123,6 +123,17 @@ class Admin {
         exit();
     }
 
+    public function getDepartment(){
+        $employees = $this->database->connect()->query("SELECT attendance.*,employee_details.,employee_details.department, FROM attendance
+                                                        JOIN employee_details ON attendance.employee_id = employee_details.employee_id
+                                                        WHERE employees_details.department = 'sales'")->fetchAll();
+
+  
+
+        return $employees;
+        exit();
+    }
+
     public function searchEmployees($name){
         $data =  $this->database->connect()->query("SELECT employees.*,employee_details.picture_path, employee_details.department,employee_details.date_applied FROM employees 
                                                     JOIN employee_details ON employees.id = employee_details.employee_id 
