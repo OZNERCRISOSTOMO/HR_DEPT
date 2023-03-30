@@ -43,7 +43,7 @@
             </select>
           </div>
       		<div class="form-group has-feedback">
-        		<input type="text" class="form-control input-lg" id="employee" name="employee" required>
+        		<input type="text" class="form-control input-lg" id="employee" name="employee" autofocus required>
         		<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
       		</div>
       		<div class="row">
@@ -53,5 +53,12 @@
       		</div>
     	</form>
 </div>
+
+<script>
+	window.addEventListener("pageshow", function(event) {
+                var input = document.getElementById("employee");
+                input.value = "";
+         });
+</script>
 </body>
 </html>

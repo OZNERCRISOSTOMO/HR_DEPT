@@ -46,7 +46,7 @@ if(isset($_POST['submit'])){
 
     $fileExt2 = explode('.', $fileData2['fileName']);
     $fileActualExt2 = strtolower(end($fileExt2));
-    $allowed2 = array('jpeg','png');
+    $allowed2 = array('jpeg','png','jpg');
 
     //resume and picture data
     $resumeAndPictureData = array(

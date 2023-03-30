@@ -18,13 +18,21 @@
         $employee = $_POST['employee'];
 		$status = $_POST['status'];
 
-		$sql = "SELECT * FROM employees WHERE id = '$employee'";
-		$query = $conn->query($sql);
+        $sql1 = "SELECT * FROM RFID_card WHERE serial_number = '$employee'";
+        $query1 = $conn->query($sql1);
+        $row1 = $query1->fetch_assoc();
 
-        if($query->num_rows > 0){
+        if($query1->num_rows > 0){
+            $sql2 = "SELECT * FROM employee_details WHERE employee_id = '".$row1['employee_id']."'";
+		    $query2 = $conn->query($sql2);
+            $row2 = $query2->fetch_assoc();
+
+            $sql = "SELECT * FROM employees WHERE id = '".$row1['employee_id']."'";
+		    $query = $conn->query($sql);
             $row = $query->fetch_assoc();
 			$id = $row['id'];
             $date_now = date('Y-m-d');
+
             if($status == "in"){
                 $sql = "SELECT *,attendance.id AS uid FROM attendance WHERE employee_id = '$id' AND date = '$date_now' AND time_in IS NOT NULL";
 				$query = $conn->query($sql);
@@ -42,7 +50,16 @@
 
                     $sql = "INSERT INTO attendance (employee_id, date, time_in, status) VALUES ('$id', '$date_now', '$lognow', '$logstatus')";
 					if($conn->query($sql)){
-						echo "Time in "."$lognow"." ".$row['first_name']. " "  .$row['last_name']. " ";
+                        echo '<img src="../Uploads/' . $row2['picture_path'] . '" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle"><br/>';
+						echo "Employee ID = ".$id." <br/>";
+                        echo "Employee Name = ".$row['first_name']." ".$row['last_name']."<br/>";
+                        echo "Position = ".$row2['position']."<br/>";
+                        echo "Time in = ".$lognow."";
+                        echo "<script>
+                            setTimeout(function(){
+                                window.history.back();
+                            }, 5000);
+                        </script>";
 					}
 					else{
 						echo "Error";
@@ -65,7 +82,11 @@
                     $lognow = date('H:i:s');
                     $sql = "UPDATE attendance SET time_out = '$lognow' WHERE id = '".$row['uid']."'";
                     if($conn->query($sql)){
-                        echo "Time out "."$lognow"." ".$row['first_name']. " "  .$row['last_name']. " ";
+                        echo '<img src="../Uploads/' . $row2['picture_path'] . '" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle"><br/>';
+						echo "Employee ID = ".$id." <br/>";
+                        echo "Employee Name = ".$row['first_name']." ".$row['last_name']."<br/>";
+                        echo "Position = ".$row2['position']."<br/>";
+                        echo "Time in = ".$lognow."";
 
                         $sql = "SELECT * FROM attendance WHERE id = '".$row['uid']."'";
                         $query = $conn->query($sql);
