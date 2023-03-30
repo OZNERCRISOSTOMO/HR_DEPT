@@ -56,7 +56,11 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
 <!-- Select2 JS --> 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+
+    <style>
         
+    </style>
 
 </head>
 
@@ -83,7 +87,9 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <div class="row flex-nowrap">
 
         <!------------ MAIN ------------ -->
-        <div class="main col-lg-10" >
+        <div class="main col-lg-10 " >
+        
+        
 
         <!--Time and Date-->
         <div class="container-fluid d-flex justify-content-center align-items-center mt-4">
@@ -211,24 +217,29 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                         <div class="col-3">
                     
                         <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown button
-                        </button>
+                            <button class="btn bg-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-filter"></i> <b>Sort By</b>
+                            </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">By Name</a></li>
+                            <li><a class="dropdown-item" href="#">By Department</a></li>
+                            <li><a class="dropdown-item" href="#">By Position</a></li>
                         </ul>
                         </div>
 
                         </div>
 
                         <!-- SEARCH EMPLOYEE -->
-                        <div class="col-3">
-                            <input type="text" id="search" placeholder="Search" name="search-employee" />
+                        <div class="col-3 input-group w-25 float-end">
+                        <span class="input-group-text bg-white border border-end-0 border-0">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        <input type="text" name="search-employee" class="form-control border-0 border shadow-none border-start-0" id="search" autocomplete="off">
+                   
                         </div>
                     </div>
 
+                    
                     <div class="container">
                         <div class="row employee-list-wrapper">
                         <?php
@@ -240,7 +251,7 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                     <div class="card" style="width: 18rem;">
                        <div class="card-body">
                             <?php
-                           echo '<img src="../Uploads/' . $employee['picture_path'] . '" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle">';
+                          echo '<img src="../Uploads/' . $employee['picture_path'] . '" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle">';
                           echo '<h5 class="card-title text-center">'. $employee["first_name"]." " . $employee["last_name"] . '  </h5>';           
                           echo '<p class="">'. $employee["email"]. '  </p>';
                           echo '<p class="">'. $employee["address"]. '  </p>';
@@ -262,12 +273,17 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
         <!-- --------------------------- -->
 
 
-        <div class="col bg-default">
+        <div class="col bg-white">
         <!------------ SIDEBAR ---------- -->
         
 
             <!--==== SEND EMPLOYEE EMAIL -->
             <div class="sidebar pe-2">
+            <div class="container">
+
+
+
+
                 <form action="../Functions/admin-sendEmail.php" method="POST" enctype="multipart/form-data">
    
                    <div class="mb-2">
@@ -275,7 +291,7 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                                    
                         <!-- Dropdown --> 
                         <select id='select-employee' name="employee-id">
-                            <option value="0">Select employee</option>
+                            <option value="0">Select Employee</option>
                          <?php
                              $employees = $admin->getEmployees();
 
@@ -287,14 +303,15 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                         </div>
                        
                             </div>
-
+                    
                     <div class="mb-2">
+                             
                         <input type="text" class="form-control" placeholder="Subject" name="subject" required>
                     </div>
 
                     <div class="mb-2">
 
-                        <textarea class="form-control" name="message"  rows="4" placeholder="message" required></textarea>
+                        <textarea class="form-control" name="message"  rows="4" placeholder="Message" required></textarea>
                     </div>
 
                     <div class="mb-2">
@@ -303,7 +320,7 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
                     <input type="hidden" id="" name="">
                     <div class="d-grid gap-2 ">
-                    <button  class=" btn btn-primary" name="submit" id="send-email">Send</button>
+                    <button  class=" btn btn-primary" name="submit" id="send-email"><i class="fa-solid fa-paper-plane me-2"></i> Send</button>
                             </div>  
                 </form>
             </div>
@@ -375,7 +392,7 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
 Toast.fire({
   icon: 'success',
-  title: 'Signed in successfully'
+  title: 'Email sent successfully'
 })
     }
     
