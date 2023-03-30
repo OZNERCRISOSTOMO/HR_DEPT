@@ -63,6 +63,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         <th>Time OUT</th>
         <th>Status</th>
       </tr>
+      </thead>
+      <tbody>
       <?php
         $attlist = $attlist->attendanceList();
         foreach($attlist as $list){
@@ -88,7 +90,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <?php
       }
     ?>
-    </thead>
+    </tbody>
   </table>
 <!----Table End--->
 </div>
