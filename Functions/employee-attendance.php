@@ -46,8 +46,8 @@
                     $sql = "SELECT * FROM schedule WHERE id = '$sched'";
 					$squery = $conn->query($sql);
 					$srow = $squery->fetch_assoc();
-					$logstatus = ($lognow > $srow['time_in']) ? 0 : 1;
-
+					$logstatus = ('08:30:00' > $lognow)? 'ontime':'late';
+                    if($lognow >= $srow['time_in']){
                     $sql = "INSERT INTO attendance (employee_id, date, time_in, status) VALUES ('$id', '$date_now', '$lognow', '$logstatus')";
 					if($conn->query($sql)){
                         echo '<img src="../Uploads/' . $row2['picture_path'] . '" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle"><br/>';
@@ -64,6 +64,14 @@
 					else{
 						echo "Error";
 					}
+                }else{
+                    echo "You can't time in";
+                    echo "<script>
+                            setTimeout(function(){
+                                window.history.back();
+                            }, 3000);
+                        </script>";
+                }
                 }
 
             }else{
@@ -72,21 +80,38 @@
 				if($query->num_rows < 1){
 		
 					echo 'Cannot Timeout. No time in.';
+                    echo "<script>
+                            setTimeout(function(){
+                                window.history.back();
+                            }, 3000);
+                        </script>";
 				}else{
                     $row = $query->fetch_assoc();
                     if($row['time_out'] != '00:00:00'){
                         echo 'You have timed out for today';
+                        echo "<script>
+                            setTimeout(function(){
+                                window.history.back();
+                            }, 3000);
+                        </script>";
                     }else{
 					$timezone = 'Asia/Manila';
 	                date_default_timezone_set($timezone);
                     $lognow = date('H:i:s');
-                    $sql = "UPDATE attendance SET time_out = '$lognow' WHERE id = '".$row['uid']."'";
+                    $sql = "UPDATE attendance SET time_out = '17:00:00' WHERE id = '".$row['uid']."'";
                     if($conn->query($sql)){
                         echo '<img src="../Uploads/' . $row2['picture_path'] . '" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle"><br/>';
 						echo "Employee ID = ".$id." <br/>";
                         echo "Employee Name = ".$row['first_name']." ".$row['last_name']."<br/>";
                         echo "Position = ".$row2['position']."<br/>";
-                        echo "Time in = ".$lognow."";
+                        echo "Time in = ".$row['time_in']."<br/>";
+                        echo "Time out = ".$lognow."";
+                        echo "<script>
+                            setTimeout(function(){
+                                window.history.back();
+                            }, 3000);
+                        </script>";
+                        
 
                         $sql = "SELECT * FROM attendance WHERE id = '".$row['uid']."'";
                         $query = $conn->query($sql);
@@ -95,7 +120,7 @@
                         $time_in = $urow['time_in'];
                         $time_out = $urow['time_out'];
 
-                        $sql = "SELECT * FROM employees LEFT JOIN schedule ON schedule.id=employees.schedule_id WHERE employees.id = '$id'";
+                        $sql = "SELECT * FROM employees LEFT JOIN schedule ON schedule.id=employees.schedule_id WHERE employees.id = $id";
                         $query = $conn->query($sql);
                         $srow = $query->fetch_assoc();
 
@@ -114,11 +139,12 @@
                         $mins = $interval->format('%i');
                         $mins2 = $mins/60;
                         $int = $hrs + $mins2;
-                        if($int > 4){
-                            $int = $int - 1;
-                        }
+                        
                         $sql = "UPDATE attendance SET num_hr = '$int' WHERE id = '".$row['uid']."'";
 						$conn->query($sql);
+
+                        $sql123 = "UPDATE employee_details SET num_hr = num_hr + $int WHERE employee_id = $id";
+                        $conn->query($sql123);
                     }
                     else{
                         echo $conn->error;
