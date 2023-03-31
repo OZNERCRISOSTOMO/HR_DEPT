@@ -46,8 +46,13 @@
                     $sql = "SELECT * FROM schedule WHERE id = '$sched'";
 					$squery = $conn->query($sql);
 					$srow = $squery->fetch_assoc();
-					$logstatus = ('08:30:00' > $lognow)? 'ontime':'late';
-                    if($lognow >= $srow['time_in']){
+                    if($srow['time_in'] == '08:00:00'){
+                        $logstatus = ('08:30:00' > $lognow)? 'ontime':'late';
+                    }else if($srow['time_in'] == '17:00:00'){
+                        $logstatus = ('17:30:00' > $lognow)? 'ontime':'late';
+                    }
+					
+                    if($lognow > $srow['time_in']){
                     $sql = "INSERT INTO attendance (employee_id, date, time_in, status) VALUES ('$id', '$date_now', '$lognow', '$logstatus')";
 					if($conn->query($sql)){
                         echo '<img src="../Uploads/' . $row2['picture_path'] . '" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle"><br/>';
