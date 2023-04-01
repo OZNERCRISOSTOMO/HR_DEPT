@@ -72,5 +72,14 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 </div>
 </div>
 </div>
+
+      <form>
+        
+      </form>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    console.log(id);
+</script>
 </body>
 </html>

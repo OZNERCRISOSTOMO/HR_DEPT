@@ -90,6 +90,36 @@ class Admin {
         unset($this->database);
     }
 
+    public function insertEmployeePayslip($employee, $net, $filedata, $id){
+        
+    }
+
+    public function checkprlist ($id) {
+        $stmt = $this->database->connect()->prepare("SELECT * FROM prlist
+                                                     WHERE id=?");
+
+         //if execution fail
+        if (!$stmt->execute([$id])) {
+            header("Location: ../index.php?error=stmtfail");
+            exit();
+        }
+
+        //fetch the result
+        $result = $stmt->fetchAll();
+        
+          //if has result return it, else return false
+        if ($result) {
+            $result = true;
+            return $result;
+        } else {
+            $result = false;
+            return $result;
+        }
+
+        //close connection
+        unset($this->database);
+    }
+
     public function getAdmin(){
         $admin = $this->database->connect()->query("SELECT * FROM hr_dept WHERE id = 1")->fetch();
         return $admin;

@@ -111,7 +111,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
 
 <script>
-        $(document).ready(function(){
+     $(document).ready(function(){
   
     // Initialize select2
     $("#select-employee").select2();
