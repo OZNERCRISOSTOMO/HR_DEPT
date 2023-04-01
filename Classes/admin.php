@@ -305,7 +305,6 @@ class Payroll{
         $this->database = $database;
         date_default_timezone_set('Asia/Manila');
         $this->date =  date('Y-m-d H:i:s');
-
     }
     public function payrollList(){
         $prlist =  $this->database->connect()->query("SELECT * FROM prlist")->fetchAll();
@@ -327,24 +326,25 @@ public function Insertpayroll($prlist){
        exit();
        }
 }
+public function updatePayroll($id, $code, $start, $end, $type){
+    $stmt = $this->database->connect()->prepare("UPDATE prlist SET code = ?, start = ?, end = ?, type = ? WHERE id = ?");
+    $stmt->bindParam(1, $code);
+    $stmt->bindParam(2, $start);
+    $stmt->bindParam(3, $end);
+    $stmt->bindParam(4, $type);
+    $stmt->bindParam(5, $id);
+    $stmt->execute();
+}
+public function payslipList($prlistid){
+    $stmt = $this->database->connect()->prepare("SELECT * FROM employee_payslip WHERE prlist_id=?");
+    //if execution fail
+    if (!$stmt->execute([$prlistid])) {
+        header("Location: ../index.php?error=stmtfail");
+        exit();
+    }
+    //fetch the employeeID
+    $pslist = $stmt->fetchAll();
+    return $pslist;
+}
 }
 
-class Payslip{
-    private $database;
-    private $date;
-
-    public function __construct(Database $database) {
-        $this->database = $database;
-        date_default_timezone_set('Asia/Manila');
-        $this->date =  date('Y-m-d H:i:s');
-
-    }
-    public function payslipList(){
-        $pslist = $this->database->connect()->query("SELECT prlist.id, prlist.date, employees.last_name, employees.first_name, employee_details.salary FROM prlist 
-                                                    JOIN employees ON prlist.id = employees.id
-                                                    JOIN employee_details ON prlist.id = employee_details.employee_id")->fetchAll(PDO::FETCH_ASSOC);
-        return $pslist;
-    }
-    
-    
-}
