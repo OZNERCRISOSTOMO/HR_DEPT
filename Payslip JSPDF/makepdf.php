@@ -1,11 +1,15 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
+require '../Classes/admin.php';
+require '../Classes/database.php';
+
+$database = new Database();
+$admin = new Admin($database);
 
 $fname = $_POST['employee-name'];
 $position = $_POST['position'];
 $branch = $_POST['branch'];
-$email = $_POST['email'];
 $date = $_POST['date-from'];
 $date1 = $_POST['date-to'];
 $present = $_POST['present'];
@@ -16,6 +20,7 @@ $salary = $_POST['salary'];
 $sss = $_POST['sss'];
 $philhealth = $_POST['philhealth'];
 $pagibig = $_POST['pagibig'];
+
 
 
 isset($_POST['sss']);
@@ -79,6 +84,9 @@ else if ($tax >=250001 || $tax <=500000) {
     $tax = $salaryOT * 0.30;
 }
 else $tax = ($tax >=500001) ? $salaryOT * 0.32 : 'error';
+
+$sql = 
+
 
 $mdpf = new Mpdf\Mpdf();
 
@@ -221,6 +229,7 @@ p {
 
 
 $mdpf->WriteHTML($data);
-
+$admin->checkprlist($id);
 $mdpf->Output($fname . '_' . $date . ' - payslip.pdf', 'D');
+
 ?>

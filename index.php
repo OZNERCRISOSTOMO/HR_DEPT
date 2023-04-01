@@ -30,7 +30,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
             <nav class="navbar bg-body-tertiary">
                 <div class="container">
                     <a class="navbar-brand color-black" href="#">
-                    <img src="./images/Google-Admin-900x0.png" alt="Admin" width="70" height="50">
+                    <img src="Images/Google-Admin-900x0.png" alt="Admin" width="70" height="50">
                     ADMIN
                     </a>
                 </div>
@@ -38,7 +38,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
             <div class="container m-auto ">
                 <h4 class="text-center my-3">Start your day with Renzo Caloocan</h4>
-                <img src="./images/login-illustration.png" class="mx-auto d-block" height="400">
+                <img src="Images/login-illustration.png" class="mx-auto d-block" height="400">
             </div>
         </div>
 
