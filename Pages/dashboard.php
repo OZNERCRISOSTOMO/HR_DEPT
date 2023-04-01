@@ -206,7 +206,7 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
             <div class="main-content-container">
 
                 <!-- ================ EMPLOYEE LIST ========================== -->
-                <div class="employee-list ">
+                <div class="employee-list">
                     <div class="row">
                     <div class="col-5">
                     <h5>Employee List</h5>
@@ -230,7 +230,9 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                         </div>
 
                         <!-- SEARCH EMPLOYEE -->
-                        <div class="col-3 input-group w-25 float-end">
+
+                        
+                        <div class="col-3 input-group w-25">
                         <span class="input-group-text bg-white border border-end-0 border-0">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
@@ -248,14 +250,12 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                     
                     foreach($employees as $employee){
                          ?>
-                    <div class="card" style="width: 18rem;">
+                    <div class="card mt-2 me-2" style="width: 17rem;">
                        <div class="card-body">
                             <?php
-                          echo '<img src="../Uploads/' . $employee['picture_path'] . '" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle">';
+                          echo '<img src="../Uploads/' . $employee['picture_path'] . '" alt="avatar" style="object-fit: cover;border-radius: 50%;height: 150px; width: 150px;" class="mb-2 mx-auto d-block">';
                           echo '<h5 class="card-title text-center">'. $employee["first_name"]." " . $employee["last_name"] . '  </h5>';           
-                          echo '<p class="">'. $employee["email"]. '  </p>';
-                          echo '<p class="">'. $employee["address"]. '  </p>';
-                          echo '<p class="">'. $employee["gender"]. '  </p>';                
+                          echo '<p class="">'. $employee["email"]. '  </p>';            
                           echo '<p class="">'. $employee["contact"]. '  </p>';            
                           echo '<p class=""> Date hired : '. $admin->formatDate($employee["date_applied"]) . '</p>';
                         ?>
