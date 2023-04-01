@@ -3,7 +3,7 @@
 <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  	<title>Employee Attendance</title>
+  	<title>Employee Attendance Manual</title>
   	<!-- Tell the browser to be responsive to screen width -->
   	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   	<!-- Bootstrap 5 -->
@@ -55,66 +55,40 @@
 	
 	<div class="col-sm-5 m-auto my-5 shadow-lg p-4 rounded align-items-center">
 		<img src="../Images/Attendance-logo.png" class="mx-auto d-block mb-3" height="150" width="150">
-		<form action="../Functions/employee-attendance.php" method="POST">
-			<div class="form-group mb-3">
-				<select class="form-control shadow-none" name="status">
-				<option value="in">Time In</option>
-				<option value="out">Time Out</option>
-				</select>
-			</div>
+		<form action=" " method="POST">
+            <div class="form-group mb-3" >
+                <label for="exampleInputEmail1" class="form-label fw-bolder">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-user"></i></div>
+                            <input type="text" class="form-control shadow-none border-left-0" name="email" placeholder="Email" required="required">
+                        </div>
+                    </div>
+                
+                <div class="form-group mb-3">
+		            <label for="examplePassword" class="form-label fw-bolder">Password</label>
+		                <div class="input-group">
+			                <div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-lock"></i></div>
+                            <input type="password" class="form-control shadow-none border-left-0" name="password" placeholder="Password" required="required">
+		                </div>
+		        </div> 
 
-			<div class="form-group has-feedback mb-3">
-					<input type="text" class="form-control input-lg shadow-none" id="employee" name="employee" autofocus required>
-					<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-			</div>
+                <div class="row">
+				    <div class="col-xs-4 d-grid">
+					    <button type="submit" name="signin" id="signin" class="btn btn-primary">
+					        <i class="fa-solid fa-right-to-bracket me-2"></i>
+						    Log in
+					    </button>
+				    </div>
+			    </div>
+            </div>
+            
+		    
 
-			<div class="row">
-				<div class="col-xs-4 d-grid">
-					<button type="submit" name="signin" id="signin" class="btn btn-primary">
-					<i class="fa-solid fa-right-to-bracket me-2"></i>
-						Enter using username
-					</button>
-				</div>
-			</div>
+			
 		</form>
 	</div>
 </div>
 
-<!--Keme->
-<div class="login-box">
-  	<div class="login-logo">
-  		<p id="date"></p>
-      <p id="time" class="bold"></p>
-  	</div>
-  
-  	<div class="login-box-body">
-    	<h4 class="login-box-msg">Enter Employee ID</h4>
 
-    	<form action="../Functions/employee-attendance.php" method="POST">
-          <div class="form-group">
-            <select class="form-control" name="status">
-              <option value="in">Time In</option>
-              <option value="out">Time Out</option>
-            </select>
-          </div>
-      		<div class="form-group has-feedback">
-        		<input type="text" class="form-control input-lg" id="employee" name="employee" autofocus required>
-        		<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-      		</div>
-      		<div class="row">
-    			<div class="col-xs-4">
-          	<input type="submit" name="signin" id="signin" value="Sign in">
-        	</div>
-      		</div>
-    	</form>
-</div>
-
-	-->
-<script>
-	window.addEventListener("pageshow", function(event) {
-                var input = document.getElementById("employee");
-                input.value = "";
-         });
-</script>
 </body>
 </html>

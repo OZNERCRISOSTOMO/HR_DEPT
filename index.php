@@ -79,7 +79,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 		            </div>
 		        </div>        
 
-                    <div class="form-group py-2">
+                    <div class="form-group py-2 d-grid">
                     <button type="submit" class="btn btn-primary btn-md btn-block">Log in</button>
                     </div>
                 </form>
