@@ -20,7 +20,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   <script src="https://kit.fontawesome.com/53a2b7f096.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="../includes/prnew.js"></script>
+
 </head>
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
 
@@ -82,9 +82,11 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       <td><?php echo $list['end']; ?> </td>
       <td><?php echo $list['type']; ?> </td>
       <td>
+      <form method="POST">
       <button onclick="location.href='../admin/pslist.php'" type="button" class="btn btn-sm btn-primary">View</button>
-      <button class="btn btn-sm btn-success">Edit</button>
-      <button class="btn btn-sm btn-danger">Delete</button>
+      <button class="btn btn-sm btn-success" type="submit" name="edit" value="Edit">Edit</button>
+      <button class="btn btn-sm btn-danger" type="submit" name="delete" value="Delete">Delete</button>
+      </form>
       </td>
     </tr>
     <?php
@@ -101,7 +103,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       <div class="modal-header">
         <h4>Add New Payroll</h4>
       </div>
-
       <div class="modal-body">
         <form id="prForm" name="payroll" role="form" action="../Functions/admin-payroll.php" method="POST">
           <div class="form-group mb-3">
@@ -128,7 +129,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                 <option value="monthly">Monthly</option>
               </select>
           </div>
-        </form>
       </div>
 
 
@@ -136,6 +136,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         <button type="button" class="btn btn-default text-danger border border-end-0 border-0" data-bs-dismiss="modal">Close</button>
 				<input type="submit" class="btn btn-success" id="submit" name="submit">
       </div>
+      </form>
     </div>
   </div>
 </div>

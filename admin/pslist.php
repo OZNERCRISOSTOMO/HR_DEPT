@@ -22,15 +22,12 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/53a2b7f096.js" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="../includes/prnew.js"></script>
 </head>
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
 <div class="container">
  <div class="row">
    <div class="col-sm-8">
-    <?php echo $deleteMsg??''; ?>
     <h4>List of Payslip
       <button onclick="location.href='../Payslip JSPDF/index.php'" type="button">Create New</button>
         </h4>
@@ -43,15 +40,14 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     </div>
     <div class="table-responsive">
       <table class="table table-bordered">
-       <thead>
+       <tr>
          <th>Id</th>
          <th>Date Added</th>
          <th>Employee</th>
          <th>Net</th>
          <th>File</th>
          <th>Action</th>
-    </thead>
-    <tbody>
+    </tr>
     <?php
       $pslist = $pslist->payslipList();
       foreach($pslist as $list){
@@ -63,16 +59,14 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       <td><?php echo $list['salary']; ?></td>
       <td></td>
       <td>
-        <button><i class='fa fa-view'></i> View</button>
-        <button><i class='fa fa-edit'></i> Edit</button>
-        <button><i class='fa fa-trash'></i> Delete</button>
+        <button></i> View</button>
+        <button></i> Edit</button>
+        <button></i> Delete</button>
       </td>
     </tr>
     <?php
       }
     ?>
-    </div>
-    </tbody>
      </table>
    </div>
 </div>

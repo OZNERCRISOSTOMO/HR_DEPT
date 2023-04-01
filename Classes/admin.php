@@ -310,10 +310,11 @@ class Payslip{
 
     }
     public function payslipList(){
-        $pslist =  $this->database->connect()->query("SELECT prlist.id, prlist.date, employees.last_name, employees.first_name, employee_details.salary FROM prlist 
+        $pslist = $this->database->connect()->query("SELECT prlist.id, prlist.date, employees.last_name, employees.first_name, employee_details.salary FROM prlist 
                                                     JOIN employees ON prlist.id = employees.id
-                                                    JOIN employee_details ON employees.id = employee_details.employee_id")->fetchAll();
+                                                    JOIN employee_details ON prlist.id = employee_details.employee_id")->fetchAll(PDO::FETCH_ASSOC);
         return $pslist;
-        exit();
-}
+    }
+    
+    
 }
