@@ -83,7 +83,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       <td><?php echo $list['type']; ?> </td>
       <td>
       <form method="POST">
-      <button onclick="location.href='../admin/pslist.php'" type="button" class="btn btn-sm btn-primary">View</button>
+      <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
       <button class="btn btn-sm btn-success" type="submit" name="edit" value="Edit">Edit</button>
       <button class="btn btn-sm btn-danger" type="submit" name="delete" value="Delete">Delete</button>
       </form>
