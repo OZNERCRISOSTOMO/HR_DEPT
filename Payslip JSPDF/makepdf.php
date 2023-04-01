@@ -132,28 +132,42 @@ p {
             <table>
                     <caption>Payroll Details</caption>
                     <tr>
+                        <th>Payroll Code </th>
+                        <td>No Data Yet</td>
+
+                        <th>Type </th>
+                        <td>No data Yet</td>
+                    </tr>
+
+                    <tr>
+                        <th>Cut-off Start</th>
+                        <td>No data Yet</td>
+
+                        <th>Cut-off End</th>
+                        <td>No data Yet</td>
+                    </tr>
+            </table>
+
+            <table>
+                    <caption>Employee Details</caption>
+                    <tr>
                         <th>Full Name:</th>
                         <td>'. $fname .'</td>
 
+                        <th>Gross Pay:</th>
+                        <td>' . '₱' . $salaryOT .'</td>
+
+                        
+                    </tr>
+
+                    <tr>
                         <th>Position:</th>
                         <td>'. $position .'</td>
-                    </tr>
 
-                    <tr>
                         <th>Branch:</th>
                         <td>'. $branch. '</td>
-
-                        <th>Email:</th>
-                        <td>'. $email .'</td>
                     </tr>
 
-                    <tr>
-                        <th>From Date:</th>
-                        <td>'. $date .'</td>
-
-                        <th>To Date:</th>
-                        <td>'. $date1 .'</td>
-                    </tr>
 
                     <tr>
                         <th>Number of Present:</th>
@@ -164,11 +178,24 @@ p {
                     </tr>
 
                     <tr>
-                        <th>Gross Pay:</th>
-                        <td>' . '₱' . $salary .'</td>
 
-                        <th>Gross plus OT:</th>
-                        <td>' . '₱' . $salaryOT .'</td>
+                    </tr>
+            </table>
+
+            <table>
+                    <caption>Allowances:</caption>
+                    <tr>
+                        <th>SSS: </th>
+                        <td>' . '₱' . $sss_result .'</td>
+
+                        <th>Pag-ibig: </th>
+                        <td>' . '₱' . $love_result .'</td>
+
+                        <th>Philhealth: </th>
+                        <td>' . '₱' . $phil_result .'</td>
+
+                        <th>Withholding Tax: </th>
+                        <td>' . '₱' . $tax .'</td>
                     </tr>
             </table>
 
