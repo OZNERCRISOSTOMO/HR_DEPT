@@ -15,7 +15,7 @@ $date1 = $_POST['date-to'];
 $present = $_POST['present'];
 $overtime = $_POST['overtime'];
 $salary = $_POST['salary'];
-
+$prlistid = $_POST['prlist-id'];
 
 $sss = $_POST['sss'];
 $philhealth = $_POST['philhealth'];
@@ -229,7 +229,9 @@ p {
 
 
 $mdpf->WriteHTML($data);
-$admin->checkprlist($id);
+if ($admin->checkprlist($prlistid)) {
+    $admin->insertEmployeePayslip($fname, $networth, $prlistid);
+}
 $mdpf->Output($fname . '_' . $date . ' - payslip.pdf', 'D');
 
 ?>

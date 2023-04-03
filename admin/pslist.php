@@ -100,7 +100,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-         <form action="makepdf.php" method="post" class="offset-md-3 col-md-6">
+         <form action="makepdf.php" method="post" class="offset-md-3 col-md-6" id="myForm">
                 <p>Fill out the form to generate payslip into PDF</p>
 
                 <div class="row mb-2">
@@ -135,7 +135,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                 <div class="mb-2">
                 <p>From Date: </p>
                 <input type="date" name="date-from" id="date-from" class="form-control" placeholder="From" required>
-                </div>
+                </div> 
 
                 <div class="mb-2">
                 <p>To Date: </p>
@@ -167,11 +167,12 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                             <label for="beneficiaries3">Philhealth Beneficiaries</label><br /><br />
                 </div>
                     <input type="hidden" id="employee-name" name="employee-name">
+                    <input type="hidden" id="prlist-id" name="prlist-id" value="<?php echo $id?>">
             </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>
@@ -187,6 +188,12 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     console.log(id);
+
+    const modalSubmitBtn = document.querySelector('#staticBackdrop button[type="submit"]');
+        modalSubmitBtn.addEventListener('click', () => {
+        const myForm = document.querySelector('#myForm');
+        myForm.submit();
+    });
 
 $('#staticBackdrop').on('shown.bs.modal', function() {
   $('#select-employee').select2();

@@ -90,9 +90,59 @@ class Admin {
         unset($this->database);
     }
 
-    public function insertEmployeePayslip($employee, $net, $filedata, $id){
-        
+    public function insertEmployeePayslip($employee, $net, $id){
+        // prepare insert statement for employee table
+        $sql = "INSERT INTO employee_payslip (date_added,employee, net, file_path, prlist_id)
+        VALUES (?,?,?,?,?);";
+
+     // prepared statement
+    $stmt = $this->database->connect()->prepare($sql);
+
+    //if execution fail
+    if (!$stmt->execute([$this->date,
+                         $employee,
+                         $net,
+                         "Not generated",
+                         $id])) {
+        header("Location: ../Pages/employee-register.php?error=stmtfail");
+
+        exit();
     }
+
+    // if succesful
+    header("Location: ../admin/pslist.php?id=$id");
+    }
+
+    public function insertEmployeePayslipForm($employee_name, $position, $branch, $department, $fromdate, $todate, $present, $overtime, $rate, $sss, $pagibig, $philhealth) {
+
+        $sql = "INSERT INTO employee_payslip_form (employee_name, position, branch, department, from_date, to_date, number_present, number_overtime, rate, sss, pagibig, philhealth)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+
+     // prepared statement
+    $stmt = $this->database->connect()->prepare($sql);
+
+    //if execution fail
+    if (!$stmt->execute([$employee_name,
+                         $position,
+                         $branch,
+                         $department,
+                         $fromdate,
+                         $todate,
+                         $present,
+                         $overtime, 
+                         $rate, 
+                         $sss, 
+                         $pagibig, 
+                         $philhealth])) {
+        header("Location: ../Pages/employee-register.php?error=stmtfail");
+
+        exit();
+    }
+
+    // if succesful
+    header("Location: ../admin/pslist.php?id=$id");
+    }
+
 
     public function checkprlist ($id) {
         $stmt = $this->database->connect()->prepare("SELECT * FROM prlist
