@@ -19,11 +19,9 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/53a2b7f096.js" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+    <!-- BOOSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 
 
     <!-- Select2 CSS --> 
@@ -34,6 +32,12 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
     <!-- Select2 JS --> 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <style>
+        .select2-container {
+            z-index: 9999;
+        }
+    </style>
 </head>
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
     <div class="container">
@@ -96,13 +100,13 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="makepdf.php" method="post" class="offset-md-3 col-md-6">
+         <form action="makepdf.php" method="post" class="offset-md-3 col-md-6">
                 <p>Fill out the form to generate payslip into PDF</p>
 
                 <div class="row mb-2">
                     <div class="col-md-6">
-                           <!---- Dropdown ---->
-                            <select id='select-employee' name="employee-id">
+                         
+                            <select id='select-employee' name="employee-id" class="select2-container">
                                 <option value="0">Select employee</option>
                            <?php
                                 $employees = $admin->getEmployees();
@@ -174,12 +178,21 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 </div>
     <!---------------------- END OF MODAL FOR PAYSLIP FORM ------------------------------------->
 </div>
+
+  
     
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+
 <script>
-    $(document).ready(function(){
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     console.log(id);
+
+$('#staticBackdrop').on('shown.bs.modal', function() {
+  $('#select-employee').select2();
+});
+
+    $(document).ready(function(){
 
   
   // Initialize select2
