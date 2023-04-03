@@ -71,8 +71,8 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
             <div> <a href="#" class="text-decoration-none nav_logo">  <span class="nav_logo-name">COMPANY</span> </a>
                 <div class="nav_list">
                  <a href="#" class="text-decoration-none nav_link active"><i class='bx bx-grid-alt nav_icon'></i>  <span class="nav_name">Dashboard</span> </a>
-                 <a href="#" class="text-decoration-none nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Employes</span> </a> 
-                <a href="#" class="text-decoration-none nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Attendance</span> </a>
+                 <a href="#" class="text-decoration-none nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Employees</span> </a> 
+                <a href="../Pages/admin-attendanceList.php" class="text-decoration-none nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Attendance</span> </a>
                 <a href="../admin/prlist.php" class="text-decoration-none nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Payroll</span> </a>
                 <a href="../Payslip JSPDF/index.php" class="text-decoration-none nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Payslip</span> </a>
              </div>

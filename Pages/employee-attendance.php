@@ -1,3 +1,22 @@
+<?php
+    
+    $timezone = 'Asia/Manila';
+	date_default_timezone_set($timezone);
+
+    $dbServername = "sql985.main-hosting.eu";
+    $dbUsername = "u839345553_sbit3g";
+    $dbPassword = "sbit3gQCU";
+
+    $conn = new mysqli($dbServername, $dbUsername, $dbPassword, 'u839345553_SBIT3G');
+    $date = new DateTime();
+    if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
+	}
+
+
+  
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +74,7 @@
 	
 	<div class="col-sm-5 m-auto my-5 shadow-lg p-4 rounded align-items-center">
 		<img src="../Images/Attendance-logo.png" class="mx-auto d-block mb-3" height="150" width="150">
-		<form action="../Functions/employee-attendance.php" method="POST">
+		<form action="../Functions/employee-attendance-manual.php" method="POST">
 			<div class="form-group mb-3">
 				<select class="form-control shadow-none" name="status">
 				<option value="in">Time In</option>
@@ -64,12 +83,14 @@
 			</div>
 
 			<div class="form-group has-feedback mb-3">
-					<input type="text" class="form-control input-lg shadow-none" id="employee" name="employee" autofocus required>
+					<input type="text" class="form-control input-lg shadow-none" id="employee" name="employee" autofocus >
 					<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
 			</div>
 
 			<div class="row">
 				<div class="col-xs-4 d-grid">
+
+
 					<button type="submit" name="signin" id="signin" class="btn btn-primary">
 					<i class="fa-solid fa-right-to-bracket me-2"></i>
 						Enter using username
@@ -77,6 +98,7 @@
 				</div>
 			</div>
 		</form>
+		
 	</div>
 </div>
 
@@ -110,11 +132,11 @@
 </div>
 
 	-->
-<script>
+<!-- <script>
 	window.addEventListener("pageshow", function(event) {
                 var input = document.getElementById("employee");
                 input.value = "";
          });
 </script>
-</body>
-</html>
+</body> -->
+</html>a

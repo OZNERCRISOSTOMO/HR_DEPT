@@ -49,6 +49,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       <span class="input-group-text bg-white border border-end-0 border-0">
         <i class="fa-solid fa-magnifying-glass"></i>
       </span>
+      <input type="text" id="search" placeholder="Search" name="search-employee" />
       <input type="text" class="form-control border-0 border shadow-none border-start-0" id="Search" autocomplete="off">
     </div>
     
