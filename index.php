@@ -21,6 +21,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/53a2b7f096.js" crossorigin="anonymous"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/index-style.css">
+
 </head>
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
 
@@ -43,7 +47,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         </div>
 
         <div class="col-sm-6 d-flex justify-content-md-center align-items-center vh-100">
-	        <div class="container col-9 shadow-lg p-4"> 
+            
+	        <div class="container col-9 shadow-lg p-4 login-container"> 
 	            <div class="login-form ">
                     <form action="Functions/admin-login.php" method="POST">
                     <h4 class="text-center">Company Name</h4>   
@@ -80,17 +85,39 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 		        </div>        
 
                     <div class="form-group py-2 d-grid">
-                    <button type="submit" class="btn btn-primary btn-md btn-block">
+                    <button type="submit" class="btn btn-primary btn-md btn-block login-btn">
                         <i class="fa-solid fa-right-to-bracket me-2"></i>
                         Log in
                     </button>
                     </div>
                 </form>
 		    </div>
+            
+            <!-- Loading spinner container -->
+            <div class="container col-9 shadow-lg p-5 loading-container hide-container">
+                <div class="loading">
+                    <svg viewBox="25 25 50 50">
+                        <circle r="20" cy="50" cx="50"></circle>
+                    </svg>
+                </div>
+
+                <p>Logging in, please be patient </p>
+            </div>
+        
 	</div>
   </div>
 
+<script>
+    const loginBtn = document.querySelector(".login-btn")
+    const loginContainer = document.querySelector(".login-container")
+    const loadingContainer = document.querySelector(".loading-container")
 
+    loginBtn.addEventListener("click",function(){
+        loginContainer.classList.add("hide-container")
+        loadingContainer.classList.remove("hide-container")
+    })
+
+</script>
        
             
 </body>
