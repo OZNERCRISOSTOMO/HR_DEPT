@@ -27,16 +27,14 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>HR Dashboard</title>
-    <link rel="stylesheet" href="../assets/css/dashboard-style.css">
-
+   
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 <!-- or -->
 <link rel="stylesheet"
 href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-   
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
 
     
@@ -65,32 +63,21 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 </head>
 
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
-<!----------- SIDEBAR ---------- -->
-<div class="l-navbar" id="nav-bar">
-        <nav class="nav">
-            <div> <a href="#" class="text-decoration-none nav_logo">  <span class="nav_logo-name">COMPANY</span> </a>
-                <div class="nav_list">
-                 <a href="#" class="text-decoration-none nav_link active"><i class='bx bx-grid-alt nav_icon'></i>  <span class="nav_name">Dashboard</span> </a>
-                 <a href="#" class="text-decoration-none nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Employees</span> </a> 
-                <a href="../Pages/admin-attendanceList.php" class="text-decoration-none nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Attendance</span> </a>
-                <a href="../admin/prlist.php" class="text-decoration-none nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Payroll</span> </a>
-                <a href="../Payslip JSPDF/index.php" class="text-decoration-none nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Payslip</span> </a>
-             </div>
-            </div>
-             <a href="../functions/admin-logout.php" class="text-decoration-none nav_link logout">
-                 <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
-             </a>
-        </nav>
-    </div>
+
+<div class="container-fluid">
+    <div class="row">
+        <!------------ SIDEBAR ------------ -->
+        <div class="col-2 p-0">
+        <?php include("../Components/Sidebar-Left.php")?>
+</div>
         <!---------------------------->
-        <div class="container-fluid">
+
+        <div class="col-xl-8 h-100  overflow-auto">
+ <!------------ MAIN ------------ -->
+        <div class="container-fluid p-0 m-0">
     <div class="row flex-nowrap">
-
-        <!------------ MAIN ------------ -->
-        <div class="main col-lg-10 " >
+        <div class="main col-lg-12" >
         
-        
-
         <!--Time and Date-->
         <div class="container-fluid d-flex justify-content-center align-items-center mt-4">
                 <h5 style="font-weight:bolder;"> 
@@ -270,67 +257,19 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
             </div>
         
                 </div>
-        <!-- --------------------------- -->
-
-
-        <div class="col bg-white">
-        <!------------ SIDEBAR ---------- -->
-        
-
-            <!--==== SEND EMPLOYEE EMAIL -->
-            <div class="sidebar pe-2">
-            <div class="container">
-
-
-
-
-                <form action="../Functions/admin-sendEmail.php" method="POST" enctype="multipart/form-data">
-   
-                   <div class="mb-2">
-                   <div class="dropdown">      
-                                   
-                        <!-- Dropdown --> 
-                        <select id='select-employee' name="employee-id">
-                            <option value="0">Select Employee</option>
-                         <?php
-                             $employees = $admin->getEmployees();
-
-                             foreach($employees as $employee){
-                                echo "<option value='".$employee['id'] ."'>". $employee['first_name']." ".$employee['last_name']  ."</option> ";
-                             }
-                         ?>
-                        </select>
-                        </div>
-                       
-                            </div>
-                    
-                    <div class="mb-2">
-                             
-                        <input type="text" class="form-control" placeholder="Subject" name="subject" required>
-                    </div>
-
-                    <div class="mb-2">
-
-                        <textarea class="form-control" name="message"  rows="4" placeholder="Message" required></textarea>
-                    </div>
-
-                    <div class="mb-2">
-                     <input class="col-2 form-control" type="file" id="attachment" name="attachment" accept="application/pdf">
-                            </div>
-
-                    <input type="hidden" id="" name="">
-                    <div class="d-grid gap-2 ">
-                    <button  class=" btn btn-primary" name="submit" id="send-email"><i class="fa-solid fa-paper-plane me-2"></i> Send</button>
-                            </div>  
-                </form>
-            </div>
        
+                </div>
                             </div>
-        <!------------------------------- -->
                             </div>
-                            </div>
+                             <!-- --------------------------- -->
 
-
+ <!------------ SIDEBAR ------------ -->
+<div class="col-2">
+ <?php include("../Components/Sidebar-Right.php")?>
+                </div>
+        <!---------------------------->
+                </div>
+                </div> 
 
 
 
