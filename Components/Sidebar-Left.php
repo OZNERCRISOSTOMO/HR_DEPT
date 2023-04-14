@@ -1,12 +1,4 @@
-<head>
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-<!-- or -->
-<link rel="stylesheet"
-href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-</head>
+
 <!----------- SIDEBAR ---------- -->
 <div class="container-fluid ">
     <div class="row flex-nowrap">
@@ -20,7 +12,9 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                     <a href="#" class="text-decoration-none nav_link active px-0 align-middle text-black"><i class='bx bx-grid-alt nav_icon'></i>  <span class="nav_name">Dashboard</span> </a>
                     </li>
                     <li class="nav-item mb-5 ps-2">
-                    <a href="#" class="text-decoration-none nav_link px-0 align-middle text-black"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Employees</span> </a> 
+                        <a href="../Pages/employee-list.php" class="text-decoration-none nav_link px-0 align-middle text-black"> 
+                            <i class='bx bx-user nav_icon'></i> <span class="nav_name">Employees</span>
+                         </a> 
                     </li>
                     <li class="nav-item mb-5 ps-2">
                     <a href="../Pages/admin-attendanceList.php" class="text-decoration-none nav_link px-0 align-middle text-black"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Attendance</span> </a>
