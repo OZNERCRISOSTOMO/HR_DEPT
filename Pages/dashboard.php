@@ -89,14 +89,14 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                             </div>
 
                             <div class="col">
-                                    <button type="button" class="btn  ps-0 btn-light shadow p-2 w-100 text-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="btn  ps-0 btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <span class="fs-5 p-3 text-black">3</span> Warnings 
                                     <span class="badge text-bg-warning rounded-circle"><i class="fa-solid fa-info"></i></span>
                                     </button>
                             </div>
                         
                             <div class="col">
-                                    <button type="button" class="btn ps-0  btn-light shadow p-2 w-100 text-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="btn ps-0  btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;"   data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <span class="fs-5 p-3 text-black">3</span>  Pending
                                      <span class="badge text-bg-danger rounded-circle"><i class="fa-solid fa-info"></i></span>
                                     </button>

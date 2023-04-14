@@ -10,20 +10,30 @@
       <div class="d-flex me-2 flex-column align-items-center px-1  text-white min-vh-100 position-fixed">
                 
             
+
+
+      
+
+
+
+
+
+
       <form action="../Functions/admin-sendEmail.php" method="POST" enctype="multipart/form-data">
-            <div class="dropdown mb-2 mt-2">
-            <a class="btn btn-secondary btn-sm mdropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Select Employee
-            </a>
-            <ul class="dropdown-menu" id='select-employee' name="employee-id"> 
-            <?php
-            $employees = $admin->getEmployees();
-            foreach($employees as $employee){
-            echo "<li><a class='dropdown-item' value='".$employee['id'] ."'>". $employee['first_name']." ".$employee['last_name']  ."</a></li> ";
-                }
-            ?>
-            </ul>
-            </div>
+      <div class="search-select-box mb-2 mt-3 ">                     
+                        <!-- Dropdown --> 
+                        <select id='select-employee' name="employee-id" class="form-control">
+                            <option value="0">Select employee</option>
+                         <?php
+                             $employees = $admin->getEmployees();
+
+                             foreach($employees as $employee){
+                                echo "<option value='".$employee['id'] ."'>". $employee['first_name']." ".$employee['last_name']  ."</option> ";
+                             }
+                         ?>
+                        </select>
+
+                    </div>
             <div class="mb-2 input-group input-group-sm">  
                         <input type="text" class="form-control" placeholder="Subject" name="subject" required>
                     </div>
