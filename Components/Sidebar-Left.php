@@ -8,10 +8,10 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <!----------- SIDEBAR ---------- -->
-<div class="container-fluid">
+<div class="container-fluid ">
     <div class="row flex-nowrap">
         <div class=" px-0 bg-white vh-100 position-fixed" style="max-width: 165px">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-fixed">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-fixed ">
                 <a href="" class="d-flex align-items-center text-black pb-3 mb-md-0 me-md-auto  text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline mb-3 mt-2">Company</span>
                 </a>
@@ -33,7 +33,7 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                     
                 </ul>
                 <hr>
-                <div class="nav-item pb-4">
+                <div class="nav-item pb-4 ps-2 ">
                 <a href="../functions/admin-logout.php" class="text-decoration-none nav_link logout px-0 align-middle text-black">
                  <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
              </a>

@@ -4,10 +4,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 <body>
-<div class="container-fluid align-content-end">
+<div class="container-fluid align-content-end order-last ">
   <div class="row flex-nowrap">
-    <div class="w-100 col-md-4 col-xl-2 px-sm-2 px-0 bg-white order-last vh-100 position-fixed">
-      <div class="d-flex flex-column align-items-center px-1  text-white min-vh-100 position-fixed">
+    <div class="col-md-4  col-xl-2 px-sm-2 px-0 bg-white order-last vh-100 position-fixed shadow">
+      <div class="d-flex me-2 flex-column align-items-center px-1  text-white min-vh-100 position-fixed">
                 
             
       <form action="../Functions/admin-sendEmail.php" method="POST" enctype="multipart/form-data">
