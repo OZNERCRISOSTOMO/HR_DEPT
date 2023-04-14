@@ -45,7 +45,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
             <div class="col-sm-8">
                 <h4>List of Payslip</h4>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create New</button>
-                    <button type="submit" class="btn btn-success btn block">Generate Payslip</button>
+                    <!-- <button type="submit" class="btn btn-success btn block" id="generate-payslip">Generate Payslip</button> -->
+                    <a href="function.php">Generate</a>
                 <div>
                     <h3>Payroll Details</h3>
                     Code:
@@ -200,7 +201,6 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
 });
 
     $(document).ready(function(){
-
   
   // Initialize select2
   $('#select-employee').select2();

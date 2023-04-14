@@ -343,6 +343,35 @@ class Admin {
         header("Location: ../Pages/dashboard.php?success=acceptEmployee");
         exit();
     }
+
+    public function getAllEmployeePayslip() {
+        $employeePayslip =  $this->database->connect()->query("SELECT id FROM employee_payslip")->fetchAll();
+            return $employeePayslip;
+            
+            exit();
+    }
+
+    public function getEmployeePayslipTable($id) {
+        $stmt = $this->database->connect()->prepare("SELECT * FROM employee_payslip_form WHERE payslip_id=?");
+
+         //if execution fail
+        if (!$stmt->execute([$id])) {
+            header("Location: ../Pages/employee-register.php?error=stmtfail");
+            exit();
+    }
+
+    $result = $stmt->fetch();
+        
+          //if has result true, else return false
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+
+        //close connection
+        unset($this->database);
+    }
 }
 
     
