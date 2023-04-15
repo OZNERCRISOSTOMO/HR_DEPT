@@ -93,7 +93,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
               <td>
               <form method="POST">
               <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
-              <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#EditModal" type="submit" name="edit" value="Edit">Edit</button>
+              <button id="editButton" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#EditModal" type="submit" name="edit" value="Edit">Edit</button>
+              <input type="hidden" name="id" value="<?php echo $id; ?>">
               <button class="btn btn-sm btn-danger" type="submit" name="delete" value="Delete">Delete</button>
               </form>
               </td>
@@ -104,6 +105,37 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
           </tbody>
         </table>
         <!---Table End--->
+
+        <!---Script for edit button--->
+          <script>
+            // Get all the edit button elements using a class selector
+            const editBtns = document.querySelectorAll('#editButton');
+
+            // Loop through all the edit buttons and add an event listener to each one
+            editBtns.forEach(function(editBtn) {
+              editBtn.addEventListener('click', function(event) {
+                // prevent the form from submitting
+                event.preventDefault();
+
+                // Get the row data
+                var row = $(this).closest("tr");
+                var id = row.find("td:eq(0)").text().trim();
+                var date = row.find("td:eq(1)").text().trim();
+                var code = row.find("td:eq(2)").text().trim();
+                var start = row.find("td:eq(3)").text().trim();
+                var end = row.find("td:eq(4)").text().trim();
+                var type = row.find("td:eq(5)").text().trim();
+
+                // Set the modal values
+                $("#editId").val(id);
+                $("#editDate").val(date);
+                $("#editCode").val(code);
+                $("#editStart").val(start);
+                $("#editEnd").val(end);
+                $("#editType").val(type);
+              });
+            });
+          </script>
 
         <!----Modal---->
         <div class="modal fade" id="PayrollModal">
@@ -160,18 +192,34 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
               </div>
               <div class="modal-body">
                 <form id="prForm" name="payroll" role="form" action="../Functions/admin-payroll-edit.php" method="POST">
-                  <input type="hidden" name="id" value="<?php echo $list['id']; ?>">
                   <div class="form-group mb-3">
-                    <label for="code" class="fw-bold">Payroll Code</label>
-                    <input type="text" name="code" class="form-control shadow-none" value="<?php echo $list['code']; ?>">
+                    <input type="hidden" id="editId" name="id">
+                    <label for="editDate">Date</label>
+                    <input type="date" class="form-control" id="editDate" name="date">
                   </div>
                   <div class="form-group mb-3">
-                    <label for="start" class="fw-bold">Start Date</label>
-                    <input type="date" name="start" class="form-control shadow-none" value="<?php echo $list['date']; ?>">
+                    <label for="editCode">Code</label>
+                    <input type="text" class="form-control" id="editCode" name="code">
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="editStart">Start</label>
+                    <input type="date" class="form-control" id="editStart" name="start">
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="editEnd">End</label>
+                    <input type="date" class="form-control" id="editEnd" name="end">
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="editType">Type</label>
+                    <select class="form-control" id="editType" name="editType">
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="semimonthly">Semi-Monthly</option>
+                  </select>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default text-danger border border-end-0 border-0" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-success" id="update" name="update">
+                    <input type="submit" class="btn btn-success" id="update" name="editSubmit">
                   </div>
                 </form>
               </div>
@@ -183,15 +231,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
       </div>
     </div>
-    
-
   </div>
 </div>
-
-
-
-
-
-
 </body>
 </html>

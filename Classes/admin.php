@@ -385,11 +385,17 @@ class Payroll{
         date_default_timezone_set('Asia/Manila');
         $this->date =  date('Y-m-d H:i:s');
     }
-    public function payrollList(){
+public function payrollList(){
         $prlist =  $this->database->connect()->query("SELECT * FROM prlist")->fetchAll();
         return $prlist;
         exit();
 }
+public function payrollDetails($id){
+    $prlist = $this->database->connect()->prepare("SELECT code, start, end, type FROM prlist WHERE id=?");
+    $prlist->execute([$id]);
+    return $prlist->fetchAll();
+}
+
 public function Insertpayroll($prlist){
     $sql = "INSERT INTO prlist (date, code, start, end, type)
        VALUES (?,?,?,?,?);";
@@ -413,6 +419,18 @@ public function updatePayroll($id, $code, $start, $end, $type){
     $stmt->bindParam(4, $type);
     $stmt->bindParam(5, $id);
     $stmt->execute();
+}
+public function deletePayroll($id) {
+    try {
+        $sql = "DELETE FROM prlist WHERE id = :id";
+        $stmt = $this->database->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+    }
 }
 public function payslipList($prlistid){
     $stmt = $this->database->connect()->prepare("SELECT * FROM employee_payslip WHERE prlist_id=?");

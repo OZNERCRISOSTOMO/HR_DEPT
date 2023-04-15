@@ -7,9 +7,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
     $database = new Database();
     $admin = new Admin($database);
-    $payslip = new Payroll($database); 
+    $payslip = new Payroll($database);
     $id = $_GET['id'];
-    $pslist = $payslip->payslipList($id);
 } else {
     header("Location: ../index.php");
     exit();
@@ -49,10 +48,15 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     <a href="function.php">Generate</a>
                 <div>
                     <h3>Payroll Details</h3>
-                    Code:
-                    Start Date:
-                    End Date:
-                    Type:
+                    <?php
+                        $prlist = $payslip->payrollDetails($id);
+                    ?>
+                    <?php foreach($prlist as $list):?>
+                    Code: <?php echo $list['code']; ?>
+                    Start Date: <?php echo $list['start']; ?>
+                    End Date: <?php echo $list['end']; ?>
+                    Type: <?php echo $list['type']; ?>
+                    <?php endforeach; ?>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -62,10 +66,14 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                             <th>Employee</th>
                             <th>Net</th>
                             <th>File</th>
+                            <th>Payroll ID</th>
                             <th>Action</th>
                         </tr>
-                        <?php if (!empty($pslist)): ?>
-                            <?php foreach($pslist as $list): ?>
+                        <?php
+                            $pslist = $payslip->payslipList($id);
+                            if (!empty($pslist)):
+                        ?>
+                            <?php foreach($pslist as $list):?>
                             <tr>
                                 <td><?php echo $list['id']; ?></td>
                                 <td><?php echo $list['date_added']; ?></td>
@@ -73,7 +81,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                 <td><?php echo $list['net']; ?></td>
                                 <td><?php echo $list['file_path']; ?></td>
                                 <td><?php echo $list['prlist_id']; ?></td>
-                                <td></td>
                                 <td>
                                     <button>View</button>
                                     <button>Edit</button>
