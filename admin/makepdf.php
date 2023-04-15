@@ -21,10 +21,32 @@ $sss = $_POST['sss'];
 $philhealth = $_POST['philhealth'];
 $pagibig = $_POST['pagibig'];
 
-
+//check if sss is checked 
+if(isset($_POST['sss'])){
+        $sss = $_POST['sss'];
+      }else{
+        $sss = null;
+      }
+      
+      //check if philhealth is checked 
+      if(isset($_POST['philhealth'])){
+       $philhealth = $_POST['philhealth'];
+      }else{
+        $philhealth = null;
+      }
+      
+      //check if pagibig is checked 
+      if(isset($_POST['pagibig'])){
+        $pagibig = $_POST['pagibig'];
+      }else{
+        $pagibig = null;
+      }
+      
+      $sssChecked = isset($_POST['sss']) ? 1 : 0;
+      $philhealthChecked  = isset($_POST['philhealth']) ? 1 : 0;
+      $pagibigChecked = isset($_POST['pagibig']) ? 1 : 0;
 
 isset($_POST['sss']);
-
 if (filter_has_var(INPUT_POST, 'sss')) {
         $num1 = $_POST['salary'];       
         $sss_result = $num1 * 0.045;
@@ -62,14 +84,11 @@ else {
 }
 
 
-
 $networth = $salary - ($sss_result + $phil_result + $love_result);
 
 
 if ($admin->checkprlist($prlistid)) {
-    $admin->insertEmployeePayslipForm($fname, $position, $branch, $date, $date1, $present, $overtime, $salary, $prlistid, $sss, $philhealth, $pagibig);
+    $admin->insertEmployeePayslipForm($fname, $position, $branch, $date, $date1, $present, $overtime, $salary, $prlistid, $sssChecked, $philhealthChecked, $pagibigChecked);
     $admin->insertEmployeePayslip($fname, $networth, $prlistid);
 }
-
-
 ?>
