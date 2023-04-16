@@ -23,14 +23,16 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HR DEPARTMENT</title>
 
-    <link rel="import" href="../Modals/M-Employee.php">
+    <!-- <link rel="import" href="../Modals/M-Employee.php"> -->
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
     <!-- SWEET ALERT -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- BOOTSTRAP 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <!-- Select2 CSS --> 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
     <!-- jQuery --> 
@@ -111,11 +113,18 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                             </div>
                         
                             <div class="col">
-                                    <button type="button" class="btn ps-0  btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;"   data-bs-toggle="modal" data-bs-target="#exampleModal">
+                
+                                     <button type="button" class="btn ps-0  btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;"   data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <span class="fs-5 p-3 text-black">3</span>  Pending
                                     <span class="p-2"><i class=" text-danger fa-solid fa-circle-info fs-5 p-0" ></i></span>
                                     </button>
+
+                                    <?php include("../Modals/M-Pending.php")?>   
+
+                                 
                                 </div>
+
+
                              </div>
                                 </div>
                         <!---------------------------->
@@ -222,157 +231,17 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 </div>
         
     
-<script src="../Modals/M-Employee.js"></script>
-<script src="../Modals/M-Presents.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+<!-- <script src="../Modals/M-Employee.js"></script>
+<script src="../Modals/M-Presents.js"></script> -->
+ <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>  -->
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script> -->
  
-    <script>
-    const action = document.querySelector('.action');
-    const logoutBtn = document.querySelector('.logout');
-    const totalEmployees = document.querySelector(".total-employees")
-    const totalPendingEmployees = document.querySelector(".total-pending-employees")
-   
-    const listOfContainer = [".employee-list",".pending-employee-list"]
-    let currentMainContent = listOfContainer[0];
-
-
-
-    $(document).ready(function(){
-  
-    // Initialize select2
-    $("#select-employee").select2();
-    
-    $("#send-email").prop("disabled",true)
-
-    // Read selected option
-    $('#select-employee').on('change', function() {
-        var selectedValue = $(this).val();
-        console.log(selectedValue);
-        if(selectedValue != '0'){
-            $("#send-email").prop("disabled",false)
-        }else{
-            $("#send-email").prop("disabled",true)
-        }
-        
-        });
-    });
-    
-    //get url 
-    const urlParams = new URLSearchParams(window.location.search);
-    const successValue = urlParams.get('success');
-    console.log(successValue);
-
-    //SWEET ALERT EMAIL SENT
-    if(successValue === "emailSent"){
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
-
-Toast.fire({
-  icon: 'success',
-  title: 'Email sent successfully'
-})
-    }
-    
-
-    // SWEET ALERT CONFIRMATION FOR LOGOUT
-    logoutBtn.addEventListener('click', function(e) {
-        e.preventDefault()
-
-        Swal.fire({
-            title: 'Are you sure?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, Log me out',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // e.target.href
-                // console.log(e.target.closest(".logout").href)
-                window.location.href = `${e.target.closest(".logout").href}`
-
-            }
-        })
-
-    })
-
-    //Accept pending employee
-         //Accept button function 
-        action.addEventListener('click', function(e) {
-            if (e.target.classList.contains('acceptBtn')) {
-                $('#acceptModal').modal('show');
-                const targetParent = e.target.closest('td')
-                
-                const employeeId = targetParent.firstElementChild.value        
-                const employeeEmail = targetParent.firstElementChild.nextElementSibling.value
-                const employeeLastName = targetParent.firstElementChild.nextElementSibling.nextElementSibling.value
-            
-                document.querySelector('#employee_id_accept').value = employeeId;
-                document.querySelector('#employee_email_accept').value = employeeEmail;
-                document.querySelector('#employee_lastname_accept').value = employeeLastName;
-            }
-
-            if (e.target.classList.contains('declineBtn')) {
-                $('#declineModal').modal('show');
-                // const docId = e.target.closest('td').firstElementChild.value
-                // document.querySelector('#ebooks_id_decline').value = docId;
-            }
-        })
-
-
-    // SEARCH EMPLOYEE
-    $(document).ready(function() {
-        $("#search").keyup(function() {
-            var input = $(this).val();
-
-            if (input == "") {
-                $.ajax({
-                    url: "../Functions/admin-livesearch.php",
-                    type: "POST",
-                    data: {
-                        search: "all"
-                    },
-
-                    success: function(data) {
-                        $(".employee-list-wrapper").html(data);
-                    }
-                })
-            } else {
-
-                $.ajax({
-                    url: "../Functions/admin-livesearch.php",
-                    type: "POST",
-                    data: {
-                        search: input
-                    },
-
-                    success: function(data) {
-                        $(".employee-list-wrapper").html(data);
-                    }
-                })
-            }
-        })
-    });
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
-
     <!-- JS FROM ASSETS -->
     <script src="../assets/js/dashboard-script.js"></script>
   </body>

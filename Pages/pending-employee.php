@@ -81,6 +81,21 @@
                                 <option value="warehouse">Warehouse</option>
                                 </select>
                             </div>
+
+                                    <!--===== TYPE ====== -->
+                            <div class="mb-3 d-flex">
+                                Type : 
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" value="regular" id="regular" name="type" required>
+                                    <label class="form-check-label" for="regular">Regular</label>
+                                </div>
+            
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" value="non-regular" id="non-regular" name="type" required>
+                                    <label class="form-check-label" for="non-regular">Non-Regular</label>
+                                </div>
+                            </div>
+                            
                             
                             <!--===== POSITION ====== -->
                             <div class="mb-3 d-flex">
@@ -117,16 +132,40 @@
                             </div>
 
                             <!--==== SALARY ======== -->
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="salary" class="col-form-label">Salary</label>
                                 <input type="number" class="form-control" id="salary" name="salary">
-                            </div>
+                            </div> -->
                             
-                            <!--===== WORKING HOURS ===== -->
+                            <!--===== RATE  ===== -->
                             <div class="mb-3">
-                                <label for="working-hours" class="col-form-label">Working hours</label>
-                                <input type="number" class="form-control" id="working-hours" name="working-hours">
+                                <label for="rate" class="col-form-label">Rate</label>
+                                <input type="number" class="form-control" id="rate" name="rate" value="1" disabled>
+                                <input type="hidden" class="form-control" id="rate-hidden" name="rate" value="12" >
                             </div>
+
+                                       <h4>Benefits</h4>
+                            <div class="col-12 d-flex mb-4 ">
+                             
+                                <div class="col-6">
+                                    <label for="vacation-leave" class="col-form-label">Vacation leave</label>
+                                    <input type="number" class="form-control" id="vacation-leave" name="vacation-leave" >
+                                </div>
+                                
+                                <div class="col-6 align-self-end ms-3">
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1" id="health-insurance" name="health-insurance">
+                                    <label class="form-check-label" for="health-insuranc"> Health insurance </label>
+                                 </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1" id="christmas-bonus" name="christmas-bonus">
+                                     <label class="form-check-label" for="christmas-bonus"> Chrirstmas Bonus </label>
+                                </div> 
+                                </div>
+                     
+                            </div>
+
                             
                             <!-- BENEFICARIES -->
                             <div class="col-12 ">
@@ -183,7 +222,8 @@
                                 <option value="inventory">Inventory</option>
                                 </select>
                             </div>
-                            
+
+                    
                             <!--===== POSITION ====== -->
                             <div class="mb-3 d-flex">
                                 Position : 
@@ -209,6 +249,7 @@
                                 <label for="working-hours" class="col-form-label">Working hours</label>
                                 <input type="number" class="form-control" id="working-hours" name="working-hours">
                             </div>
+
                             
                             <!-- BENEFICARIES -->
                             <div class="col-12 ">

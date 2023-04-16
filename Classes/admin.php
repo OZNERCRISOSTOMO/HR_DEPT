@@ -242,21 +242,25 @@ class Admin {
     }
 
      public function acceptEmployee($employeeData){
-        // prepared statement
+            // prepared statement
          $stmt = $this->database->connect()->prepare("UPDATE employees AS e
                                                       INNER JOIN employee_details AS ed ON e.id = ed.employee_id
-                                                      SET e.schedule_id = ?, e.status = ?, ed.salary = ?, ed.working_hours = ?, ed.department = ?, ed.date_hired = ?, ed.position = ?, ed.branch = ?
+                                                      SET e.schedule_id = ?, e.status = ?,  ed.rate_per_hour = ?, ed.department = ?, ed.date_hired = ?,
+                                                       ed.position = ?, ed.employee_type = ?,  ed.branch = ? , ed.vacation_leave = ? , ed.health_insurance = ?, ed.christmas_bonus = ? 
                                                       WHERE e.id = ?");
 
         //if execution fail
         if (!$stmt->execute([$employeeData['schedule'],
-                            '1',
-                             $employeeData['salary'],
-                             $employeeData['workingHours'],
+                            '1',              
+                             $employeeData['rate'],
                              $employeeData['department'],
                              $this->date,
                              $employeeData['position'],
+                             $employeeData['type'],
                              $employeeData['branch'],
+                             $employeeData['vacationLeave'],
+                             $employeeData['healthInsurance'],
+                             $employeeData['christmasBonus'],
                              $employeeData['employeeId']
                              ])) {
             header("Location: ../Pages/employee-register.php?error=stmtfail");

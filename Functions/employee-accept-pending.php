@@ -16,8 +16,11 @@ if(isset($_POST['submit'])){
         'position'  => $_POST['position'],
         'schedule'  => $_POST['schedule'],
         'branch'  => trim($_POST['branch']),
-        'salary'  => trim($_POST['salary']),
-        'workingHours'  => trim($_POST['working-hours']),
+        'rate'  => $_POST['rate'],
+        'vacationLeave' => trim($_POST['vacation-leave']),
+        'type' => $_POST['type'],
+        'healthInsurance' => isset($_POST['health-insurance']) ? 1 : 0 ,
+        'christmasBonus' => isset($_POST['christmas-bonus']) ? 1 : 0 ,
         'beneficiaries'  => $_POST['beneficiaries'],
     );
 

@@ -5,6 +5,72 @@ const totalPendingEmployees = document.querySelector(
   ".total-pending-employees"
 );
 
+// Get the radio buttons by name
+const employeeType = document.getElementsByName("type");
+const employeePosition = document.getElementsByName("position");
+const rate = document.querySelector("#rate");
+const rateHidden = document.querySelector("#rate-hidden");
+
+const employeeRate = {
+  regular: "71.25",
+  nonRegular: "60",
+  admin: "100",
+};
+
+const employeeStatus = {
+  type: "",
+  position: "",
+};
+
+// Loop through the radio buttons to add event listeners
+for (let i = 0; i < employeeType.length; i++) {
+  employeeType[i].addEventListener("change", function () {
+    // This code will run whenever the selected radio button changes
+
+    if (this.value === "regular") {
+      employeeStatus.type = "regular";
+
+      //check if position is admin
+      if (employeeStatus.position === "admin") {
+        rate.value = employeeRate.admin;
+        rateHidden.value = employeeRate.admin;
+      } else {
+        rate.value = employeeRate.regular;
+        rateHidden.value = employeeRate.regular;
+      }
+
+      //enabled admin
+      employeePosition[1].disabled = false;
+    } else {
+      rate.value = employeeRate.nonRegular;
+      rateHidden.value = employeeRate.nonRegular;
+
+      //disabled admin
+      employeePosition[1].disabled = true;
+      employeePosition[0].checked = true;
+      employeePosition[1].checked = false;
+    }
+
+    console.log(rateHidden.value);
+  });
+}
+
+// Loop through the radio buttons to add event listeners
+for (let i = 0; i < employeePosition.length; i++) {
+  employeePosition[i].addEventListener("change", function () {
+    // This code will run whenever the selected radio button changes
+
+    if (this.value === "admin") {
+      rate.value = employeeRate.admin;
+      rateHidden.value = employeeRate.admin;
+    } else {
+      rate.value = employeeRate.regular;
+      rateHidden.value = employeeRate.regular;
+    }
+  });
+  console.log(employeePosition.values);
+}
+
 const listOfContainer = [".employee-list", ".pending-employee-list"];
 let currentMainContent = listOfContainer[0];
 
@@ -107,29 +173,32 @@ logoutBtn.addEventListener("click", function (e) {
 
 //Accept pending employee
 //Accept button function
-// action.addEventListener('click', function(e) {
-//     if (e.target.classList.contains('acceptBtn')) {
-//         $('#acceptModal').modal('show');
-//         const targetParent = e.target.closest('td')
+action.addEventListener("click", function (e) {
+  if (e.target.classList.contains("acceptBtn")) {
+    $("#acceptModal").modal("show");
+    const targetParent = e.target.closest("td");
 
-//         const employeeId = targetParent.firstElementChild.value
-//         const employeeEmail = targetParent.firstElementChild.nextElementSibling.value
-//         const employeeLastName = targetParent.firstElementChild.nextElementSibling.nextElementSibling.value
+    const employeeId = targetParent.firstElementChild.value;
+    const employeeEmail =
+      targetParent.firstElementChild.nextElementSibling.value;
+    const employeeLastName =
+      targetParent.firstElementChild.nextElementSibling.nextElementSibling
+        .value;
 
-//         document.querySelector('#employee_id_accept').value = employeeId;
-//         document.querySelector('#employee_email_accept').value = employeeEmail;
-//         document.querySelector('#employee_lastname_accept').value = employeeLastName;
-//     }
+    document.querySelector("#employee_id_accept").value = employeeId;
+    document.querySelector("#employee_email_accept").value = employeeEmail;
+    document.querySelector("#employee_lastname_accept").value =
+      employeeLastName;
+  }
 
-//     if (e.target.classList.contains('declineBtn')) {
-//         $('#declineModal').modal('show');
-
-//     }
-// })
-
-const myModal = document.getElementById("exampleModal");
-const myInput = document.getElementById("myModalContent");
-
-myModal.addEventListener("shown.bs.modal", () => {
-  myInput.focus();
+  if (e.target.classList.contains("declineBtn")) {
+    $("#declineModal").modal("show");
+  }
 });
+
+// const myModal = document.getElementById("exampleModal");
+// const myInput = document.getElementById("myModalContent");
+
+// myModal.addEventListener("shown.bs.modal", () => {
+//   myInput.focus();
+// });
