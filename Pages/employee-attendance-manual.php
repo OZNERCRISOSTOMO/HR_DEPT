@@ -1,15 +1,53 @@
-<?php
-
+<?php 
 $dbServername = "sql985.main-hosting.eu";
 $dbUsername = "u839345553_sbit3g";
 $dbPassword = "sbit3gQCU";
 
 $conn = new mysqli($dbServername, $dbUsername, $dbPassword, 'u839345553_SBIT3G');
 $date = new DateTime();
+
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
+if(isset($_POST['signin'])){
+    // getting data from the FORM
+    $username = $_POST['login_id'];
+    $password = $_POST['login_password'];
 
+    // Query the database
+    $sql = "SELECT * FROM employee_login WHERE login_id='$username'";
+    $query = $conn->query($sql);
+
+    // Check if the username and password are valid
+    if ($query->num_rows > 0) {
+        $row = $query->fetch_assoc();
+        $_SESSION['login_id'] = $row['login_id'];
+
+        //getting the password and compare to hash
+        $input_password = $row['login_password']; //getting the password from database and save as variable
+        $hashed_input_password = password_hash($password, PASSWORD_DEFAULT); //compare and convert password
+
+        // Check if the hashed password matches the stored password
+        if (password_verify($password, $input_password)) {
+            // Close database connection
+            mysqli_close($conn);
+
+            // Redirect to Attendance Page
+            header("Location: ../Pages/admin-attendanceList.php");
+            exit();
+        } else {
+            // Display an error message in a pop-up window
+            echo "<script>alert('Invalid Login ID or Password!');</script>";
+        }
+
+    } else {
+        // Display an error message in a pop-up window
+        // echo "<script>alert('Invalid Login ID or Password!');</script>";
+    }
+
+    // Close database connection
+    mysqli_close($conn);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,12 +106,12 @@ if ($conn->connect_error) {
 	
 	<div class="col-sm-5 m-auto my-5 shadow-lg p-4 rounded align-items-center">
 		<img src="../Images/Attendance-logo.png" class="mx-auto d-block mb-3" height="150" width="150">
-		<form action=" " method="POST">
+		<form action="" method="POST">
             <div class="form-group mb-3" >
                 <label for="exampleInputEmail1" class="form-label fw-bolder">Email</label>
                     <div class="input-group">
                         <div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-user"></i></div>
-                            <input type="text" class="form-control shadow-none border-left-0" name="email" placeholder="Email" required="required">
+                            <input type="text" class="form-control shadow-none border-left-0" name="login_id" id="login_id" placeholder="Email" required="required">
                         </div>
                     </div>
                 
@@ -81,7 +119,7 @@ if ($conn->connect_error) {
 		            <label for="examplePassword" class="form-label fw-bolder">Password</label>
 		                <div class="input-group">
 			                <div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-lock"></i></div>
-                            <input type="password" class="form-control shadow-none border-left-0" name="password" placeholder="Password" required="required">
+                            <input type="password" class="form-control shadow-none border-left-0" name="login_password" id="login_password" placeholder="Password" required="required">
 		                </div>
 		        </div> 
 
