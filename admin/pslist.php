@@ -36,30 +36,73 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         .select2-container {
             z-index: 9999;
         }
+        .a {
+            position: absolute;
+            left: 1%;
+            width: 96%;
+        }
+        .container{
+            position: absolute;
+            left: 15%;
+            top: 3%;
+                }
+        .sidebar {
+            position: absolute;
+            left: 0%;
+        }
+
     </style>
 </head>
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
-    <div class="container">
+   
+<body style=" background-color: #eee;">
+<div class="container-fluid">
+<div class="row">
+<div class="overflow-hidden">
+
+
+<!----------SIDEBAR ------------>
+
+<div class="col-2 p-0 sidebar">
+
+<?php include("../Components/Sidebar-Left.php")?>
+
+</div>
+<!----------END OF SIDEBAR ------------>
+
+<!--Time and Date-->
+<div class="container-fluid d-flex justify-content-center align-items-center mt-6">
+                <h5 style="font-weight:bolder;"> 
+                <script>                   
+                    function updateTime() {
+                    const now = new Date();
+                    const date = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+                    document.getElementById('datetime').textContent = `${date} ${time}`;
+                    }
+
+                    setInterval(updateTime, 1000);
+
+                </script> 
+                <span id="datetime"></span>  
+                </h5>  
+            </div>
+            <!------End----->
+
+<div class="container">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-xl-8">
                 <h4>List of Payslip</h4>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create New</button>
-                    <!-- <button type="submit" class="btn btn-success btn block" id="generate-payslip">Generate Payslip</button> -->
-                    <a href="function.php">Generate</a>
-                <div>
-                    <h3>Payroll Details</h3>
-                    <?php
-                        $prlist = $payslip->payrollDetails($id);
-                    ?>
-                    <?php foreach($prlist as $list):?>
-                    Code: <?php echo $list['code']; ?>
-                    Start Date: <?php echo $list['start']; ?>
-                    End Date: <?php echo $list['end']; ?>
-                    Type: <?php echo $list['type']; ?>
-                    <?php endforeach; ?>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+                    
+                    
+                    <a href="function.php">
+                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#PayrollModal">Generate Payslip</button>
+                    </a>
+                
+  <!-- TABLE -->                  
+                    <div class= "a">          
+    <table class="table table-borderless table-striped text-center mt-3 align-middle">
                         <tr>
                             <th>Id</th>
                             <th>Date Added</th>
@@ -69,6 +112,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                             <th>Payroll ID</th>
                             <th>Action</th>
                         </tr>
+
                         <?php
                             $pslist = $payslip->payslipList($id);
                             if (!empty($pslist)):
@@ -82,10 +126,12 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                 <td><?php echo $list['file_path']; ?></td>
                                 <td><?php echo $list['prlist_id']; ?></td>
                                 <td>
-                                    <button>View</button>
-                                    <button>Edit</button>
-                                    <button>Delete</button>
-                                </td>
+      <form method="POST">
+      <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
+      <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#EditModal" type="submit" name="edit" value="Edit">Edit</button>
+      <button class="btn btn-sm btn-danger"  type="submit" name="delete" value="Delete">Delete</button>
+      </form>
+      </td>
                             </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
@@ -97,7 +143,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                 </div>
             </div>
         </div>
-
+<!-- END OF TABLEE -->
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -257,5 +303,6 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
   });
 </script>
 </body>
+</div>
 </html>
 
