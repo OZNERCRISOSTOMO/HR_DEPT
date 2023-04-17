@@ -1,6 +1,6 @@
 <html>
 <head>
-    <Title> Employee List </Title>
+    <Title> EMPLOYEE LIST </Title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
@@ -17,6 +17,17 @@
 </style>
 </head>
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
+
+<div class="container-fluid">
+      <div class="row">
+
+
+ <!------------ SIDEBAR ------------ -->
+ <div class="col-2 p-0">
+                <?php include("../Components/Sidebar-Left.php")?>
+            </div>
+        <!---------------------------->
+        <div class="col-xl-9 h-100 " >
     <!--Time and Date-->
         <div class="container-fluid d-flex justify-content-center align-items-center mt-4">
             <h5 style="font-weight:bolder;"> 
@@ -213,10 +224,12 @@
         </div>
     </div>
     </div>
+    </div>
     <!-----End----->
 
     
-
+    </div>
+    </div>
 
 
 </body>
