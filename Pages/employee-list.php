@@ -1,3 +1,21 @@
+<?php
+// start session
+session_start();
+
+if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
+    require '../Classes/admin.php';
+    require '../Classes/database.php';
+
+    
+
+    $database = new Database();
+    $admin = new Admin($database);
+
+    
+} else {
+    header("Location: ../index.php");
+}
+?>
 <html>
 <head>
     <Title> EMPLOYEE LIST </Title>
@@ -6,7 +24,10 @@
     <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/308043b825.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-
+        <!-- jQuery --> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+      <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/index-style.css">
 <style>
     container-fluid{
         overflow: hidden;
@@ -69,13 +90,20 @@
     <!-----End----->
 
     <!-----Employee List----->
-    <div class="container mt-5">
+    <div class="container mt-5 employeeList-container">
     <div class="row-cols-4">
-    <div class="card cols-1 bg-white rounded mx-2 py-3" data-bs-toggle="modal" id="view" data-bs-target="#viewmodal">
-                        <img class="rounded-circle mx-auto" src="../Images/1x1 photo.png" height="100" width="100" alt="Employee Pic">    
+
+      <?php 
+        $employees = $admin->getEmployees();
+  
+        foreach($employees as $employee){                 
+      ?>
+    <div class="card cols-1 bg-white rounded mx-2 py-3 employee-container" data-bs-toggle="modal"
+     id="view" data-bs-target="#viewmodal" data-employee-id="<?php echo $employee["id"]?>">
+                        <img class="rounded-circle mx-auto" src="../Uploads/<?php echo $employee["picture_path"] ?>" height="100" width="100" alt="Employee Pic">    
                         <div class="card-body ps-1">
-                            <h4 class="card-title text-center" name="EmployeeName">Shipoo Banini</h4>
-                            <p class="card-text text-center" style="opacity: 0.5;">Project Manager</p>
+                            <h4 class="card-title text-center" name="EmployeeName"><?php echo $employee["first_name"] . " " .$employee["last_name"];  ?></h4>
+                            <p class="card-text text-center" style="opacity: 0.5;"><?php echo ucfirst($employee["position"]) ?></p>
                             <div id="inCard" class="rounded ms-3">
                             <table class="table table-borderless mt-2">
                                 <thead>
@@ -86,17 +114,20 @@
                                 </thead> 
                                 <tbody>
                                     <tr class="text-center">
-                                        <td name="Department">Sales</td>
-                                        <td name="DateHired">02/02/2019</td>
+                                        <td name="Department"><?php echo ucfirst($employee["department"]) ?></td>
+                                        <td name="DateHired"><?php echo  $admin->formatDate($employee["date_hired"] )?></td>
                                     </tr>                     
                                 </tbody>
                             </table>
                             
-                            <p class="card-text ms-3" name="Email"><i class="fa-solid fa-envelope text-primary"></i> shipoobanini@gmail.com</p>
-                            <p class="card-text ms-3" name="ContactNum"><i class="fa-solid fa-phone text-success"></i> 09123456789</p>
+                            <p class="card-text ms-3" name="Email"><i class="fa-solid fa-envelope text-primary"></i><?php echo $employee["email"] ?></p>
+                            <p class="card-text ms-3" name="ContactNum"><i class="fa-solid fa-phone text-success"></i> <?php echo $employee["contact"] ?></p>
                         </div>
                         </div>
                     </div>
+          <?php 
+              } 
+          ?>          
         </div>
     </div>
     <!-----End----->
@@ -114,9 +145,9 @@
 
         <!-- Modal body -->
 
-        <div class="modal-body">
-  <div class="d-flex flex-row">
-    <div class="flex-fill p-2">
+        <div class="modal-body ">  
+  <div class="d-flex flex-row employee-modal-body">
+    <!-- <div class="flex-fill p-2">
       <img class="rounded-circle mx-auto d-block" src="../Images/1x1 photo.png" height="150" width="150" alt="Employee Pic">
       <h2 class="text" name="EmployeeName">Renzo Caloocan</h2>
       <p class="text text-center">Project Manager</p>
@@ -167,9 +198,20 @@
           </tbody>
         </table>
       </div>
-    </div>
+    </div> -->
   </div>
+
+             <!-- Loading spinner container -->
+            <div class=" loading-container hide-container">
+                <div class="loading">
+                    <svg viewBox="25 25 50 50">
+                        <circle r="20" cy="50" cx="50"></circle>
+                    </svg>
+                </div>
+
+            </div>
 </div>
+               
 
         <!--Modal Body End-->
 
@@ -231,6 +273,6 @@
     </div>
     </div>
 
-
+<script src="../assets/js/employee-list-script.js"></script>
 </body>
 </html>

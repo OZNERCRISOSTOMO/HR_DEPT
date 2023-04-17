@@ -49,7 +49,7 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                 </ul>
                 <hr>
                 <div class="nav-item pb-4 ps-2 ">
-                <a href="../functions/admin-logout.php" class="text-decoration-none  nav_link logout px-0 align-middle text-black">
+                <a href="../Functions/admin-logout.php" class="text-decoration-none  nav_link logout px-0 align-middle text-black">
                  <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
              </a>
                 </div>

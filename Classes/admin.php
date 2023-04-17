@@ -194,10 +194,25 @@ class Admin {
         exit();
     }
 
-    public function getEmployees(){
-        $employees = $this->database->connect()->query("SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,employee_details.date_applied FROM employees 
+    public function getEmployees($id = ""){
+        $query = "";
+        $employees = "";
+
+        if($id == ""){
+            
+            $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
+                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
-                                                        WHERE employees.status = '1'")->fetchAll();
+                                                        WHERE employees.status = '1'";
+            $employees = $this->database->connect()->query($query)->fetchAll();
+        }else{
+             $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
+                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position FROM employees 
+                                                        JOIN employee_details ON employees.id = employee_details.employee_id
+                                                        WHERE employees.status = '1' AND employees.id = $id";
+            $employees = $this->database->connect()->query($query)->fetch();
+        }
+         
 
         return $employees;
         exit();
