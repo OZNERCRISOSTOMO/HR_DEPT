@@ -44,8 +44,7 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                     <li class="nav-item mb-5 ps-2">
                     <a href="../admin/prlist.php" class="text-decoration-none nav_links px-0 align-middle "> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Payroll</span> </a>
                     </li>
-                    <li class="nav-item mb-5 ps-2">
-                    <a href="../Payslip JSPDF/index.php" class="text-decoration-none nav_links px-0 align-middle "> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Payslip</span> </a>
+
                     
                 </ul>
                 <hr>

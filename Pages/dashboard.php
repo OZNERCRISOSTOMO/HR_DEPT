@@ -92,24 +92,26 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                             <div class="container py-4">
                                 <div class="row">
                                     <div class="col">
-                                <button type="button" class="btn  ps-0 btn-light shadow btn-md p-2 w-100 text-secondary" style="max-width: 200px; max-height: 300px;" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="MEmployees()">
+                                <button type="button" class="btn  ps-0 btn-light shadow btn-md p-2 w-100 text-secondary" style="max-width: 200px; max-height: 300px;"  onclick="goToPage()">
                                 <span class="fs-5 p-3 text-black">3</span> Employee
                                 <span class="p-2"><i class=" text-primary fa-solid fa-circle-info fs-5 p-0" ></i></span>
                                 </button>
                             </div>
 
                             <div class="col">
-                                    <button type="button" class=" btn ps-0 btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="Presents()">
+                                    <button type="button" class=" btn ps-0 btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;" data-bs-toggle="modal" data-bs-target="#presentModal">
                                     <span class="fs-5 p-3 text-black">13</span>Presents 
                                     <span class="p-2"><i class=" text-success fa-solid fa-circle-info fs-5 p-0" ></i></span>
                                     </button>
+                                    <?php include("../Modals/M-Presents.php")?>  
                             </div>
 
                             <div class="col">
-                                    <button type="button" class="btn  ps-0 btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="btn  ps-0 btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;"  data-bs-toggle="modal" data-bs-target="#WarningModal">
                                     <span class="fs-5 p-3 text-black">3</span> Warnings 
                                     <span class="p-2"><i class=" text-warning fa-solid fa-circle-info fs-5 p-0" ></i></span>
                                     </button>
+                                    <?php include("../Modals/M-Warning.php")?>  
                             </div>
                         
                             <div class="col">
@@ -120,6 +122,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                     </button>
 
                                     <?php include("../Modals/M-Pending.php")?>   
+                                   
 
                                  
                                 </div>
@@ -244,5 +247,12 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     </script>
     <!-- JS FROM ASSETS -->
     <script src="../assets/js/dashboard-script.js"></script>
+
+    <script>
+
+function goToPage() {
+    window.location.href = "../Pages/employee-list.php";
+}
+    </script>
   </body>
 </html>
