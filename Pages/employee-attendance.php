@@ -121,7 +121,7 @@ if(successValue === "employeeNotfound"){
 	})
 	setTimeout(function(){
     window.history.back();
-   },5000);
+   },4000);
 }else if(successValue === "Timein"){
 	const picture = urlParams.get('picture');
 	const id = urlParams.get('ID');
@@ -148,7 +148,7 @@ if(successValue === "employeeNotfound"){
 	})
 	setTimeout(function(){
     window.history.back();
-   },5000);
+   },4000);
 }else if(successValue === "Timeout"){
 	const picture = urlParams.get('picture');
 	const id = urlParams.get('ID');
@@ -178,7 +178,7 @@ if(successValue === "employeeNotfound"){
 	window.onload = function() {
       document.getElementById('employee').value = '';
     };
-   },5000);
+   },4000);
 }
 
 </script>

@@ -101,7 +101,14 @@ if ($conn->connect_error) {
 		</form>
 	</div>
 </div>
-
+<script>
+	window.addEventListener("pageshow", function(event) {
+                var inputEmail = document.getElementById("email");
+				var inputPass = document.getElementById("password");
+                inputEmail.value = "";
+				inputPass.value = "";
+         });
+</script>
 
 </body>
 
@@ -126,7 +133,7 @@ if(successValue === "invalidUser"){
 	})
 	setTimeout(function(){
     window.history.back();
-   },5000);
+   },4000);
 }else if(successValue === "invalidPass"){
 	Swal.fire({
 		icon:'error',
@@ -143,7 +150,7 @@ if(successValue === "invalidUser"){
 	})
 	setTimeout(function(){
     window.history.back();
-   },5000);
+   },4000);
 }else if(successValue === "Timein"){
 	const picture = urlParams.get('picture');
 	const id = urlParams.get('ID');
@@ -170,7 +177,7 @@ if(successValue === "invalidUser"){
 	})
 	setTimeout(function(){
     window.history.back();
-   },5000);
+   },4000);
 }else if(successValue === "Timeout"){
 	const picture = urlParams.get('picture');
 	const id = urlParams.get('ID');
@@ -196,7 +203,7 @@ if(successValue === "invalidUser"){
 	})
 	setTimeout(function(){
     window.history.back();
-   },5000);
+   },4000);
 }
 
 </script>

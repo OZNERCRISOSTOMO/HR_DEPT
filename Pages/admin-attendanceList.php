@@ -197,7 +197,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 	})
   setTimeout(function(){
     window.history.back();
-   },5000);
+   },4000);
   }else if(successValue === "delete"){
     Swal.fire({
 		icon:'error',
@@ -214,6 +214,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 	})
   setTimeout(function(){
     window.history.back();
-   },5000);
+   },4000);
   }
 </script>
