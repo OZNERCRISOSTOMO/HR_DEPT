@@ -35,6 +35,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     #inCard {
         background-color: #f2f2f2;
     };
+
+   
 </style>
 </head>
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
@@ -90,15 +92,15 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <!-----End----->
 
     <!-----Employee List----->
-    <div class="container mt-5 employeeList-container">
-    <div class="row-cols-4">
+    <div class="container mt-5 employeeList-container ">
+    <div class="row col-12">
 
       <?php 
         $employees = $admin->getEmployees();
   
         foreach($employees as $employee){                 
       ?>
-    <div class="card bg-white rounded mx-2 py-3 employee-container" data-bs-toggle="modal"
+    <div class="card bg-white rounded mx-2 my-2 py-3 employee-container col-3" data-bs-toggle="modal"
      id="view" data-bs-target="#viewmodal" data-employee-id="<?php echo $employee["id"]?>">
                         <img class="rounded-circle mx-auto" src="../Uploads/<?php echo $employee["picture_path"] ?>" style="object-fit: cover;border-radius: 50%;height: 150px; width: 150px;" alt="Employee Pic">    
                         <div class="card-body ps-1">

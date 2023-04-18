@@ -12,7 +12,7 @@
                 <p>Fill out the form to generate payslip into PDF</p>
 
                 <div class="row mb-2">
-                    <div class="col-md-6">
+                    <div class="col-md-6" >
                          
                             <select id='select-employee' name="employee-id" class="select2-container">
                                 <option value="0">Select employee</option>

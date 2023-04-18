@@ -28,6 +28,24 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <!-- Select2 JS --> 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
+    <style>
+     .modal-backdrop.show {
+    z-index: 100;
+}
+
+.modal {
+  z-index: 150;
+}
+        .select2-container {
+            /* z-index: 20; */
+              z-index: 1050;
+        }
+        /* .select2-selection {
+  z-index: auto;
+} */
+  
+    </style>
+
 </head>
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
 <div class="container-fluid">
@@ -67,7 +85,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
             <div class="col-xl-12">
                 <h4>List of Payslip</h4>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create New</button>
-                    <?php include("../Modals/M-pslist.php")?>   
+                     <?php include("../Modals/M-pslist.php")?>   
+
                     
                     <a href="function.php">
                      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#PayrollModal">Generate Payslip</button>
