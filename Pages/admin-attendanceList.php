@@ -19,6 +19,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/53a2b7f096.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
@@ -28,7 +29,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
 <!------------ SIDEBAR ------------ -->
 <div class="col-2 p-0">
-                <?php include("../Components/Sidebar-Left.php")?>
+               <?php include("../Components/Sidebar-Left.php") ?>
             </div>
         <!---------------------------->
 
@@ -119,9 +120,98 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   </table>
 <!----Table End--->
 </div>
-</div>
-</div>
+<div>
+<table class="table table-striped table-borderless align-middle text-center">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Employee ID</th>
+        <th>Remarks</th>
+        <th>Date</th>
+        <th>Over Time</th>
+      </tr>
+      </thead>
+      <tbody>
+      <?php
+        $dbServername = "sql985.main-hosting.eu";
+        $dbUsername = "u839345553_sbit3g";
+        $dbPassword = "sbit3gQCU";
+    
+        $conn = new mysqli($dbServername, $dbUsername, $dbPassword, 'u839345553_SBIT3G');
+        $date = new DateTime();
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $sql = "SELECT * FROM overTime";
+        $query = $conn->query($sql);
 
+        while($row = mysqli_fetch_assoc($query)){
 
+      ?>
+      <tr>
+      <td><?php echo $row['id']; ?> </td>
+      <td><?php echo $row['employee_id']; ?> </td>
+      <td><?php echo $row['remarks']; ?> </td>
+      <td><?php echo $row['date']; ?> </td>
+      <td><?php echo $row['over_time']; ?> </td>
+      <td>
+      <td><form method="post" action="../Functions/overtime-accept.php">
+      <input type="hidden" name="acceptid" id="acceptid" value=<?php echo $row['id']; ?>>
+      <input type="submit" name="acceptbtn" id="acceptbtn" class="btn btn-sm btn-primary" value="Accept">
+      </form>
+      <form method="post" action="../Functions/overtime-delete.php">
+      <input type="hidden" name="deleteid" id="deleteid" value=<?php echo $row['id']; ?>>
+      <input type="submit" name="deletebtn" id="deletebtn" value="Delete">
+      </form>
+    </td>
+    </tr>
+    <?php
+      }
+    ?>
+    </tbody>
+  </table>
+</div>
 </body>
 </html>
+
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const successValue = urlParams.get('value');
+
+  if(successValue === "accept"){
+    Swal.fire({
+		icon:'success',
+    position:'top-end',
+		title:'Over Time of the Employee was Accepted',
+		toast:true,
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+  setTimeout(function(){
+    window.history.back();
+   },5000);
+  }else if(successValue === "decline"){
+    Swal.fire({
+		icon:'success',
+    position:'top-end',
+		title:'Over Time of the Employee was Decline',
+		toast:true,
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+  setTimeout(function(){
+    window.history.back();
+   },5000);
+  }
+</script>

@@ -28,7 +28,7 @@ if ($conn->connect_error) {
   	<!-- Theme style -->
   	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="hold-transition login-page" style="background-color: #f2f2f2; font-family: Bahnschrift;">
 
@@ -68,12 +68,12 @@ if ($conn->connect_error) {
 	
 	<div class="col-sm-5 m-auto my-5 shadow-lg p-4 rounded align-items-center">
 		<img src="../Images/Attendance-logo.png" class="mx-auto d-block mb-3" height="150" width="150">
-		<form action=" " method="POST">
+		<form action="../Functions/employee-attendance-manual-function.php" method="POST">
             <div class="form-group mb-3" >
                 <label for="exampleInputEmail1" class="form-label fw-bolder">Email</label>
                     <div class="input-group">
                         <div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-user"></i></div>
-                            <input type="text" class="form-control shadow-none border-left-0" name="email" placeholder="Email" required="required">
+                            <input type="text" class="form-control shadow-none border-left-0" name="email" id="email" placeholder="Email" required="required">
                         </div>
                     </div>
                 
@@ -81,7 +81,7 @@ if ($conn->connect_error) {
 		            <label for="examplePassword" class="form-label fw-bolder">Password</label>
 		                <div class="input-group">
 			                <div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-lock"></i></div>
-                            <input type="password" class="form-control shadow-none border-left-0" name="password" placeholder="Password" required="required">
+                            <input type="password" class="form-control shadow-none border-left-0" name="password" id="password" placeholder="Password" required="required">
 		                </div>
 		        </div> 
 
@@ -104,4 +104,100 @@ if ($conn->connect_error) {
 
 
 </body>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const successValue = urlParams.get('value');
+    console.log(successValue);
+
+if(successValue === "invalidUser"){
+	Swal.fire({
+		icon:'error',
+		title:'User Not Found',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	setTimeout(function(){
+    window.history.back();
+   },5000);
+}else if(successValue === "invalidPass"){
+	Swal.fire({
+		icon:'error',
+		title:'Wrong Password',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	setTimeout(function(){
+    window.history.back();
+   },5000);
+}else if(successValue === "Timein"){
+	const picture = urlParams.get('picture');
+	const id = urlParams.get('ID');
+	const name = urlParams.get('name');
+	const post = urlParams.get('post');
+	const timein = urlParams.get('Timein');
+	const status = urlParams.get('status');
+	const dept =urlParams.get('dep');
+	
+	Swal.fire({
+		html:'<div><img src="../Uploads/'+picture+'" style="position:absolute;top:25px;left:50px;height:90px;width:90px;" class="img-fluid m-0 rounded-circle">'+
+		'<p>Name: '+name+'</p>'+
+		'<p>Department: '+dept+'</p>'+
+		'<p>Position: '+post+'</p></div>',
+		footer:'<h1 class="bi bi-check-circle-fill text-success" style="position:absolute;top:175px;left:70px;"></h1>'+
+				'Time In Recorded<br>'+timein+'<br>'+status,
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+  		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	setTimeout(function(){
+    window.history.back();
+   },5000);
+}else if(successValue === "Timeout"){
+	const picture = urlParams.get('picture');
+	const id = urlParams.get('ID');
+	const name = urlParams.get('name');
+	const post = urlParams.get('post');
+	const timeout = urlParams.get('Timeout');
+	const dept =urlParams.get('dep');
+	
+	Swal.fire({
+		html:'<div><img src="../Uploads/'+picture+'" style="position:absolute;top:25px;left:50px;height:90px;width:90px;" class="img-fluid m-0 rounded-circle">'+
+		'<p>Name: '+name+'</p>'+
+		'<p>Department: '+dept+'</p>'+
+		'<p>Position: '+post+'</p></div>',
+		footer:'<h1 class="bi bi-check-circle-fill text-success" style="position:absolute;top:175px;left:70px;"></h1>'+
+				'Time Out Recorded<br>'+timeout,
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+  		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	setTimeout(function(){
+    window.history.back();
+   },5000);
+}
+
+</script>
 </html>
