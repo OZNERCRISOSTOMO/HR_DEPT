@@ -200,7 +200,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
    },5000);
   }else if(successValue === "delete"){
     Swal.fire({
-		icon:'danger',
+		icon:'error',
     position:'top-end',
 		title:'Over Time of the Employee was Decline',
 		toast:true,
