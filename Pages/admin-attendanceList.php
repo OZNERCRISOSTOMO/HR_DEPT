@@ -117,11 +117,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       }
     ?>
     </tbody>
-  </table>
-<!----Table End--->
-</div>
-<div>
-<table class="table table-striped table-borderless align-middle text-center">
+
+    </div>
+<div >
+<table class="table table-striped table-borderless align-middle text-center mb-2">
     <thead>
       <tr>
         <th>ID</th>
@@ -171,6 +170,9 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     </tbody>
   </table>
 </div>
+  </table>
+<!----Table End--->
+
 </body>
 </html>
 
