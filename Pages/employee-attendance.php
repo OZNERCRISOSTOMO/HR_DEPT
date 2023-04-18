@@ -34,7 +34,8 @@
   	<!-- Theme style -->
   	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+	  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 </head>
 <body class="hold-transition login-page" style="background-color: #f2f2f2; font-family: Bahnschrift;">
 
@@ -74,23 +75,15 @@
 	
 	<div class="col-sm-5 m-auto my-5 shadow-lg p-4 rounded align-items-center">
 		<img src="../Images/Attendance-logo.png" class="mx-auto d-block mb-3" height="150" width="150">
-		<form action="../Functions/employee-attendance-manual.php" method="POST">
-			<div class="form-group mb-3">
-				<select class="form-control shadow-none" name="status">
-				<option value="in">Time In</option>
-				<option value="out">Time Out</option>
-				</select>
-			</div>
-
+		<form action="../Functions/employee-attendance-revise.php" method="POST">
 			<div class="form-group has-feedback mb-3">
 					<input type="text" class="form-control input-lg shadow-none" id="employee" name="employee" autofocus >
 					<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
 			</div>
-
+		</form>
+		<form action="../Functions/employee-attendance-manual.php" method="POST">
 			<div class="row">
 				<div class="col-xs-4 d-grid">
-
-
 					<button type="submit" name="signin" id="signin" class="btn btn-primary">
 					<i class="fa-solid fa-right-to-bracket me-2"></i>
 						Enter using username
@@ -98,9 +91,97 @@
 				</div>
 			</div>
 		</form>
-		
 	</div>
 </div>
+<script>
+	window.addEventListener("pageshow", function(event) {
+                var input = document.getElementById("employee");
+                input.value = "";
+         });
+</script>
+</body>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const successValue = urlParams.get('value');
+    console.log(successValue);
+
+if(successValue === "employeeNotfound"){
+	Swal.fire({
+		icon:'error',
+		title:'User Not Found',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	setTimeout(function(){
+    window.history.back();
+   },5000);
+}else if(successValue === "Timein"){
+	const picture = urlParams.get('picture');
+	const id = urlParams.get('ID');
+	const name = urlParams.get('name');
+	const post = urlParams.get('post');
+	const timein = urlParams.get('Timein');
+	const status = urlParams.get('status');
+	const dept =urlParams.get('dep');
+	
+	Swal.fire({
+		html:'<div><img src="../Uploads/'+picture+'" style="position:absolute;top:25px;left:50px;height:90px;width:90px;" class="img-fluid m-0 rounded-circle">'+
+		'<p>Name: '+name+'</p>'+
+		'<p>Department: '+dept+'</p>'+
+		'<p>Position: '+post+'</p></div>',
+		footer:'<h1 class="bi bi-check-circle-fill text-success" style="position:absolute;top:175px;left:70px;"></h1>'+
+				'Time In Recorded<br>'+timein+'<br>'+status,
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+  		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	setTimeout(function(){
+    window.history.back();
+   },5000);
+}else if(successValue === "Timeout"){
+	const picture = urlParams.get('picture');
+	const id = urlParams.get('ID');
+	const name = urlParams.get('name');
+	const post = urlParams.get('post');
+	const timeout = urlParams.get('Timeout');
+	const dept =urlParams.get('dep');
+	
+	Swal.fire({
+		html:'<div><img src="../Uploads/'+picture+'" style="position:absolute;top:25px;left:50px;height:90px;width:90px;" class="img-fluid m-0 rounded-circle">'+
+		'<p>Name: '+name+'</p>'+
+		'<p>Department: '+dept+'</p>'+
+		'<p>Position: '+post+'</p></div>',
+		footer:'<h1 class="bi bi-check-circle-fill text-success" style="position:absolute;top:175px;left:70px;"></h1>'+
+				'Time Out Recorded<br>'+timeout,
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+  		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	setTimeout(function(){
+    window.history.back();
+
+	window.onload = function() {
+      document.getElementById('employee').value = '';
+    };
+   },5000);
+}
+
+</script>
 
 <!--Keme->
 <div class="login-box">
@@ -139,4 +220,4 @@
          });
 </script>
 </body> -->
-</html>a
+</html>

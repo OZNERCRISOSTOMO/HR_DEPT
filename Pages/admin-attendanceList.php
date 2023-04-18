@@ -196,9 +196,9 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   setTimeout(function(){
     window.history.back();
    },5000);
-  }else if(successValue === "decline"){
+  }else if(successValue === "delete"){
     Swal.fire({
-		icon:'success',
+		icon:'danger',
     position:'top-end',
 		title:'Over Time of the Employee was Decline',
 		toast:true,
