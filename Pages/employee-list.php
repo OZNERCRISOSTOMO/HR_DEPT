@@ -98,9 +98,9 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   
         foreach($employees as $employee){                 
       ?>
-    <div class="card cols-1 bg-white rounded mx-2 py-3 employee-container" data-bs-toggle="modal"
+    <div class="card bg-white rounded mx-2 py-3 employee-container" data-bs-toggle="modal"
      id="view" data-bs-target="#viewmodal" data-employee-id="<?php echo $employee["id"]?>">
-                        <img class="rounded-circle mx-auto" src="../Uploads/<?php echo $employee["picture_path"] ?>" height="100" width="100" alt="Employee Pic">    
+                        <img class="rounded-circle mx-auto" src="../Uploads/<?php echo $employee["picture_path"] ?>" style="object-fit: cover;border-radius: 50%;height: 150px; width: 150px;" alt="Employee Pic">    
                         <div class="card-body ps-1">
                             <h4 class="card-title text-center" name="EmployeeName"><?php echo $employee["first_name"] . " " .$employee["last_name"];  ?></h4>
                             <p class="card-text text-center" style="opacity: 0.5;"><?php echo ucfirst($employee["position"]) ?></p>

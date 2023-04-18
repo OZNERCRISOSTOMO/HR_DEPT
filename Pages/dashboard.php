@@ -154,16 +154,16 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                                     <div class="btn-group dropend">
                                                          <li>
                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropend
-  </button>
-                                                    </li>
-  
-  <ul class="dropdown-menu">
-    <li>test</li>
-    <!-- Dropdown menu links -->
-  </ul>
-</div>
-                                                   
+                                                                Dropend
+                                                            </button>
+                                                                                                                </li>
+                                                            
+                                                            <ul class="dropdown-menu">
+                                                                <li>test</li>
+                                                                <!-- Dropdown menu links -->
+                                                            </ul>
+                                                            </div>
+                                                                                                            
                                                     <li><a class="dropdown-item" href="#">By Name</a></li>
                                                     <li><a class="dropdown-item" href="#">By Department</a></li>
                                                     <li><a class="dropdown-item" href="#">By Position</a></li>
