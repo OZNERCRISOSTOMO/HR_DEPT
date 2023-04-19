@@ -44,7 +44,7 @@
     FROM employees
     JOIN employee_details ON employees.id = employee_details.employee_id
     JOIN attendance ON employees.id = attendance.employee_id
-    WHERE employee_details.department = 'sales' AND attendance.date = '$date_now'";
+    WHERE employee_details.department =  employee_details.department AND attendance.date = '$date_now'";
     $result = mysqli_query($conn, $sql);
 
     // check if SELECT statement was successful
@@ -54,7 +54,7 @@
             echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["date"] . "</td><td>" . $row["time_in"] . "</td><td>" . $row["time_out"] . "</td><td>" . $row["status"] . "</td><td>" ."</td></tr>";
         }
     } else {
-        echo "0 results";
+        echo "";
     }
 
     // close the database connection
