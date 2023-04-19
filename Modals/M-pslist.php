@@ -53,7 +53,7 @@
 
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <input type="number" name="present" id="present" placeholder="Number of hour present" class="form-control" required>
+                        <input type="   number" name="present" id="present" placeholder="Number of hour present" class="form-control" required>
                     </div>
 
                     <div class="col-md-6">

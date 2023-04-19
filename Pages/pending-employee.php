@@ -144,9 +144,10 @@
                                 <input type="hidden" class="form-control" id="rate-hidden" name="rate" value="12" >
                             </div>
 
-                                       <h4>Benefits</h4>
-                            <div class="col-12 d-flex mb-4 ">
-                             
+                            <h4>Benefits</h4>     
+                            <div class="col-12 d-flex mb-4 benefits">
+                            
+
                                 <div class="col-6">
                                     <label for="vacation-leave" class="col-form-label">Vacation leave</label>
                                     <input type="number" class="form-control" id="vacation-leave" name="vacation-leave" >
@@ -275,7 +276,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button name="submit" class="btn btn-primary">Submit</button>
+                                <button name="submit" class="btn btn-primary" type="submit"> Submit</button>
                             </div>
                         </form>
                     </div>

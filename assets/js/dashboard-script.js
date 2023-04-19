@@ -49,6 +49,9 @@ for (let i = 0; i < employeeType.length; i++) {
       employeePosition[1].disabled = true;
       employeePosition[0].checked = true;
       employeePosition[1].checked = false;
+
+      //remove benefits
+      document.querySelector(".benefits").classList.add("hide-container")
     }
 
     console.log(rateHidden.value);

@@ -96,13 +96,20 @@
                         $mins = $interval->format('%i');
                         $mins2 = $mins/60;
                         $int = $hrs + $mins2;
-                        
+                    
+                    if($srow['time_out'] < $urow['time_out']){
+                        if($srow['num_hr'] == 0){
                         $sql = "UPDATE attendance SET num_hr = '$int' WHERE id = '".$timeout['uid']."'";
 						$conn->query($sql);
 
                         $sql123 = "UPDATE employee_details SET num_hr = num_hr + $int WHERE employee_id = $id";
                         $conn->query($sql123);
+                        }
+                    }else if($srow['time_out'] > $urow['time_out']){
+                        $undertime = "INSERT INTO overTime (employee_id, remarks, date, over_time) VALUES ('$id','Under Time', '$date_now','$int')";
+                        $conn->query($undertime);
                     }
+                }
                     else{
                         echo $conn->error;
                     }
