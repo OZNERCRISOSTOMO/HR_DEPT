@@ -36,6 +36,15 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         background-color: #f2f2f2;
     };
 
+    .small-text {
+  font-size: 10px;
+}
+
+.email-wrapper {
+  display: inline-flex; /* display the icon and email address inline */
+
+}
+
    
 </style>
 </head>
@@ -62,14 +71,15 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <!------End----->
 
     <!-----Title----->
-        <div class="container d-flex ms-5 mt-2">
-            <h5 style="font-weight:bolder;">Employee List</h5>
-        </div>
+      
     <!-----End----->
     
     <!-----Filter and Search Employee ----->
-    <div class="container ">
-        <div class="row float-end">
+    <div class="container mt-3">
+        <div class="row">
+        <div class="col-sm pt-2">
+            <h5 style="font-weight:bolder;">Employee List</h5>
+        </div>
                 <div class="col-md row ms-2">
                     <div class="col-sm rounded dropdown text-center bg-white">
                         <button class="btn dropdown-toggle fw-bolder container-fluid" type="button" data-bs-toggle="dropdown" id="dropdown">By Department</button>
@@ -90,21 +100,21 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         </div>
     </div>
     <!-----End----->
-
+ 
     <!-----Employee List----->
-    <div class="container mt-5 employeeList-container ">
-    <div class="row col-12">
+    <div class="container-fluid ms-3 p-0 mt-3 employeeList-container align-content-center m-auto d-block ">
+    <div class="row ">
 
       <?php 
         $employees = $admin->getEmployees();
   
         foreach($employees as $employee){                 
       ?>
-    <div class="card bg-white rounded mx-2 my-2 py-3 employee-container col-3" data-bs-toggle="modal"
+    <div class="card bg-white rounded ms-2 my-2 py-3 employee-container" style="width: 18rem;" data-bs-toggle="modal"
      id="view" data-bs-target="#viewmodal" data-employee-id="<?php echo $employee["id"]?>">
-                        <img class="rounded-circle mx-auto" src="../Uploads/<?php echo $employee["picture_path"] ?>" style="object-fit: cover;border-radius: 50%;height: 150px; width: 150px;" alt="Employee Pic">    
+                        <img class="rounded-circle mx-auto" src="../Uploads/<?php echo $employee["picture_path"] ?>" style="object-fit: cover;border-radius: 50%;height: 140px; width: 140px;" alt="Employee Pic">    
                         <div class="card-body ps-1">
-                            <h4 class="card-title text-center" name="EmployeeName"><?php echo $employee["first_name"] . " " .$employee["last_name"];  ?></h4>
+                            <h5 class="card-title text-center col-11 m-auto" name="EmployeeName"><?php echo $employee["first_name"] . " " .$employee["last_name"];  ?></h5>
                             <p class="card-text text-center" style="opacity: 0.5;"><?php echo ucfirst($employee["position"]) ?></p>
                             <div id="inCard" class="rounded ms-3">
                             <table class="table table-borderless mt-2">
@@ -121,9 +131,11 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                     </tr>                     
                                 </tbody>
                             </table>
-                            
-                            <p class="card-text ms-3" name="Email"><i class="fa-solid fa-envelope text-primary"></i><?php echo $employee["email"] ?></p>
-                            <p class="card-text ms-3" name="ContactNum"><i class="fa-solid fa-phone text-success"></i> <?php echo $employee["contact"] ?></p>
+
+                  
+
+                            <p class="text ms-3 col-10 small-text" name="Email"><i class="fa-solid fa-envelope text-primary"></i><?php echo $employee["email"] ?></p>
+                            <p class="card-text ms-3 small-text" name="ContactNum"><i class="fa-solid fa-phone text-success"></i> <?php echo $employee["contact"] ?></p>
                         </div>
                         </div>
                     </div>
