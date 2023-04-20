@@ -11,21 +11,17 @@
           <div class="modal-body">
             
           <div class="container">
-		<h2 class="text-center py-2">Attendance Monitoring</h2>
+		<h2 class="text-center">Attendance Monitoring</h2>
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					
 			<th>Employee ID</th>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Status</th>
-        
-          
 				</tr>
-			</thead>
-			<tbody>
-            <?php
+
+        <?php
             $employee = $admin->selectEmployeeSched('1');
 
             $count = 0;
@@ -42,7 +38,7 @@
                 echo "<tr><td>".$employeeInfo[0]['id']."</td>";
                 echo "<td>".$employeeInfo[0]['first_name']."</td>";
                 echo "<td>".$employeeInfo[0]['last_name']."</td>";
-                echo '<td><span class="badge badge-danger">Absent</span></td>';
+                echo '<td>Absent</td>';
                 echo "</br>";
                 }
             }
@@ -50,6 +46,9 @@
     }
 }
 ?>
+			</thead>
+			<tbody>
+           
 			</tbody>
 		</table>
 	</div>
@@ -57,7 +56,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+         
           </div>
         </div>
       </div>

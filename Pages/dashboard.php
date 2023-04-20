@@ -108,42 +108,42 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
                             <div class="container py-4">
                                 <div class="row">
-                                    <div class="col">
-                                <button type="button" class="btn  ps-0 btn-light shadow btn-md p-2 w-100 text-secondary" style="max-width: 200px; max-height: 300px;"  onclick="goToPage()">
-                                <span class="fs-5 p-3 text-black"><?php echo $admin->getTotalEmployees(); ?> </span> Employee
-                                <span class="p-2"><i class=" text-primary fa-solid fa-circle-info fs-5 p-0" ></i></span>
+                                    <div class="col" >
+                                <button type="button" class="btn  ps-0 btn-light shadow btn-md p-2 w-100 vh-100 text-secondary" style="max-width: 200px; max-height: 50px;"  onclick="goToPage()">
+                                <span class="ps-2 text-black" style="font-size: 18px;"><?php echo $admin->getTotalEmployees(); ?> </span> Employee
+                                <span ><i class=" text-primary fa-solid fa-circle-info p-0"  style="font-size: 18px;"></i></span>
                                 </button>
                             </div>
 
                             <div class="col">
-                                    <button type="button" class=" btn ps-0 btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;" data-bs-toggle="modal" data-bs-target="#presentModal">
-                                    <span class="fs-5 p-3 text-black"><?php echo $admin->getTotalPresent(); ?> </span>Presents 
-                                    <span class="p-2"><i class=" text-success fa-solid fa-circle-info fs-5 p-0" ></i></span>
+                                    <button type="button" class=" btn ps-0 btn-light shadow btn-md p-2 w-100 vh-100 text-secondary" style="max-width: 200px; max-height:  50px;" data-bs-toggle="modal" data-bs-target="#presentModal">
+                                    <span class="p-2 text-black" style="font-size: 18px;"><?php echo $admin->getTotalPresent(); ?> </span>Presents 
+                                    <span ><i class=" text-success fa-solid fa-circle-info p-0" style="font-size: 18px;" ></i></span>
                                     </button>
                                     <?php include("../Modals/M-Presents.php")?>  
                             </div>
 
                             <div class="col">
-                                    <button type="button" class=" btn ps-0 btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;" data-bs-toggle="modal" data-bs-target="#absentModal">
-                                    <span class="fs-5 p-3 text-black"><?php echo "$count" ?> </span>Absents 
-                                    <span class="p-2"><i class=" text-success fa-solid fa-circle-info fs-5 p-0" ></i></span>
+                                    <button type="button" class=" btn ps-0 btn-light shadow btn-md p-2 w-100 vh-100 text-secondary" style="max-width: 200px;max-height:  50px;" data-bs-toggle="modal" data-bs-target="#absentModal">
+                                    <span class="p-2 text-black"  style="font-size: 18px;"><?php echo "$count" ?> </span>Absents 
+                                    <span ><i class=" text-danger fa-solid fa-circle-info p-0" style="font-size: 18px;" ></i></span>
                                     </button>
                                     <?php include("../Modals/M-Absent.php")?>  
                             </div>
 
                             <div class="col">
-                                    <button type="button" class="btn  ps-0 btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;"  data-bs-toggle="modal" data-bs-target="#WarningModal">
-                                    <span class="fs-5 p-3 text-black">3</span> Warnings 
-                                    <span class="p-2"><i class=" text-warning fa-solid fa-circle-info fs-5 p-0" ></i></span>
+                                    <button type="button" class="btn  ps-0 btn-light shadow btn-md p-2 w-100 vh-100 text-secondary" style="max-width: 200px; max-height:  50px;"  data-bs-toggle="modal" data-bs-target="#WarningModal">
+                                    <span class="p-2 text-black" style="font-size: 18px;">45</span> Warnings 
+                                    <span ><i class=" text-warning fa-solid fa-circle-info  p-0"  style="font-size: 18px;"></i></span>
                                     </button>
                                     <?php include("../Modals/M-Warning.php")?>  
                             </div>
                         
                             <div class="col">
                 
-                                     <button type="button" class="btn ps-0  btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;"   data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <span class="fs-5 p-3 text-black"><?php echo $admin->getTotalPendingEmployees(); ?> </span>  Pending
-                                    <span class="p-2"><i class=" text-danger fa-solid fa-circle-info fs-5 p-0" ></i></span>
+                                     <button type="button" class="btn ps-0  btn-light shadow btn-md p-2 w-100  vh-100  text-secondary" style="max-width: 200px; max-height:  50px;"   data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <span class="p-2 text-black" style="font-size: 18px;"><?php echo $admin->getTotalPendingEmployees(); ?> </span>  Pending
+                                    <span ><i class=" text-secondary fa-solid fa-circle-info p-0" style="font-size: 18px;"></i></span>
                                     </button>
 
                                     <?php include("../Modals/M-Pending.php")?>   

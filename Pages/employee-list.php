@@ -44,6 +44,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   display: inline-flex; /* display the icon and email address inline */
 
 }
+.card:hover{
+
+  cursor: pointer;
+}
 
    
 </style>

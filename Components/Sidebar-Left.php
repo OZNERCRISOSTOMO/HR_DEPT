@@ -28,8 +28,8 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <div class="row flex-nowrap">
         <div class=" px-0 bg-white vh-100 position-fixed" style="max-width: 165px">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-fixed ">
-                <a href="" class="d-flex align-items-center text-black pb-3 mb-md-0 me-md-auto  text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline mb-3 mt-2">Company</span>
+                <a href="../Pages/dashboard.php" class="d-flex align-items-center text-black pb-3 mb-md-0 me-md-auto  text-decoration-none">
+                    <span class="fs-6 d-none m-auto d-flex d-sm-inline mb-3 mt-2">3GClothingLine</span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start text-center" id="menu">
                     <li class="nav-item mb-5 ps-2 "> 
