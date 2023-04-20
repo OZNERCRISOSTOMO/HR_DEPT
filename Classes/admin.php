@@ -194,6 +194,22 @@ class Admin {
         exit();
     }
 
+     public function getTotalPresent(){
+        // Get today's date
+        $today = date('Y-m-d');
+
+        $count = $this->database->connect()->query("SELECT count(*) FROM attendance WHERE date = '$today' ")->fetchColumn();
+
+        return $count;
+        //close connection
+        unset($this->database);
+        exit();
+    }
+
+    public function getAttendance(){
+        
+    }
+
     public function getEmployees($id = ""){
         $query = "";
         $employees = "";
@@ -251,10 +267,12 @@ class Admin {
     }
 
     public function formatDate($date){
-         $formatted_date = date('M d Y, h:i A', strtotime($date));
+         $formatted_date = date('M d, Y', strtotime($date));
 
          return $formatted_date;
     }
+
+    
 
      public function acceptEmployee($employeeData){
             // prepared statement
@@ -325,6 +343,8 @@ class Admin {
 
         exit();
     }
+
+    
 
     public function generateEmployeeIDAndPassword($employeeLastName){
 

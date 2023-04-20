@@ -50,8 +50,11 @@
     // check if SELECT statement was successful
     if (mysqli_num_rows($result) > 0) {
         // output data of each row
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["date"] . "</td><td>" . $row["time_in"] . "</td><td>" . $row["time_out"] . "</td><td>" . $row["status"] . "</td><td>" ."</td></tr>";
+        while ($row = mysqli_fetch_assoc($result)) {    
+            $timeIn = date('h:i A', strtotime($row["time_in"]));
+            $timeOut = date('h:i A', strtotime($row["time_out"]));
+
+            echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["date"] . "</td><td>" . $timeIn . "</td><td>" . $timeOut . "</td><td>" . $row["status"] . "</td><td>" ."</td></tr>";
         }
     } else {
         echo "";
@@ -64,11 +67,6 @@
 			</tbody>
 		</table>
 	</div>
-
-
-
-
-
 
           </div>
           <div class="modal-footer">

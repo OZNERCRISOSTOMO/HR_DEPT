@@ -93,14 +93,14 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                 <div class="row">
                                     <div class="col">
                                 <button type="button" class="btn  ps-0 btn-light shadow btn-md p-2 w-100 text-secondary" style="max-width: 200px; max-height: 300px;"  onclick="goToPage()">
-                                <span class="fs-5 p-3 text-black">3</span> Employee
+                                <span class="fs-5 p-3 text-black"><?php echo $admin->getTotalEmployees(); ?> </span> Employee
                                 <span class="p-2"><i class=" text-primary fa-solid fa-circle-info fs-5 p-0" ></i></span>
                                 </button>
                             </div>
 
                             <div class="col">
                                     <button type="button" class=" btn ps-0 btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;" data-bs-toggle="modal" data-bs-target="#presentModal">
-                                    <span class="fs-5 p-3 text-black">13</span>Presents 
+                                    <span class="fs-5 p-3 text-black"><?php echo $admin->getTotalPresent(); ?> </span>Presents 
                                     <span class="p-2"><i class=" text-success fa-solid fa-circle-info fs-5 p-0" ></i></span>
                                     </button>
                                     <?php include("../Modals/M-Presents.php")?>  
@@ -117,7 +117,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                             <div class="col">
                 
                                      <button type="button" class="btn ps-0  btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;"   data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <span class="fs-5 p-3 text-black">3</span>  Pending
+                                    <span class="fs-5 p-3 text-black"><?php echo $admin->getTotalPendingEmployees(); ?> </span>  Pending
                                     <span class="p-2"><i class=" text-danger fa-solid fa-circle-info fs-5 p-0" ></i></span>
                                     </button>
 

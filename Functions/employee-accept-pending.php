@@ -25,15 +25,6 @@ if(isset($_POST['submit'])){
     );
 
 
-     //check if any input is  empty
-    foreach($employeeData as $data){
-        if(empty($data)){
-            //return to employee register page
-            header("Location: ../Pages/dashboard.php");
-            exit();
-        }
-    }
-
     //update employee details
     $admin->acceptEmployee($employeeData);
 
