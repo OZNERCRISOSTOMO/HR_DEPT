@@ -2,19 +2,16 @@
 <html>
 <head>
 	<title>Employee</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" />
+
+  </head>
+ 
 <body>
 	<div class="container">
 		<h2>Employee List</h2>
-
 <button type="button" class="btn btn-primary">Primary</button>
 
 <button type="button" class="btn btn-primary">Primary</button>
-
 
 		<table class="table table-striped">
 			<thead>
@@ -29,18 +26,9 @@
             <th>Contact</th>
             <th>Department</th>
             <th>Action</th>
-          
-
-
 				</tr>
 			</thead>
 			<tbody>
-
-
-
-
-            
-             
 			<?php
     // establish a connection to the MySQL database
     $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
@@ -58,19 +46,25 @@
     WHERE employee_details.department = 'sales'";
     $result = mysqli_query($conn, $sql);
 
+
+   
     $schedule = "";
     // check if SELECT statement was successful
     if (mysqli_num_rows($result) > 0) {
         // output data of each row
         while ($row = mysqli_fetch_assoc($result)) {
+          $sql = "SELECT * FROM schedule WHERE id = '".$row['id']."'";
+
             if ($row["schedule_id"] == '1') {
-                $schedule = "8:00AM - 5:00PM";
+                $schedule = "8:00AM - 4:00PM";
             } 
             elseif ($row["schedule_id"] == '2') {
-                $schedule = "5:00PM - 10:00PM";  
+                $schedule = "4:00PM - 10:00PM";  
             } 
             
-            echo "<tr><td>"  . $row["id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["email"] . "</td><td>" . $row["gender"] . "</td><td>" . $schedule . "</td><td>" . $row["contact"] . "</td><td>" . $row["department"] . '</td><td> <button type="button" class="btn btn-primary">Set Schedule</button> </td></tr>';
+            echo "<tr><td>"  . $row["id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["email"] . "</td><td>" . $row["gender"] . "</td><td>" . $schedule . "</td><td>" . $row["contact"] . "</td><td>" . $row["department"] . '</td><td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Set Schedule
+          </button></td></tr>';
 
        
         }
@@ -84,12 +78,13 @@
 			</tbody>
 		</table>
         <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scheduleModal">
-  Launch demo modal
-</button>
+
+
+        <!-- Button trigger modal -->
+
 
 <!-- Modal -->
-<div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -97,20 +92,39 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+      <div class="mb-3 d-flex">
+            <form method="POST">
+                              Schedule : 
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" value="1" id="1" name="schedule" required>
+                                    <label class="form-check-label" for="1">8:00 AM - 5:00 PM</label>
+                                </div>
+            
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" value="2" id="2" name="schedule" required>
+                                    <label class="form-check-label" for="2">6:00 PM - 10:00 PM</label>
+                                </div>
+                            </div>
+      </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" name="save" id="save" onclick="">Save changes</button>
       </div>
+      </form> 
     </div>
   </div>
 </div>
 
+
 	</div>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js"></script>
 
-    
+<script>
+
+</script>
 
 </body>
 </html>

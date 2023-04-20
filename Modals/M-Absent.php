@@ -5,7 +5,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel1">Presents</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel1">Absents</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -39,7 +39,7 @@
                 echo "<td>".$employeeInfo[0]['first_name']."</td>";
                 echo "<td>".$employeeInfo[0]['last_name']."</td>";
                 echo '<td>Absent</td>';
-                echo "</br>";
+               
                 }
             }
 
