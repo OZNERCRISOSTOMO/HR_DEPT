@@ -10,10 +10,27 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     $database = new Database();
     $admin = new Admin($database);
 
-    
+    $employee = $admin->selectEmployeeSched('1');
+
+    $count = 0;
+   foreach ($employee as $sched) {
+    foreach ($sched as $key => $value) {
+
+        //check in attendance if exist 
+        $valueEmployee = $admin->checkAttendance($value);
+
+        if(!$valueEmployee){
+            $count++;
+            $employeeInfo = $admin->findEmployeeById($value);
+        }
+    }
+}
+
 } else {
     header("Location: ../index.php");
 }
+
+
 ?>
 
 <!doctype html>
@@ -104,6 +121,14 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                     <span class="p-2"><i class=" text-success fa-solid fa-circle-info fs-5 p-0" ></i></span>
                                     </button>
                                     <?php include("../Modals/M-Presents.php")?>  
+                            </div>
+
+                            <div class="col">
+                                    <button type="button" class=" btn ps-0 btn-light shadow p-2 w-100 text-secondary" style="max-width: 200px; max-height: 200px;" data-bs-toggle="modal" data-bs-target="#absentModal">
+                                    <span class="fs-5 p-3 text-black"><?php echo "$count" ?> </span>Absents 
+                                    <span class="p-2"><i class=" text-success fa-solid fa-circle-info fs-5 p-0" ></i></span>
+                                    </button>
+                                    <?php include("../Modals/M-Absent.php")?>  
                             </div>
 
                             <div class="col">

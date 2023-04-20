@@ -411,6 +411,24 @@ class Admin {
         //close connection
         unset($this->database);
     }
+    public function selectEmployeeSched($sched){
+        $employee = $this->database->connect()->prepare("SELECT id FROM employees WHERE schedule_id = ? ");
+        $employee->execute([$sched]);
+        return $employee->fetchAll();
+
+        exit();
+    }
+
+     public function checkAttendance($id){
+             // Get today's date
+        $today = date('Y-m-d');
+
+        $employee = $this->database->connect()->prepare("SELECT * FROM attendance WHERE employee_id = ? AND date = '$today'");
+         $employee->execute([$id]);
+        return $employee->fetch();
+
+        exit();
+    }
 }
 
     
