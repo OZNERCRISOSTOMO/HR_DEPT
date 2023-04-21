@@ -74,8 +74,9 @@
                         <form method="POST" action="../Functions/employee-accept-pending.php">
                             <!--==== DEPARTMENT ===== -->
                             <div class="mb-3">
-                                <select class="form-select" aria-label="Default select example" name="department">
+                                <select class="form-select" aria-label="Default select example" name="department" id="department">
                                 <option selected>Select department</option>
+                                <option value="human-resource">Human Resources</option>
                                 <option value="sales">Sales</option>
                                 <option value="purchaser">Purchaser</option>
                                 <option value="warehouse">Warehouse</option>
@@ -111,6 +112,14 @@
                                 </div>
                             </div>
 
+                                   <!--==== POSITION DROPDOWN ===== -->
+                            <div class="mb-3">
+                                <select class="form-select" aria-label="Default select example" name="department-position" id="department-position" required>
+                                <option selected>Select position</option>
+        
+                                </select>
+                            </div>
+
                               <!--===== SCHEDULE ====== -->
                             <div class="mb-3 d-flex">
                                 Schedule : 
@@ -128,7 +137,7 @@
                               <!--==== BRANCH ======== -->
                             <div class="mb-3">
                                 <label for="branch" class="col-form-label">Branch</label>
-                                <input type="text" class="form-control" id="branch" name="branch">
+                                <input type="text" class="form-control" id="branch" name="branch" required>
                             </div>
 
                             <!--==== SALARY ======== -->
@@ -141,29 +150,44 @@
                             <div class="mb-3">
                                 <label for="rate" class="col-form-label">Rate</label>
                                 <input type="number" class="form-control" id="rate" name="rate" value="1" disabled>
-                                <input type="hidden" class="form-control" id="rate-hidden" name="rate" value="12" >
+                                <input type="hidden" class="form-control" id="rate-hidden" name="rate" value="0" >
                             </div>
 
-                            <h4>Benefits</h4>     
-                            <div class="col-12 d-flex mb-4 benefits">
-                            
-
+                           
+                            <div class="col-12 mb-4 benefits-container">
+                                
                                 <div class="col-6">
+                                     <h4>Benefits</h4>     
                                     <label for="vacation-leave" class="col-form-label">Vacation leave</label>
-                                    <input type="number" class="form-control" id="vacation-leave" name="vacation-leave" >
+                                    <input type="number" class="form-control" id="vacation-leave" name="vacation-leave" value="15" disabled>
+                                    <input type="hidden" class="form-control vacation-leave" id="vacation-leave" name="vacation-leave" value="15" >
+
+                                    <label for="vacation-leave" class="col-form-label">Sick leave</label>
+                                    <input type="number" class="form-control " id="sick-leave" name="sick-leave" value="60" disabled>
+                                      <input type="hidden" class="form-control sick-leave" id="sick-leave" name="sick-leave" value="60" >
                                 </div>
                                 
                                 <div class="col-6 align-self-end ms-3">
                                     <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="1" id="health-insurance" name="health-insurance">
-                                    <label class="form-check-label" for="health-insuranc"> Health insurance </label>
+                                    <input class="form-check-input" type="checkbox" value="1" id="health-insurance" name="health-insurance" checked >
+                                    <label class="form-check-label" for="health-insurance"> Health insurance </label>
                                  </div>
 
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="1" id="christmas-bonus" name="christmas-bonus">
-                                     <label class="form-check-label" for="christmas-bonus"> Chrirstmas Bonus </label>
+                                    <input class="form-check-input" type="checkbox" value="1" id="christmas-bonus" name="christmas-bonus" checked >
+                                     <label class="form-check-label" for="christmas-bonus"> Chrirstmas Bonus </label >
                                 </div> 
                                 </div>
+
+                                <h5>Allowance</h5>
+                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1" id="food-allowance" name="food-allowance" checked >
+                                     <label class="form-check-label" for="food-allowance"> Food allowance </label  >
+                                </div> 
+                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1" id="transpo-allowance" name="transpo-allowance" checked >
+                                     <label class="form-check-label" for="transpo-allowance"> Transportation allowance</label>
+                                </div> 
                      
                             </div>
 
@@ -238,6 +262,8 @@
                                     <label class="form-check-label" for="admin">Admin</label>
                                 </div>
                             </div>
+
+                      
                             
                             <!--==== SALARY ======== -->
                             <div class="mb-3">

@@ -40,7 +40,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HR DEPARTMENT</title>
 
-    <!-- <link rel="import" href="../Modals/M-Employee.php"> -->
+    <link rel="import" href="../Modals/M-Employee.php">
 
     
     <!-- SWEET ALERT -->
@@ -68,6 +68,15 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <!-- ==================== -->
 
+    <style>
+        .modal-pending{
+            z-index: 9999;
+        }
+
+        .d-none{
+            display: none;
+        }
+    </style>
 
   </head>
   <body style=" background-color: #eee; font-family: Bahnschrift;"> 

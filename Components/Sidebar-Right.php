@@ -7,16 +7,17 @@
   max-height:200px;
 }
 
-form {
+/* form {
   position: absolute;
   bottom: 15px;
   left: 0;
   width: 100%;
   max-width: 100%;
-}
+} */
     </style>
 </head>
 <body>
+  
 <div class="container-fluid align-content-end " >
   <div class="row flex-nowrap">
     <div class="col-md-4  col-xl-2 px-sm-2 px-0 bg-white   vh-100 position-fixed shadow order-last">

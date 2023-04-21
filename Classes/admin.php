@@ -308,7 +308,7 @@ class Admin {
          $stmt = $this->database->getConnection()->prepare("UPDATE employees AS e
                                                       INNER JOIN employee_details AS ed ON e.id = ed.employee_id
                                                       SET e.schedule_id = ?, e.status = ?,  ed.rate_per_hour = ?, ed.department = ?, ed.date_hired = ?,
-                                                       ed.position = ?, ed.employee_type = ?,  ed.branch = ? , ed.vacation_leave = ? , ed.health_insurance = ?, ed.christmas_bonus = ? 
+                                                       ed.position = ?, ed.employee_type = ?,  ed.branch = ? , ed.vacation_leave = ? , ed.sick_leave = ? , ed.health_insurance = ?, ed.christmas_bonus = ? 
                                                       WHERE e.id = ?");
 
         //if execution fail
@@ -321,6 +321,7 @@ class Admin {
                              $employeeData['type'],
                              $employeeData['branch'],
                              $employeeData['vacationLeave'],
+                             $employeeData['sickLeave'],
                              $employeeData['healthInsurance'],
                              $employeeData['christmasBonus'],
                              $employeeData['employeeId']

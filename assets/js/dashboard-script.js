@@ -5,11 +5,78 @@ const totalPendingEmployees = document.querySelector(
   ".total-pending-employees"
 );
 
+const benefitsContainer = document.querySelector(".benefits-container");
+
+//department
+const selectDepartment = document.querySelector("#department");
+
+//department position
+const selectDepartmentPosition = document.querySelector("#department-position");
+
 // Get the radio buttons by name
 const employeeType = document.getElementsByName("type");
 const employeePosition = document.getElementsByName("position");
 const rate = document.querySelector("#rate");
 const rateHidden = document.querySelector("#rate-hidden");
+
+const companyEmployeeRate = {
+  humanResource: {
+    admin: {
+      "HR Manager": 443,
+      "HR Assistant": 183,
+      "HR Administrator": 200,
+      "HR Director": 1071,
+    },
+    employee: {
+      "HR Analyst": 265,
+      "HR Associate": 200,
+      "Staffing Coordinator": 211,
+      "Staffing Specialist": 227,
+      Recruiter: 253,
+      "Employee Relations Manager": 701,
+      "HR Representative": 196,
+      "Personal Manager": 248,
+      "Safety Manager": 425,
+    },
+  },
+};
+
+let selectedDepartment = "";
+
+selectDepartment.addEventListener("change", function (e) {
+  const department = e.target.value;
+  const formattedDepartment = department.replace(/-([a-z])/g, (match, letter) =>
+    letter.toUpperCase()
+  );
+  console.log(formattedDepartment);
+
+  // Clear the department position dropdown
+  selectDepartmentPosition.innerHTML =
+    "<option selected>Select position</option>";
+
+  selectedDepartment = formattedDepartment;
+
+  //set rate to 0
+  rate.value = "0";
+  rateHidden.value = "0";
+
+  //unchecked employe type
+  for (let i = 0; i < employeeType.length; i++) {
+    if (employeeType[i].checked) {
+      employeeType[i].checked = false;
+      break;
+    }
+  }
+
+  //unchecked employee position
+  for (let i = 0; i < employeePosition.length; i++) {
+    if (employeePosition[i].checked) {
+      employeePosition[i].checked = false;
+      break;
+    }
+  }
+  console.log(selectedDepartment);
+});
 
 const employeeRate = {
   regular: "71.25",
@@ -30,28 +97,58 @@ for (let i = 0; i < employeeType.length; i++) {
     if (this.value === "regular") {
       employeeStatus.type = "regular";
 
-      //check if position is admin
-      if (employeeStatus.position === "admin") {
-        rate.value = employeeRate.admin;
-        rateHidden.value = employeeRate.admin;
-      } else {
-        rate.value = employeeRate.regular;
-        rateHidden.value = employeeRate.regular;
-      }
+      //set sick leave to
+      $(".sick-leave").val("60");
+
+      // set vacation leave to 0
+      $(".vacation-leave").val("15");
+
+      //set health insurance to unchecked
+      $("#health-insurance").prop("checked", true);
+
+      //set christmas bonus to unchecked
+      $("#christmas-bonus").prop("checked", true);
+
+      //set food allowance to unchecked
+      $("#food-allowances").prop("checked", true);
+
+      //set transpo allowance to unchecked
+      $("#transpo-allowance").prop("checked", true);
+
+      //add benefits
+      benefitsContainer.classList.remove("d-none");
 
       //enabled admin
       employeePosition[1].disabled = false;
     } else {
-      rate.value = employeeRate.nonRegular;
-      rateHidden.value = employeeRate.nonRegular;
+      // rate.value = employeeRate.nonRegular;
+      // rateHidden.value = employeeRate.nonRegular;
 
       //disabled admin
       employeePosition[1].disabled = true;
       employeePosition[0].checked = true;
       employeePosition[1].checked = false;
 
+      //set sick leave to 0
+      $(".sick-leave").val("0");
+
+      // set vacation leave to 0
+      $(".vacation-leave").val("0");
+
+      //set health insurance to unchecked
+      $("#health-insurance").prop("checked", false);
+
+      //set christmas bonus to unchecked
+      $("#christmas-bonus").prop("checked", false);
+
+      //set food allowance to unchecked
+      $("#food-allowances").prop("checked", false);
+
+      //set transpo allowance to unchecked
+      $("#transpo-allowance").prop("checked", false);
+
       //remove benefits
-      document.querySelector(".benefits").classList.add("hide-container");
+      benefitsContainer.classList.add("d-none");
     }
 
     console.log(rateHidden.value);
@@ -63,16 +160,51 @@ for (let i = 0; i < employeePosition.length; i++) {
   employeePosition[i].addEventListener("change", function () {
     // This code will run whenever the selected radio button changes
 
-    if (this.value === "admin") {
-      rate.value = employeeRate.admin;
-      rateHidden.value = employeeRate.admin;
-    } else {
-      rate.value = employeeRate.regular;
-      rateHidden.value = employeeRate.regular;
+    if (this.value === "admin" && selectedDepartment !== "Select department") {
+      // Clear the position dropdown
+      selectDepartmentPosition.innerHTML =
+        "<option selected>Select position</option>";
+
+      //populate department position
+      const positions = companyEmployeeRate[selectedDepartment].admin;
+      Object.keys(positions).forEach((position) => {
+        const option = document.createElement("option");
+        option.value = position;
+        option.textContent = `${position}`;
+        option.setAttribute("data-position-rate", positions[position]);
+        selectDepartmentPosition.appendChild(option);
+      });
+    }
+
+    if (
+      this.value == "employee" &&
+      selectedDepartment !== "Select department"
+    ) {
+      // Clear the position dropdown
+      selectDepartmentPosition.innerHTML =
+        "<option selected>Select position</option>";
+
+      //populate department position
+      const positions = companyEmployeeRate[selectedDepartment].employee;
+      Object.keys(positions).forEach((position) => {
+        const option = document.createElement("option");
+        option.value = position;
+        option.textContent = `${position}`;
+        option.setAttribute("data-position-rate", positions[position]);
+        selectDepartmentPosition.appendChild(option);
+      });
     }
   });
-  console.log(employeePosition.values);
 }
+
+selectDepartmentPosition.addEventListener("change", function (e) {
+  const selectedOption =
+    selectDepartmentPosition.options[selectDepartmentPosition.selectedIndex];
+  const positionRate = selectedOption.getAttribute("data-position-rate");
+
+  rate.value = positionRate;
+  rateHidden.value = positionRate;
+});
 
 const listOfContainer = [".employee-list", ".pending-employee-list"];
 let currentMainContent = listOfContainer[0];
