@@ -91,6 +91,19 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     <a href="function.php">
                      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#PayrollModal">Generate Payslip</button>
                     </a>
+                    
+                    <div>
+                    <h3>Payroll Details</h3>
+                    <?php
+                        $prlist = $payslip->payrollDetails($id);
+                    ?>
+                    <?php foreach($prlist as $list):?>
+                    Code: <?php echo $list['code']; ?>
+                    Start Date: <?php echo $list['start']; ?>
+                    End Date: <?php echo $list['end']; ?>
+                    Type: <?php echo $list['type']; ?>
+                    <?php endforeach; ?>
+                    </div>
                 
   <!-- TABLE -->                  
                     <div class= "a">          
