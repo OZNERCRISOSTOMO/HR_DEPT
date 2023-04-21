@@ -166,13 +166,17 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     <label for="type" class="fw-bold">Payroll Type</label>
                       <select class="form-select shadow-none" id="type" name="type">
                         <option value="" selected>Choose an option</option>
-                        <option value="weekly">Weekly</option>
                         <option value="semimonthly">Semi-Monthly</option>
                         <option value="monthly">Monthly</option>
-                      </select>
+                        <option value="custom">Custom</option>
+                        </select>
+                        <!-- Add an input field for the custom option -->
+                        <div class="mt-2" id="customTypeContainer" style="display: none;">
+                          <input type="text" class="form-control" id="customType" name="customType" placeholder="Enter custom type">
+                          <button type="button" class="btn btn-primary mt-2" id="saveCustomType">Save Custom Type</button>
+                        </div>
                   </div>
               </div>
-
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-default text-danger border border-end-0 border-0" data-bs-dismiss="modal">Close</button>
@@ -213,10 +217,15 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                   <div class="form-group mb-3">
                     <label for="editType">Type</label>
                     <select class="form-control" id="editType" name="editType">
-                    <option value="weekly">Weekly</option>
                     <option value="monthly">Monthly</option>
                     <option value="semimonthly">Semi-Monthly</option>
-                  </select>
+                    <option value="custom">Custom</option>
+                        </select>
+                        <!-- Add an input field for the custom option -->
+                        <div class="mt-2" id="customTypeContainer" style="display: none;">
+                          <input type="text" class="form-control" id="customType" name="customType" placeholder="Enter custom type">
+                          <button type="button" class="btn btn-primary mt-2" id="saveCustomType">Save Custom Type</button>
+                        </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default text-danger border border-end-0 border-0" data-bs-dismiss="modal">Close</button>
@@ -229,6 +238,34 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         </div>
 
         <!---Modal End--->
+
+        <!-- JavaScript code to handle the custom option -->
+<script>
+document.getElementById('type').addEventListener('change', function() {
+  var customOption = document.getElementById('type').value;
+  var customTypeContainer = document.getElementById('customTypeContainer');
+  if (customOption === 'custom') {
+    customTypeContainer.style.display = 'block';
+  } else {
+    customTypeContainer.style.display = 'none';
+  }
+});
+
+document.getElementById('saveCustomType').addEventListener('click', function() {
+  var customType = document.getElementById('customType').value;
+  if (customType !== '') {
+    var select = document.getElementById('type');
+    var option = document.createElement('option');
+    option.value = customType;
+    option.text = customType;
+    select.add(option);
+    select.value = customType;
+    document.getElementById('customType').value = '';
+    document.getElementById('customTypeContainer').style.display = 'none';
+  }
+});
+</script>
+<!---Script for custom--->
 
       </div>
     </div>
