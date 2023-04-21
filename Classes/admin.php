@@ -5,7 +5,7 @@ class Admin {
     private $database;
     private $date;
 
-    public function __construct(Database $database) {
+    public function __construct( $database) {
         $this->database = $database;
         date_default_timezone_set('Asia/Manila');
         $this->date =  date('Y-m-d H:i:s');
@@ -13,7 +13,7 @@ class Admin {
 
     public function findByEmail($email) {
         // prepare the SQL statement using the database property
-        $stmt = $this->database->connect()->prepare("SELECT * FROM hr_dept WHERE email=?");
+        $stmt = $this->database->getConnection()->prepare("SELECT * FROM hr_dept WHERE email=?");
 
          //if execution fail
         if (!$stmt->execute([$email])) {
@@ -32,13 +32,12 @@ class Admin {
             return $result;
         }
 
-        //close connection
-        unset($this->database);
+    
     }
      public function findEmployeeById($id){
         
           // prepare the SQL statement using the database property
-        $stmt = $this->database->connect()->prepare("SELECT * FROM employees
+        $stmt = $this->database->getConnection()->prepare("SELECT * FROM employees
                                                      WHERE id=?");
 
          //if execution fail
@@ -58,14 +57,13 @@ class Admin {
             return $result;
         }
 
-        //close connection
-        unset($this->database);
+      
     }
 
     public function getEmployeePayslip($id){
         
           // prepare the SQL statement using the database property
-        $stmt = $this->database->connect()->prepare("SELECT employees.*, employee_details.department, employee_details.salary, employee_details.sss,employee_details.pagibig ,employee_details.philhealth, employee_details.position, employee_details.branch  FROM employees
+        $stmt = $this->database->getConnection()->prepare("SELECT employees.*, employee_details.department, employee_details.salary, employee_details.sss,employee_details.pagibig ,employee_details.philhealth, employee_details.position, employee_details.branch  FROM employees
                                                      JOIN employee_details ON employees.id = employee_details.employee_id
                                                      WHERE employees.id=?");
 
@@ -86,8 +84,7 @@ class Admin {
             return $result;
         }
 
-        //close connection
-        unset($this->database);
+       
     }
 
     public function insertEmployeePayslip($employee, $net, $id){
@@ -96,7 +93,7 @@ class Admin {
         VALUES (?,?,?,?,?);";
 
      // prepared statement
-    $stmt = $this->database->connect()->prepare($sql);
+    $stmt = $this->database->getConnection()->prepare($sql);
 
     //if execution fail
     if (!$stmt->execute([$this->date,
@@ -119,7 +116,7 @@ class Admin {
         VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
 
      // prepared statement
-    $stmt = $this->database->connect()->prepare($sql);
+    $stmt = $this->database->getConnection()->prepare($sql);
 
     //if execution fail
     if (!$stmt->execute([$employee_name,
@@ -145,7 +142,7 @@ class Admin {
 
 
     public function checkprlist ($id) {
-        $stmt = $this->database->connect()->prepare("SELECT * FROM prlist
+        $stmt = $this->database->getConnection()->prepare("SELECT * FROM prlist
                                                      WHERE id=?");
 
          //if execution fail
@@ -171,26 +168,24 @@ class Admin {
     }
 
     public function getAdmin(){
-        $admin = $this->database->connect()->query("SELECT * FROM hr_dept WHERE id = 1")->fetch();
+        $admin = $this->database->getConnection()->query("SELECT * FROM hr_dept WHERE id = 1")->fetch();
         return $admin;
         exit();
     }
 
     public function getTotalEmployees(){
-        $count = $this->database->connect()->query("SELECT count(*) FROM employees WHERE status = '1' ")->fetchColumn();
+        $count = $this->database->getConnection()->query("SELECT count(*) FROM employees WHERE status = '1' ")->fetchColumn();
 
         return $count;
-        //close connection
-        unset($this->database);
+     
         exit();
     }
 
     public function getTotalPendingEmployees(){
-        $count = $this->database->connect()->query("SELECT count(*) FROM employees WHERE status = '0' ")->fetchColumn();
+        $count = $this->database->getConnection()->query("SELECT count(*) FROM employees WHERE status = '0' ")->fetchColumn();
 
         return $count;
-        //close connection
-        unset($this->database);
+
         exit();
     }
 
@@ -198,11 +193,10 @@ class Admin {
         // Get today's date
         $today = date('Y-m-d');
 
-        $count = $this->database->connect()->query("SELECT count(*) FROM attendance WHERE date = '$today' ")->fetchColumn();
+        $count = $this->database->getConnection()->query("SELECT count(*) FROM attendance WHERE date = '$today' ")->fetchColumn();
 
         return $count;
-        //close connection
-        unset($this->database);
+
         exit();
     }
 
@@ -220,41 +214,45 @@ class Admin {
                                                         employee_details.date_applied,employee_details.date_hired, employee_details.position FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
                                                         WHERE employees.status = '1'";
-            $employees = $this->database->connect()->query($query)->fetchAll();
+            $employees = $this->database->getConnection()->query($query)->fetchAll();
         }else{
              $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
                                                         employee_details.date_applied,employee_details.date_hired, employee_details.position FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
                                                         WHERE employees.status = '1' AND employees.id = $id";
-            $employees = $this->database->connect()->query($query)->fetch();
+            $employees = $this->database->getConnection()->query($query)->fetch();
         }
          
 
         return $employees;
+
         exit();
     }
 
     public function getDepartment(){
-        $employees = $this->database->connect()->query("SELECT attendance.*,employee_details.,employee_details.department, FROM attendance
+        $employees = $this->database->getConnection()->query("SELECT attendance.*,employee_details.,employee_details.department, FROM attendance
                                                         JOIN employee_details ON attendance.employee_id = employee_details.employee_id
                                                         WHERE employees_details.department = 'sales'")->fetchAll();
 
   
 
         return $employees;
+  
         exit();
     }
 
     public function searchEmployees($name){
-        $data =  $this->database->connect()->query("SELECT employees.*,employee_details.picture_path, employee_details.department,employee_details.date_applied FROM employees 
+        $data =  $this->database->getConnection()->query("SELECT employees.*,employee_details.picture_path, employee_details.department,employee_details.date_applied FROM employees 
                                                     JOIN employee_details ON employees.id = employee_details.employee_id 
                                                     WHERE (first_name LIKE '{$name}%' OR last_name LIKE '{$name}%') AND status = '1' ")->fetchAll();
         return $data;
+
+    
         exit();
     }
 
     public function getPendingEmployees(){
-          $pendingEmployees = $this->database->connect()->query("SELECT employees.*, employee_details.resume_name,
+          $pendingEmployees = $this->database->getConnection()->query("SELECT employees.*, employee_details.resume_name,
                                                                                      employee_details.resume_path,
                                                                                      employee_details.picture_path,
                                                                                      employee_details.department,
@@ -263,6 +261,8 @@ class Admin {
                                                         WHERE employees.status = '0'")->fetchAll();
 
         return $pendingEmployees;
+
+      
         exit();
     }
 
@@ -276,7 +276,7 @@ class Admin {
 
      public function acceptEmployee($employeeData){
             // prepared statement
-         $stmt = $this->database->connect()->prepare("UPDATE employees AS e
+         $stmt = $this->database->getConnection()->prepare("UPDATE employees AS e
                                                       INNER JOIN employee_details AS ed ON e.id = ed.employee_id
                                                       SET e.schedule_id = ?, e.status = ?,  ed.rate_per_hour = ?, ed.department = ?, ed.date_hired = ?,
                                                        ed.position = ?, ed.employee_type = ?,  ed.branch = ? , ed.vacation_leave = ? , ed.health_insurance = ?, ed.christmas_bonus = ? 
@@ -321,7 +321,7 @@ class Admin {
         $sql .= " WHERE e.id = ?";
 
         // Prepare the statement
-        $stmt2 = $this->database->connect()->prepare($sql);
+        $stmt2 = $this->database->getConnection()->prepare($sql);
         $params = array_merge($values, array($employeeData['employeeId']));
 
 
@@ -364,7 +364,7 @@ class Admin {
          $sql = "INSERT INTO employee_login (login_id,login_password,employee_id) VALUES (?,?,?);";
 
          // prepared statement
-         $stmt = $this->database->connect()->prepare($sql);
+         $stmt = $this->database->getConnection()->prepare($sql);
 
          //hash password
         $hashedpwd = password_hash($employeePassword, PASSWORD_DEFAULT);
@@ -384,14 +384,15 @@ class Admin {
     }
 
     public function getAllEmployeePayslip() {
-        $employeePayslip =  $this->database->connect()->query("SELECT id FROM employee_payslip")->fetchAll();
+        $employeePayslip =  $this->database->getConnection()->query("SELECT id FROM employee_payslip")->fetchAll();
             return $employeePayslip;
+
             
             exit();
     }
 
     public function getEmployeePayslipTable($id) {
-        $stmt = $this->database->connect()->prepare("SELECT * FROM employee_payslip_form WHERE payslip_id=?");
+        $stmt = $this->database->getConnection()->prepare("SELECT * FROM employee_payslip_form WHERE payslip_id=?");
 
          //if execution fail
         if (!$stmt->execute([$id])) {
@@ -412,9 +413,11 @@ class Admin {
         unset($this->database);
     }
     public function selectEmployeeSched($sched){
-        $employee = $this->database->connect()->prepare("SELECT id FROM employees WHERE schedule_id = ? ");
+        $employee = $this->database->getConnection()->prepare("SELECT id FROM employees WHERE schedule_id = ? ");
         $employee->execute([$sched]);
         return $employee->fetchAll();
+
+     
 
         exit();
     }
@@ -423,9 +426,11 @@ class Admin {
              // Get today's date
         $today = date('Y-m-d');
 
-        $employee = $this->database->connect()->prepare("SELECT * FROM attendance WHERE employee_id = ? AND date = '$today'");
+        $employee = $this->database->getConnection()->prepare("SELECT * FROM attendance WHERE employee_id = ? AND date = '$today'");
          $employee->execute([$id]);
         return $employee->fetch();
+
+      
 
         exit();
     }
@@ -443,12 +448,12 @@ class Payroll{
         $this->date =  date('Y-m-d H:i:s');
     }
 public function payrollList(){
-        $prlist =  $this->database->connect()->query("SELECT * FROM prlist")->fetchAll();
+        $prlist =  $this->database->getConnection()->query("SELECT * FROM prlist")->fetchAll();
         return $prlist;
         exit();
 }
 public function payrollDetails($id){
-    $prlist = $this->database->connect()->prepare("SELECT code, start, end, type FROM prlist WHERE id=?");
+    $prlist = $this->database->getConnection()->prepare("SELECT code, start, end, type FROM prlist WHERE id=?");
     $prlist->execute([$id]);
     return $prlist->fetchAll();
 }
@@ -457,7 +462,7 @@ public function Insertpayroll($prlist){
     $sql = "INSERT INTO prlist (date, code, start, end, type)
        VALUES (?,?,?,?,?);";
 
-   $stmt = $this->database->connect()->prepare($sql);
+   $stmt = $this->database->getConnection()->prepare($sql);
    if (!$stmt->execute([$this->date,
     $prlist['code'],
     $prlist['start'],
@@ -469,7 +474,7 @@ public function Insertpayroll($prlist){
        }
 }
 public function updatePayroll($id, $code, $start, $end, $type){
-    $stmt = $this->database->connect()->prepare("UPDATE prlist SET code = ?, start = ?, end = ?, type = ? WHERE id = ?");
+    $stmt = $this->database->getConnection()->prepare("UPDATE prlist SET code = ?, start = ?, end = ?, type = ? WHERE id = ?");
     $stmt->bindParam(1, $code);
     $stmt->bindParam(2, $start);
     $stmt->bindParam(3, $end);
@@ -480,7 +485,7 @@ public function updatePayroll($id, $code, $start, $end, $type){
 public function deletePayroll($id) {
     try {
         $sql = "DELETE FROM prlist WHERE id = :id";
-        $stmt = $this->database->prepare($sql);
+        $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return true;
@@ -490,7 +495,7 @@ public function deletePayroll($id) {
     }
 }
 public function payslipList($prlistid){
-    $stmt = $this->database->connect()->prepare("SELECT * FROM employee_payslip WHERE prlist_id=?");
+    $stmt = $this->database->getConnection()->prepare("SELECT * FROM employee_payslip WHERE prlist_id=?");
     //if execution fail
     if (!$stmt->execute([$prlistid])) {
         header("Location: ../index.php?error=stmtfail");
