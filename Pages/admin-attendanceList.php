@@ -98,7 +98,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         <table class="table table-striped table-borderless align-middle text-center">
     <thead>
       <tr>
-        <th>ID</th>
         <th>Employee ID</th>
         <th>Name</th>
         <th>Date</th>
@@ -113,7 +112,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         foreach($attlist as $list){
       ?>
       <tr>
-      <td><?php echo $list['id']; ?> </td>
       <td><?php echo $list['employee_id']; ?> </td>
       <td><?php echo $list['Name']; ?> </td>
       <td><?php echo $list['date']; ?> </td>
@@ -141,7 +139,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         <table class="table table-striped table-borderless align-middle text-center mb-2">
     <thead>
       <tr>
-        <th>ID</th>
         <th>Employee ID</th>
         <th>Name</th>
         <th>Remarks</th>
@@ -160,14 +157,21 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        $sql = "SELECT * FROM overTime";
+
+        $page = $_GET['page'];
+
+        if($page == "" || $page="1"){
+          $page1=0;
+        }else{
+          $page1 = ($page*5)-5;
+        }
+        $sql = "SELECT * FROM overTime LIMIT $page1,5";
         $query = $conn->query($sql);
 
         while($row = mysqli_fetch_assoc($query)){
 
       ?>
       <tr>
-      <td><?php echo $row['id']; ?> </td>
       <td><?php echo $row['employee_id']; ?> </td>
       <td><?php echo $row['Name']; ?> </td>
       <td><?php echo $row['remarks']; ?> </td>
@@ -176,19 +180,27 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       <td>
       <td>
       <form method="post" action="../Functions/overtime-accept.php">
-      <input type="hidden" name="acceptid" id="acceptid" value=<?php echo $row['id']; ?>>
-      <input type="submit" name="acceptbtn" id="acceptbtn" class="btn btn-sm btn-primary" value="Accept">
+          <input type="hidden" name="acceptid" id="acceptid" value=<?php echo $row['id']; ?>>
+          <input type="submit" name="acceptbtn" id="acceptbtn" class="btn btn-sm btn-primary" value="Accept">
+      </form>
       <form method="post" action="../Functions/overtime-delete.php">
-      <input type="hidden" name="deleteid" id="deleteid" value=<?php echo $row['id']; ?>>
-      <input type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger"  value="Delete">
+          <input type="hidden" name="deleteid" id="deleteid" value=<?php echo $row['id']; ?>>
+          <input type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger"  value="Delete">
       </form>
-      </form>
-      
       </td>
     </tr>
     <?php
       }
-    ?>
+      $res1 = "SELECT * FROM overTime";
+      $res2 = $conn->query($res1);
+      $count = mysqli_num_rows($res2);
+
+      $a = $count/5;
+      $a = ceil($a);
+      for($b=1;$b<=$a;$b++){
+        ?><a class="page-link" href="../Pages/admin-attendanceList.php?page=<?php echo $b ?>"><?php echo $b. " " ?></a><?php
+      }
+?>
     </tbody>
   </table>
         </div>

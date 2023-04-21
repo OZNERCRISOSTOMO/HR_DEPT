@@ -26,6 +26,17 @@
                 $conn->query($delete);
 
                 header("Location: ../Pages/admin-attendanceList.php?value=accept");
+            }else{
+                $acceptOT = "UPDATE attendance SET num_hr = '".$date['over_time']."' WHERE employee_id = '".$date['employee_id']."' AND date = '".$date['date']."'";
+                $conn->query($acceptOT);
+    
+                $acceptOTT = "UPDATE employee_details SET num_hr = num_hr + '".$date['over_time']."' WHERE employee_id = '".$date['employee_id']."'";
+                $conn->query($acceptOTT);
+    
+                $delete = "DELETE FROM overTime WHERE id = '$id'";
+                $conn->query($delete);
+
+                header("Location: ../Pages/admin-attendanceList.php?value=accept");
             }
         }
     }

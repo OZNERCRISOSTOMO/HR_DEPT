@@ -84,9 +84,15 @@
                                 $int = $hrs + $mins2;
 
                             }
+                            $sqlov = "SELECT * FROM overTime";
+                            $ov = $conn->query($sqlov);
+                            $orow = $ov->fetch_assoc();
+                            if($orow['date'] == $date_now && $orow['remarks'] == 'Under Time' && $orow['employee_id'] == $id){
                             $overT = "INSERT INTO overTime (employee_id, remarks, date, over_time) VALUES ('$id','Over Time', '$date_now','$int')";
                             $conn->query($overT);
+                            }
                             $time_out = $srow['time_out'];
+                            
                         }
 
                         $time_in = new DateTime($time_in);
