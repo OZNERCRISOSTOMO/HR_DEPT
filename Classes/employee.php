@@ -13,7 +13,7 @@ class Employee{
 
     public function findByEmail($email){
           // prepare the SQL statement using the database property
-        $stmt = $this->database->connect()->prepare("SELECT * FROM employees WHERE email=?");
+        $stmt = $this->database->getConnection()->prepare("SELECT * FROM employees WHERE email=?");
 
          //if execution fail
         if (!$stmt->execute([$email])) {
@@ -31,8 +31,6 @@ class Employee{
             return false;
         }
 
-        //close connection
-        unset($this->database);
     }
 
     public function checkData($resumeAndPictureData, $employeeData){
@@ -78,7 +76,7 @@ class Employee{
             VALUES (?,?,?,?,?,?,?);";
 
          // prepared statement
-        $stmt = $this->database->connect()->prepare($sql);
+        $stmt = $this->database->getConnection()->prepare($sql);
 
         //if execution fail
         if (!$stmt->execute([$employeeData['firstName'],
@@ -95,7 +93,7 @@ class Employee{
         
         // get the ID of the inserted employee record
         // prepare the SQL statement using the database property
-        $stmtEmployeeID = $this->database->connect()->prepare("SELECT id FROM employees WHERE email=?");
+        $stmtEmployeeID = $this->database->getConnection()->prepare("SELECT id FROM employees WHERE email=?");
 
          //if execution fail
         if (!$stmtEmployeeID->execute([$employeeData['email']])) {
@@ -111,7 +109,7 @@ class Employee{
 
     
          // prepared statement
-        $stmt2 = $this->database->connect()->prepare($sql2);
+        $stmt2 = $this->database->getConnection()->prepare($sql2);
 
          //if execution fail
         if (!$stmt2->execute([$resume_name,$resume_path,$picture_path, $employeeData['department'],$this->date,$employeeId])) {
@@ -132,11 +130,11 @@ class Employee{
 
     public function acceptEmployee($employeeData){
         // prepared statement
-         $stmt = $this->database->connect()->prepare("INSERT INTO employees (first_name,last_name, email, gender, address, contact, status)
+         $stmt = $this->database->getConnection()->prepare("INSERT INTO employees (first_name,last_name, email, gender, address, contact, status)
             VALUES (?,?,?,?,?,?,?);");
     }
     public function attendanceList(){
-        $attlist =  $this->database->connect()->query("SELECT * FROM attendance")->fetchAll();
+        $attlist =  $this->database->getConnection()->query("SELECT * FROM attendance")->fetchAll();
         return $attlist;
         exit();
     }
