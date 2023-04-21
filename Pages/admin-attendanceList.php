@@ -158,14 +158,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $page = $_GET['page'];
-
-        if($page == "" || $page="1"){
-          $page1=0;
-        }else{
-          $page1 = ($page*5)-5;
-        }
-        $sql = "SELECT * FROM overTime LIMIT $page1,5";
+        $sql = "SELECT * FROM overTime";
         $query = $conn->query($sql);
 
         while($row = mysqli_fetch_assoc($query)){
@@ -190,15 +183,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       </td>
     </tr>
     <?php
-      }
-      $res1 = "SELECT * FROM overTime";
-      $res2 = $conn->query($res1);
-      $count = mysqli_num_rows($res2);
-
-      $a = $count/5;
-      $a = ceil($a);
-      for($b=1;$b<=$a;$b++){
-        ?><a class="page-link" href="../Pages/admin-attendanceList.php?page=<?php echo $b ?>"><?php echo $b. " " ?></a><?php
       }
 ?>
     </tbody>
