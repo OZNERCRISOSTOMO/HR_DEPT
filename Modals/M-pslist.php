@@ -1,4 +1,3 @@
-
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -40,15 +39,21 @@
                 <input type="email" name="email" placeholder="Email" id="email" class="form-control" required>
                 </div>
 
+                <?php
+                        $prlist = $payslip->payrollDetails($id);
+                        ?>
+                        <?php foreach($prlist as $list): ?>
                 <div class="mb-2">
                 <p>From Date: </p>
-                <input type="date" name="date-from" id="date-from" class="form-control" placeholder="From" required>
+                <input type="date" name="date-from" id="date-from" class="form-control" placeholder="From" value="<?php echo $list['start']; ?>"required>
                 </div> 
 
                 <div class="mb-2">
                 <p>To Date: </p>
-                <input type="date" name="date-to" id="date-to" class="form-control" placeholder="To" required>
+                <input type="date" name="date-to" id="date-to" class="form-control" placeholder="To" value="<?php echo $list['end']; ?>" required>
                 </div>
+
+                        <?php endforeach; ?>
 
 
                 <div class="row mb-3">

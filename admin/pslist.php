@@ -13,7 +13,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     header("Location: ../index.php");
     exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html>
