@@ -107,139 +107,206 @@
         $data = '';
         
         $data = '
-        <style type="text/css">
-        table {
-            width: 100%;
-            background: #eee;
-            padding: 10px;
-            font-size: 13px;
-            font-family: Arial;
-            border-spacing: 0;
-        }
-        th {
-            background-color: #ddd;
-            padding: 4px;
-            width: 100px;
-        }
-        td {
-            padding: 4px;
-            border-bottom: solid thin #ddd;
-        }
-        h1 {
-            text-align: center; 
-            font-family: Century Gothic;
-        }
-        h3 {
-            text-align: center; 
-            font-family: Century Gothic;
-        }
-        caption {
-            text-align: center; 
-            border: 2px solid black;
-        }
-        p {
-            text-align: center;
-            font-size: 18px;
-            border: 1px solid black;
-            float: right;
-            height: 25px;
-            width: 30%;
-        }
+        <style>
+            .column {
+                width: 250px;}
+            .column1 {
+                width: 400px;
+                padding: 5px;
+                border: 1px solid black;
+            }
+            .column2 {
+                width: 150px;
+                padding: 5px;
+                border: 1px solid black;
+            }
+            table {
+                font-size: 12px;
+            }
         </style>
-        <div style = "font-family: Century Gothic;">
-                <center><h1>Company Name</h1></center>
-                <center><h3>Generated Payslip</h3></center>
-        
-        
-                    <table>
-                            <caption>Payroll Details</caption>
-                            <tr>
-                                <th>Payroll Code </th>
-                                <td>'. $paycode .'</td>
-        
-                                <th>Type </th>
-                                <td>'. $paytype .'</td>
-                            </tr>
-        
-                            <tr>
-                                <th>Cut-off Start</th>
-                                <td>'. $date .'</td>
-        
-                                <th>Cut-off End</th>
-                                <td>'. $date1 .'</td>
-                            </tr>
-                    </table>
-        
-                    <table>
-                            <caption>Employee Details</caption>
-                            <tr>
-                                <th>Full Name:</th>
-                                <td>'. $fname .'</td>
-        
-                                <th>Hourly Rate:</th>
-                                <td>' . '₱' . $salary .'</td>
-        
-                                
-                            </tr>
-        
-                            <tr>
-                                <th>Position:</th>
-                                <td>'. $position .'</td>
-        
-                                <th>Branch:</th>
-                                <td>'. $branch. '</td>
-                            </tr>
-        
-        
-                            <tr>
-                                <th>Total hours present:</th>
-                                <td>'. $present .'</td>
-        
-                                <th>Gross pay:</th>
-                                <td>'. $salaryOT .'</td>
-                            </tr>
-        
-                            <tr>
-        
-                            </tr>
-                    </table>
-        
-                    <table>
-                            <caption>Allowances:</caption>
-                            <tr>
-                                <th>SSS: </th>
-                                <td>' . '₱' . $sss_result .'</td>
-        
-                                <th>Pag-ibig: </th>
-                                <td>' . '₱' . $love_result .'</td>
-        
-                                <th>Philhealth: </th>
-                                <td>' . '₱' . $phil_result .'</td>
-        
-                                <th>Withholding Tax: </th>
-                                <td>' . '₱' . $tax .'</td>
-                            </tr>
-                    </table>
-        
-                    <table>
-                            <caption>Deductions:</caption>
-                            <tr>
-                                <th>SSS: </th>
-                                <td>' . '₱' . $sss_result .'</td>
-        
-                                <th>Pag-ibig: </th>
-                                <td>' . '₱' . $love_result .'</td>
-        
-                                <th>Philhealth: </th>
-                                <td>' . '₱' . $phil_result .'</td>
-        
-                                <th>Withholding Tax: </th>
-                                <td>' . '₱' . $tax .'</td>
-                            </tr>
-                    </table>
-        
-                    <p><b>Net Pay:</b> ' . '₱' . $networth . '</p>
-        </div>';
+
+        <div class="container" style="font-family: Bahnschrift;">
+            <h1 style="margin-bottom: -20px; text-align: center;">3G CLOTHING LINE</h1>
+            <p style="margin-bottom: 20; text-align: center;">Brgy. San Bartolome, Novaliches, Quezon City</p>
+            <h2 style="margin-top: 0; text-align: center;">Generated Payslip</h2>
+
+            <!---Table for Employee and Payroll Information-->
+            <table style="display: flex; justify-content: center; margin-bottom: 30; margin-top: 20px;">
+                <tbody>
+                    <tr>
+                        <td class="column" style="font-weight: bold;">Employee Name: </td>
+                        <td class="column">'. $fname .'</td>
+                        <td class="column" style="font-weight: bold;">Payroll Code: </td>
+                        <td class="column">No data</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="column" style="font-weight: bold;">Department: </td>
+                        <td class="column">No data</td>
+                        <td class="column" style="font-weight: bold;">Payroll Type: </td>
+                        <td class="column">No data</td>
+                    </tr>
+
+                    <tr>
+                        <td class="column" style="font-weight: bold;">Position: </td>
+                        <td class="column">'. $position .'</td>
+                        <td class="column" style="font-weight: bold;">From Date: </td>
+                        <td class="column">'. $date .'</td>
+                    </tr>
+
+                    <tr>
+                        <td class="column" style="font-weight: bold;">Branch: </td>
+                        <td class="column">'. $branch. '</td>
+                        <td class="column" style="font-weight: bold;">To Date: </td>
+                        <td class="column">'. $date1 .'</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <!---Table for Earnings-->
+            <table style="border-collapse: collapse; width: 80%; margin: auto; margin-bottom: 20;">
+                <tr style="text-align:center; font-weight: bold; color: white; background-color: #0d6efd;">
+                    <td class="column1" style="text-align: center; color: white;"">EARNINGS</td>
+                    <td class="column2" style="text-align: center; color: white;"">AMOUNT</td> 
+                </tr>
+
+                <tr>
+                    <td class="column1">Basic Salary</td>
+                    <td class="column2" style="text-align: right;">'. $salary .'</td>
+                </tr>
+
+                <tr>
+                    <td class="column1">Worked Hours</td>
+                    <td class="column2" style="text-align: right;">'. $present .'</td>
+                </tr>
+
+                <tr>
+                    <td class="column1">Hourly Rate</td>
+                    <td class="column2" style="text-align: right;">' . '₱' . $salary .'</td>
+                </tr>
+
+                <tr>
+                    <td class="column1">Overtime</td>
+                    <td class="column2" style="text-align: right;">No data</td>
+                </tr>
+
+                <tr>
+                    <td class="column1" style="text-align: right; font-weight: bolder;">TOTAL EARNINGS</td>
+                    <td class="column2" style="text-align: right; font-weight: bolder;">'. $salaryOT .'</td>
+                </tr>
+            </table>
+
+
+            <!---Table for Allowances-->
+            <table style="border-collapse: collapse; width: 80%; margin: auto; margin-bottom: 20;">
+                <tr style="text-align:center; font-weight: bold; color: white; background-color: #0d6efd;">
+                    <td class="column1" style="text-align: center; color: white;"">ALLOWANCES</td>
+                    <td class="column2" style="text-align: center; color: white;"">AMOUNT</td> 
+                </tr>
+
+                <tr>
+                    <td class="column1">Food</td>
+                    <td class="column2" style="text-align: right;">No data</td>
+                </tr>
+
+                <tr>
+                    <td class="column1">Transportation</td>
+                    <td class="column2" style="text-align: right;">No data</td>
+                </tr>
+
+                <tr>
+                    <td class="column1" style="text-align: right; font-weight: bolder;">TOTAL ALLOWANCES</td>
+                    <td class="column2" style="text-align: right; font-weight: bolder;">No data</td>
+                </tr>
+            </table>
+
+
+            <!---Table for Benefits-->
+            <table style="border-collapse: collapse; width: 80%; margin: auto; margin-bottom: 20;">
+                <tr style="text-align:center; font-weight: bold; color: white; background-color: #0d6efd;">
+                    <td class="column1" style="text-align: center; color: white;">BENEFITS</td>
+                    <td class="column2" style="text-align: center; color: white;">AMOUNT</td> 
+                </tr>
+
+                <tr>
+                    <td class="column1">Vacation Leave</td>
+                    <td class="column2" style="text-align: right;">No data</td>
+                </tr>
+
+                <tr>
+                    <td class="column1">Health Insurance</td>
+                    <td class="column2" style="text-align: right;">No data</td>
+                </tr>
+
+                <tr>
+                    <td class="column1">Christmas Bonus</td>
+                    <td class="column2" style="text-align: right;">No data</td>
+                </tr>
+
+                <tr>
+                    <td class="column1" style="text-align: right; font-weight: bolder;">TOTAL BENEFITS</td>
+                    <td class="column2" style="text-align: right; font-weight: bolder;">No data</td>
+                </tr>
+            </table>
+
+            <!---Table for Deductions-->
+            <table style="border-collapse: collapse; width: 80%; margin: auto; margin-bottom: 20;">
+                <tr style="text-align:center; font-weight: bold; color: white; background-color: #0d6efd;">
+                    <td class="column1" style="text-align: center; color: white;">DEDUCTIONS</td>
+                    <td class="column2" style="text-align: center; color: white;">AMOUNT</td> 
+                </tr>
+
+                <tr>
+                    <td class="column1">SSS</td>
+                    <td class="column2" style="text-align: right;">' . '₱' . $sss_result .'</td>
+                </tr>
+
+                <tr>
+                    <td class="column1">Pag-ibig</td>
+                    <td class="column2" style="text-align: right;">' . '₱' . $love_result .'</td>
+                </tr>
+
+                <tr>
+                    <td class="column1">Philhealth</td>
+                    <td class="column2" style="text-align: right;">' . '₱' . $phil_result .'</td>
+                </tr>
+
+                <tr>
+                    <td class="column1">Withholding Tax</td>
+                    <td class="column2" style="text-align: right;">' . '₱' . $tax .'</td>
+                </tr>
+
+                <tr>
+                    <td class="column1" style="text-align: right; font-weight: bolder;">TOTAL DEDUCTIONS</td>
+                    <td class="column2" style="text-align: right; font-weight: bolder;">No data</td>
+                </tr>
+            </table>
+
+            <!---Table for Overall Total-->
+            <table style="border-collapse: collapse; width: 80%; margin: auto; margin-bottom: 20;">
+                <tr style="text-align:center; font-weight: bold; background-color: #0d6efd;">
+                    <td class="column1" style="text-align: center; color: white;">OVERALL TOTAL</td>
+                    <td class="column2" style="text-align: center; color: white;">AMOUNT</td> 
+                </tr>
+
+                <tr>
+                    <td class="column1">Gross Pay</td>
+                    <td class="column2" style="text-align: right;">No data</td>
+                </tr>
+
+                <tr>
+                    <td class="column1" style="text-align: right; font-weight: bolder; color: red;">NET PAY</td>
+                    <td class="column2" style="text-align: right; font-weight: bolder; color: red;">' . '₱' . $networth . '</td>
+                </tr>
+            </table>
+
+            
+            
+          
+            
+        </div>
+        ';
 
         $mdpf->WriteHTML($data);
         $mdpf->Output($fname . '_' . $date . ' - payslip.pdf', 'D');
