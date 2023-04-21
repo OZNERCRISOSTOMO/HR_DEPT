@@ -84,6 +84,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       <tr>
         <th>ID</th>
         <th>Employee ID</th>
+        <th>Name</th>
         <th>Date</th>
         <th>Time IN</th>
         <th>Time OUT</th>
@@ -98,6 +99,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       <tr>
       <td><?php echo $list['id']; ?> </td>
       <td><?php echo $list['employee_id']; ?> </td>
+      <td><?php echo $list['Name']; ?> </td>
       <td><?php echo $list['date']; ?> </td>
       <td><?php            
            $time = DateTime::createFromFormat('H:i:s', $list['time_in']);
@@ -120,11 +122,18 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
     </div>
 <div >
+<div class="col-8 d-flex pr-3">
+  <h4 class="fw-bolder">Attendance</h4>
+  <button class="btn border-0 border shadow-none border-start-0 mb-1">
+    <h4><i class="fa-solid fa-clock-rotate-left"></i></h4>
+  </button>
+                  </div>
 <table class="table table-striped table-borderless align-middle text-center mb-2">
     <thead>
       <tr>
         <th>ID</th>
         <th>Employee ID</th>
+        <th>Name</th>
         <th>Remarks</th>
         <th>Date</th>
         <th>Over Time</th>
@@ -150,6 +159,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       <tr>
       <td><?php echo $row['id']; ?> </td>
       <td><?php echo $row['employee_id']; ?> </td>
+      <td><?php echo $row['Name']; ?> </td>
       <td><?php echo $row['remarks']; ?> </td>
       <td><?php echo $row['date']; ?> </td>
       <td><?php echo $row['over_time']; ?> </td>

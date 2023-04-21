@@ -98,7 +98,7 @@
                         $int = $hrs + $mins2;
                     
                     if($srow['time_out'] < $urow['time_out']){
-                        if($srow['num_hr'] == 0){
+                        if($urow['num_hr'] == 0){
                         $sql = "UPDATE attendance SET num_hr = '$int' WHERE id = '".$timeout['uid']."'";
 						$conn->query($sql);
 
@@ -106,7 +106,8 @@
                         $conn->query($sql123);
                         }
                     }else if($srow['time_out'] > $urow['time_out']){
-                        $undertime = "INSERT INTO overTime (employee_id, remarks, date, over_time) VALUES ('$id','Under Time', '$date_now','$int')";
+                        $name = "".$row['first_name']." ".$row['last_name']."";
+                        $undertime = "INSERT INTO overTime (employee_id, name, remarks, date, over_time) VALUES ('$id', '$name', 'Under Time', '$date_now','$int')";
                         $conn->query($undertime);
                     }
                 }
@@ -123,8 +124,8 @@
 					$squery = $conn->query($sql);
 					$srow = $squery->fetch_assoc();
                     $logstatus = ($srow['time_in'] > $lognow)? 'ONTIME':'LATE';
-                    
-                    $sql = "INSERT INTO attendance (employee_id, date, time_in, status) VALUES ('$id', '$date_now', '$lognow', '$logstatus')";
+                    $name = "".$row['first_name']." ".$row['last_name']."";
+                    $sql = "INSERT INTO attendance (employee_id, name, date, time_in, status) VALUES ('$id', '$name', '$date_now', '$lognow', '$logstatus')";
 					if($conn->query($sql)){
                         
                         header("Location: ../Pages/employee-attendance.php?value=Timein&picture=".$row2['picture_path']."&ID=".$id."&name=".$row['first_name']." ".$row['last_name']."&post=".$row2['position']."&Timein=".$lognow."&status=".$logstatus."&dep=".$row2['department']."");
