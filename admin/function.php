@@ -5,9 +5,12 @@
  
  $database = new Database();
  $admin = new Admin($database);
+ $payslip = new Payroll($database);
  $employee = $admin->getAllEmployeePayslip();
 
- $admin->getEmployeePayslipTable($employee[0]["id"]);
+
+//  $payslip->payrollDetails($id);
+
  $employeepayslip = $admin->getEmployeePayslipTable($employee[0]["id"]);
 
  foreach ($employee as $emp) {
@@ -16,7 +19,14 @@
       $employeepayslip = $admin->getEmployeePayslipTable($value);
   
       if($employeepayslip){
-  
+        $prlist = $payslip->payrollDetails($employee[0]["id"]);
+        $paycode = '';
+        $paytype = '';
+        foreach($prlist as $list):
+            $paycode = $list['code'];
+            $paytype = $list['type'];
+         endforeach;
+
         $fname = $employeepayslip['employee_name'];
         $position = $employeepayslip['position'];
         $branch = $employeepayslip['branch'];
@@ -25,7 +35,7 @@
         $date1 = $employeepayslip['to_date'];
         $present = $employeepayslip['number_present'];
         $salary = $employeepayslip['rate'];
-        
+
         $sss = $employeepayslip['sss'];
         $philhealth = $employeepayslip['philhealth'];
         $pagibig = $employeepayslip['pagibig'];
@@ -145,18 +155,18 @@
                             <caption>Payroll Details</caption>
                             <tr>
                                 <th>Payroll Code </th>
-                                <td>No Data Yet</td>
+                                <td>'. $paycode .'</td>
         
                                 <th>Type </th>
-                                <td>No data Yet</td>
+                                <td>'. $paytype .'</td>
                             </tr>
         
                             <tr>
                                 <th>Cut-off Start</th>
-                                <td>No data Yet</td>
+                                <td>'. $date .'</td>
         
                                 <th>Cut-off End</th>
-                                <td>No data Yet</td>
+                                <td>'. $date1 .'</td>
                             </tr>
                     </table>
         
@@ -230,12 +240,12 @@
         
                     <p><b>Net Pay:</b> ' . '₱' . $networth . '</p>
         </div>';
+
+        $mdpf->WriteHTML($data);
+        $mdpf->Output($fname . '_' . $date . ' - payslip.pdf', 'D');
   
       }
     }
    
   }
-
-$mdpf->WriteHTML($data);
-$mdpf->Output($fname . '_' . $date . ' - payslip.pdf', 'D');
 ?>

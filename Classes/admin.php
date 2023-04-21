@@ -87,6 +87,29 @@ class Admin {
        
     }
 
+    // public function getEmployeePayslipDetails($id){
+
+    //     $stmt = $this->database->getConnection()->prepare("SELECT * FROM prlist
+    //                                                  WHERE id=?");
+
+    //     if (!$stmt->execute([$id])) {
+    //         header("Location: ../index.php?error=stmtfail");
+    //         exit();
+    //     }
+
+    //     //fetch the result
+    //     $result = $stmt->fetchAll();
+
+    //     //if has result return it, else return false
+    //     if ($result) {
+    //         return $result;
+    //     } else {
+    //         $result = false;
+    //         return $result;
+    //     }
+
+    // }
+
     public function insertEmployeePayslip($employee, $net, $id){
         // prepare insert statement for employee table
         $sql = "INSERT INTO employee_payslip (date_added,employee, net, file_path, prlist_id)
