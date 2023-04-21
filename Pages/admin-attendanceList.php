@@ -56,14 +56,11 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
 
 
-<div class="container ">
-  <div class="row">
-
-  <div class="col-8 d-flex pr-3">
-  <h4 class="fw-bolder">Attendance</h4>
-  <button class="btn border-0 border shadow-none border-start-0 mb-1">
-    <h4><i class="fa-solid fa-clock-rotate-left"></i></h4>
-  </button>
+  <div div class="container ">
+    <div class="row">
+      <h4 class="fw-bolder">Attendance</h4>
+      <div class="col-8 d-flex pr-3">
+  
                   </div>
 
 
@@ -78,8 +75,27 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
                   </div>
                   </div>
-<!----Table Start--->
-  <table class="table table-striped table-borderless align-middle text-center">
+
+                  <div class="container mt-4">
+
+
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="#tab1" data-bs-toggle="tab">History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#tab2" data-bs-toggle="tab">Over/Undertime</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#tab3" data-bs-toggle="tab">Recent</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#tab4" data-bs-toggle="tab">Absents</a>
+        </li>
+      </ul>
+      <div class="tab-content mt-3">
+        <div class="tab-pane fade show active" id="tab1">
+        <table class="table table-striped table-borderless align-middle text-center">
     <thead>
       <tr>
         <th>ID</th>
@@ -119,10 +135,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       }
     ?>
     </tbody>
-
-    </div>
-<div >
-<table class="table table-striped table-borderless align-middle text-center mb-2">
+    </table>  
+        </div>
+        <div class="tab-pane fade" id="tab2">
+        <table class="table table-striped table-borderless align-middle text-center mb-2">
     <thead>
       <tr>
         <th>ID</th>
@@ -130,7 +146,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         <th>Name</th>
         <th>Remarks</th>
         <th>Date</th>
-        <th>Over Time</th>
+        <th>Overtime</th>
       </tr>
       </thead>
       <tbody>
@@ -158,24 +174,58 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       <td><?php echo $row['date']; ?> </td>
       <td><?php echo $row['over_time']; ?> </td>
       <td>
-      <td><form method="post" action="../Functions/overtime-accept.php">
+      <td>
+      <form method="post" action="../Functions/overtime-accept.php">
       <input type="hidden" name="acceptid" id="acceptid" value=<?php echo $row['id']; ?>>
       <input type="submit" name="acceptbtn" id="acceptbtn" class="btn btn-sm btn-primary" value="Accept">
-      </form>
       <form method="post" action="../Functions/overtime-delete.php">
       <input type="hidden" name="deleteid" id="deleteid" value=<?php echo $row['id']; ?>>
-      <input type="submit" name="deletebtn" id="deletebtn" value="Delete">
+      <input type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger"  value="Delete">
       </form>
-    </td>
+      </form>
+      
+      </td>
     </tr>
     <?php
       }
     ?>
     </tbody>
   </table>
-</div>
-  </table>
-<!----Table End--->
+        </div>
+        <div class="tab-pane fade" id="tab3">
+          <h3>Recent logins</h3>
+        </div>
+        <div class="tab-pane fade" id="tab4">
+          <h3>Absent</h3>
+        </div>
+      </div>
+      <div class="mt-4">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                >Previous</a
+              >
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+</ul>
+
+    </div>
 
 </body>
 </html>
