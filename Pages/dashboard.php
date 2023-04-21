@@ -224,7 +224,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                          ?>
                      <div class="card bg-white rounded ms-2 my-2 pt-3 employee-container" style="width: 16rem;" data-bs-toggle="modal"
                          id="view" data-bs-target="#viewmodal" data-employee-id="<?php echo $employee["id"]?>">
-                        <img class="rounded-circle mx-auto" src="../Uploads/<?php echo $employee["picture_path"] ?>" style="object-fit: cover;border-radius: 50%;height: 140px; width: 140px;" alt="Employee Pic">    
+                        <img class="rounded-circle mx-auto" src="../Uploads/<?php echo $employee["picture_path"] ?>" style="object-fit: cover;border-radius: 50%;height: 140px; width: 140px;" alt="">    
                         <div class="card-body ps-1">
                             <h6 class="card-title text-center col-11 m-auto" name="EmployeeName"><?php echo $employee["first_name"] . " " .$employee["last_name"];  ?></h6>
                             <p class="card-text text-center" style="opacity: 0.7;"><?php echo ucfirst($employee["position"]) ?></p>
