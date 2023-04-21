@@ -214,7 +214,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
                         
                         <!------------ Employee List ------------ -->
-                        <div class="container-fluid mb-2 ">
+                        <div class="container-fluid mb-2  ">
                         <div class="row employee-list-wrapper">
                         <?php
                     $employees = $admin->getEmployees();
@@ -222,15 +222,52 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     
                     foreach($employees as $employee){
                          ?>
-                    <div class="card mt-2 me-2" style="width: 16rem;">
-                       <div class="card-body">
-                            <?php
-                          echo '<img src="../Uploads/' . $employee['picture_path'] . '" alt="avatar" style="object-fit: cover;border-radius: 50%;height: 150px; width: 150px;" class="mb-2 mx-auto d-block">';
-                          echo '<h5 class="card-title text-center">'. $employee["first_name"]." " . $employee["last_name"] . '  </h5>';           
-                          echo '<p class="">'. $employee["email"]. '  </p>';            
-                          echo '<p class="">'. $employee["contact"]. '  </p>';            
-                          echo '<p class=""> Date hired : '. $admin->formatDate($employee["date_applied"]) . '</p>';
-                        ?>
+                     <div class="card bg-white rounded ms-2 my-2 pt-3 employee-container" style="width: 16rem;" data-bs-toggle="modal"
+                         id="view" data-bs-target="#viewmodal" data-employee-id="<?php echo $employee["id"]?>">
+                        <img class="rounded-circle mx-auto" src="../Uploads/<?php echo $employee["picture_path"] ?>" style="object-fit: cover;border-radius: 50%;height: 140px; width: 140px;" alt="Employee Pic">    
+                        <div class="card-body ps-1">
+                            <h6 class="card-title text-center col-11 m-auto" name="EmployeeName"><?php echo $employee["first_name"] . " " .$employee["last_name"];  ?></h6>
+                            <p class="card-text text-center" style="opacity: 0.7;"><?php echo ucfirst($employee["position"]) ?></p>
+                            
+                            <div id="inCard"  style=" background-color: #f2f2f2;"; class="col-12 rounded m-auto align-content-center ms-2 ">
+                            <table class="table table-borderless p-0 m-0 pb-0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th style="font-size: 14px;">Department:</th>
+                                        <th style="font-size: 14px;">Date Hired: </th>
+                                       
+                                    </tr>
+                                    
+
+                                </thead> 
+                               
+                                <tbody>
+                                <tr class="text-center ">
+                                        <td name="Department" style="font-size: 13.5px;"><?php echo ucfirst($employee["department"]) ?></td>
+                                        <td name="DateHired" style="font-size: 13.5px;"><?php echo  $admin->formatDate($employee["date_hired"] )?></td>
+                                    </tr>   
+                                </tbody>
+
+                               
+                            </table>
+                            
+                                <div class="col-12 mt-2">
+
+                                <div class="d-flex ms-3">
+                                <i class="fa-solid fa-star text-warning pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px;" name="Email">P 215pr/hr</p>
+                                </div>
+
+                                <div class="d-flex ms-3">
+                                <i class="fa-solid fa-envelope text-primary text pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" name="Email"><?php echo $employee["email"] ?></p>
+                                </div>
+
+                            <div class="d-flex ms-3">
+                            <i class="fa-solid fa-phone text-success pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px;" name="Email"><?php echo $employee["contact"] ?></p>
+                            </div>
+                        
+                             </div>
+                           
+                        </div>
                         </div>
                     </div>
                         <?php
