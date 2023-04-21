@@ -242,9 +242,15 @@ class Admin {
     }
 
     public function searchEmployees($name){
-        $data =  $this->database->getConnection()->query("SELECT employees.*,employee_details.picture_path, employee_details.department,employee_details.date_applied FROM employees 
-                                                    JOIN employee_details ON employees.id = employee_details.employee_id 
+        $data =  $this->database->getConnection()->query("SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
+                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position FROM employees 
+                                                        JOIN employee_details ON employees.id = employee_details.employee_id
                                                     WHERE (first_name LIKE '{$name}%' OR last_name LIKE '{$name}%') AND status = '1' ")->fetchAll();
+
+                                                    // $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
+                                                    //     employee_details.date_applied,employee_details.date_hired, employee_details.position FROM employees 
+                                                    //     JOIN employee_details ON employees.id = employee_details.employee_id
+                                                    //     WHERE employees.status = '1' AND employees.id = $id";
         return $data;
 
     
@@ -267,7 +273,7 @@ class Admin {
     }
 
     public function formatDate($date){
-         $formatted_date = date('M d, Y', strtotime($date));
+         $formatted_date = date('m/d/Y', strtotime($date));
 
          return $formatted_date;
     }

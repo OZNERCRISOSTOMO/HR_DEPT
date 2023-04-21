@@ -98,7 +98,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                         <span class="input-group-text bg-white border border-end-0 border-0">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
-                        <input type="text" class="form-control border-0 border shadow-none border-start-0" id="Search" autocomplete="off">
+                        <input type="text" class="form-control border-0 border shadow-none border-start-0" id="search" autocomplete="off">
                     </div>
                 </div>
         </div>
@@ -107,7 +107,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
  
     <!-----Employee List----->
     <div class="container-fluid ms-3 p-0 mt-3 employeeList-container align-content-center m-auto d-block ">
-    <div class="row ">
+    <div class="row employee-list-wrapper">
 
       <?php 
         $employees = $admin->getEmployees();

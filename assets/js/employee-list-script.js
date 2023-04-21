@@ -39,3 +39,36 @@ $(document).ready(function () {
     });
   });
 });
+
+// SEARCH EMPLOYEE
+$(document).ready(function () {
+  $("#search").keyup(function () {
+    var input = $(this).val();
+
+    if (input == "") {
+      $.ajax({
+        url: "../Functions/admin-employeeList-livesearch.php",
+        type: "POST",
+        data: {
+          search: "all",
+        },
+
+        success: function (data) {
+          $(".employee-list-wrapper").html(data);
+        },
+      });
+    } else {
+      $.ajax({
+        url: "../Functions/admin-employeeList-livesearch.php",
+        type: "POST",
+        data: {
+          search: input,
+        },
+
+        success: function (data) {
+          $(".employee-list-wrapper").html(data);
+        },
+      });
+    }
+  });
+});
