@@ -20,6 +20,9 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/53a2b7f096.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+ <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 </head>
 
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
@@ -63,39 +66,31 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   
                   </div>
 
-
-                  <div class="col-4">
-   <div class="col-sm input-group">
-                        <span class="input-group-text bg-white border border-end-0 border-0">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </span>
-                        <input type="text" class="form-control border-0 border shadow-none border-start-0" id="Search" autocomplete="off">
-                    </div>
-                  </div>
-
                   </div>
                   </div>
 
-                  <div class="container mt-4">
+                  <div class="container mt-2">
+                    <ul class="nav nav-tabs">
+                      <li class="nav-item">
+                        <a class="nav-link text-dark active" href="#tab1" data-bs-toggle="tab">History</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-dark" href="#tab2" data-bs-toggle="tab">Over/Undertime</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-dark" href="#tab3" data-bs-toggle="tab">Recent</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-dark" href="#tab4" data-bs-toggle="tab">Absents</a>
+                      </li>
+                    </ul>
 
+ <!------------ Table 1 History------------ -->
 
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" href="#tab1" data-bs-toggle="tab">History</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#tab2" data-bs-toggle="tab">Over/Undertime</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#tab3" data-bs-toggle="tab">Recent</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#tab4" data-bs-toggle="tab">Absents</a>
-        </li>
-      </ul>
-      <div class="tab-content mt-3">
+      <div class="tab-content mt-2 mb-2">
         <div class="tab-pane fade show active" id="tab1">
-        <table class="table table-striped table-borderless align-middle text-center">
+
+        <table id="history" class="table table-striped table-borderless align-middle text-center">
     <thead>
       <tr>
         <th>Employee ID</th>
@@ -135,8 +130,11 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     </tbody>
     </table>  
         </div>
+
+
+         <!------------ Table 2 Overtime / Undertime------------ -->
         <div class="tab-pane fade" id="tab2">
-        <table class="table table-striped table-borderless align-middle text-center mb-2">
+        <table id="overtime" class="table table-striped table-borderless align-middle text-center mb-2">
     <thead>
       <tr>
         <th>Employee ID</th>
@@ -144,6 +142,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         <th>Remarks</th>
         <th>Date</th>
         <th>Overtime</th>
+        <th>Action</th>
       </tr>
       </thead>
       <tbody>
@@ -166,12 +165,11 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       ?>
       <tr>
       <td><?php echo $row['employee_id']; ?> </td>
-      <td><?php echo $row['Name']; ?> </td>
+      <td ><?php echo $row['Name']; ?> </td>
       <td><?php echo $row['remarks']; ?> </td>
       <td><?php echo $row['date']; ?> </td>
       <td><?php echo $row['over_time']; ?> </td>
-      <td>
-      <td>
+      <td class="d-flex">
       <form method="post" action="../Functions/overtime-accept.php">
           <input type="hidden" name="acceptid" id="acceptid" value=<?php echo $row['id']; ?>>
           <input type="submit" name="acceptbtn" id="acceptbtn" class="btn btn-sm btn-primary" value="Accept">
@@ -188,41 +186,105 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     </tbody>
   </table>
         </div>
+ <!------------ Table 2 End ------------ -->
+
+ <!------------ Table 3 Recents------------ -->
         <div class="tab-pane fade" id="tab3">
-          <h3>Recent logins</h3>
+        <table id="recents" class="table table-striped">
+			<thead>
+				<tr>
+					
+			     <th>Employee ID</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+		      	<th>Date</th>
+            <th>Time In</th>
+            <th>Time Out</th>
+            <th>Status</th>
+        
+          
+				</tr>
+			</thead>
+			<tbody>
+			<?php
+    // establish a connection to the MySQL database
+    $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
+
+    // check if connection was successful
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    
+
+    // execute a SELECT statement to retrieve data from the table
+    $timezone = 'Asia/Manila';
+	date_default_timezone_set($timezone);
+    $date_now = date('Y-m-d');
+    $sql = "SELECT employees.first_name, employees.last_name, attendance.*
+    FROM employees
+    JOIN employee_details ON employees.id = employee_details.employee_id
+    JOIN attendance ON employees.id = attendance.employee_id
+    WHERE employee_details.department =  employee_details.department AND attendance.date = '$date_now'";
+    $result = mysqli_query($conn, $sql);
+
+    // check if SELECT statement was successful
+    if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        while ($row = mysqli_fetch_assoc($result)) {    
+            $timeIn = date('h:i A', strtotime($row["time_in"]));
+            $timeOut = date('h:i A', strtotime($row["time_out"]));
+
+            echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["date"] . "</td><td>" . $timeIn . "</td><td>" . $timeOut . "</td><td>" . $row["status"] . "</td></tr>";
+        }
+    } else {
+        echo "";
+    }
+
+    // close the database connection
+    mysqli_close($conn);
+?>
+
+			</tbody>
+		</table>
         </div>
+ <!------------ Table 3 End ------------ -->
+
+  <!------------ Table 4 Overtime / Undertime------------ -->
         <div class="tab-pane fade" id="tab4">
-          <h3>Absent</h3>
+
+      
+
+        
+
         </div>
+ <!------------ Table 3 End ------------ -->
+
+
       </div>
-      <div class="mt-4">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
-                >Previous</a
-              >
-            </li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      
     </div>
 </ul>
 
     </div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script  src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script>
+ $(document).ready(function(){
+    $('#history').DataTable();
+  });
 
+  $(document).ready(function(){
+    $('#overtime').DataTable();
+  });
+
+  $(document).ready(function(){
+    $('#recents').DataTable();
+  });
+  
+  
+  
+  </script>
 </body>
 </html>
 
@@ -266,4 +328,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     window.history.back();
    },4000);
   }
+
+
+ 
 </script>
