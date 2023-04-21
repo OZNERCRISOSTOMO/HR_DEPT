@@ -122,12 +122,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
     </div>
 <div >
-<div class="col-8 d-flex pr-3">
-  <h4 class="fw-bolder">Attendance</h4>
-  <button class="btn border-0 border shadow-none border-start-0 mb-1">
-    <h4><i class="fa-solid fa-clock-rotate-left"></i></h4>
-  </button>
-                  </div>
 <table class="table table-striped table-borderless align-middle text-center mb-2">
     <thead>
       <tr>

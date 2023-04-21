@@ -15,16 +15,18 @@
         $date = $queryko->fetch_assoc();
     
         if (isset($_POST['acceptbtn'])) {
-          $acceptOT = "UPDATE attendance SET over_time = '".$date['over_time']."' WHERE employee_id = '".$date['employee_id']."' AND date = '".$date['date']."'";
-          $conn->query($acceptOT);
+            if($date['remarks'] == 'Over Time'){
+                $acceptOT = "UPDATE attendance SET over_time = '".$date['over_time']."' WHERE employee_id = '".$date['employee_id']."' AND date = '".$date['date']."'";
+                $conn->query($acceptOT);
     
-          $acceptOTT = "UPDATE employee_details SET over_time = over_time + '".$date['over_time']."' WHERE employee_id = '".$date['employee_id']."'";
-          $conn->query($acceptOTT);
+                $acceptOTT = "UPDATE employee_details SET over_time = over_time + '".$date['over_time']."' WHERE employee_id = '".$date['employee_id']."'";
+                $conn->query($acceptOTT);
     
-          $delete = "DELETE FROM overTime WHERE id = '$id'";
-          $conn->query($delete);
+                $delete = "DELETE FROM overTime WHERE id = '$id'";
+                $conn->query($delete);
 
-          header("Location: ../Pages/admin-attendanceList.php?value=accept");
+                header("Location: ../Pages/admin-attendanceList.php?value=accept");
+            }
         }
     }
 ?>
