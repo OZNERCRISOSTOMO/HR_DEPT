@@ -8,6 +8,7 @@
  $database = new Database();
  $admin = new Admin($database);
  $payslip = new Payroll($database);
+
  $employee = $admin->getAllEmployeePayslip($prlistId);
 
 //  $payslip->payrollDetails($id);
@@ -27,7 +28,7 @@
   
       if($employeepayslip){
 
-        $prlist = $payslip->payrollDetails($employee[0]["id"]);
+        $prlist = $payslip->payrollDetails($prlistId);
         $paycode = '';
         $paytype = '';
 
@@ -42,32 +43,17 @@
         $department = $employeepayslip['department'];
         $date = $employeepayslip['from_date'];
         $date1 = $employeepayslip['to_date'];
-        $num_hr = $employeeDetails[0]['num_hr']; //* employee _details
+        $num_hr = $employeeDetails[0]['num_hr'];
 
-        $overtime = $employeeDetails[0]['over_time']; //* employee_details
-        $ratePerHour = $employeeDetails[0]['rate_per_hour']; //*  employee_details
+        $overtime = $employeeDetails[0]['over_time'];
+        $ratePerHour = $employeeDetails[0]['rate_per_hour']; 
 
-        $sss = $employeepayslip['sss']; //*
-        $philhealth = $employeepayslip['philhealth']; //*
-        $pagibig = $employeepayslip['pagibig']; //*
+        $sss = $employeepayslip['sss']; 
+        $philhealth = $employeepayslip['philhealth']; 
+        $pagibig = $employeepayslip['pagibig']; 
 
         $totalearn = ($ratePerHour * $num_hr) + $overtime; //salary rate * number of hours completed
-
-    //     echo "</br>";
-    //     echo "rate per hour". $ratePerHour;
-    //     echo "</br>";
-    //     echo "overtime". $overtime;
-    //    echo "</br>";
-    //     echo "num hr". $num_hr;
-    //     echo "</br>";
-    //     echo "sss". $sss;
-    //     echo "</br>";
-    //     echo "phil" . $philhealth;
-    //     echo "</br>";
-    //     echo "pagibig". $pagibig;
-    //     echo "</br>";
-  
-
+        // $grosspay = $totalearn + $totalallowance; -> (saka na'to pag okay na yung sa allowance)
 
         if ($sss == true) {
             $num1 = $totalearn;       
@@ -315,7 +301,7 @@
 
                 <tr>
                     <td class="column1">Gross Pay</td>
-                    <td class="column2" style="text-align: right;">No data</td>
+                    <td class="column2" style="text-align: right;"> $grosspay </td>
                 </tr>
 
                 <tr>

@@ -178,7 +178,7 @@ class Admin {
 
     public function insertEmployeePayslipForm($fname, $position, $branch, $department,  $date, $date1, $present, $overtime, $salary, $sssChecked,$pagibigChecked, $philhealthChecked, $employeeId) {
 
-        $sql = "INSERT INTO employee_payslip_form (employee_name, position, branch, department, from_date, to_date, number_present, number_overtime, rate, sss, pagibig, philhealth,employee_id)
+        $sql = "INSERT INTO employee_payslip_form (employee_name, position, branch, department, from_date, to_date, number_present, number_overtime, rate, sss, pagibig, philhealth, employee_id)
         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
      // prepared statement
