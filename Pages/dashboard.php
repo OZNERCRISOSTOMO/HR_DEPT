@@ -45,11 +45,13 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     
     <!-- SWEET ALERT -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- BOOTSTRAP 5 -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
     <!-- Select2 CSS --> 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
     <!-- jQuery --> 
@@ -224,7 +226,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                         
                         <!------------ Employee List ------------ -->
                         <div class="container-fluid mb-2  ">
-                            
+
                         <div class="row employee-list-wrapper">
                         <?php
                     $employees = $admin->getEmployees();

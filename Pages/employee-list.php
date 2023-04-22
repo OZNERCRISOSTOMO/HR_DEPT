@@ -22,12 +22,16 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+  <!-- SWEET ALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="https://kit.fontawesome.com/308043b825.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- jQuery --> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
       <!-- CSS -->
     <link rel="stylesheet" href="../assets/css/index-style.css">
+     
 <style>
     container-fluid{
         overflow: hidden;
@@ -311,5 +315,28 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     </div>
 
 <script src="../assets/js/employee-list-script.js"></script>
+<script>
+  // SWEET ALERT CONFIRMATION FOR LOGOUT
+logoutBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  Swal.fire({
+    title: "Are you sure?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Log me out",
+    reverseButtons: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // e.target.href
+      // console.log(e.target.closest(".logout").href)
+      window.location.href = `${e.target.closest(".logout").href}`;
+    }
+  });
+});
+
+</script>
 </body>
 </html>

@@ -18,6 +18,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 <head>
 <Title> PAYROLL LIST </Title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SWEET ALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/53a2b7f096.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -277,6 +279,31 @@ document.getElementById('saveCustomType').addEventListener('click', function() {
     document.getElementById('customTypeContainer').style.display = 'none';
   }
 });
+
+const logoutBtn = document.querySelector(".logout");
+
+  // SWEET ALERT CONFIRMATION FOR LOGOUT
+logoutBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  Swal.fire({
+    title: "Are you sure?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Log me out",
+    reverseButtons: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // e.target.href
+      // console.log(e.target.closest(".logout").href)
+      window.location.href = `${e.target.closest(".logout").href}`;
+    }
+  });
+});
+
+
 </script>
 <!---Script for custom--->
 

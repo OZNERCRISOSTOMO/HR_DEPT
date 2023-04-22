@@ -421,6 +421,13 @@ class Admin {
             exit();
     }
 
+    public function getAllRfidCard(){
+           $rfid =  $this->database->getConnection()->query("SELECT * FROM RFID_card")->fetchAll();
+            return $rfid;
+            
+            exit();
+    }
+
     public function getEmployeePayslipTable($id) {
         $stmt = $this->database->getConnection()->prepare("SELECT * FROM employee_payslip_form WHERE payslip_id=?");
 

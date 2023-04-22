@@ -140,12 +140,7 @@
                                 <input type="text" class="form-control" id="branch" name="branch" required>
                             </div>
 
-                            <!--==== SALARY ======== -->
-                            <!-- <div class="mb-3">
-                                <label for="salary" class="col-form-label">Salary</label>
-                                <input type="number" class="form-control" id="salary" name="salary">
-                            </div> -->
-                            
+              
                             <!--===== RATE  ===== -->
                             <div class="mb-3">
                                 <label for="rate" class="col-form-label">Rate</label>
@@ -208,6 +203,25 @@
                                     <input class="form-check-input" type="checkbox" value="philhealth" id="philhealth" name="beneficiaries[]">
                                      <label class="form-check-label" for="philhealth"> Philhealth </label>
                                 </div> 
+                            </div>
+                            
+                            <!-- RFID CARD -->
+                            <div class="mb-3 mt-3">
+                                <select class="form-select" aria-label="Default select example" name="rfid-card" id="rfid-card" >
+                                <option selected>Select available RFID card</option>
+                                 <?php 
+                                    $rfidCards = $admin->getAllRfidCard();
+
+                                  foreach($rfidCards as $card){
+
+                                    // if($card["employee_id"] == null){
+                                       
+                                    // }
+                                     echo "<option value='".$card["serial_number"] ."'>". $card["serial_number"] ."</option>";
+                                    
+                                  }
+                                ?>
+                                </select>
                             </div>
 
                             <!-- HIDDEN INPUT TO STORE EMPLOYEE ID -->

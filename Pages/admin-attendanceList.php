@@ -23,6 +23,9 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
  <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
+    <!-- SWEET ALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
@@ -328,6 +331,29 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     window.history.back();
    },4000);
   }
+
+  const logoutBtn = document.querySelector(".logout");
+
+  // SWEET ALERT CONFIRMATION FOR LOGOUT
+logoutBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  Swal.fire({
+    title: "Are you sure?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Log me out",
+    reverseButtons: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // e.target.href
+      // console.log(e.target.closest(".logout").href)
+      window.location.href = `${e.target.closest(".logout").href}`;
+    }
+  });
+});
 
 
  

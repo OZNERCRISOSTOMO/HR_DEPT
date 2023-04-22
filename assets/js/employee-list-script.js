@@ -1,5 +1,6 @@
 const employeeListContainer = document.querySelector(".employeeList-container");
 const loadingContainer = document.querySelector(".loading-container");
+const logoutBtn = document.querySelector(".logout");
 
 const globalId = {
   id: "",
@@ -69,6 +70,27 @@ $(document).ready(function () {
           $(".employee-list-wrapper").html(data);
         },
       });
+    }
+  });
+});
+
+// SWEET ALERT CONFIRMATION FOR LOGOUT
+logoutBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  Swal.fire({
+    title: "Are you sure?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Log me out",
+    reverseButtons: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // e.target.href
+      // console.log(e.target.closest(".logout").href)
+      window.location.href = `${e.target.closest(".logout").href}`;
     }
   });
 });
