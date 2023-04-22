@@ -146,7 +146,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                 <div class="col-12 mt-2">
 
                                 <div class="d-flex ms-3">
-                                <i class="fa-solid fa-star text-warning pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px;" name="Email">P 215pr/hr</p>
+                                <i class="fa-solid fa-star text-warning pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px;" name="Email">₱ <?php echo number_format($employee["rate_per_hour"] )?>/hr</p>
                                 </div>
 
                                 <div class="d-flex ms-3">

@@ -22,20 +22,58 @@ if (isset($_POST['search'])) {
 
     // var_dump($employees);
     foreach($employees as $employee){;
-        echo '<div class="card" style="width: 18rem;">';
-        echo "<div class='card-body'>";
 
-            echo '<img src="../Uploads/' . $employee['picture_path'] . '" alt="avatar" style="width: 150px;" class="img-fluid m-0 rounded-circle">';
-             echo '<h5 class="card-title text-center">'. $employee["first_name"]." " . $employee["last_name"] . '  </h5>';         
-                echo '<p class="">'. $employee["email"]. '  </p>';
-                 echo '<p class="">'. $employee["gender"]. '  </p>';  
-                echo '<p class="">'. $employee["department"]. '  </p>'; 
-                echo '<p class="">'. $employee["contact"]. '  </p>'; 
-                 echo '<p class=""> Date hired : '. $admin->formatDate($employee["date_applied"]) . '</p>';
-       
-             
-        echo "</div>";
-         echo "</div>";
+        $html = ' <div class="card bg-white rounded ms-2 my-2 pt-3 employee-container" style="width: 16rem;" data-bs-toggle="modal"
+                         id="view" data-bs-target="#viewmodal" data-employee-id="'. $employee["id"] .'">
+                        <img class="rounded-circle mx-auto" src="../Uploads/'. $employee["picture_path"] .'" style="object-fit: cover;border-radius: 50%;height: 140px; width: 140px;" alt="">    
+                        <div class="card-body ps-1">
+                            <h6 class="card-title text-center col-11 m-auto" name="EmployeeName">'. $employee["first_name"] . " " .$employee["last_name"]  .'</h6>
+                            <p class="card-text text-center" style="opacity: 0.7;">'. ucfirst($employee["position"]) .'</p>
+                            
+                            <div id="inCard"  style=" background-color: #f2f2f2;"; class="col-12 rounded m-auto align-content-center ms-2 ">
+                            <table class="table table-borderless p-0 m-0 pb-0">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th style="font-size: 14px;">Department:</th>
+                                        <th style="font-size: 14px;">Date Hired: </th>
+                                       
+                                    </tr>
+                                    
+
+                                </thead> 
+                               
+                                <tbody>
+                                <tr class="text-center ">
+                                        <td name="Department" style="font-size: 13.5px;">'. ucfirst($employee["department"]) .'</td>
+                                        <td name="DateHired" style="font-size: 13.5px;">'. $admin->formatDate($employee["date_hired"] ) .'</td>
+                                    </tr>   
+                                </tbody>
+
+                               
+                            </table>
+                            
+                                <div class="col-12 mt-2">
+
+                                <div class="d-flex ms-3">
+                                <i class="fa-solid fa-star text-warning pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px;" name="Email">₱ '. number_format($employee["rate_per_hour"] ) .'/hr</p>
+                                </div>
+
+                                <div class="d-flex ms-3">
+                                <i class="fa-solid fa-envelope text-primary text pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" name="Email">'.  $employee["email"] .'</p>
+                                </div>
+
+                            <div class="d-flex ms-3">
+                            <i class="fa-solid fa-phone text-success pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px;" name="Email">'. $employee["contact"] .'</p>
+                            </div>
+                        
+                             </div>
+                           
+                        </div>
+                        </div>
+                    </div>';
+
+  
+        echo $html;
     }
 
 }else{

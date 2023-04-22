@@ -53,7 +53,7 @@ if (isset($_POST['id'])) {
         <table class="table table-borderless mt-2">
           <thead>
             <tr>
-              <th><p class="text" style="opacity: 0.5;">SSS </p></th>
+              <th><p class="text" style="opacity: 0.5;"> SSS </p></th>
               <th><p class="text" style="opacity: 0.5;">TIN </p></th>
               <th><p class="text" style="opacity: 0.5;">PhilHealth </p></th>
             </tr>

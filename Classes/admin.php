@@ -234,13 +234,13 @@ class Admin {
         if($id == ""){
             
             $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
-                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position FROM employees 
+                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position, employee_details.rate_per_hour FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
                                                         WHERE employees.status = '1'";
             $employees = $this->database->getConnection()->query($query)->fetchAll();
         }else{
              $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
-                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position FROM employees 
+                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position, employee_details.rate_per_hour  FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
                                                         WHERE employees.status = '1' AND employees.id = $id";
             $employees = $this->database->getConnection()->query($query)->fetch();
@@ -266,14 +266,11 @@ class Admin {
 
     public function searchEmployees($name){
         $data =  $this->database->getConnection()->query("SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
-                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position FROM employees 
+                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position,employee_details.rate_per_hour FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
                                                     WHERE (first_name LIKE '{$name}%' OR last_name LIKE '{$name}%') AND status = '1' ")->fetchAll();
 
-                                                    // $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
-                                                    //     employee_details.date_applied,employee_details.date_hired, employee_details.position FROM employees 
-                                                    //     JOIN employee_details ON employees.id = employee_details.employee_id
-                                                    //     WHERE employees.status = '1' AND employees.id = $id";
+                                                    
         return $data;
 
     
