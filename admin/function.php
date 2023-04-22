@@ -33,18 +33,18 @@
         $department = $employeepayslip['department'];
         $date = $employeepayslip['from_date'];
         $date1 = $employeepayslip['to_date'];
-        $present = $employeepayslip['number_present'];
+        $present = $employeepayslip['num_hr']; //*
+        $overtime = $employeepayslip['over_time']; //*
         $salary = $employeepayslip['rate'];
 
-        $sss = $employeepayslip['sss'];
-        $philhealth = $employeepayslip['philhealth'];
-        $pagibig = $employeepayslip['pagibig'];
-        
+        $sss = $employeepayslip['sss']; //*
+        $philhealth = $employeepayslip['philhealth']; //*
+        $pagibig = $employeepayslip['pagibig']; //*
 
-        $salaryOT = $salary * $present; //salary rate * number of hours completed
+        $totalearn = ($salary * $present) + $overtime; //salary rate * number of hours completed
 
         if ($sss == true) {
-            $num1 = $salaryOT;       
+            $num1 = $totalearn;       
             $sss_result = $num1 * 0.14;
         }
         else {
@@ -52,7 +52,7 @@
         }
 
         if ($philhealth == true) {
-            $num1 = $salaryOT;
+            $num1 = $totalearn;
             $phil_result = $num1 * 0.045;
         }
         else {
@@ -60,7 +60,7 @@
         }
 
         if ($pagibig == true) {
-            $num1 = $salaryOT;
+            $num1 = $totalearn;
 
             if ($num1 <= 1499){
                 $love_result = $num1 * 0.02;
@@ -81,26 +81,28 @@
 
 
         if ($tax <= 10000) {
-            $tax = $salaryOT * 0.05;
+            $tax = $totalearn * 0.05;
         }
         else if ($tax >=10001 || $tax <=30000) {
-            $tax = $salaryOT * 0.10;
+            $tax = $totalearn * 0.10;
         }
         else if ($tax >=30001 || $tax <=70000) {
-            $tax = $salaryOT * 0.15;
+            $tax = $totalearn * 0.15;
         }
         else if ($tax >=70001 || $tax <=140000) {
-            $tax = $salaryOT * 0.20;
+            $tax = $totalearn * 0.20;
         }
         else if ($tax >=140001 || $tax <=250000) {
-            $tax = $salaryOT * 0.25;
+            $tax = $totalearn * 0.25;
         }
         else if ($tax >=250001 || $tax <=500000) {
-            $tax = $salaryOT * 0.30;
+            $tax = $totalearn * 0.30;
         }
-        else $tax = ($tax >=500001) ? $salaryOT * 0.32 : 'error';
+        else $tax = ($tax >=500001) ? $totalearn * 0.32 : 'error';
 
-        $networth = $salaryOT - ($sss_result + $phil_result + $love_result + $tax);
+        $networth = $totalearn - ($sss_result + $phil_result + $love_result + $tax);
+
+        $totaldeductions = $sss_result + $phil_result + $love_result + $tax;
         
         $mdpf = new Mpdf\Mpdf();
         
@@ -137,14 +139,14 @@
                         <td class="column" style="font-weight: bold;">Employee Name: </td>
                         <td class="column">'. $fname .'</td>
                         <td class="column" style="font-weight: bold;">Payroll Code: </td>
-                        <td class="column">No data</td>
+                        <td class="column">'. $paycode .'</td>
                     </tr>
                     
                     <tr>
                         <td class="column" style="font-weight: bold;">Department: </td>
-                        <td class="column">No data</td>
+                        <td class="column">'. $department .'</td>
                         <td class="column" style="font-weight: bold;">Payroll Type: </td>
-                        <td class="column">No data</td>
+                        <td class="column">'. $paytype .'</td>
                     </tr>
 
                     <tr>
@@ -172,11 +174,6 @@
                 </tr>
 
                 <tr>
-                    <td class="column1">Basic Salary</td>
-                    <td class="column2" style="text-align: right;">'. $salary .'</td>
-                </tr>
-
-                <tr>
                     <td class="column1">Worked Hours</td>
                     <td class="column2" style="text-align: right;">'. $present .'</td>
                 </tr>
@@ -188,12 +185,12 @@
 
                 <tr>
                     <td class="column1">Overtime</td>
-                    <td class="column2" style="text-align: right;">No data</td>
+                    <td class="column2" style="text-align: right;">'. $overtime .'</td>
                 </tr>
 
                 <tr>
                     <td class="column1" style="text-align: right; font-weight: bolder;">TOTAL EARNINGS</td>
-                    <td class="column2" style="text-align: right; font-weight: bolder;">'. $salaryOT .'</td>
+                    <td class="column2" style="text-align: right; font-weight: bolder;">'. $totalearn .'</td>
                 </tr>
             </table>
 
@@ -264,7 +261,7 @@
 
                 <tr>
                     <td class="column1">Pag-ibig</td>
-                    <td class="column2" style="text-align: right;">' . '₱' . $love_result .'</td>
+                    <td class="column2" style="text-align: right;">' . '₱' . $love_result.'</td>
                 </tr>
 
                 <tr>
@@ -279,7 +276,7 @@
 
                 <tr>
                     <td class="column1" style="text-align: right; font-weight: bolder;">TOTAL DEDUCTIONS</td>
-                    <td class="column2" style="text-align: right; font-weight: bolder;">No data</td>
+                    <td class="column2" style="text-align: right; font-weight: bolder;">'. '₱' . $totaldeductions .'</td>
                 </tr>
             </table>
 
@@ -299,12 +296,7 @@
                     <td class="column1" style="text-align: right; font-weight: bolder; color: red;">NET PAY</td>
                     <td class="column2" style="text-align: right; font-weight: bolder; color: red;">' . '₱' . $networth . '</td>
                 </tr>
-            </table>
-
-            
-            
-          
-            
+            </table>   
         </div>
         ';
 
@@ -313,6 +305,5 @@
   
       }
     }
-   
   }
 ?>

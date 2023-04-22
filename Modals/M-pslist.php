@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <input type="number" name="overtime" placeholder="Number of Overtime (per hour)" class="form-control" required>
+                        <input type="number" name="overtime" id="overtime" placeholder="Number of Overtime (per hour)" class="form-control" required>
                     </div>
                 </div>
                 

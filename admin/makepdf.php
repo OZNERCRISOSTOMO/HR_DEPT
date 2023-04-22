@@ -10,6 +10,7 @@ $admin = new Admin($database);
 $fname = $_POST['employee-name'];
 $position = $_POST['position'];
 $branch = $_POST['branch'];
+$department = $_POST['department'];
 $date = $_POST['date-from'];
 $date1 = $_POST['date-to'];
 $present = $_POST['present'];
@@ -88,7 +89,7 @@ $networth = $salary - ($sss_result + $phil_result + $love_result);
 
 
 if ($admin->checkprlist($prlistid)) {
-    $admin->insertEmployeePayslipForm($fname, $position, $branch, $date, $date1, $present, $overtime, $salary, $prlistid, $sssChecked, $philhealthChecked, $pagibigChecked);
+    $admin->insertEmployeePayslipForm($fname, $position, $department, $branch, $date, $date1, $present, $overtime, $salary, $networth, $tax, $prlistid, $sssChecked, $philhealthChecked, $pagibigChecked);
     $admin->insertEmployeePayslip($fname, $networth, $prlistid);
 }
 ?>

@@ -63,9 +63,12 @@ class Admin {
     public function getEmployeePayslip($id){
         
           // prepare the SQL statement using the database property
-        $stmt = $this->database->getConnection()->prepare("SELECT employees.*, employee_details.department, employee_details.salary, employee_details.sss,employee_details.pagibig ,employee_details.philhealth, employee_details.position, employee_details.branch  FROM employees
-                                                     JOIN employee_details ON employees.id = employee_details.employee_id
-                                                     WHERE employees.id=?");
+        $stmt = $this->database->getConnection()->prepare("SELECT employees.*, employee_details.department, employee_details.salary, 
+                                                    employee_details.sss, employee_details.pagibig, employee_details.philhealth, 
+                                                    employee_details.position, employee_details.branch, employee_details.num_hr, 
+                                                    employee_details.over_time FROM employees
+                                                    JOIN employee_details ON employees.id = employee_details.employee_id
+                                                    WHERE employees.id=?");
 
          //if execution fail
         if (!$stmt->execute([$id])) {
