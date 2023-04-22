@@ -243,6 +243,8 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
                        $("#email").val(employeeData.email)
                        $("#position").val(employeeData.position)
                        $("#branch").val(employeeData.branch)
+                       $("#present").val(employeeData.num_hr)
+                       $("#overtime").val(employeeData.over_time)
                       $("#employee-name").val(employeeData.first_name + " " + employeeData.last_name)
                        const beneficiaries = [{type:"sss",
                                                value:employeeData.sss
@@ -269,7 +271,6 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
   });
 </script>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script  src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 </body>
