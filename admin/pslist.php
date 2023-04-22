@@ -27,6 +27,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <!-- Select2 JS --> 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
+    <!--DATATABLES -->
+    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
     <style>
      .modal-backdrop.show {
     z-index: 100;
@@ -81,33 +85,71 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
 <div class="container">
         <div class="row">
-            <div class="col-xl-12">
-                <h4>List of Payslip</h4>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create New</button>
-                     <?php include("../Modals/M-pslist.php")?>   
+            <div class="col-xl-12 mt-3 ">
 
+            
+              
+                        <div class="row d-flex ">
+
+                            <div class="col-7">
+                            <h3 >Payroll Details</h3>
+                </div>
+
+                    <div class="col-2 " style=" justify-content: flex-end;">
+                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-plus fs-6"></i>Create New</button>
+                     <?php include("../Modals/M-pslist.php")?>   
+                </div>
                     
+                <div class="col-3 " >
                     <a href="function.php">
                      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#PayrollModal">Generate Payslip</button>
                     </a>
-                    
-                    <div>
-                    <h3>Payroll Details</h3>
-                    <?php
+                </div>
+
+                
+                <div class="container-fluid mb-3 mt-3">
+                <?php
                         $prlist = $payslip->payrollDetails($id);
                     ?>
                     <?php foreach($prlist as $list):?>
-                    Code: <?php echo $list['code']; ?>
-                    Start Date: <?php echo $list['start']; ?>
-                    End Date: <?php echo $list['end']; ?>
-                    Type: <?php echo $list['type']; ?>
+                  
+                       <div class="container-fluid order-last align-item-end justify-content-end"> 
+                        <div class="row" style="display: flex; justify-content: flex-end;">
+                        
+                        <div class="col-3">
+                            <div class="btn btn-md shadow-sm btn-light w-100  text-black">  Code: <?php echo $list['code']; ?></div>
+                            </div>
+
+                            <div class="col-3">
+                            <div class="btn btn-md shadow-sm  btn-light w-100  text-black"> Type: <?php echo $list['type']; ?></div>
+                        </div>
+
+                    <div class="col-3">
+                    <div class="btn btn-md  shadow-sm btn-light w-100 text-black"> Start Date: <?php echo $list['start']; ?></div>
+                    </div>
+                    <div class="col-3">
+                    <div class="btn btn-md shadow-sm btn-light w-100  text-black"> End Date: <?php echo $list['end']; ?></div>
+                    
+                    </div>
+                    </div>
+                    </div>
+
+
                     <?php endforeach; ?>
                     </div>
+            </div>
+
+                    </div>        
+
+                    <div>
+                    
+                    
                 
   <!-- TABLE -->                  
                     <div class= "a">          
-    <table class="table table-borderless table-striped text-center mt-3 align-middle">
-                        <tr>
+                         <table id="pslist" class="table table-borderless table-striped text-center mt-3 align-middle">
+                         <thead>
+                         <tr>
                             <th>Id</th>
                             <th>Date Added</th>
                             <th>Employee</th>
@@ -116,7 +158,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                             <th>Payroll ID</th>
                             <th>Action</th>
                         </tr>
-
+                        </thead>
+                     <tbody>
                         <?php
                             $pslist = $payslip->payslipList($id);
                             if (!empty($pslist)):
@@ -130,19 +173,18 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                 <td><?php echo $list['file_path']; ?></td>
                                 <td><?php echo $list['prlist_id']; ?></td>
                                 <td>
-      <form method="POST">
-      <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
-      <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#EditModal" type="submit" name="edit" value="Edit">Edit</button>
-      <button class="btn btn-sm btn-danger"  type="submit" name="delete" value="Delete">Delete</button>
-      </form>
-      </td>
+                                <form method="POST">
+                                <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#EditModal" type="submit" name="edit" value="Edit">Edit</button>
+                                <button class="btn btn-sm btn-danger"  type="submit" name="delete" value="Delete">Delete</button>
+                                </form>
+                                </td>
                             </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <tr>
-                                <td colspan="6">No data found.</td>
-                            </tr>
+                            
                         <?php endif; ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -152,7 +194,13 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
 </div>
 
-  
+<script>
+ $(document).ready(function(){
+    $('#pslist').DataTable();
+  });
+
+
+  </script>
     
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 
@@ -220,6 +268,10 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
       });
   });
 </script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script  src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 </body>
 </div>
 </html>

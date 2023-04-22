@@ -23,6 +23,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+
+    <!--DATATABLES -->
+    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 </head>
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
 <div class="container-fluid">
@@ -55,20 +59,21 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
       <div class="container-fluid ms-3">
         <!--Create New Button-->
-        <div class="container">
+        <div class="container ">
           <?php echo $deleteMsg??''; ?>
+          <div class="row mt-2 mb-3">
+            <div class="col-2">
             <h4 class="fw-bolder">Payroll List</h4>
-              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#PayrollModal">Create New</button>
-              <div class="col-sm input-group w-25 float-end">
-                <span class="input-group-text bg-white border border-end-0 border-0">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                </span>
-                <input type="text" class="form-control border-0 border shadow-none border-start-0" id="Search" autocomplete="off">
+            </div>
+            <div class="col-2"> 
+              <button class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#PayrollModal"><i class="fa-solid fa-plus"></i> Create New</button>
+            
+            </div>
               </div>
         <!----End---->
 
         <!---Table--->
-        <table class="table table-borderless table-striped text-center mt-3 align-middle">
+        <table id="prlist" class="table table-borderless table-striped text-center mt-3 align-middle">
           <thead>
             <th>ID</th>
             <th>Date Added</th>
@@ -240,6 +245,14 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         <!---Modal End--->
 
         <!-- JavaScript code to handle the custom option -->
+
+        <script>
+ $(document).ready(function(){
+    $('#prlist').DataTable();
+  });
+
+
+  </script>
 <script>
 document.getElementById('type').addEventListener('change', function() {
   var customOption = document.getElementById('type').value;
@@ -271,5 +284,8 @@ document.getElementById('saveCustomType').addEventListener('click', function() {
     </div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script  src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 </body>
 </html>
