@@ -1,27 +1,36 @@
 <?php 
+
  require_once __DIR__ . '/vendor/autoload.php';
  require '../Classes/admin.php';
  require '../Classes/database.php';
  
+ $prlistId = $_POST["prlist-id"];
  $database = new Database();
  $admin = new Admin($database);
  $payslip = new Payroll($database);
- $employee = $admin->getAllEmployeePayslip();
-
+ $employee = $admin->getAllEmployeePayslip($prlistId);
 
 //  $payslip->payrollDetails($id);
 
- $employeepayslip = $admin->getEmployeePayslipTable($employee[0]["id"]);
+//  $employeepayslip = $admin->getEmployeePayslipTable($employee[0]["id"]);
 
  foreach ($employee as $emp) {
     foreach ($emp as $key => $value) {
   
+        //getting data from employee_payslip_form
       $employeepayslip = $admin->getEmployeePayslipTable($value);
+
+      //getting data from employee_details
+      $employeeDetails = $admin->getEmployeeDetails($employeepayslip["employee_id"]);
+
+    
   
       if($employeepayslip){
+
         $prlist = $payslip->payrollDetails($employee[0]["id"]);
         $paycode = '';
         $paytype = '';
+
         foreach($prlist as $list):
             $paycode = $list['code'];
             $paytype = $list['type'];
@@ -33,15 +42,32 @@
         $department = $employeepayslip['department'];
         $date = $employeepayslip['from_date'];
         $date1 = $employeepayslip['to_date'];
-        $present = $employeepayslip['num_hr']; //*
-        $overtime = $employeepayslip['over_time']; //*
-        $salary = $employeepayslip['rate'];
+        $num_hr = $employeeDetails[0]['num_hr']; //* employee _details
+
+        $overtime = $employeeDetails[0]['over_time']; //* employee_details
+        $ratePerHour = $employeeDetails[0]['rate_per_hour']; //*  employee_details
 
         $sss = $employeepayslip['sss']; //*
         $philhealth = $employeepayslip['philhealth']; //*
         $pagibig = $employeepayslip['pagibig']; //*
 
-        $totalearn = ($salary * $present) + $overtime; //salary rate * number of hours completed
+        $totalearn = ($ratePerHour * $num_hr) + $overtime; //salary rate * number of hours completed
+
+    //     echo "</br>";
+    //     echo "rate per hour". $ratePerHour;
+    //     echo "</br>";
+    //     echo "overtime". $overtime;
+    //    echo "</br>";
+    //     echo "num hr". $num_hr;
+    //     echo "</br>";
+    //     echo "sss". $sss;
+    //     echo "</br>";
+    //     echo "phil" . $philhealth;
+    //     echo "</br>";
+    //     echo "pagibig". $pagibig;
+    //     echo "</br>";
+  
+
 
         if ($sss == true) {
             $num1 = $totalearn;       
@@ -175,12 +201,12 @@
 
                 <tr>
                     <td class="column1">Worked Hours</td>
-                    <td class="column2" style="text-align: right;">'. $present .'</td>
+                    <td class="column2" style="text-align: right;">'. $num_hr .'</td>
                 </tr>
 
                 <tr>
                     <td class="column1">Hourly Rate</td>
-                    <td class="column2" style="text-align: right;">' . '₱' . $salary .'</td>
+                    <td class="column2" style="text-align: right;">' . '₱' . $ratePerHour .'</td>
                 </tr>
 
                 <tr>

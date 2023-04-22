@@ -101,9 +101,15 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                 </div>
                     
                 <div class="col-3 " >
-                    <a href="function.php">
-                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#PayrollModal">Generate Payslip</button>
-                    </a>
+
+                    <form action ="function.php" method="POST">
+                        <input type="hidden" name="prlist-id" value="<?php echo $id ?>">
+                        
+                        <button type="submit" name="submit" class="btn btn-success">
+                            Generate Payslip
+                        </button>
+              
+                    </form>
                 </div>
 
                 
@@ -173,7 +179,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                 <td><?php echo $list['file_path']; ?></td>
                                 <td><?php echo $list['prlist_id']; ?></td>
                                 <td>
-                                <form method="POST">
+                                <form action="" method="POST">
                                 <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
                                 <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#EditModal" type="submit" name="edit" value="Edit">Edit</button>
                                 <button class="btn btn-sm btn-danger"  type="submit" name="delete" value="Delete">Delete</button>
@@ -239,6 +245,9 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
 
                   success: function(data) {
                       const [employeeData] = JSON.parse(data)
+                      
+                      $("#employee-id").val(employeeData.employee_id)
+                      $("#department").val(employeeData.department)
                       $("#salary").val(employeeData.salary)
                        $("#email").val(employeeData.email)
                        $("#position").val(employeeData.position)
@@ -255,6 +264,7 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
                                               {type:"philhealth",
                                                value:employeeData.philhealth
                                               }]
+
                       beneficiaries.forEach(membership =>{
                           if(membership.value != null){
                              $(`#${membership.type}`).prop('checked', true);

@@ -36,6 +36,10 @@
                 </div>
 
                 <div class="mb-2">
+                <input type="text" name="department" placeholder="Department" class="form-control" id="department" required>
+                </div>
+
+                <div class="mb-2">
                 <input type="email" name="email" placeholder="Email" id="email" class="form-control" required>
                 </div>
 
@@ -81,6 +85,7 @@
                 </div>
                     <input type="hidden" id="employee-name" name="employee-name">
                     <input type="hidden" id="prlist-id" name="prlist-id" value="<?php echo $id?>">
+                    <input type="hidden" id="employee-id" name="employee-id">
             </form>
       </div>
       <div class="modal-footer">

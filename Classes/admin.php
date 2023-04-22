@@ -60,13 +60,37 @@ class Admin {
       
     }
 
+    public function getEmployeeDetails($employeeId){
+          // prepare the SQL statement using the database property
+        $stmt = $this->database->getConnection()->prepare("SELECT * FROM employee_details                                               
+                                                    WHERE employee_id = ? ");
+
+         //if execution fail
+        if (!$stmt->execute([$employeeId])) {
+            header("Location: ../index.php?error=stmtfail");
+            exit();
+        }
+
+        //fetch the result
+        $result = $stmt->fetchAll();
+        
+          //if has result return it, else return false
+        if ($result) {
+            return $result;
+        } else {
+            $result = false;
+            return $result;
+        }
+
+    }
+
     public function getEmployeePayslip($id){
         
           // prepare the SQL statement using the database property
         $stmt = $this->database->getConnection()->prepare("SELECT employees.*, employee_details.department, employee_details.salary, 
                                                     employee_details.sss, employee_details.pagibig, employee_details.philhealth, 
                                                     employee_details.position, employee_details.branch, employee_details.num_hr, 
-                                                    employee_details.over_time FROM employees
+                                                    employee_details.over_time,employee_details.employee_id FROM employees
                                                     JOIN employee_details ON employees.id = employee_details.employee_id
                                                     WHERE employees.id=?");
 
@@ -113,10 +137,12 @@ class Admin {
 
     // }
 
-    public function insertEmployeePayslip($employee, $net, $id){
+    public function insertEmployeePayslip($employee, $net, $id,$employeeId){
+
+
         // prepare insert statement for employee table
-        $sql = "INSERT INTO employee_payslip (date_added,employee, net, file_path, prlist_id)
-        VALUES (?,?,?,?,?);";
+        $sql = "INSERT INTO employee_payslip (date_added,employee, net, file_path, prlist_id, employee_id)
+        VALUES (?,?,?,?,?,?);";
 
      // prepared statement
     $stmt = $this->database->getConnection()->prepare($sql);
@@ -124,11 +150,25 @@ class Admin {
     //if execution fail
     if (!$stmt->execute([$this->date,
                          $employee,
-                         $net,
+                         $net,  
                          "Not generated",
-                         $id])) {
+                         $id,
+                         $employeeId])) {
         header("Location: ../Pages/employee-register.php?error=stmtfail");
 
+        exit();
+    }
+
+    // get the ID of the newly inserted row
+    $payslipId = $this->database->getConnection()->lastInsertId();
+
+    // update the payslip_id column in the employee_payslip_form table
+    $sql = "UPDATE employee_payslip_form SET payslip_id = ? WHERE employee_id = ? ";
+    $stmt = $this->database->getConnection()->prepare($sql);
+
+    // execute statement and check for errors
+    if (!$stmt->execute([$payslipId, $employeeId])) {
+        header("Location: ../Pages/employee-register.php?error=stmtfail");
         exit();
     }
 
@@ -136,27 +176,28 @@ class Admin {
     header("Location: ../admin/pslist.php?id=$id");
     }
 
-    public function insertEmployeePayslipForm($employee_name, $position, $branch, $department, $fromdate, $todate, $present, $overtime, $rate, $sss, $pagibig, $philhealth) {
+    public function insertEmployeePayslipForm($fname, $position, $branch, $department,  $date, $date1, $present, $overtime, $salary, $sssChecked,$pagibigChecked, $philhealthChecked, $employeeId) {
 
-        $sql = "INSERT INTO employee_payslip_form (employee_name, position, branch, department, from_date, to_date, number_present, number_overtime, rate, sss, pagibig, philhealth)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+        $sql = "INSERT INTO employee_payslip_form (employee_name, position, branch, department, from_date, to_date, number_present, number_overtime, rate, sss, pagibig, philhealth,employee_id)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
      // prepared statement
     $stmt = $this->database->getConnection()->prepare($sql);
 
     //if execution fail
-    if (!$stmt->execute([$employee_name,
+    if (!$stmt->execute([$fname,
                          $position,
                          $branch,
                          $department,
-                         $fromdate,
-                         $todate,
+                         $date,
+                         $date1,
                          $present,
                          $overtime, 
-                         $rate, 
-                         $sss, 
-                         $pagibig, 
-                         $philhealth])) {
+                         $salary, 
+                         $sssChecked, 
+                         $pagibigChecked, 
+                         $philhealthChecked,
+                         $employeeId])) {
         header("Location: ../Pages/employee-register.php?error=stmtfail");
 
         exit();
@@ -413,8 +454,8 @@ class Admin {
         exit();
     }
 
-    public function getAllEmployeePayslip() {
-        $employeePayslip =  $this->database->getConnection()->query("SELECT id FROM employee_payslip")->fetchAll();
+    public function getAllEmployeePayslip($prlistId) {
+        $employeePayslip =  $this->database->getConnection()->query("SELECT id FROM employee_payslip WHERE prlist_id = '$prlistId' ")->fetchAll();
             return $employeePayslip;
 
             
