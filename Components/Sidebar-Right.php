@@ -34,91 +34,39 @@
   </div>
 
 
-  <div class="card-container overflow-auto w-100 " style=" max-height: 15rem;">
 
-    <div class="card my-2" style="max-width: 300px; height:5rem;">
+<div class="overflow-auto w-100" style="height: 15rem;">
+
+
+<!--buong card to-->
+  <div class="card-container mb-2">
+    <div class="card" style="width: 100%; height:5rem;">
       <div class="card-body">
-        <p class="card-text m-0 p-0" style="font-size:13px; font-weight:bold;">Feb 14. 2023</p>
-        <div class="row ">
+        <h3 class="card-text" style="font-size:16px; font-weight:bold;">Feb 14. 2023</h3>
+        <div class="row">
           <div class="col-6">
-            <p class="card-title"style="font-size:12px;"><small>Valentines Day</small></p>
+            <h3 class="card-title"style="font-size:13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Valentines Day</h3>
           </div>
           <div class="col-1 ms-2">
-            <button class="btn btn-transparent btn-sm" type="submit">
+            <button class="btn btn-transparent btn-sm border-0 border-none" type="submit">
               <i class="fa-solid text-primary fa-pen-to-square"></i>
             </button>
           </div>
           <div class="col-1">
-            <button class="btn btn-transparent btn-sm" type="submit">
+            <button class="btn btn-transparent btn-sm border-0 border-none" type="submit">
               <i class="fa-solid text-danger fa-square-minus"></i>
             </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
+<!--buong card to-->
 
-    <div class="card my-2" style="max-width: 300px; height:5rem;">
-      <div class="card-body">
-        <p class="card-text m-0 p-0" style="font-size:13px; font-weight:bold;">Feb 14. 2023</p>
-        <div class="row ">
-          <div class="col-6">
-            <p class="card-title"style="font-size:12px;"><small>Valentines Day</small></p>
-          </div>
-          <div class="col-1 ms-2">
-            <button class="btn btn-transparent btn-sm" type="submit">
-              <i class="fa-solid text-primary fa-pen-to-square"></i>
-            </button>
-          </div>
-          <div class="col-1">
-            <button class="btn btn-transparent btn-sm" type="submit">
-              <i class="fa-solid text-danger fa-square-minus"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="card my-2" style="max-width: 300px; height:5rem;">
-      <div class="card-body">
-        <p class="card-text m-0 p-0" style="font-size:13px; font-weight:bold;">Feb 14. 2023</p>
-        <div class="row ">
-          <div class="col-6">
-            <p class="card-title"style="font-size:12px;"><small>Valentines Day</small></p>
-          </div>
-          <div class="col-1 ms-2">
-            <button class="btn btn-transparent btn-sm" type="submit">
-              <i class="fa-solid text-primary fa-pen-to-square"></i>
-            </button>
-          </div>
-          <div class="col-1">
-            <button class="btn btn-transparent btn-sm" type="submit">
-              <i class="fa-solid text-danger fa-square-minus"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="card my-2" style="max-width: 300px; height:5rem;">
-      <div class="card-body">
-        <p class="card-text m-0 p-0" style="font-size:13px; font-weight:bold;">Feb 14. 2023</p>
-        <div class="row ">
-          <div class="col-6">
-            <p class="card-title"style="font-size:12px;"><small>Valentines Day</small></p>
-          </div>
-          <div class="col-1 ms-2">
-            <button class="btn btn-transparent btn-sm" type="submit">
-              <i class="fa-solid text-primary fa-pen-to-square"></i>
-            </button>
-          </div>
-          <div class="col-1">
-            <button class="btn btn-transparent btn-sm" type="submit">
-              <i class="fa-solid text-danger fa-square-minus"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+
+</div>
    
     
 
