@@ -44,6 +44,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
     
     <!-- SWEET ALERT -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- BOOTSTRAP 5 -->
@@ -71,6 +72,15 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <!-- ==================== -->
 
     <style>
+        .swal2-title {
+        font-size: 15px;
+      }
+        .swal2-icon {
+        font-size: 10px;
+      }
+      .swal2-shown {
+        overflow: visible !important;
+      }
         .modal-pending{
             z-index: 9999;
         }
@@ -270,7 +280,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                 </div>
 
                                 <div class="d-flex ms-3">
-                                <i class="fa-solid fa-envelope text-primary text pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" name="Email"><?php echo $employee["email"] ?></p>
+                                <i class="fa-solid fa-envelope text-primary text pe-2"></i> <p class="text d-flex flex-column col-10 textToCopy"  style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" name="Email" id="textToCopy"><?php echo $employee["email"] ?></p>
                                 </div>
 
                             <div class="d-flex ms-3">
@@ -306,7 +316,30 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
 </div>
 </div>
-        
+
+ <script>
+      const textElements = document.querySelectorAll(".textToCopy");
+      textElements.forEach(function(text) {
+        text.addEventListener("click", function() {
+          const range = document.createRange();
+          range.selectNode(text);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+          document.execCommand("copy");
+          window.getSelection().removeAllRanges();
+          
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Text Copied!',
+            showConfirmButton: false,
+            timer: 1000,
+            height: 100,
+            width: 300
+          });
+        });
+      });
+    </script>   
     
 <!-- <script src="../Modals/M-Employee.js"></script>
 <script src="../Modals/M-Presents.js"></script> -->
@@ -330,3 +363,5 @@ function goToPage() {
     </script>
   </body>
 </html>
+
+
