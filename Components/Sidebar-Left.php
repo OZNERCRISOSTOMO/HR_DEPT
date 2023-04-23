@@ -47,21 +47,35 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                 </li>
 
                 
-
+    
                     
                 </ul>
                 <hr>
               
-
-                <div class="nav-item pb-4 ps-2 ">
-                <p class="text-decoration-none  nav_link  px-0 align-middle text-black">
-                  <span class="nav_name">Renzo Caloocan</span>
-                </p>
-
-                <a href="../Functions/admin-logout.php" class="text-decoration-none  nav_link logout px-0 align-middle text-black">
-                 <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
-             </a>
+              
+                <div class="dropdown pb-4">
+                    <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../Images/1x1 photo.png" alt="hugenerd" width="37" height="30" class="rounded-circle">
+                        <span class="d-none d-sm-inline opacity-75" style=" font-size:15px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Crisostomo</span>  
+                        <!----------- Boss yec last name na lng idisplay mo d2 para di gaano mahaba boss ---------- -->
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-light text-small shadow">
+                       
+    
+                        <li><a class="dropdown-item mx-3" href="#">Pending</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                        <a href="../Functions/admin-logout.php" class="text-decoration-none  nav_link logout mx-3 align-middle text-black">
+                            <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
+                        </a>
+                        </li>
+                    </ul>
                 </div>
+
+                
+
             </div>
         </div>
        
