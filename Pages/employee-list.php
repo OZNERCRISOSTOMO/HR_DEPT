@@ -89,13 +89,12 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
             <h5 style="font-weight:bolder;">Employee List</h5>
         </div>
                 <div class="col-md row ms-2">
-                    <div class="col-sm rounded dropdown text-center bg-white">
-                        <button class="btn dropdown-toggle fw-bolder container-fluid" type="button" data-bs-toggle="dropdown" id="dropdown">By Department</button>
+                    <div class="col-sm rounded dropdown text-center ">
+                        <button class="btn bg-white dropdown-toggle fw-bolder container-fluid" type="button" data-bs-toggle="dropdown" id="dropdown"><i class="fa-solid fa-filter px-1"></i><b>Sort By</b></button>
                         <ul class="dropdown-menu container-fluid">
-                            <li class="dropdown-item">Human Resources</li>
-                            <li class="dropdown-item">Sales</li>
-                            <li class="dropdown-item">Warehouse</li>
-                            <li class="dropdown-item">Purchasing</li>
+                            <li><a class="dropdown-item" href="#">By Name</a></li>
+                            <li><a class="dropdown-item" href="#">By Department</a></li>
+                            <li><a class="dropdown-item" href="#">By Position</a></li>
                         </ul>
                     </div>
                     <div class="col-sm input-group">

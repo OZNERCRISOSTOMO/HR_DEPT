@@ -141,17 +141,17 @@
 
                     </div>
             <div class=" input-group input-group-sm">  
-                        <input type="text" class="form-control" placeholder="Subject" name="subject" required>
+                        <input type="text" class="shadow-none form-control" placeholder="Subject" name="subject" autocomplete="off" required>
                     </div>
                     <div class="mb-2 input-group input-group-sm">
-                        <textarea class="form-control" name="message"  rows="4" placeholder="Message" required></textarea>
+                        <textarea class="shadow-none form-control mt-2" name="message"  rows="4" placeholder="Message" autocomplete="off" required style="resize:none;"></textarea>
                     </div>
                     <div class="mb-2 input-group input-group-sm">
-                     <input class="col-2 form-control" type="file" id="attachment" name="attachment" accept="application/pdf">
+                     <input class="shadow-none col-2 form-control" type="file" id="attachment" name="attachment" accept="application/pdf">
                             </div>
                     <input type="hidden" id="" name="">
                     <div class="d-grid gap-2 ">
-                    <button  class=" btn btn-primary btn-sm" name="submit" id="send-email"><i class="fa-solid fa-paper-plane me-2"></i> Send</button>
+                    <button  class="shadow-none btn btn-primary btn-sm" name="submit" id="send-email"><i class="fa-solid fa-paper-plane me-2"></i> Send</button>
                             </div>  
             </form>
             </div>     
