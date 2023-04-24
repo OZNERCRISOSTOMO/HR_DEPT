@@ -80,6 +80,7 @@
                                 <option value="sales">Sales</option>
                                 <option value="purchaser">Purchaser</option>
                                 <option value="warehouse">Warehouse</option>
+                        
                                 </select>
                             </div>
 
@@ -208,16 +209,16 @@
                             <!-- RFID CARD -->
                             <div class="mb-3 mt-3">
                                 <select class="form-select" aria-label="Default select example" name="rfid-card" id="rfid-card" >
-                                <option selected>Select available RFID card</option>
+                                <option selected value="0">Select available RFID card</option>
                                  <?php 
                                     $rfidCards = $admin->getAllRfidCard();
 
                                   foreach($rfidCards as $card){
 
-                                    // if($card["employee_id"] == null){
-                                       
-                                    // }
-                                     echo "<option value='".$card["serial_number"] ."'>". $card["serial_number"] ."</option>";
+                                    if($card["employee_id"] == null){
+                                        echo "<option value='".$card["serial_number"] ."'>". $card["serial_number"] ."</option>";
+                                    }
+                                    
                                     
                                   }
                                 ?>

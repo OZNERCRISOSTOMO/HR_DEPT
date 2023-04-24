@@ -82,7 +82,8 @@
                              $employees = $admin->getEmployees();
 
                              foreach($employees as $employee){
-                                echo "<option value='".$employee['id'] ."'>". $employee['first_name']." ".$employee['last_name']  ."</option> ";
+                                       echo "<option value='" . $employee['id'] . "' data-employee-email='" . $employee['email'] . "'>" . $employee['first_name'] . " " . $employee['last_name'] . "</option>";
+
                              }
                          ?>
                         </select>

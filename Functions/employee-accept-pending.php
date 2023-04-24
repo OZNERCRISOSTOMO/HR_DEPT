@@ -13,7 +13,8 @@ if(isset($_POST['submit'])){
         'employeeEmail'  => $_POST['employee_email'],
         'employeeLastName'  => $_POST['employee_lastname'],
         'department'  => $_POST['department'],
-        'position'  => $_POST['department-position'],
+        'position'  => $_POST['position'],
+        'departmentPosition'  => $_POST['department-position'],
         'schedule'  => $_POST['schedule'],
         'branch'  => trim($_POST['branch']),
         'rate'  => $_POST['rate'],
@@ -23,8 +24,10 @@ if(isset($_POST['submit'])){
         'healthInsurance' => isset($_POST['health-insurance']) ? 1 : 0 ,
         'christmasBonus' => isset($_POST['christmas-bonus']) ? 1 : 0 ,
         'beneficiaries'  => $_POST['beneficiaries'],
+        'rfidCard'  => $_POST['rfid-card'],
     );
 
+    
 
     //update employee details
     $admin->acceptEmployee($employeeData);

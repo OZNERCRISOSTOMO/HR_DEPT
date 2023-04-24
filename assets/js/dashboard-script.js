@@ -39,6 +39,64 @@ const companyEmployeeRate = {
       "Safety Manager": 425,
     },
   },
+  warehouse: {
+    admin: {
+      "Warehouse specialist": 550,
+      "Warehouse manager": 550,
+      "Forklift operator": 550,
+    },
+    employee: {
+      "Stocking associate": 220,
+      Stocker: 220,
+      "Warehouse worker": 220,
+      Laborer: 220,
+      "Material handler": 250,
+      "Receiving associate": 250,
+      "Warehouse clerk": 250,
+      Loader: 270,
+      Receiver: 270,
+      "Shipping and receiving clerk": 270,
+    },
+  },
+
+  purchaser: {
+    admin: {
+      "Procurement Manager": 443,
+      "Program Manager": 500,
+      "Operations Manager": 600,
+    },
+    employee: {
+      "Procurement Clerk": 100,
+      "Purchasing Clerk": 75,
+      "Purchasing Assistant": 100,
+      "Purchasing Agent": 100,
+      "Purchasing Associate": 100,
+      "Procurement Clerk": 100,
+      "Purchasing Associate": 100,
+      "Purchasing Associate": 100,
+      "Purchasing Clerk": 75,
+    },
+  },
+
+  sales: {
+    admin: {
+      "Sales Manager": 83,
+      Manager: 200,
+      "Data Analyst 1": 150,
+      "Data Analyst 2": 150,
+    },
+    employee: {
+      "Customer Service Manager": 52,
+      "Customer Service Representative 1": 45,
+      "Customer Service Representative 2": 45,
+      "Customer Service Representative 3": 45,
+      "Cash Registry Operator Manager": 52,
+      "Cash Registry Operator 1": 45,
+      "Cash Registry Operator 2": 45,
+      "Cash Registry Operator 3": 45,
+      "Cash Registry Operator 4": 45,
+    },
+  },
 };
 
 let selectedDepartment = "";

@@ -349,7 +349,7 @@ class Admin {
          $stmt = $this->database->getConnection()->prepare("UPDATE employees AS e
                                                       INNER JOIN employee_details AS ed ON e.id = ed.employee_id
                                                       SET e.schedule_id = ?, e.status = ?,  ed.rate_per_hour = ?, ed.department = ?, ed.date_hired = ?,
-                                                       ed.position = ?, ed.employee_type = ?,  ed.branch = ? , ed.vacation_leave = ? , ed.sick_leave = ? , ed.health_insurance = ?, ed.christmas_bonus = ? 
+                                                       ed.position = ?, ed.department_position = ?, ed.employee_type = ?,  ed.branch = ? , ed.vacation_leave = ? , ed.sick_leave = ? , ed.health_insurance = ?, ed.christmas_bonus = ? 
                                                       WHERE e.id = ?");
 
         //if execution fail
@@ -359,6 +359,7 @@ class Admin {
                              $employeeData['department'],
                              $this->date,
                              $employeeData['position'],
+                             $employeeData['departmentPosition'],
                              $employeeData['type'],
                              $employeeData['branch'],
                              $employeeData['vacationLeave'],
@@ -406,8 +407,24 @@ class Admin {
         //generate employee account
         $employeeAccount = $this->generateEmployeeIDAndPassword($employeeData['employeeLastName']);
 
+        //if selected rfid value is not 0, updated RFID_card
+        if($employeeData["rfidCard"] != "0"){
+              // prepared statement
+         $stmt = $this->database->getConnection()->prepare("UPDATE RFID_card SET  employee_id = ?                                  
+                                                      WHERE serial_number = ?");
+
+        //if execution fail
+        if (!$stmt->execute([$employeeData["employeeId"],$employeeData["rfidCard"]])) {
+            header("Location: ../Pages/employee-register.php?error=stmtfail");
+
+            exit();
+        }
+        }
+
         //save account to database
-        $this->saveEmployeeIDAndPassword($employeeAccount[0],$employeeAccount[1],$employeeData['employeeEmail'],$employeeData['employeeId']);
+        $this->saveEmployeeIDAndPassword($employeeAccount[0],$employeeAccount[1],$employeeData['employeeEmail'],$employeeData['employeeId'],$employeeData['position']);
+
+
 
         //if success go to dashboard
         header("Location: ../Pages/dashboard.php");
@@ -430,9 +447,9 @@ class Admin {
 
     }
 
-    public function saveEmployeeIDAndPassword($employeeUserID, $employeePassword,$employeeEmail,$employeeId){
+    public function saveEmployeeIDAndPassword($employeeUserID, $employeePassword,$employeeEmail,$employeeId,$employeePosition){
         // prepare insert statement for employee_login table
-         $sql = "INSERT INTO employee_login (login_id,login_password,employee_id) VALUES (?,?,?);";
+         $sql = "INSERT INTO employee_login (login_id,login_password,employee_id,position) VALUES (?,?,?,?);";
 
          // prepared statement
          $stmt = $this->database->getConnection()->prepare($sql);
@@ -440,7 +457,7 @@ class Admin {
          //hash password
         $hashedpwd = password_hash($employeePassword, PASSWORD_DEFAULT);
          //if execution fail
-        if (!$stmt->execute([$employeeUserID,$hashedpwd,$employeeId])) {
+        if (!$stmt->execute([$employeeUserID,$hashedpwd,$employeeId,$employeePosition])) {
             header("Location: ../Pages/dashboard.php?error=stmtfail");
             exit();
         }

@@ -244,7 +244,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     
                     foreach($employees as $employee){
                          ?>
-                     <div class="card bg-white rounded ms-2 my-2 pt-3 employee-container" style="width: 16rem;" data-bs-toggle="modal"
+                     <div class="card bg-white rounded ms-2 my-2 pt-3 employee-container" style="width: 16rem;" 
                          id="view" data-bs-target="#viewmodal" data-employee-id="<?php echo $employee["id"]?>">
                         <img class="rounded-circle mx-auto" src="../Uploads/<?php echo $employee["picture_path"] ?>" style="object-fit: cover;border-radius: 50%;height: 140px; width: 140px;" alt="">    
                         <div class="card-body ps-1">
@@ -318,27 +318,69 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 </div>
 
  <script>
-      const textElements = document.querySelectorAll(".textToCopy");
-      textElements.forEach(function(text) {
-        text.addEventListener("click", function() {
-          const range = document.createRange();
-          range.selectNode(text);
-          window.getSelection().removeAllRanges();
-          window.getSelection().addRange(range);
-          document.execCommand("copy");
-          window.getSelection().removeAllRanges();
-          
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Text Copied!',
-            showConfirmButton: false,
-            timer: 1000,
-            height: 100,
-            width: 300
-          });
-        });
-      });
+
+const textElements = document.querySelectorAll(".textToCopy");
+
+textElements.forEach(function (text) {
+  let clickCount = 0;
+
+  text.addEventListener("click", function () {
+    clickCount++;
+    if (clickCount === 1) {
+      // Start a timer to wait for double click
+      setTimeout(function () {
+        textCopyFunction(text);
+        clickCount = 0;
+      }, 300);
+    } else if (clickCount === 2) {
+      redirectToSendEmail(text);
+      clickCount = 0;
+    }
+  });
+
+  text.addEventListener("dblclick", function () {
+    redirectToSendEmail(text);
+    clickCount = 0;
+  });
+});
+
+function textCopyFunction(text) {
+  const range = document.createRange();
+  range.selectNode(text);
+  window.getSelection().removeAllRanges();
+  window.getSelection().addRange(range);
+  document.execCommand("copy");
+  window.getSelection().removeAllRanges();
+
+  Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Text Copied!",
+    showConfirmButton: false,
+    timer: 1000,
+    height: 100,
+    width: 300,
+  });
+}
+
+function redirectToSendEmail(text) {
+  const selectedEmail = text.textContent;
+  const dropdown = document.getElementById("select-employee");
+  const options = dropdown.options;
+
+  // loop through email dropdown
+  for (let i = 0; i < options.length; i++) {
+    const option = options[i];
+    const email = option.dataset.employeeEmail;
+
+    if (email === selectedEmail) {
+      option.selected = true;
+      $(dropdown).trigger("change");
+    }
+  }
+}
+
+
     </script>   
     
 <!-- <script src="../Modals/M-Employee.js"></script>
