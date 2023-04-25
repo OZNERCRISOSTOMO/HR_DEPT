@@ -92,6 +92,7 @@
 
             <select class="form-select" name="department" id="department">
                 <option class="dropdown-item" value="">--Please choose an option--</option>
+                <option class="dropdown-item" value="human-resource">Human Resource</option>
                 <option class="dropdown-item" value="sales">Sales</option>
                 <option class="dropdown-item" value="purchaser">Purchaser</option>
                 <option class="dropdown-item" value="warehouse">Warehouse</option>                  
