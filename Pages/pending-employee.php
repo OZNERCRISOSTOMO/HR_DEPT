@@ -215,7 +215,7 @@
 
                                   foreach($rfidCards as $card){
 
-                                    if($card["employee_id"] == null){
+                                    if($card["employee_id"] == "0"){
                                         echo "<option value='".$card["serial_number"] ."'>". $card["serial_number"] ."</option>";
                                     }
                                     
