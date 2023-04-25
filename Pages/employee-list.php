@@ -257,56 +257,100 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
         <!-- Modal footer -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="text-danger border-0 bg-transparent" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editmodal">Edit</button>
         </div>
         </div>
     </div>
     </div>
     <!-----End----->
 
-    <!-- Modal for Edit -->
-        <div class="modal fade" id="editmodal">
-        <div class="modal-dialog">
-        <div class="modal-content">
+<!-- Modal for Edit -->
+<div class="modal fade" id="editmodal">
+<div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
 
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h5 class="modal-title">Employee Data</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      <!-- Modal Header -->
+      <div class="modal-header" id="editmodal">
+        <h5 class="modal-title">Edit Employee Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+      <div class="d-flex flex-row">
+      <div class="flex-fill p-2">
+        <div class="d-flex justify-content-center mb-2">
+        <img class="rounded-circle mx-auto d-block" src="../Images/1x1 photo.png" height="150" width="150" alt="Employee Pic" />
         </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-            <div class="form-floating">
-            <input type="text" class="form-control" name="EmployeeName" id="floatingName" placeholder="Employee Name"> </textarea>
-            <label for="floatingName" style="font-family: Bahnschrift;">Employee Name</label>
+        <div class="d-flex justify-content-center">
+        <div class="btn btn-primary btn-rounded btn-sm">
+            <label class="form-label text-white m-1" for="profile">Tap to Change Profile</label>
+            <input type="file" class="form-control d-none" id="profile" />
+        </div>
+      </div>
+          <h2 class="text mt-2" name="EmployeeName" contenteditable="true">Renzo Caloocan</h2>
+          <p class="text text-center" contenteditable="true">Project Manager</p>
+          <div class="rounded ms-3"></div>
+        </div>
+        <div class="flex-fill p-2">
+          <div class="form-floating">
+            <h5 style="font-family: Bahnschrift;">Personal Information</h5>
+            <table class="table table-borderless mt-2">
+              <thead>
+                <tr>
+                  <th><p class="text" style="opacity: 0.5;">Employee ID </p></th>
+                  <th><p class="text" style="opacity: 0.5;">Date Hired </p></th>
+                  <th><p class="text" style="opacity: 0.5;">Email </p></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><p class="text" style="" contenteditable="true">0001-AAA</p></td>
+                  <td contenteditable="true">10/02/2023</td>
+                  <td contenteditable="true">johnrenzocrisos@gmail.com</td>
+                </tr>
+                <tr>
+                  <th><p class="text" style="opacity: 0.5;">Contact Number </p></th>
+                  <th><p class="text" style="opacity: 0.5;">Birthdate </p></th>
+                </tr>
+                <tr>
+                  <td contenteditable="true">+639123456789</td>
+                  <td contenteditable="true">21/02/2002</td>
+                </tr>
+              </tbody>
+            </table>
+            <h5 style="font-family: Bahnschrift;">Benefits</h5>
+            <table class="table table-borderless mt-2">
+              <thead>
+                <tr>
+                  <th><p class="text" style="opacity: 0.5;">SSS </p></th>
+                  <th><p class="text" style="opacity: 0.5;">TIN </p></th>
+                  <th><p class="text" style="opacity: 0.5;">PhilHealth </p></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td contenteditable="true"><p class="text" style="">0000-0000000-0</p></td>
+                  <td contenteditable="true">000-000-000-0000</td>
+                  <td contenteditable="true">0000-0000-0000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
             </div>
+      <!--Modal Body End-->
 
-        <div class="form-floating mt-3">
-            <textarea class="form-control" name="EmployeePos" id="floatingPosition" placeholder="Employee Position"> </textarea>
-            <label for="floatingPosition" style="font-family: Bahnschrift;">Employee Position</label>
-            </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="text-danger border-0 bg-transparent" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success btn-sm" id="editBtn">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <div class="dropdown mt-3">
-            <select name="Category" id="category">
-            <option value="Category">Department</option>
-            <option value="Sales">Sales</option>
-            <option value="HR">HR</option>
-            <option value="Secret">Secret</option>
-            </select>
-        </div>
-        </div>
-        <!--Modal Body End-->
-
-        <!-- Modal footer -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" name="add-details">Submit</button>
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
-        </div>
-    </div>
-    </div>
-    </div>
     <!-----End----->
 
     
@@ -335,7 +379,6 @@ logoutBtn.addEventListener("click", function (e) {
     }
   });
 });
-
 </script>
 </body>
 </html>
