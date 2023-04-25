@@ -168,7 +168,7 @@ for (let i = 0; i < employeeType.length; i++) {
       $("#christmas-bonus").prop("checked", true);
 
       //set food allowance to unchecked
-      $("#food-allowances").prop("checked", true);
+      $("#food-allowance").prop("checked", true);
 
       //set transpo allowance to unchecked
       $("#transpo-allowance").prop("checked", true);
@@ -184,7 +184,7 @@ for (let i = 0; i < employeeType.length; i++) {
 
       //disabled admin
       employeePosition[1].disabled = true;
-      employeePosition[0].checked = true;
+      // employeePosition[0].checked = true;
       employeePosition[1].checked = false;
 
       //set sick leave to 0
@@ -193,6 +193,10 @@ for (let i = 0; i < employeeType.length; i++) {
       // set vacation leave to 0
       $(".vacation-leave").val("0");
 
+      //set sick leave to 0
+      // $("#food-allowance").prop("value", "0");
+      // $("#transpo-allowance").prop("value", "0");
+
       //set health insurance to unchecked
       $("#health-insurance").prop("checked", false);
 
@@ -200,7 +204,7 @@ for (let i = 0; i < employeeType.length; i++) {
       $("#christmas-bonus").prop("checked", false);
 
       //set food allowance to unchecked
-      $("#food-allowances").prop("checked", false);
+      $("#food-allowance").prop("checked", false);
 
       //set transpo allowance to unchecked
       $("#transpo-allowance").prop("checked", false);
@@ -232,6 +236,10 @@ for (let i = 0; i < employeePosition.length; i++) {
         option.setAttribute("data-position-rate", positions[position]);
         selectDepartmentPosition.appendChild(option);
       });
+
+      //change value of food and transpo allowance
+      $("#food-allowance").prop("value", "1500");
+      $("#transpo-allowance").prop("value", "1500");
     }
 
     if (
@@ -251,6 +259,10 @@ for (let i = 0; i < employeePosition.length; i++) {
         option.setAttribute("data-position-rate", positions[position]);
         selectDepartmentPosition.appendChild(option);
       });
+
+      //change value of food and transpo allowance
+      $("#food-allowance").prop("value", "1000");
+      $("#transpo-allowance").prop("value", "1000");
     }
   });
 }

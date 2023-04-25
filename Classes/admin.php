@@ -278,13 +278,13 @@ class Admin {
         if($id == ""){
             
             $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
-                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position, employee_details.rate_per_hour FROM employees 
+                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position, employee_details.department_position, employee_details.rate_per_hour FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
                                                         WHERE employees.status = '1'";
             $employees = $this->database->getConnection()->query($query)->fetchAll();
         }else{
              $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
-                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position, employee_details.rate_per_hour  FROM employees 
+                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position, employee_details.department_position, employee_details.rate_per_hour  FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
                                                         WHERE employees.status = '1' AND employees.id = $id";
             $employees = $this->database->getConnection()->query($query)->fetch();
@@ -310,7 +310,7 @@ class Admin {
 
     public function searchEmployees($name){
         $data =  $this->database->getConnection()->query("SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
-                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position,employee_details.rate_per_hour FROM employees 
+                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position,employee_details.department_position, employee_details.rate_per_hour FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
                                                     WHERE (first_name LIKE '{$name}%' OR last_name LIKE '{$name}%') AND status = '1' ")->fetchAll();
 
@@ -349,7 +349,8 @@ class Admin {
          $stmt = $this->database->getConnection()->prepare("UPDATE employees AS e
                                                       INNER JOIN employee_details AS ed ON e.id = ed.employee_id
                                                       SET e.schedule_id = ?, e.status = ?,  ed.rate_per_hour = ?, ed.department = ?, ed.date_hired = ?,
-                                                       ed.position = ?, ed.department_position = ?, ed.employee_type = ?,  ed.branch = ? , ed.vacation_leave = ? , ed.sick_leave = ? , ed.health_insurance = ?, ed.christmas_bonus = ? 
+                                                       ed.position = ?, ed.department_position = ?, ed.employee_type = ?,  ed.branch = ? , ed.vacation_leave = ? ,
+                                                        ed.sick_leave = ? , ed.health_insurance = ?, ed.christmas_bonus = ?, ed.food_allowance = ?, ed.transpo_allowance = ? 
                                                       WHERE e.id = ?");
 
         //if execution fail
@@ -366,6 +367,8 @@ class Admin {
                              $employeeData['sickLeave'],
                              $employeeData['healthInsurance'],
                              $employeeData['christmasBonus'],
+                             $employeeData['foodAllowance'],
+                             $employeeData['transpoAllowance'],
                              $employeeData['employeeId']
                              ])) {
             header("Location: ../Pages/employee-register.php?error=stmtfail");

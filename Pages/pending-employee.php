@@ -177,11 +177,11 @@
 
                                 <h5>Allowance</h5>
                                  <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="1" id="food-allowance" name="food-allowance" checked >
+                                    <input class="form-check-input" type="checkbox" value="0" id="food-allowance" name="food-allowance" checked >
                                      <label class="form-check-label" for="food-allowance"> Food allowance </label  >
                                 </div> 
                                  <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="1" id="transpo-allowance" name="transpo-allowance" checked >
+                                    <input class="form-check-input" type="checkbox" value="0"  id="transpo-allowance" name="transpo-allowance" checked >
                                      <label class="form-check-label" for="transpo-allowance"> Transportation allowance</label>
                                 </div> 
                      

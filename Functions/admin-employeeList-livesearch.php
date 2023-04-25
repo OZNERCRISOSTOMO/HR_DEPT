@@ -29,7 +29,7 @@ if (isset($_POST['search'])) {
                         <img class="rounded-circle mx-auto" src="../Uploads/'. $employee["picture_path"] .'" style="object-fit: cover;border-radius: 50%;height: 140px; width: 140px;" alt="Employee Pic">    
                         <div class="card-body ps-1">
                             <h6 class="card-title text-center col-11 m-auto" name="EmployeeName">'. $employee["first_name"] . " " .$employee["last_name"]  .'</h6>
-                            <p class="card-text text-center" style="opacity: 0.7;">'. ucfirst($employee["position"]) .'</p>
+                            <p class="card-text text-center" style="opacity: 0.7;">'. ucfirst($employee["department_position"]) .'</p>
                             
                             <div id="inCard"  style=" background-color: #f2f2f2;"; class="col-12 rounded m-auto align-content-center ms-2 ">
                             <table class="table table-borderless p-0 m-0 pb-0">
