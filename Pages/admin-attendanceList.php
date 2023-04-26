@@ -20,6 +20,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/53a2b7f096.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
  <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
@@ -227,7 +228,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     FROM employees
     JOIN employee_details ON employees.id = employee_details.employee_id
     JOIN attendance ON employees.id = attendance.employee_id
-    WHERE employee_details.department =  employee_details.department AND attendance.date = '$date_now'";
+    WHERE employee_details.department = employee_details.department AND attendance.date = '$date_now' AND attendance.status = 'LATE' OR attendance.status = 'ONTIME'";
     $result = mysqli_query($conn, $sql);
 
     // check if SELECT statement was successful
@@ -254,13 +255,26 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
   <!------------ Table 4 Overtime / Undertime------------ -->
         <div class="tab-pane fade" id="tab4">
-
-      
-
+        <table id="absents" class="table table-striped">
+			<thead>
+				<tr>
+					
+			      <th>Employee ID</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Status</th>
+        
+          
+				</tr>
+			</thead>
+			<tbody>
+        
+      </tbody>
+		</table>
         
 
-        </div>
- <!------------ Table 3 End ------------ -->
+    </div>
+ <!------------ Table 4 End ------------ -->
 
 
       </div>
@@ -283,6 +297,9 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
   $(document).ready(function(){
     $('#recents').DataTable();
+  });
+  $(document).ready(function(){
+    $('#absents').DataTable();
   });
   
   

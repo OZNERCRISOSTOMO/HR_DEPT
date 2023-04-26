@@ -12,7 +12,7 @@
             
           <div class="container">
 		<h2 class="text-center">Attendance Monitoring</h2>
-		<table class="table table-striped">
+		<table id="attendanceTable" class="table table-striped">
 			<thead>
 				<tr>
 			<th>Employee ID</th>
@@ -20,37 +20,29 @@
             <th>Lastname</th>
             <th>Status</th>
 				</tr>
-
-        <?php
-            $employee = $admin->selectEmployeeSched('1');
-
-            $count = 0;
-            foreach ($employee as $sched) {
-                foreach ($sched as $key => $value) {
-
-                //check in attendance if exist 
-                $valueEmployee = $admin->checkAttendance($value);
-
-                if(!$valueEmployee){
-                    $count++;
-                    $employeeInfo = $admin->findEmployeeById($value);
-              if (!empty($employeeInfo)) {
-                echo "<tr><td>".$employeeInfo[0]['id']."</td>";
-                echo "<td>".$employeeInfo[0]['first_name']."</td>";
-                echo "<td>".$employeeInfo[0]['last_name']."</td>";
-                echo '<td>Absent</td>';
-               
-                }
-            }
-
-    }
-}
-?>
 			</thead>
 			<tbody>
            
 			</tbody>
 		</table>
+    <script>
+      $.ajax({
+        url: "../Functions/employee-absent.php",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+          $.each(data, function(index, value){
+            var row = $("<tr>");
+            var idCell = $("<td>").text(value.id);
+            var fnameCell = $("<td>").text(value.first_name);
+            var lnameCell = $("<td>").text(value.last_name);
+            var statusCell = $("<td>").text("Absent");
+            row.append(idCell, fnameCell, lnameCell, statusCell);
+            $("#attendanceTable tbody").append(row);
+          });
+        }
+      });
+    </script>
 	</div>
 
           </div>

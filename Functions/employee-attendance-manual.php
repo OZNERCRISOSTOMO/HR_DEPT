@@ -70,7 +70,7 @@ if ($conn->connect_error) {
 		<img src="../Images/Attendance-logo.png" class="mx-auto d-block mb-3" height="150" width="150">
 		<form action="../Functions/employee-attendance-manual-function.php" method="POST">
             <div class="form-group mb-3" >
-                <label for="exampleInputEmail1" class="form-label fw-bolder">Email</label>
+                <label for="exampleInputEmail1" class="form-label fw-bolder">Login ID:</label>
                     <div class="input-group">
                         <div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-user"></i></div>
                             <input type="text" class="form-control shadow-none border-left-0" name="email" id="email" placeholder="Email" required="required">
@@ -134,7 +134,25 @@ if(successValue === "invalidUser"){
 	setTimeout(function(){
     window.history.back();
    },4000);
-}else if(successValue === "invalidPass"){
+}else if(successValue === "invalidSched"){
+	Swal.fire({
+		icon:'error',
+		title:'Please Follow Your Schedule',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	setTimeout(function(){
+    window.history.back();
+   },4000);
+}
+else if(successValue === "invalidPass"){
 	Swal.fire({
 		icon:'error',
 		title:'Wrong Password',

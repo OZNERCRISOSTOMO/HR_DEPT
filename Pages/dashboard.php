@@ -10,7 +10,15 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     $database = new Database();
     $admin = new Admin($database);
 
-    $employee = $admin->selectEmployeeSched('1');
+    $timezone = 'Asia/Manila';
+	date_default_timezone_set($timezone);
+    $lognow = date('H:i:s');
+
+    if($lognow < "16:30:00"){
+        $employee = $admin->selectEmployeeSched('1');
+    }else if($lognow > "16:30:00"){
+        $employee = $admin->selectEmployeeSched('2');
+    }
 
     $count = 0;
    foreach ($employee as $sched) {
