@@ -597,13 +597,9 @@ public function Insertpayroll($prlist){
 }
 public function updatePayroll($id, $code, $start, $end, $type){
     $stmt = $this->database->getConnection()->prepare("UPDATE prlist SET code = ?, start = ?, end = ?, type = ? WHERE id = ?");
-    $stmt->bindParam(1, $code);
-    $stmt->bindParam(2, $start);
-    $stmt->bindParam(3, $end);
-    $stmt->bindParam(4, $type);
-    $stmt->bindParam(5, $id);
-    $stmt->execute();
+    $stmt->execute([$code, $start, $end, $type, $id]);
 }
+
 public function deletePayroll($id) {
     try {
         $sql = "DELETE FROM prlist WHERE id = :id";

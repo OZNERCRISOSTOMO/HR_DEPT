@@ -20,10 +20,9 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         } else {
             echo "Failed to update payroll.";
         }
-    }else if (isset($_POST['delete']) && isset($_POST['id'])) {
-        // code for deleting payroll
+    }else  if (isset($_POST['delete']) && $_POST['delete'] == 'Delete') {
         $id = $_POST['id'];
-        $payroll->deletePayroll($id);
+        $deleteMsg = $payroll->deletePayroll($id); // Call the deletePayroll method Payroll class passing the id to be deleted
         header("Location: ../admin/prlist.php");
     } else {
         header("Location: ../admin/prlist.php");

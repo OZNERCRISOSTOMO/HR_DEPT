@@ -226,7 +226,6 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     <select class="form-control" id="editType" name="editType">
                     <option value="monthly">Monthly</option>
                     <option value="semimonthly">Semi-Monthly</option>
-                    <option value="custom">Custom</option>
                         </select>
                         <!-- Add an input field for the custom option -->
                         <div class="mt-2" id="customTypeContainer" style="display: none;">
