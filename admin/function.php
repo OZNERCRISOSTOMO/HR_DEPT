@@ -15,6 +15,9 @@
 
 //  $employeepayslip = $admin->getEmployeePayslipTable($employee[0]["id"]);
 
+// create an empty array to store the PDF data
+// $pdf_data = array();
+
  foreach ($employee as $emp) {
     foreach ($emp as $key => $value) {
   
@@ -25,9 +28,8 @@
       $employeeDetails = $admin->getEmployeeDetails($employeepayslip["employee_id"]);
 
     
-  
+        
       if($employeepayslip){
-
         $prlist = $payslip->payrollDetails($prlistId);
         $paycode = '';
         $paytype = '';
@@ -94,6 +96,7 @@
                 $love_result = '0 - not a member';
         }
 
+        $tax = 5000;
 
         if ($tax <= 10000) {
             $tax = $totalearn * 0.05;
@@ -119,7 +122,7 @@
 
         $totaldeductions = $sss_result + $phil_result + $love_result + $tax;
         
-        $mdpf = new Mpdf\Mpdf();
+        $mdpf = new \Mpdf\Mpdf();
         
         $data = '';
         
@@ -285,11 +288,31 @@
             </table>   
         </div>
         ';
+        
+        $document_path = '../Uploads/';
 
         $mdpf->WriteHTML($data);
-        $mdpf->Output($fname . '_' . $date . ' - payslip.pdf', 'D');
+
+        $timestamp = time(); // get current timestamp
+
+        $filename = $fname. '_' . $date . '-' . $timestamp . '.pdf'; // append timestamp to filename
+
+        $file_path = $document_path . $filename;
+
+        $mdpf->Output($file_path, 'F');
+
+        //save the file name to database
+        $admin->insertPayslipFilePath($filename, $employeepayslip["employee_id"]);
   
       }
     }
   }
+     
+
+header("Location: pslist.php?id=$prlistId");
+
+
 ?>
+
+
+        

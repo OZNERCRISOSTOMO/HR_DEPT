@@ -176,7 +176,11 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                 <td><?php echo $list['date_added']; ?></td>
                                 <td><?php echo $list['employee']; ?></td>
                                 <td><?php echo $list['net']; ?></td>
-                                <td><?php echo $list['file_path']; ?></td>
+                                <td>
+                                    <a href="../Uploads/<?php echo $list['file_path'];?>" target="_thapa">
+                                                <?php echo $list['file_path'];?>
+                                    </a>      
+                                </td>
                                 <td><?php echo $list['prlist_id']; ?></td>
                                 <td>
                                 <form action="" method="POST">
@@ -234,7 +238,7 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
   // Read selected option
   $('#select-employee').on('change', function() {
       var selectedValue = $(this).val();
-      console.log(selectedValue);
+    //   console.log(selectedValue);
       if(selectedValue != '0'){
              $.ajax({
                   url: "../Functions/admin-payslip.php",
@@ -248,12 +252,15 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
                       
                       $("#employee-id").val(employeeData.employee_id)
                       $("#department").val(employeeData.department)
-                      $("#salary").val(employeeData.salary)
+                      $("#salary").val(employeeData.rate_per_hour)
                        $("#email").val(employeeData.email)
                        $("#position").val(employeeData.position)
                        $("#branch").val(employeeData.branch)
                        $("#present").val(employeeData.num_hr)
                        $("#overtime").val(employeeData.over_time)
+                       $("#food-allowance").val(employeeData.food_allowance)
+                       $("#transpo-allowance").val(employeeData.transpo_allowance)
+
                       $("#employee-name").val(employeeData.first_name + " " + employeeData.last_name)
                        const beneficiaries = [{type:"sss",
                                                value:employeeData.sss
@@ -272,7 +279,7 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
                               $(`#${membership.type}`).prop('disabled', true);
                           }
                       })
-                       console.log(beneficiaries)
+                
                   }
               })
       }

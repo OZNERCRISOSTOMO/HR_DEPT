@@ -14,7 +14,12 @@ if (isset($_POST['id'])) {
 
     $employeeData = $admin->getEmployeePayslip($employeeId);
     
+    // var_dump($employeeData);    
+    // exit();
+
+    // header('Content-Type: application/json');
     echo json_encode($employeeData);
+
 
 }else{
     echo "none";

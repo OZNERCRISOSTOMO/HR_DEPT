@@ -18,7 +18,8 @@ $overtime = $_POST['overtime'];
 $salary = $_POST['salary'];
 $prlistid = $_POST['prlist-id'];
 $employeeId = $_POST['employee-id'];
-
+$food_allowance = $_POST['food-allowance'];
+$transpo_allowance = $_POST['transpo-allowance'];
 
 $sss = "";
 $philhealth = "";
@@ -94,7 +95,7 @@ $networth = $salary - ($sss_result + $phil_result + $love_result);
 
 
 if ($admin->checkprlist($prlistid)) {
-    $admin->insertEmployeePayslipForm($fname, $position, $branch, $department,  $date, $date1, $present, $overtime, $salary, $sssChecked,$pagibigChecked, $philhealthChecked, $employeeId);
+    $admin->insertEmployeePayslipForm($fname, $position, $branch, $department,  $date, $date1, $present, $overtime, $salary, $sssChecked,$pagibigChecked, $philhealthChecked, $food_allowance, $transpo_allowance, $employeeId);
     $admin->insertEmployeePayslip($fname, $networth, $prlistid, $employeeId);
 }
 ?>

@@ -87,11 +87,20 @@ class Admin {
     public function getEmployeePayslip($id){
         
           // prepare the SQL statement using the database property
-        $stmt = $this->database->getConnection()->prepare("SELECT employees.*, employee_details.department, employee_details.salary, 
+        // $stmt = $this->database->getConnection()->prepare("SELECT employees.*, employee_details.department, employee_details.salary, 
+        //                                             employee_details.sss, employee_details.pagibig, employee_details.philhealth, 
+        //                                             employee_details.position, employee_details.branch, employee_details.num_hr, 
+        //                                             employee_details.over_time,employee_details.employee_id, employee_details.food_allowance
+        //                                             FROM employees
+        //                                             JOIN employee_details ON employees.id = employee_details.employee_id
+        //                                             WHERE employees.id=?");
+
+         $stmt = $this->database->getConnection()->prepare("SELECT employees.*, employee_details.department, employee_details.rate_per_hour, 
                                                     employee_details.sss, employee_details.pagibig, employee_details.philhealth, 
                                                     employee_details.position, employee_details.branch, employee_details.num_hr, 
-                                                    employee_details.over_time,employee_details.employee_id, employee_details.food_allowance
-                                                    employee_details.transpo_allowance FROM employees
+                                                    employee_details.over_time, employee_details.employee_id, employee_details.food_allowance
+                                                    , employee_details.transpo_allowance
+                                                    FROM employees
                                                     JOIN employee_details ON employees.id = employee_details.employee_id
                                                     WHERE employees.id=?");
 
@@ -343,6 +352,18 @@ class Admin {
          $formatted_date = date('m/d/Y', strtotime($date));
 
          return $formatted_date;
+    }
+
+    public function insertPayslipFilePath($file,$employeeId){
+         // prepared statement
+         $stmt = $this->database->getConnection()->prepare("UPDATE employee_payslip SET file_path = ? WHERE employee_id = ?");
+
+        //if execution fail
+        if (!$stmt->execute([$file,$employeeId])) {
+            header("Location: ../Pages/employee-register.php?error=stmtfail");
+
+            exit();
+        }
     }
 
     

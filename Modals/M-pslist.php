@@ -69,6 +69,16 @@
                         <input type="number" name="overtime" id="overtime" placeholder="Number of Overtime (per hour)" class="form-control" required>
                     </div>
                 </div>
+
+                 <div class="row mb-3">
+                    <div class="col-md-6">
+                        <input type="number" name="food-allowance" id="food-allowance" placeholder="Food allowance" class="form-control" value="0">
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="number" name="transpo-allowance" id="transpo-allowance" placeholder="Transportation allowance" class="form-control" value="0">
+                    </div>
+                </div>
                 
                 <div class="mb-2">
                 <input type="number" name="salary" id="salary" placeholder="Salary" class="form-control" required>
