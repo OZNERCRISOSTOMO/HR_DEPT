@@ -289,8 +289,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
             <input type="file" class="form-control d-none" id="profile" />
         </div>
       </div>
-          <h2 class="text mt-2" name="EmployeeName" contenteditable="true">Renzo Caloocan</h2>
-          <p class="text text-center" contenteditable="true">Project Manager</p>
+              <h2 class="text mt-2 text-center" name="EmployeeFName" contenteditable="true">Renzo Hatdog</h2>
+              <h2 class="text mt-2 text-center" name="EmployeeLName" contenteditable="true">Caloocan</h2>
+              <p class="text text-center" contenteditable="true">Project Manager</p>
+
           <div class="rounded ms-3"></div>
         </div>
         <div class="flex-fill p-2">
@@ -306,17 +308,18 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
               </thead>
               <tbody>
                 <tr>
-                  <td><p class="text" style="" contenteditable="true">0001-AAA</p></td>
-                  <td contenteditable="true">10/02/2023</td>
-                  <td contenteditable="true">johnrenzocrisos@gmail.com</td>
+                <td> <input type="text" class="form-control form-control-sm border-0" value="0001-AAA"></td>
+                <td> <input type="text" class="form-control form-control-sm border-0" value="10/02/2023"></td>
+                <td> <input type="text" class="form-control form-control-sm border-0" value="johnrenzocrisos@gmail.com"></td>
+
                 </tr>
                 <tr>
                   <th><p class="text" style="opacity: 0.5;">Contact Number </p></th>
                   <th><p class="text" style="opacity: 0.5;">Birthdate </p></th>
                 </tr>
                 <tr>
-                  <td contenteditable="true">+639123456789</td>
-                  <td contenteditable="true">21/02/2002</td>
+                  <td> <input type="text" class="form-control border-0" value="+639123456789"></td>
+                  <td>21/02/2002</td>
                 </tr>
               </tbody>
             </table>
@@ -331,9 +334,9 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
               </thead>
               <tbody>
                 <tr>
-                  <td contenteditable="true"><p class="text" style="">0000-0000000-0</p></td>
-                  <td contenteditable="true">000-000-000-0000</td>
-                  <td contenteditable="true">0000-0000-0000</td>
+                  <td> <input type="text" class="form-control border-0" value="0000-0000000-0"></p></td>
+                  <td> <input type="text" class="form-control border-0" value="000-000-000-0000"></td>
+                  <td> <input type="text" class="form-control border-0" value="0000-0000-0000"></td>
             </tr>
           </tbody>
         </table>
