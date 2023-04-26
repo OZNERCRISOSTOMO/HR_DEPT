@@ -90,7 +90,8 @@ class Admin {
         $stmt = $this->database->getConnection()->prepare("SELECT employees.*, employee_details.department, employee_details.salary, 
                                                     employee_details.sss, employee_details.pagibig, employee_details.philhealth, 
                                                     employee_details.position, employee_details.branch, employee_details.num_hr, 
-                                                    employee_details.over_time,employee_details.employee_id FROM employees
+                                                    employee_details.over_time,employee_details.employee_id, employee_details.food_allowance
+                                                    employee_details.transpo_allowance FROM employees
                                                     JOIN employee_details ON employees.id = employee_details.employee_id
                                                     WHERE employees.id=?");
 
@@ -176,10 +177,10 @@ class Admin {
     header("Location: ../admin/pslist.php?id=$id");
     }
 
-    public function insertEmployeePayslipForm($fname, $position, $branch, $department,  $date, $date1, $present, $overtime, $salary, $sssChecked,$pagibigChecked, $philhealthChecked, $employeeId) {
+    public function insertEmployeePayslipForm($fname, $position, $branch, $department,  $date, $date1, $present, $overtime, $salary, $sssChecked,$pagibigChecked, $philhealthChecked, $food_allowance, $transpo_allowance, $employeeId) {
 
-        $sql = "INSERT INTO employee_payslip_form (employee_name, position, branch, department, from_date, to_date, number_present, number_overtime, rate, sss, pagibig, philhealth, employee_id)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        $sql = "INSERT INTO employee_payslip_form (employee_name, position, branch, department, from_date, to_date, number_present, number_overtime, rate, sss, pagibig, philhealth, food_allowance, transpo_allowance  ,employee_id)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
      // prepared statement
     $stmt = $this->database->getConnection()->prepare($sql);
@@ -197,6 +198,8 @@ class Admin {
                          $sssChecked, 
                          $pagibigChecked, 
                          $philhealthChecked,
+                         $food_allowance,
+                         $transpo_allowance,
                          $employeeId])) {
         header("Location: ../Pages/employee-register.php?error=stmtfail");
 

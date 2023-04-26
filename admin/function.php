@@ -47,13 +47,16 @@
 
         $overtime = $employeeDetails[0]['over_time'];
         $ratePerHour = $employeeDetails[0]['rate_per_hour']; 
+        $food = $employeeDetails[0]['food_allowance'];
+        $transpo = $employeeDetails[0]['transpo_allowance'];
 
         $sss = $employeepayslip['sss']; 
         $philhealth = $employeepayslip['philhealth']; 
         $pagibig = $employeepayslip['pagibig']; 
 
         $totalearn = ($ratePerHour * $num_hr) + $overtime; //salary rate * number of hours completed
-        // $grosspay = $totalearn + $totalallowance; -> (saka na'to pag okay na yung sa allowance)
+        $totalallowance = $food + $transpo;
+        $grosspay = $totalearn + $totalallowance; //-> (saka na'to pag okay na yung sa allowance)
 
         if ($sss == true) {
             $num1 = $totalearn;       
@@ -216,46 +219,17 @@
 
                 <tr>
                     <td class="column1">Food</td>
-                    <td class="column2" style="text-align: right;">No data</td>
+                    <td class="column2" style="text-align: right;">'. $food .'</td>
                 </tr>
 
                 <tr>
                     <td class="column1">Transportation</td>
-                    <td class="column2" style="text-align: right;">No data</td>
+                    <td class="column2" style="text-align: right;">'. $transpo .'</td>
                 </tr>
 
                 <tr>
                     <td class="column1" style="text-align: right; font-weight: bolder;">TOTAL ALLOWANCES</td>
-                    <td class="column2" style="text-align: right; font-weight: bolder;">No data</td>
-                </tr>
-            </table>
-
-
-            <!---Table for Benefits-->
-            <table style="border-collapse: collapse; width: 80%; margin: auto; margin-bottom: 20;">
-                <tr style="text-align:center; font-weight: bold; color: white; background-color: #0d6efd;">
-                    <td class="column1" style="text-align: center; color: white;">BENEFITS</td>
-                    <td class="column2" style="text-align: center; color: white;">AMOUNT</td> 
-                </tr>
-
-                <tr>
-                    <td class="column1">Vacation Leave</td>
-                    <td class="column2" style="text-align: right;">No data</td>
-                </tr>
-
-                <tr>
-                    <td class="column1">Health Insurance</td>
-                    <td class="column2" style="text-align: right;">No data</td>
-                </tr>
-
-                <tr>
-                    <td class="column1">Christmas Bonus</td>
-                    <td class="column2" style="text-align: right;">No data</td>
-                </tr>
-
-                <tr>
-                    <td class="column1" style="text-align: right; font-weight: bolder;">TOTAL BENEFITS</td>
-                    <td class="column2" style="text-align: right; font-weight: bolder;">No data</td>
+                    <td class="column2" style="text-align: right; font-weight: bolder;">'. $totalallowance .'</td>
                 </tr>
             </table>
 
@@ -301,7 +275,7 @@
 
                 <tr>
                     <td class="column1">Gross Pay</td>
-                    <td class="column2" style="text-align: right;"> $grosspay </td>
+                    <td class="column2" style="text-align: right;">'. $grosspay .'</td>
                 </tr>
 
                 <tr>
