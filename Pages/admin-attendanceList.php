@@ -4,9 +4,11 @@ session_start();
 if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     require '../Classes/employee.php';
     require '../Classes/database.php';
+    require '../Classes/admin.php';
 
     $database = new Database();
     $attlist = new Employee($database);
+    $admin = new Admin($database);
 } else {
     header("Location: ../index.php");
 }
@@ -268,7 +270,39 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 				</tr>
 			</thead>
 			<tbody>
-        
+      <?php
+            $timezone = 'Asia/Manila';
+	date_default_timezone_set($timezone);
+    $lognow = date('H:i:s');
+
+    if($lognow < "16:00:00"){
+        $employee = $admin->selectEmployeeSched('1');
+    }else if($lognow > "16:00:00"){
+        $employee = $admin->selectEmployeeSched('2');
+    }
+
+            $count = 0;
+            foreach ($employee as $sched) {
+                foreach ($sched as $key => $value) {
+
+                //check in attendance if exist 
+                $valueEmployee = $admin->checkAttendance($value);
+
+                if(!$valueEmployee){
+                    $count++;
+                    $employeeInfo = $admin->findEmployeeById($value);
+              if (!empty($employeeInfo)) {
+                echo "<tr><td>".$employeeInfo[0]['id']."</td>";
+                echo "<td>".$employeeInfo[0]['first_name']."</td>";
+                echo "<td>".$employeeInfo[0]['last_name']."</td>";
+                echo '<td>Absent</td>';
+              
+                }
+            }
+
+    }
+}
+?>
       </tbody>
 		</table>
         
