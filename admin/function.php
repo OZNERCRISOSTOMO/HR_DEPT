@@ -42,7 +42,8 @@
             $paycode = $list['code'];
             $paytype = $list['type'];
          endforeach;
-
+        
+        $id = $employeepayslip['employee_id'];
         $fname = $employeepayslip['employee_name'];
         $position = $employeepayslip['position'];
         $branch = $employeepayslip['branch'];
@@ -126,7 +127,9 @@
         $grosspay = $totalearn - $totaldeductions; //
         $networth = $totalallowance + $grosspay;
 
-        $mdpf = new \Mpdf\Mpdf();
+        $mdpf = new \Mpdf\Mpdf(['format' => 'LETTER', 'orientation' => 'P']);
+        $mdpf->SetProtection( ['print', 'modify', 'copy', 'annot-forms', 'fill-forms', 'extract', 'assemble', 'print-highres'],
+            $fname, $id, 128);
         
         $data = '';
         
