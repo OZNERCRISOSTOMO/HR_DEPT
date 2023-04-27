@@ -499,7 +499,7 @@ class Admin {
     }
 
     public function getAllEmployeePayslip($prlistId) {
-        $employeePayslip =  $this->database->getConnection()->query("SELECT id FROM employee_payslip WHERE prlist_id = '$prlistId' ")->fetchAll();
+        $employeePayslip =  $this->database->getConnection()->query("SELECT id,file_path FROM employee_payslip WHERE prlist_id = '$prlistId' ")->fetchAll();
             return $employeePayslip;
 
             
