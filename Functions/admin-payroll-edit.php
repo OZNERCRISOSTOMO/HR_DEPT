@@ -13,19 +13,15 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         $start = $_POST['editStart'];
         $end = $_POST['editEnd'];
         $type = $_POST['editType'];
+
+        // echo $id;
+        // echo $code;
+        // echo $start;
+        // echo $end;
+        // echo $type;
     
-        $update = $payroll->updatePayroll($id, $code, $start, $end, $type);
-        if($update) {
-            header("Location: ../admin/prlist.php");
-        } else {
-            echo "Failed to update payroll.";
-        }
-    }else  if (isset($_POST['delete']) && $_POST['delete'] == 'Delete') {
-        $id = $_POST['id'];
-        $deleteMsg = $payroll->deletePayroll($id); // Call the deletePayroll method Payroll class passing the id to be deleted
-        header("Location: ../admin/prlist.php");
-    } else {
-        header("Location: ../admin/prlist.php");
+        $payroll->updatePayroll($id, $code, $start, $end, $type);
+     
     }
 } else {
     header("Location: ../admin/prlist.php");

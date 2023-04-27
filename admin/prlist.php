@@ -99,11 +99,13 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
               <td><?php echo $list['end']; ?> </td>
               <td><?php echo $list['type']; ?> </td>
               <td>
-              <form method="POST">
               <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
               <button id="editButton" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#EditModal" type="submit" name="edit" value="Edit">Edit</button>
-              <input type="hidden" name="id" value="<?php echo $id; ?>">
+              
+
+              <form method="POST" action="../Functions/admin-payroll-delete.php">
               <button class="btn btn-sm btn-danger" type="submit" name="delete" value="Delete">Delete</button>
+              <input type="hidden" name="id" value="<?php echo $list['id']; ?>">
               </form>
               </td>
             </tr>
@@ -205,21 +207,21 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
               <div class="modal-body">
                 <form id="prForm" name="payroll" role="form" action="../Functions/admin-payroll-edit.php" method="POST">
                   <div class="form-group mb-3">
-                    <input type="hidden" id="editId" name="id">
+                    <input type="hidden" id="editId" name="editId">
                     <label for="editDate">Date</label>
-                    <input type="date" class="form-control" id="editDate" name="date">
+                    <input type="date" class="form-control" id="editDate" name="editDate">
                   </div>
                   <div class="form-group mb-3">
                     <label for="editCode">Code</label>
-                    <input type="text" class="form-control" id="editCode" name="code">
+                    <input type="text" class="form-control" id="editCode" name="editCode">
                   </div>
                   <div class="form-group mb-3">
                     <label for="editStart">Start</label>
-                    <input type="date" class="form-control" id="editStart" name="start">
+                    <input type="date" class="form-control" id="editStart" name="editStart">
                   </div>
                   <div class="form-group mb-3">
                     <label for="editEnd">End</label>
-                    <input type="date" class="form-control" id="editEnd" name="end">
+                    <input type="date" class="form-control" id="editEnd" name="editEnd">
                   </div>
                   <div class="form-group mb-3">
                     <label for="editType">Type</label>

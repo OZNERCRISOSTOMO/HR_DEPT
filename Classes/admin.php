@@ -585,6 +585,7 @@ public function Insertpayroll($prlist){
        VALUES (?,?,?,?,?);";
 
    $stmt = $this->database->getConnection()->prepare($sql);
+
    if (!$stmt->execute([$this->date,
     $prlist['code'],
     $prlist['start'],
@@ -598,15 +599,30 @@ public function Insertpayroll($prlist){
 public function updatePayroll($id, $code, $start, $end, $type){
     $stmt = $this->database->getConnection()->prepare("UPDATE prlist SET code = ?, start = ?, end = ?, type = ? WHERE id = ?");
     $stmt->execute([$code, $start, $end, $type, $id]);
+    if (!$stmt->execute([$code, $start, $end, $type, $id])) {
+    header("Location: ../admin/prlist.php?error=stmtfail");
+       exit();
+       }
+
+       header("Location: ../admin/prlist.php");
 }
 
 public function deletePayroll($id) {
     try {
-        $sql = "DELETE FROM prlist WHERE id = :id";
-        $stmt = $this->database->getConnection()->prepare($sql);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-        return true;
+        // $sql = "DELETE FROM prlist WHERE id = :id";
+        // $stmt = $this->database->getConnection()->prepare($sql);
+        // $stmt->bindParam(':id', $id);
+        // $stmt->execute();
+
+        $sql = "DELETE FROM prlist WHERE id=?";
+        $stmt= $this->database->getConnection()->prepare($sql);
+        $stmt->execute([$id]);
+
+        if (!$stmt->execute([$id])) {
+            header("Location: ../admin/prlist.php?error=stmtfail");
+               exit();
+        }
+        header("Location: ../admin/prlist.php");
     } catch (PDOException $e) {
         echo $e->getMessage();
         return false;
