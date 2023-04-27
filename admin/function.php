@@ -19,10 +19,14 @@
 // $pdf_data = array();
 
  foreach ($employee as $emp) {
-    foreach ($emp as $key => $value) {
+    // foreach ($emp as $key => $value) {
+
+        if($emp["file_path"] != "Not generated"){
+            continue;
+        }
   
-        //getting data from employee_payslip_form
-      $employeepayslip = $admin->getEmployeePayslipTable($value);
+       //getting data from employee_payslip_form
+      $employeepayslip = $admin->getEmployeePayslipTable($emp["id"] );
 
       //getting data from employee_details
       $employeeDetails = $admin->getEmployeeDetails($employeepayslip["employee_id"]);
@@ -305,7 +309,7 @@
         $admin->insertPayslipFilePath($filename, $employeepayslip["employee_id"]);
   
       }
-    }
+    // }
   }
      
 
