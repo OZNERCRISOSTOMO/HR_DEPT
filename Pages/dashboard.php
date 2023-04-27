@@ -46,11 +46,12 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HR DEPARTMENT</title>
+    <title>HR Department</title>
 
     <link rel="import" href="../Modals/M-Employee.php">
 
-    
+    <link rel="icon" type="image/x-icon" href="../Images/Logo 1.svg">
+
     <!-- SWEET ALERT -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -97,10 +98,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
             display: none;
         }
 
-                .dropdown-menu li {
+         .dropdown-menu li {
         position: relative;
         }
-        .dropdown-menu .dropdown-submenu {
+        .dropdown-menu .dropdown-submenu {            
         display: none;
         position: absolute;
         left: 100%;
@@ -233,23 +234,27 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     <li><a class="dropdown-item" href="#">By Name</a></li>
     <li>
       <a class="dropdown-item" href="#">By Department &raquo; </a>
-      <ul class="dropdown-menu dropdown-submenu">
+
+      <ul class="dropdown-menu dropdown-submenu department-dropdown">
+
+        <li>      
+            <a class="dropdown-item" href="#" id="human-resource" >Human Resource</a>                                   
+        </li>
+
         <li>
-          <a class="dropdown-item" href="#">Human Resource</a>
+          <a class="dropdown-item" href="#" id="sales">Sales</a>
         </li>
         <li>
-          <a class="dropdown-item" href="#">Sales</a>
+          <a class="dropdown-item" href="#" id="warehouse" >Warehouse</a>
         </li>
         <li>
-          <a class="dropdown-item" href="#">Warehouse</a>
-        </li>
-        <li>
-          <a class="dropdown-item" href="#">Purchaser</a>
+          <a class="dropdown-item" href="#" id="purchaser" >Purchaser</a>
         </li>
       </ul>
     </li>
     <li><a class="dropdown-item" href="#">By Position</a></li>
-  </ul>
+   </ul>
+
 </div>
                                                 
                                             </div>

@@ -17,7 +17,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 <!DOCTYPE html>
 <html>
 <head>
-    <Title> PAYSLIP LIST </Title>
+    <Title> Payslip List</Title>
+    <link rel="icon" type="image/x-icon" href="../Images/Logo 1.svg">
     <!-- BOOSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <!-- Select2 CSS --> 

@@ -18,7 +18,9 @@ if (isset($_POST['id'])) {
          
     <div class="flex-fill p-2">
       <img class="rounded-circle mx-auto d-block" src="../Uploads/'. $employee["picture_path"] .'" height="150" width="150" alt="Employee Pic">
-      <h2 class="text" name="EmployeeName">'.  $employee["first_name"] ." ". $employee["last_name"].'</h2>
+      
+      <h2 class="text m-auto text-center" name="EmployeeName">'.  $employee["first_name"] ." ". $employee["last_name"].'</h2>
+      
       <p class="text text-center">'. ucfirst($employee["department"]) .'</p>
       <div class="rounded ms-3"></div>
     </div>

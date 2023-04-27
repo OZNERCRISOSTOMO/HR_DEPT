@@ -18,10 +18,12 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 ?>
 <html>
 <head>
-    <Title> EMPLOYEE LIST </Title>
+    <Title> Employee List </Title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="../Images/Logo 1.svg">
+
   <!-- SWEET ALERT -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -145,7 +147,7 @@ display: block;
     <!-----End----->
  
     <!-----Employee List----->
-    <div class="container-fluid ms-3 p-0 mt-3 employeeList-container align-content-center m-auto d-block ">
+    <div class="container-fluid ms-3 p-3 mt-3 employeeList-container align-content-center m-auto d-block ">
     <div class="row employee-list-wrapper">
 
       <?php 
@@ -320,14 +322,14 @@ display: block;
         <img class="rounded-circle mx-auto d-block" src="../Images/1x1 photo.png" height="150" width="150" alt="Employee Pic" />
         </div>
         <div class="d-flex justify-content-center">
-        <div class="btn btn-primary btn-rounded btn-sm">
+        <div class="btn btn-primary btn-rounded btn-sm p-0 m-0">
             <label class="form-label text-white m-1" for="profile">Tap to Change Profile</label>
             <input type="file" class="form-control d-none" id="profile" />
         </div>
       </div>
-              <h2 class="text mt-2 text-center" name="EmployeeFName" contenteditable="true">Renzo Hatdog</h2>
-              <h2 class="text mt-2 text-center" name="EmployeeLName" contenteditable="true">Caloocan</h2>
-              <p class="text text-center" contenteditable="true">Project Manager</p>
+              <input type="text"  class="form-control fs-2 fw-bold mt-2 text-center border-0 p-0 m-0" name="EmployeeFName" contenteditable="true" value="John Renzo"> </input>
+              <input type="text"  class="form-control fs-2 fw-bold mt-2  text mt-2 text-center border-0 p-0 m-0" name="EmployeeLName" contenteditable="true" value="Crisostomo"></input>
+              <input  type="text" class="form-control border-0 text-center" contenteditable="true" value="Project Manager"></input>
 
           <div class="rounded ms-3"></div>
         </div>
@@ -344,7 +346,7 @@ display: block;
               </thead>
               <tbody>
                 <tr>
-                <td> <input type="text" class="form-control form-control-sm border-0" value="0001-AAA"></td>
+                <td> <input type="text" class="form-control form-control-sm border-0"  value="0001-AAA"></td>
                 <td> <input type="text" class="form-control form-control-sm border-0" value="10/02/2023"></td>
                 <td> <input type="text" class="form-control form-control-sm border-0" value="johnrenzocrisos@gmail.com"></td>
 
@@ -379,6 +381,8 @@ display: block;
       </div>
     </div>
             </div>
+            </div>
+
       <!--Modal Body End-->
 
       <!-- Modal footer -->
@@ -386,6 +390,8 @@ display: block;
         <button type="button" class="text-danger border-0 bg-transparent" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-success btn-sm" id="editBtn">Save Changes</button>
       </div>
+
+      </div> 
     </div>
   </div>
 </div>

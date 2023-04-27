@@ -4,7 +4,7 @@ const totalEmployees = document.querySelector(".total-employees");
 const totalPendingEmployees = document.querySelector(
   ".total-pending-employees"
 );
-
+const departmentDropdown = document.querySelector(".department-dropdown")
 const benefitsContainer = document.querySelector(".benefits-container");
 
 //department
@@ -98,6 +98,16 @@ const companyEmployeeRate = {
     },
   },
 };
+
+departmentDropdown.addEventListener("click",function(e){
+  // Check if the clicked element has an id
+  if (event.target.id) {
+    // Get the id of the clicked element
+    const idName = event.target.id;
+    
+    
+  }
+})
 
 let selectedDepartment = "";
 

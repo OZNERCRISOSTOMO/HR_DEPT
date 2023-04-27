@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+        stroke: #d36727;
+        stroke-width: 6px;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-3 {
+        fill: #bcbec0;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-2);
+        stroke: #487bbe;
+        stroke-width: 7px;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="4.93" y1="347.27" x2="183.75" y2="301.35" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f89b57"/>
+      <stop offset="1" stop-color="#ef4132"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="158.71" y1="183.57" x2="454.97" y2="183.57" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0b77be"/>
+      <stop offset="1" stop-color="#7dd0dd"/>
+    </linearGradient>
+  </defs>
+  <path class="cls-3" d="m250.06,61.09l-7.17,29.75-10.68,44.34-21.82,90.62H47.13c-1.42,5.89-2.1,11.63-2.1,17.13,0,32.67,24.04,56.99,59.72,56.99h12.31l-17.85,74.11h75.49l-2.91,12.08c-9.86,40.93,15.95,74.1,57.63,74.1l20.75-86.18,11.25-46.73,1.56-6.45,5.04-20.93h87.78l-11.15,46.29-.59,2.45c20.84,0,41.72-8.29,58.6-21.7,16.89-13.41,29.8-31.94,34.72-52.41l15.51-64.37,7.14-29.68h-75.47l-7.16,29.68-3.76,15.63h-87.78l3.76-15.63,7.17-29.75,10.89-45.23h87.78c30.9,0,61.86-18.23,79.82-44.34,6.27-9.11,10.95-19.17,13.5-29.75h-238.74Z"/>
+  <g>
+    <path class="cls-1" d="m158.71,278.62l17.85-74.11H13.3c-9.86,40.93,15.94,74.11,57.63,74.11h12.31l-17.85,74.11h75.48l-2.91,12.08c-9.86,40.93,15.94,74.11,57.63,74.11h0l20.76-86.19,17.85-74.11h-75.48Z"/>
+    <path class="cls-2" d="m454.97,39.79h0s-238.74,0-238.74,0l-17.85,74.11-21.83,90.62-17.85,74.11h163.26l-11.74,48.73h0c41.69,0,83.47-33.18,93.33-74.11l22.65-94.04h-75.48l-10.91,45.31h-87.78l21.83-90.62h87.78c41.69,0,83.47-33.18,93.33-74.11Z"/>
+  </g>
+</svg>

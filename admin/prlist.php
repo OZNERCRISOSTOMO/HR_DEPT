@@ -16,7 +16,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 <!DOCTYPE html>
 <html>
 <head>
-<Title> PAYROLL LIST </Title>
+<Title> Payroll List </Title>
+<link rel="icon" type="image/x-icon" href="../Images/Logo 1.svg">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- SWEET ALERT -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
