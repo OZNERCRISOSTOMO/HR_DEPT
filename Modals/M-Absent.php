@@ -22,30 +22,65 @@
 				</tr>
 			</thead>
 			<tbody>
-           
+      <?php
+   // establish a connection to the MySQL database
+   $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
+
+   // check if connection was successful
+   if (!$conn) {
+       die("Connection failed: " . mysqli_connect_error());
+   }
+
+        if($lognow < "16:30:00"){
+            $employee = $admin->selectEmployeeSched('1');
+        }else if($lognow > "16:30:00"){
+            $employee = $admin->selectEmployeeSched('2');
+        }
+    
+                $count = 0;
+                foreach ($employee as $sched) {
+                    foreach ($sched as $key => $value) {
+    
+                    //check in attendance if exist 
+                    $valueEmployee = $admin->checkAttendance($value);
+    
+                    if(!$valueEmployee){
+                        $count++;
+                        $employeeInfo = $admin->findEmployeeById($value);
+                  if (!empty($employeeInfo)) {
+                    echo "<tr><td>".$employeeInfo[0]['id']."</td>";
+                    echo "<td>".$employeeInfo[0]['first_name']."</td>";
+                    echo "<td>".$employeeInfo[0]['last_name']."</td>";
+                    echo '<td>Absent</td></tr>';
+                    }
+                    $checkAttendancevalue = "SELECT * FROM attendance WHERE date = '$date_now' AND status = 'ABSENT' AND employee_id = '".$employeeInfo[0]['id']."' AND schedule_id ='".$employeeInfo[0]['schedule_id']."'";
+                    $query123 = $conn->query($checkAttendancevalue);
+                    if($query123->num_rows > 0){
+                      if($lognow > '16:00:00' && $employeeInfo[0]['schedule_id'] == '1'){
+                        $insertAbsent = "INSERT INTO attendance (name, employee_id, date, status, schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now', 'ABSENT', '1')";
+                        $conn->query($insertAbsent);
+                      }else if($lognow >= '22:00:00' && $employeeInfo[0]['schedule_id'] == '2'){
+                        $insertAbsent = "INSERT INTO attendance (name, employee_id, date, status, schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now','ABSENT', '2')";
+                        $conn->query($insertAbsent);
+                    }
+                  }else{
+                    if($lognow > '16:00:00' && $employeeInfo[0]['schedule_id'] == '1'){
+                      $insertAbsent = "INSERT INTO attendance (name, employee_id, date, status, schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now', 'ABSENT', '1')";
+                      $conn->query($insertAbsent);
+                    }else if($lognow >= '22:00:00' && $employeeInfo[0]['schedule_id'] == '2'){
+                      $insertAbsent = "INSERT INTO attendance (name, employee_id, date, status, schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now','ABSENT', '2')";
+                      $conn->query($insertAbsent);
+                  }
+                  }
+                }
+    
+        }
+    }
+?>
 			</tbody>
 		</table>
-    <script>
-      $.ajax({
-        url: "../Functions/employee-absent.php",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-          $.each(data, function(index, value){
-            var row = $("<tr>");
-            var idCell = $("<td>").text(value.id);
-            var fnameCell = $("<td>").text(value.first_name);
-            var lnameCell = $("<td>").text(value.last_name);
-            var statusCell = $("<td>").text("Absent");
-            row.append(idCell, fnameCell, lnameCell, statusCell);
-            $("#attendanceTable tbody").append(row);
-          });
-        },
-        error:function(){
-          alert("Error");
-        }
-      });
-    </script>
+    
+
 	</div>
 
           </div>
