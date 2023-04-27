@@ -155,7 +155,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     <div class= "a">          
                          <table id="pslist" class="table table-borderless table-striped text-center mt-3 align-middle">
                          <thead>
-                         <tr>
+                         <tr>-=
                             <th>Id</th>
                             <th>Date Added</th>
                             <th>Employee</th>
@@ -167,18 +167,29 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                         </thead>
                      <tbody>
                         <?php
+                            
+                            
                             $pslist = $payslip->payslipList($id);
                             if (!empty($pslist)):
                         ?>
                             <?php foreach($pslist as $list):?>
                             <tr>
                                 <td><?php echo $list['id']; ?></td>
-                                <td><?php echo $list['date_added']; ?></td>
+                                <td><?php echo $admin->formatDate($list['date_added']); ?></td>
                                 <td><?php echo $list['employee']; ?></td>
                                 <td><?php echo $list['net']; ?></td>
                                 <td>
                                     <a href="../Uploads/<?php echo $list['file_path'];?>" target="_thapa">
-                                                <?php echo $list['file_path'];?>
+                                                <?php
+                                                
+
+                                                $name = $list['employee'];
+                                                $name_parts = explode(" ", $name);
+                                                $last_name = array_pop($name_parts);
+                                                echo $last_name . " - " . $list['date_added'];
+
+                                                ?>
+                                    
                                     </a>      
                                 </td>
                                 <td><?php echo $list['prlist_id']; ?></td>
@@ -293,4 +304,3 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
 </body>
 </div>
 </html>
-

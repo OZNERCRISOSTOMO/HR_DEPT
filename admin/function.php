@@ -19,14 +19,10 @@
 // $pdf_data = array();
 
  foreach ($employee as $emp) {
-    // foreach ($emp as $key => $value) {
-        
-        if($emp["file_path"] != "Not generated"){
-            continue;
-        }
-
+    foreach ($emp as $key => $value) {
+  
         //getting data from employee_payslip_form
-      $employeepayslip = $admin->getEmployeePayslipTable($emp["id"] );
+      $employeepayslip = $admin->getEmployeePayslipTable($value);
 
       //getting data from employee_details
       $employeeDetails = $admin->getEmployeeDetails($employeepayslip["employee_id"]);
@@ -62,11 +58,11 @@
 
         $totalearn = ($ratePerHour * $num_hr) + $overtime; //salary rate * number of hours completed
         $totalallowance = $food + $transpo;
-        $grosspay = $totalearn + $totalallowance; //-> (saka na'to pag okay na yung sa allowance)
+        
 
         if ($sss == true) {
             $num1 = $totalearn;       
-            $sss_result = $num1 * 0.14;
+            $sss_result = $num1 * 0.045;
         }
         else {
             $sss_result = '0 - not a member';
@@ -100,7 +96,7 @@
                 $love_result = '0 - not a member';
         }
 
-        $tax = 5000;
+        $tax = $totalearn;
 
         if ($tax <= 10000) {
             $tax = $totalearn * 0.05;
@@ -122,10 +118,10 @@
         }
         else $tax = ($tax >=500001) ? $totalearn * 0.32 : 'error';
 
-        $networth = $totalearn - ($sss_result + $phil_result + $love_result + $tax);
-
         $totaldeductions = $sss_result + $phil_result + $love_result + $tax;
-        
+        $grosspay = $totalearn - $totaldeductions; //
+        $networth = $totalallowance + $grosspay;
+
         $mdpf = new \Mpdf\Mpdf();
         
         $data = '';
@@ -309,14 +305,11 @@
         $admin->insertPayslipFilePath($filename, $employeepayslip["employee_id"]);
   
       }
-    // }
+    }
   }
-    
+     
 
 header("Location: pslist.php?id=$prlistId");
 
 
 ?>
-
-
-        
