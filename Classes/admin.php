@@ -268,11 +268,11 @@ class Admin {
         exit();
     }
 
-     public function getTotalPresent(){
+     public function getTotalPresent($id){
         // Get today's date
         $today = date('Y-m-d');
 
-        $count = $this->database->getConnection()->query("SELECT count(*) FROM attendance WHERE date = '$today' ")->fetchColumn();
+        $count = $this->database->getConnection()->query("SELECT count(*) FROM attendance WHERE date = '$today' AND schedule_id = '$id' AND status = 'LATE' OR status = 'ONTIME'")->fetchColumn();
 
         return $count;
 
@@ -548,7 +548,7 @@ class Admin {
              // Get today's date
         $today = date('Y-m-d');
 
-        $employee = $this->database->getConnection()->prepare("SELECT * FROM attendance WHERE employee_id = ? AND date = '$today'");
+        $employee = $this->database->getConnection()->prepare("SELECT * FROM attendance WHERE employee_id = ? AND date = '$today' AND status = 'ONTIME' OR status = 'LATE'");
          $employee->execute([$id]);
         return $employee->fetch();
 

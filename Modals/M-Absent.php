@@ -40,6 +40,9 @@
             row.append(idCell, fnameCell, lnameCell, statusCell);
             $("#attendanceTable tbody").append(row);
           });
+        },
+        error:function(){
+          alert("Error");
         }
       });
     </script>

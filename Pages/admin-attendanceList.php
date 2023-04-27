@@ -9,6 +9,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     $database = new Database();
     $attlist = new Employee($database);
     $admin = new Admin($database);
+
+    $timezone = 'Asia/Manila';
+	  date_default_timezone_set($timezone);
+    $lognow = date('H:i:s');
 } else {
     header("Location: ../index.php");
 }
@@ -221,7 +225,11 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         die("Connection failed: " . mysqli_connect_error());
     }
     
-
+    if($lognow < "16:30:00"){
+      $employee = '1';
+  }else if($lognow > "16:30:00"){
+      $employee = '2';
+  }
     // execute a SELECT statement to retrieve data from the table
     $timezone = 'Asia/Manila';
 	date_default_timezone_set($timezone);
@@ -230,7 +238,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     FROM employees
     JOIN employee_details ON employees.id = employee_details.employee_id
     JOIN attendance ON employees.id = attendance.employee_id
-    WHERE employee_details.department = employee_details.department AND attendance.date = '$date_now' AND attendance.status = 'LATE' OR attendance.status = 'ONTIME'";
+    WHERE employee_details.department = employee_details.department AND attendance.date = '$date_now' AND attendance.status = 'LATE' OR attendance.status = 'ONTIME' AND attendance.schedule_id = $employee";
     $result = mysqli_query($conn, $sql);
 
     // check if SELECT statement was successful
@@ -271,13 +279,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 			</thead>
 			<tbody>
       <?php
-            $timezone = 'Asia/Manila';
-	date_default_timezone_set($timezone);
-    $lognow = date('H:i:s');
 
-    if($lognow < "16:00:00"){
+    if($lognow < "16:30:00"){
         $employee = $admin->selectEmployeeSched('1');
-    }else if($lognow > "16:00:00"){
+    }else if($lognow > "16:30:00"){
         $employee = $admin->selectEmployeeSched('2');
     }
 

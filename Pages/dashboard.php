@@ -146,7 +146,15 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
                             <div class="col">
                                     <button type="button" class=" btn ps-0 btn-light shadow btn-md p-2 w-100 vh-100 text-secondary" style="max-width: 200px; max-height:  50px;" data-bs-toggle="modal" data-bs-target="#presentModal">
-                                    <span class="p-2 text-black" style="font-size: 18px;"><?php echo $admin->getTotalPresent(); ?> </span>Presents 
+                                    <span class="p-2 text-black" style="font-size: 18px;">
+                                    <?php 
+                                    if($lognow < "16:30:00"){
+                                        echo $admin->getTotalPresent('1');
+                                    }else if($lognow > "16:30:00"){
+                                        echo $admin->getTotalPresent('2');
+                                    }
+                                    ?> 
+                                    </span>Presents 
                                     <span ><i class=" text-success fa-solid fa-circle-info p-0" style="font-size: 18px;" ></i></span>
                                     </button>
                                     <?php include("../Modals/M-Presents.php")?>  

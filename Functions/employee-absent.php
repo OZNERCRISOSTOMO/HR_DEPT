@@ -25,7 +25,7 @@
               
               foreach($row1 as $sched) {
                 foreach ($sched as $key => $value) {
-                    $checkValueinAttendance = "SELECT * FROM attendance WHERE employee_id = '$value'  AND date = '$date_now'";
+                    $checkValueinAttendance = "SELECT * FROM attendance WHERE employee_id = '$value'  AND date = '$date_now' AND status = 'ONTIME' OR status = 'LATE'";
                     $check = $conn->query($checkValueinAttendance);
                     $row2 = $check->fetch_all();
                     
