@@ -56,13 +56,8 @@
                     $checkAttendancevalue = "SELECT * FROM attendance WHERE date = '$date_now' AND status = 'ABSENT' AND employee_id = '".$employeeInfo[0]['id']."' AND schedule_id ='".$employeeInfo[0]['schedule_id']."'";
                     $query123 = $conn->query($checkAttendancevalue);
                     if($query123->num_rows > 0){
-                      if($lognow > '16:00:00' && $employeeInfo[0]['schedule_id'] == '1'){
-                        $insertAbsent = "INSERT INTO attendance (name, employee_id, date, status, schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now', 'ABSENT', '1')";
-                        $conn->query($insertAbsent);
-                      }else if($lognow >= '22:00:00' && $employeeInfo[0]['schedule_id'] == '2'){
-                        $insertAbsent = "INSERT INTO attendance (name, employee_id, date, status, schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now','ABSENT', '2')";
-                        $conn->query($insertAbsent);
-                    }
+                     
+                    
                   }else{
                     if($lognow > '16:00:00' && $employeeInfo[0]['schedule_id'] == '1'){
                       $insertAbsent = "INSERT INTO attendance (name, employee_id, date, status, schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now', 'ABSENT', '1')";

@@ -53,6 +53,23 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
   cursor: pointer;
 }
 
+.dropdown-menu li {
+position: relative;
+}
+.dropdown-menu .dropdown-submenu {
+display: none;
+position: absolute;
+left: 100%;
+top: -7px;
+}
+.dropdown-menu .dropdown-submenu-left {
+right: 100%;
+left: auto;
+}
+.dropdown-menu > li:hover > .dropdown-submenu {
+display: block;
+}
+
    
 </style>
 </head>
@@ -93,7 +110,26 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                         <button class="btn bg-white dropdown-toggle fw-bolder container-fluid" type="button" data-bs-toggle="dropdown" id="dropdown"><i class="fa-solid fa-filter px-1"></i><b>Sort By</b></button>
                         <ul class="dropdown-menu container-fluid">
                             <li><a class="dropdown-item" href="#">By Name</a></li>
-                            <li><a class="dropdown-item" href="#">By Department</a></li>
+                            
+                            <li>
+                            <a class="dropdown-item" href="#">By Department &raquo; </a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                              <li>
+                                <a class="dropdown-item" href="#">Human Resource</a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" href="#">Sales</a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" href="#">Warehouse</a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" href="#">Purchaser</a>
+                              </li>
+                            </ul>
+                          </li>
+
+
                             <li><a class="dropdown-item" href="#">By Position</a></li>
                         </ul>
                     </div>

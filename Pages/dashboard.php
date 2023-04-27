@@ -96,6 +96,23 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         .d-none{
             display: none;
         }
+
+                .dropdown-menu li {
+        position: relative;
+        }
+        .dropdown-menu .dropdown-submenu {
+        display: none;
+        position: absolute;
+        left: 100%;
+        top: -7px;
+        }
+        .dropdown-menu .dropdown-submenu-left {
+        right: 100%;
+        left: auto;
+        }
+        .dropdown-menu > li:hover > .dropdown-submenu {
+        display: block;
+        }
     </style>
 
   </head>
@@ -208,29 +225,32 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                             <div class="col-2">
                                              <!-- DROPDOWN FILTER EMPLOYEE -->
                                                     
-                                                <div class="dropdown ">
-                                                    <button class="btn bg-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fa-solid fa-filter px-1"></i> <b>Sort By</b>
-                                                    </button>
-                                                <ul class="dropdown-menu">
-                                                    <div class="btn-group dropend">
-                                                         <li>
-                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                Dropend
-                                                            </button>
-                                                                                                                </li>
-                                                            
-                                                            <ul class="dropdown-menu">
-                                                                <li>test</li>
-                                                                <!-- Dropdown menu links -->
-                                                            </ul>
-                                                            </div>
-                                                                                                            
-                                                    <li><a class="dropdown-item" href="#">By Name</a></li>
-                                                    <li><a class="dropdown-item" href="#">By Department</a></li>
-                                                    <li><a class="dropdown-item" href="#">By Position</a></li>
-                                                </ul>
-                                                </div>
+                                             <div class="dropdown ">
+  <button class="btn bg-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-filter px-1"></i> <b>Sort By</b>
+  </button>
+  <ul class="dropdown-menu" id="sort-dropdown">
+    <li><a class="dropdown-item" href="#">By Name</a></li>
+    <li>
+      <a class="dropdown-item" href="#">By Department &raquo; </a>
+      <ul class="dropdown-menu dropdown-submenu">
+        <li>
+          <a class="dropdown-item" href="#">Human Resource</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">Sales</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">Warehouse</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">Purchaser</a>
+        </li>
+      </ul>
+    </li>
+    <li><a class="dropdown-item" href="#">By Position</a></li>
+  </ul>
+</div>
                                                 
                                             </div>
 
@@ -334,6 +354,28 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 </div>
 
  <script>
+
+ // Get the dropdown menu element
+ var dropdownMenu = document.getElementById('#sort-dropdown');
+
+// Get the dropdown items and sort them alphabetically
+var items = dropdownMenu.getElementsByTagName('a');
+var itemsArr = [];
+for (var i = 0; i < items.length; i++) {
+  itemsArr.push(items[i].innerHTML);
+}
+itemsArr.sort();
+
+// Reorder the dropdown items based on the sorted array
+for (var i = 0; i < itemsArr.length; i++) {
+  for (var j = 0; j < items.length; j++) {
+    if (items[j].innerHTML === itemsArr[i]) {
+      dropdownMenu.appendChild(items[j].parentNode);
+      break;
+    }
+  }
+}
+
 
 const textElements = document.querySelectorAll(".textToCopy");
 
