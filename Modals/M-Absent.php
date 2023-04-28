@@ -51,7 +51,7 @@
                     echo "<tr><td>".$employeeInfo[0]['id']."</td>";
                     echo "<td>".$employeeInfo[0]['first_name']."</td>";
                     echo "<td>".$employeeInfo[0]['last_name']."</td>";
-                    echo '<td>Absent</td></tr>';
+                    echo '<td><span class="badge text-bg-danger">Absent</span></td></tr>';
                     }
                     $checkAttendancevalue = "SELECT * FROM attendance WHERE date = '$date_now' AND status = 'ABSENT' AND employee_id = '".$employeeInfo[0]['id']."' AND schedule_id ='".$employeeInfo[0]['schedule_id']."'";
                     $query123 = $conn->query($checkAttendancevalue);

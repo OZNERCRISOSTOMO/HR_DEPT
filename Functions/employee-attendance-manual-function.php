@@ -32,6 +32,7 @@ if(isset($_POST['signin'])){
         // Check if the hashed password matches the stored password
         if (password_verify($password, $input_password)) {
         	// Get the Info of employee
+            
             $sql2 = "SELECT * FROM employee_details WHERE employee_id = '".$row1['employee_id']."'";
 		    $query2 = $conn->query($sql2);
             $row2 = $query2->fetch_assoc();
@@ -62,6 +63,7 @@ if(isset($_POST['signin'])){
                 $lognow = date('H:i:s');
 
                 // Update the attendace table set time_out to current time.
+                if(($sched == '1' && $srow['time_out'] > $lognow) || ($sched == '2' && $srow['time_in'] < $lognow)){
                 $sql = "UPDATE attendance SET time_out = '$lognow' WHERE id = '".$timeout['uid']."'";
                     if($conn->query($sql)){
                         header("Location: ../Functions/employee-attendance-manual.php?value=Timeout&picture=".$row2['picture_path']."&ID=".$id."&name=".$row['first_name']." ".$row['last_name']."&post=".$row2['position']."&Timeout=".$lognow."&dep=".$row2['department']."");
@@ -160,6 +162,7 @@ if(isset($_POST['signin'])){
                     else{
                         echo $conn->error;
                     }
+                }
 
             }else{
 
@@ -182,7 +185,7 @@ if(isset($_POST['signin'])){
                     $name = "".$row['first_name']." ".$row['last_name']."";
                     // If the Employee Tap card and not Following on their schedule.
                     if(($sched == '1' && $srow['time_out'] > $lognow) || ($sched == '2' && $srow['time_in'] < $lognow)){
-                        $sql = "INSERT INTO attendance (employee_id, name, date, time_in, status) VALUES ('$id', '$name', '$date_now', '$lognow', '$logstatus')";
+                        $sql = "INSERT INTO attendance (employee_id, name, date, time_in, status, schedule_id) VALUES ('$id', '$name', '$date_now', '$lognow', '$logstatus', '$sched')";
 					if($conn->query($sql)){
                         
                         header("Location: ../Functions/employee-attendance-manual.php?value=Timein&picture=".$row2['picture_path']."&ID=".$id."&name=".$row['first_name']." ".$row['last_name']."&post=".$row2['position']."&Timein=".$lognow."&status=".$logstatus."&dep=".$row2['department']."");

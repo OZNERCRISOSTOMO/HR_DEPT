@@ -156,7 +156,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     <div class= "a">          
                          <table id="pslist" class="table table-borderless table-striped text-center mt-3 align-middle">
                          <thead>
-                         <tr>-=
+                         <tr>
                             <th>Id</th>
                             <th>Date Added</th>
                             <th>Employee</th>

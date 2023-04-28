@@ -16,6 +16,7 @@ if ($conn->connect_error) {
 <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <link rel="icon" type="image/x-icon" href="../Images/Logo 1.svg">
   	<title>Employee Attendance Manual</title>
   	<!-- Tell the browser to be responsive to screen width -->
   	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -38,7 +39,7 @@ if ($conn->connect_error) {
 			<div class="container-fluid ms-1">
 				<div class="row d-flex justify-content-end align-middle">
 					<a class="navbar-brand me-auto d-flex" href="#"> 
-						<img src="../images/Google-Admin-900x0.png" alt="Admin" width="70" height="50" class="ms-2">
+						<img src="../Images/Logo 1.svg" alt="Admin" width="70" height="50" class="ms-2">
 						<h4 class="my-auto">Attendance</h4>
 					</a>
 				</div>
@@ -73,7 +74,7 @@ if ($conn->connect_error) {
                 <label for="exampleInputEmail1" class="form-label fw-bolder">Login ID:</label>
                     <div class="input-group">
                         <div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-user"></i></div>
-                            <input type="text" class="form-control shadow-none border-left-0" name="email" id="email" placeholder="Email" required="required">
+                            <input type="text" class="form-control shadow-none border-left-0" name="email" id="email" placeholder="Email" required="required" autocomplete="off">
                         </div>
                     </div>
                 
@@ -81,7 +82,7 @@ if ($conn->connect_error) {
 		            <label for="examplePassword" class="form-label fw-bolder">Password</label>
 		                <div class="input-group">
 			                <div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-lock"></i></div>
-                            <input type="password" class="form-control shadow-none border-left-0" name="password" id="password" placeholder="Password" required="required">
+                            <input type="password" class="form-control shadow-none border-left-0" name="password" id="password" placeholder="Password" required="required" autocomplete="off">
 		                </div>
 		        </div> 
 
