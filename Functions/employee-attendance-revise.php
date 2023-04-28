@@ -151,6 +151,8 @@
                     else{
                         echo $conn->error;
                     }
+                }else{
+                    header("Location: ../Pages/employee-attendance.php?value=invalidSched");
                 }
 
             }else{

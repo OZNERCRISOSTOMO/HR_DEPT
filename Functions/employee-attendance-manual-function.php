@@ -162,6 +162,8 @@ if(isset($_POST['signin'])){
                     else{
                         echo $conn->error;
                     }
+                }else{
+                    header("Location: ../Functions/employee-attendance-manual.php?value=invalidSched");
                 }
 
             }else{
