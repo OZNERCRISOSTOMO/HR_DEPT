@@ -20,7 +20,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         $employee = $admin->selectEmployeeSched('2');
     }
 
-    $count = 0;
+    $countPresents = 0;
    foreach ($employee as $sched) {
     foreach ($sched as $key => $value) {
 
@@ -28,13 +28,43 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         $valueEmployee = $admin->checkAttendance($value);
 
         if(!$valueEmployee){
-            $count++;
+            $countPresents++;
             $employeeInfo = $admin->findEmployeeById($value);
         }
     }
 }
+// establish a connection to the MySQL database
+$conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
 
-} else {
+// check if connection was successful
+ if (!$conn) {
+   die("Connection failed: " . mysqli_connect_error());
+}
+$employeeQuery = "SELECT * FROM employees";
+$employeeResult = $conn->query($employeeQuery);
+$countWarnings = 0;
+// Step 3: Loop through each employee id and get the count of absent days
+while ($idRow = $employeeResult->fetch_assoc()) {
+// Get the employee id
+$employee_id = $idRow["id"];
+
+// Execute the SQL query to count absent days for this employee
+$countQuery = "SELECT COUNT(status) as countss FROM attendance WHERE employee_id = '$employee_id' AND status = 'ABSENT'";
+$countResult = $conn->query($countQuery);
+
+// Get the count of absent days
+$countRow = $countResult->fetch_assoc();
+$counttt = $countRow["countss"];
+
+// Display the count of absent days
+if($counttt >= 3){
+  $countWarnings++;
+}
+
+
+}
+}
+else {
     header("Location: ../index.php");
 }
 
@@ -180,7 +210,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
                             <div class="col">
                                     <button type="button" class=" btn ps-0 btn-light shadow btn-md p-2 w-100 vh-100 text-secondary" style="max-width: 200px;max-height:  50px;" data-bs-toggle="modal" data-bs-target="#absentModal">
-                                    <span class="p-2 text-black"  style="font-size: 18px;"><?php echo "$count" ?> </span>Absents 
+                                    <span class="p-2 text-black"  style="font-size: 18px;"><?php echo "$countPresents" ?> </span>Absents 
                                     <span ><i class=" text-danger fa-solid fa-circle-info p-0" style="font-size: 18px;" ></i></span>
                                     </button>
                                     <?php include("../Modals/M-Absent.php")?>  
@@ -188,7 +218,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
                             <div class="col">
                                     <button type="button" class="btn  ps-0 btn-light shadow btn-md p-2 w-100 vh-100 text-secondary" style="max-width: 200px; max-height:  50px;"  data-bs-toggle="modal" data-bs-target="#WarningModal">
-                                    <span class="p-2 text-black" style="font-size: 18px;">11</span> Warnings 
+                                    <span class="p-2 text-black" style="font-size: 18px;"><?php echo "$countWarnings" ?></span> Warnings 
                                     <span ><i class=" text-warning fa-solid fa-circle-info  p-0"  style="font-size: 18px;"></i></span>
                                     </button>
                                     <?php include("../Modals/M-Warning.php")?>  

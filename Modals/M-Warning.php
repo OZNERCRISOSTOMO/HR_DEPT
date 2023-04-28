@@ -46,9 +46,11 @@
             // Get the count of absent days
             $countRow = $countResult->fetch_assoc();
             $count = $countRow["count"];
-
+            $countWarnings = 0;
             // Display the count of absent days
-            
+            if($count >= 3){
+              $countWarnings++;
+            }
 
             if($count >= 3){
               echo "<tr><td>".$employee_id."</td>";
