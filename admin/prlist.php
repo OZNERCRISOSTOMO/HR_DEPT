@@ -100,14 +100,22 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
               <td><?php echo $list['end']; ?> </td>
               <td><?php echo $list['type']; ?> </td>
               <td>
+              <div class="container ">
+                <div class="row">
+                  <div class="col-3">
               <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
+              </div>
+              <div class="col-3">
               <button id="editButton" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#EditModal" type="submit" name="edit" value="Edit">Edit</button>
-              
-
+              </div>
+              <div class="col-3">
               <form method="POST" action="../Functions/admin-payroll-delete.php">
               <button class="btn btn-sm btn-danger" type="submit" name="delete" value="Delete">Delete</button>
               <input type="hidden" name="id" value="<?php echo $list['id']; ?>">
               </form>
+              </div>
+              </div>  
+              </div>  
               </td>
             </tr>
             <?php
@@ -237,7 +245,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                         </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default text-danger border border-end-0 border-0" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger border " data-bs-dismiss="modal">Close</button>
                     <input type="submit" class="btn btn-success" id="update" name="editSubmit">
                   </div>
                 </form>

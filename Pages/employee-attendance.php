@@ -22,6 +22,7 @@
 <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <link rel="icon" type="image/x-icon" href="../Images/Logo 1.svg">
   	<title>Employee Attendance</title>
   	<!-- Tell the browser to be responsive to screen width -->
   	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -45,7 +46,7 @@
 			<div class="container-fluid ms-1">
 				<div class="row d-flex justify-content-end align-middle">
 					<a class="navbar-brand me-auto d-flex" href="#"> 
-						<img src="../images/Google-Admin-900x0.png" alt="Admin" width="70" height="50" class="ms-2">
+						<img src="../Images/Logo 1.svg" alt="Admin" width="70" height="50" class="ms-2">
 						<h4 class="my-auto">Attendance</h4>
 					</a>
 				</div>
@@ -77,7 +78,7 @@
 		<img src="../Images/Attendance-logo.png" class="mx-auto d-block mb-3" height="150" width="150">
 		<form action="../Functions/employee-attendance-revise.php" method="POST">
 			<div class="form-group has-feedback mb-3">
-					<input type="text" class="form-control input-lg shadow-none" id="employee" name="employee" autofocus >
+					<input type="text" class="form-control input-lg shadow-none" id="employee" name="employee" autofocus autocomplete="off" >
 					<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
 			</div>
 		</form>

@@ -120,7 +120,7 @@ class Employee{
         }
 
         //send email
-        $this->database->sendEmail($employeeData['email'],"Succesfully register","Your application has been submitted");
+        $this->database->sendEmail($employeeData['email'],"Succesfully register","We are delighted to inform you that your registration in the 3G Clothing has been successful.");
 
         //if sucess uploading file, go to this 👇 page
         header("Location: ../Pages/employee-register-confirmation.php?success=success"); 

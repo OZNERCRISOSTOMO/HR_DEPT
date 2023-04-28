@@ -13,6 +13,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="./Images/Logo 1.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>HR MANAGEMENT SYSTEM</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -34,14 +35,14 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
             <nav class="navbar bg-body-tertiary">
                 <div class="container">
                     <a class="navbar-brand color-black" href="#">
-                    <img src="Images/Google-Admin-900x0.png" alt="Admin" width="70" height="50">
+                    <img src="./Images/Logo 1.svg" alt="Admin" width="70" height="50">
                     ADMIN
                     </a>
                 </div>
             </nav>
 
             <div class="container m-auto ">
-                <h4 class="text-center my-3">Start your day with Renzo Caloocan</h4>
+                <h4 class="text-center my-3">Start your day with Coffee</h4>
                 <img src="Images/login-illustration.png" class="mx-auto d-block" height="400">
             </div>
         </div>

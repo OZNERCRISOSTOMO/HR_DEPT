@@ -123,7 +123,7 @@
 
 
   <tbody>
-  <form method="POST">
+
   <?php
 
 $query = "SELECT * FROM `leave` ";
@@ -133,26 +133,14 @@ $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr><td>{$row['ID']}</td><td>{$row['Name']}</td><td>{$row['Type']}</td><td>{$row['date_started']}</td><td>{$row['date_ended']}</td><td>{$row['leave_file']}</td><td><div class='container d-flex gap-2'>
-        <button type='submit' name='accept' class='btn btn-success btn-sm w-100 pd-2'>Accept</button>
-        <button type='button' class='btn btn-danger btn-sm  w-100'>Decline</button>
-        <input type='hidden' name='employee_id' value='{$row['ID']}'></input>
+        <form method='POST' action='../Functions/overtime-accept.php'><button type='submit' name='accept' class='btn btn-success btn-sm w-100 pd-2'>Accept</button></form>
+        <form method='POST' action='../Functions/overtime-accept.php'><button type='button' class='btn btn-danger btn-sm  w-100'>Decline</button>
+        <input type='hidden' name='employee_id' value='{$row['ID']}'></input></form>
         </div></td></tr>";
     }
 } else {
     echo "0 results";
 }
-
-
-if (isset($_POST['accept'])){
-  $employee_id = $_POST['employee_id'];
-
-  $updateStat = "UPDATE `leave` SET status = 'accepted' WHERE ID = '$employee_id'";
-  $query1 = $conn->query($updateStat);
-
-  echo $employee_id;
-
-}
-    
   ?>
 
 </form>
@@ -193,7 +181,6 @@ if (isset($_POST['accept'])){
                                     <label class="form-check-label" for="2">6:00 PM - 10:00 PM</label>
                                 </div>
                          
-  </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
