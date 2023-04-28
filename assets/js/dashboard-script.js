@@ -101,11 +101,25 @@ const companyEmployeeRate = {
 
 departmentDropdown.addEventListener("click",function(e){
   // Check if the clicked element has an id
-  if (event.target.id) {
+  if (e.target.id) {
     // Get the id of the clicked element
-    const idName = event.target.id;
-    
-    
+    const idName = e.target.id;
+    console.log(idName)
+
+    if (idName) {
+      $.ajax({
+        url: "../Functions/admin-department-dropdown.php",
+        type: "POST",
+        data: {
+          department: idName,
+        },
+
+        success: function (data) {
+          $(".employee-list-wrapper").html(data);
+        },
+      });
+    } 
+
   }
 })
 
