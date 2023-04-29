@@ -283,23 +283,22 @@ class Admin {
         
     }
 
-    public function getEmployeesByDepartment($department){
-        $query = "";
-        $employees = "";
+   public function getEmployeesByDepartment($department){
+    $query = "";
+    $employees = "";
 
-     
-             $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
-                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position, employee_details.department_position, employee_details.rate_per_hour  FROM employees 
-                                                        JOIN employee_details ON employees.id = employee_details.employee_id
-                                                        WHERE employees.status = '1' AND employee_details.department = $department";
-            $employees = $this->database->getConnection()->query($query)->fetch();
-        
-         
-
-        return $employees;
-
-        exit();
+    $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
+                                                employee_details.date_applied,employee_details.date_hired, employee_details.position, employee_details.department_position, employee_details.rate_per_hour  FROM employees 
+                                                JOIN employee_details ON employees.id = employee_details.employee_id
+                                                WHERE employees.status = '1' AND employee_details.department = '$department'";
+    
+    $stmt = $this->database->getConnection()->query($query);
+    if ($stmt) {
+        $employees = $stmt->fetchAll();
     }
+
+    return $employees;
+}
 
     public function getEmployees($id = ""){
         $query = "";

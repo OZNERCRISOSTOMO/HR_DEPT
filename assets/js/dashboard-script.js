@@ -4,7 +4,7 @@ const totalEmployees = document.querySelector(".total-employees");
 const totalPendingEmployees = document.querySelector(
   ".total-pending-employees"
 );
-const departmentDropdown = document.querySelector(".department-dropdown")
+const departmentDropdown = document.querySelector(".department-dropdown");
 const benefitsContainer = document.querySelector(".benefits-container");
 
 //department
@@ -99,12 +99,12 @@ const companyEmployeeRate = {
   },
 };
 
-departmentDropdown.addEventListener("click",function(e){
+departmentDropdown.addEventListener("click", function (e) {
   // Check if the clicked element has an id
   if (e.target.id) {
     // Get the id of the clicked element
     const idName = e.target.id;
-    console.log(idName)
+    console.log(idName);
 
     if (idName) {
       $.ajax({
@@ -115,13 +115,13 @@ departmentDropdown.addEventListener("click",function(e){
         },
 
         success: function (data) {
+          console.log(data);
           $(".employee-list-wrapper").html(data);
         },
       });
-    } 
-
+    }
   }
-})
+});
 
 let selectedDepartment = "";
 
@@ -335,6 +335,7 @@ $(document).ready(function () {
         },
 
         success: function (data) {
+          console.log(data);
           $(".employee-list-wrapper").html(data);
         },
       });
@@ -347,6 +348,7 @@ $(document).ready(function () {
         },
 
         success: function (data) {
+          console.log(data);
           $(".employee-list-wrapper").html(data);
         },
       });

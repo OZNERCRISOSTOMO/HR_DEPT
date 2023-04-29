@@ -13,12 +13,14 @@ if (isset($_POST['department'])) {
    $department = $_POST['department'];
 
     
-    $employees = $admin->getEmployees();
+    $employees = $admin->getEmployeesByDepartment($department);
    
     
 
     // var_dump($employees);
-    foreach($employees as $employee){;
+    // Check if $employees is an array before using it in a loop
+    if (is_array($employees)) {
+    foreach($employees as $employee){
 
         $html = ' <div class="card bg-white rounded ms-2 my-2 pt-3 employee-container" style="width: 16rem;" data-bs-toggle="modal"
                          id="view" data-bs-target="#viewmodal" data-employee-id="'. $employee["id"] .'">
@@ -72,6 +74,7 @@ if (isset($_POST['department'])) {
   
         echo $html;
     }
+}
 
 }else{
     echo "none";
