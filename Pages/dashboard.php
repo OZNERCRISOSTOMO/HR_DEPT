@@ -260,8 +260,12 @@ else {
   <button class="btn bg-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     <i class="fa-solid fa-filter px-1"></i> <b>Sort By</b>
   </button>
-  <ul class="dropdown-menu" id="sort-dropdown">
-    <li><a class="dropdown-item" href="#">By Name</a></li>
+
+  <ul class="dropdown-menu sort-dropdown" id="sort-dropdown">
+    <li>
+      <a class="dropdown-item" href="#" id="byName">By Name</a>
+    </li>
+
     <li>
       <a class="dropdown-item" href="#">By Department &raquo; </a>
 
@@ -282,7 +286,10 @@ else {
         </li>
       </ul>
     </li>
-    <li><a class="dropdown-item" href="#">By Position</a></li>
+
+    <li>
+      <a class="dropdown-item" href="#" id="byPosition">By Position</a>
+    </li>
    </ul>
 
 </div>
@@ -391,51 +398,57 @@ else {
  <script>
 
  // Get the dropdown menu element
- var dropdownMenu = document.getElementById('#sort-dropdown');
+//  var dropdownMenu = document.getElementById('#sort-dropdown');
 
-// Get the dropdown items and sort them alphabetically
-var items = dropdownMenu.getElementsByTagName('a');
-var itemsArr = [];
-for (var i = 0; i < items.length; i++) {
-  itemsArr.push(items[i].innerHTML);
-}
-itemsArr.sort();
+// // Get the dropdown items and sort them alphabetically
+// var items = dropdownMenu.getElementsByTagName('a');
+// var itemsArr = [];
+// for (var i = 0; i < items.length; i++) {
+//   itemsArr.push(items[i].innerHTML);
+// }
+// itemsArr.sort();
 
-// Reorder the dropdown items based on the sorted array
-for (var i = 0; i < itemsArr.length; i++) {
-  for (var j = 0; j < items.length; j++) {
-    if (items[j].innerHTML === itemsArr[i]) {
-      dropdownMenu.appendChild(items[j].parentNode);
-      break;
-    }
-  }
-}
+// // Reorder the dropdown items based on the sorted array
+// for (var i = 0; i < itemsArr.length; i++) {
+//   for (var j = 0; j < items.length; j++) {
+//     if (items[j].innerHTML === itemsArr[i]) {
+//       dropdownMenu.appendChild(items[j].parentNode);
+//       break;
+//     }
+//   }
+// }
 
 
-const textElements = document.querySelectorAll(".textToCopy");
 
-textElements.forEach(function (text) {
-  let clickCount = 0;
+  const textElements = document.querySelectorAll(".textToCopy");
 
-  text.addEventListener("click", function () {
-    clickCount++;
-    if (clickCount === 1) {
-      // Start a timer to wait for double click
-      setTimeout(function () {
-        textCopyFunction(text);
+  textElements.forEach(function (text) {
+    let clickCount = 0;
+
+   
+    text.addEventListener("click", function () {
+      clickCount++;
+  
+      if (clickCount === 1) {
+        // Start a timer to wait for double click
+        setTimeout(function () {
+          textCopyFunction(text);
+          clickCount = 0;
+        }, 300);
+      } else if (clickCount === 2) {
+        redirectToSendEmail(text);
         clickCount = 0;
-      }, 300);
-    } else if (clickCount === 2) {
+      }
+    });
+
+    text.addEventListener("dblclick", function () {
       redirectToSendEmail(text);
       clickCount = 0;
-    }
+
+    });
   });
 
-  text.addEventListener("dblclick", function () {
-    redirectToSendEmail(text);
-    clickCount = 0;
-  });
-});
+
 
 function textCopyFunction(text) {
   const range = document.createRange();

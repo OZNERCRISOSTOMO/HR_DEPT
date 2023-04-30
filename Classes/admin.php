@@ -60,6 +60,21 @@ class Admin {
       
     }
 
+    public function  deleteEmployeeById($id){
+          // prepare the SQL statement using the database property
+        $stmt = $this->database->getConnection()->prepare("UPDATE employees SET status = '2'  WHERE id=?");
+
+         //if execution fail
+        if (!$stmt->execute([$id])) {
+            header("Location: ../index.php?error=stmtfail");
+            exit();
+        }
+
+         // if succesful
+         header("Location: ../Pages/employee-list.php");
+
+    }
+
     public function getEmployeeDetails($employeeId){
           // prepare the SQL statement using the database property
         $stmt = $this->database->getConnection()->prepare("SELECT * FROM employee_details                                               
@@ -312,7 +327,7 @@ class Admin {
                                                         WHERE employees.status = '1'";
             $employees = $this->database->getConnection()->query($query)->fetchAll();
         }else{
-             $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
+             $query ="SELECT employees.*,employee_details.picture_path,employee_details.department, employee_details.department, employee_details.sss,  employee_details.pagibig, employee_details.philhealth,
                                                         employee_details.date_applied,employee_details.date_hired, employee_details.position, employee_details.department_position, employee_details.rate_per_hour  FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
                                                         WHERE employees.status = '1' AND employees.id = $id";
@@ -323,6 +338,21 @@ class Admin {
         return $employees;
 
         exit();
+    }
+
+    public function getEmployeesSorted(){
+        $query = "";
+        $employees = "";
+
+        $query ="SELECT employees.*,employee_details.picture_path,employee_details.department,employee_details.department,
+                employee_details.date_applied,employee_details.date_hired, employee_details.position, employee_details.department_position, employee_details.rate_per_hour 
+            FROM employees 
+            JOIN employee_details ON employees.id = employee_details.employee_id
+            WHERE employees.status = '1'
+            ORDER BY employees.first_name ASC"; // add this line to sort by first name
+
+        $employees = $this->database->getConnection()->query($query)->fetchAll();
+        return $employees;
     }
 
     public function getDepartment(){
@@ -572,6 +602,119 @@ class Admin {
       
 
         exit();
+    }
+
+    public function checkData($employeeData, $pictureData = []){
+        if(!empty($pictureData)){
+             //check if the file extension is in the array $allowed
+            if (in_array($pictureData['fileActualExt'], $pictureData['allowed'])){
+
+                //seperate filename
+                $newFileName = explode('.',$pictureData['fileName']);
+
+                //picture
+                $fileNameNew = uniqid('', true) . "." . $pictureData['fileActualExt'];
+                //file destination
+                $fileDestination = '../Uploads/' . $fileNameNew;
+
+                
+                if (move_uploaded_file($pictureData['fileTmpName'],$fileDestination))  {
+
+                    $this->updateEmployeeData($employeeData,$fileNameNew);
+         
+                } else {
+                    echo "move_uploaded_file error";
+                }
+            }else {
+                echo "You can't upload this type of file!";
+            }
+        }else{
+            $this->updateEmployeeData($employeeData);
+        }
+  
+
+            
+    }
+
+    public function updateEmployeeData($employeeData,$picturePath = ""){
+
+        if($picturePath != ""){
+             // prepared statement
+         $stmt = $this->database->getConnection()->prepare("UPDATE employees AS e
+                                                      INNER JOIN employee_details AS ed ON e.id = ed.employee_id
+                                                      SET e.first_name = ?, e.last_name = ?,  e.email = ?, e.contact = ?, ed.department_position = ?, ed.picture_path = ?                   
+                                                      WHERE e.id = ?");
+
+        //if execution fail
+        if (!$stmt->execute([$employeeData['firstName'],
+                             $employeeData['lastName'],
+                             $employeeData['email'],
+                             $employeeData['contactNo'],
+                             $employeeData['departmentPosition'],
+                             $picturePath,
+                             $employeeData['employeeID']
+                             ])) {
+            header("Location: ../Pages/employee-register.php?error=stmtfail");
+
+            exit();
+        }
+            
+        }else{
+             // prepared statement
+         $stmt = $this->database->getConnection()->prepare("UPDATE employees AS e
+                                                      INNER JOIN employee_details AS ed ON e.id = ed.employee_id
+                                                      SET e.first_name = ?, e.last_name = ?,  e.email = ?, e.contact = ?, ed.department_position = ?                  
+                                                      WHERE e.id = ?");
+
+        //if execution fail
+        if (!$stmt->execute([$employeeData['firstName'],
+                             $employeeData['lastName'],
+                             $employeeData['email'],
+                             $employeeData['contactNo'],
+                             $employeeData['departmentPosition'],
+                             $employeeData['employeeID']
+                             ])) {
+            header("Location: ../Pages/employee-register.php?error=stmtfail");
+
+            exit();
+        }
+        }
+          
+
+
+        //UPDATE BENEFICARIES =================================================
+
+        $sql = "UPDATE employees as e 
+                INNER JOIN employee_details AS ed ON e.id = ed.employee_id
+                SET ";
+        $values = array();
+
+        // Build the SQL query and parameter values based on the checkboxes that are checked
+        foreach ($employeeData['beneficiaries'] as $key => $value) {
+        // Append the column name and parameter value to the SQL query
+            // $columnName = 'column' . ($key + 1);
+            $sql .= $value . ' = ?, ';
+    
+            // Append the parameter value to the array of parameter values
+            $values[] = '1';
+        }
+
+        // Remove the trailing comma and space from the query
+        $sql = rtrim($sql, ", ");
+        $sql .= " WHERE e.id = ?";
+
+     
+        // Prepare the statement
+        $stmt2 = $this->database->getConnection()->prepare($sql);
+        $params = array_merge($values, array($employeeData['employeeID']));
+
+
+         //if execution fail
+        if (!$stmt2->execute($params)) {
+            header("Location: ../Pages/employee-register.php?error=stmtfail");
+
+            exit();
+        }
     }
 }
 

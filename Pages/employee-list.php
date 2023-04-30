@@ -110,23 +110,23 @@ display: block;
                 <div class="col-md row ms-2">
                     <div class="col-sm rounded dropdown text-center ">
                         <button class="btn bg-white dropdown-toggle fw-bolder container-fluid" type="button" data-bs-toggle="dropdown" id="dropdown"><i class="fa-solid fa-filter px-1"></i><b>Sort By</b></button>
-                        <ul class="dropdown-menu container-fluid">
-                            <li><a class="dropdown-item" href="#">By Name</a></li>
+                        <ul class="dropdown-menu container-fluid sort-dropdown" id="sort-dropdown">
+                            <li><a class="dropdown-item" href="#" id="byName">By Name</a></li>
                             
                             <li>
                             <a class="dropdown-item" href="#">By Department &raquo; </a>
-                            <ul class="dropdown-menu dropdown-submenu">
+                            <ul class="dropdown-menu dropdown-submenu department-dropdown">
                               <li>
-                                <a class="dropdown-item" href="#">Human Resource</a>
+                                <a class="dropdown-item" href="#" id="human-resource" >Human Resource</a>
                               </li>
                               <li>
-                                <a class="dropdown-item" href="#">Sales</a>
+                                <a class="dropdown-item" href="#" id="sales" >Sales</a>
                               </li>
                               <li>
-                                <a class="dropdown-item" href="#">Warehouse</a>
+                                <a class="dropdown-item" href="#" id="warehouse" >Warehouse</a>
                               </li>
                               <li>
-                                <a class="dropdown-item" href="#">Purchaser</a>
+                                <a class="dropdown-item" href="#" id="purchaser" >Purchaser</a>
                               </li>
                             </ul>
                           </li>
@@ -296,9 +296,18 @@ display: block;
         <!-- Modal footer -->
         <div class="modal-footer">
             <button type="button" class="text-danger border-0 bg-transparent" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editmodal">Edit</button>
+
+   
+
+            <form id="delete-employee-form" action="../Functions/admin-deleteEmployeeInfo.php" method="POST">
+              <input type="hidden" name="employee-id" id="employee-id">
+              <button type="submit" name="submit" class="btn btn-danger btn-sm" id="delete-btn"> Delete </button>
+            </form>
+
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editmodal" id="editModalBtn">Edit</button>
         </div>
-        </div>
+
+        </div> 
     </div>
     </div>
     <!-----End----->
@@ -307,6 +316,7 @@ display: block;
 <div class="modal fade" id="editmodal">
 <div class="modal-dialog modal-dialog-scrollable modal-lg">
     <div class="modal-content">
+            <form action="../Functions/admin-updateEmployeeInfo.php" method="POST" enctype="multipart/form-data">
 
       <!-- Modal Header -->
       <div class="modal-header" id="editmodal">
@@ -316,11 +326,13 @@ display: block;
 
       <!-- Modal Body -->
       <div class="modal-body">
-      <div class="d-flex flex-row">
+      <div class="d-flex flex-row edit-modal-body">
       <div class="flex-fill p-2">
+
         <div class="d-flex justify-content-center mb-2">
         <img class="rounded-circle mx-auto d-block" src="../Images/1x1 photo.png" height="150" width="150" alt="Employee Pic" />
         </div>
+
         <div class="d-flex justify-content-center">
         <div class="btn btn-primary btn-rounded btn-sm p-0 m-0">
             <label class="form-label text-white m-1" for="profile">Tap to Change Profile</label>
@@ -346,8 +358,8 @@ display: block;
               </thead>
               <tbody>
                 <tr>
-                <td> <input type="text" class="form-control form-control-sm border-0"  value="0001-AAA"></td>
-                <td> <input type="text" class="form-control form-control-sm border-0" value="10/02/2023"></td>
+                <td> <input type="text" class="form-control form-control-sm border-0"  value="0001-AAA" ></td>
+                <td> <input type="text" class="form-control form-control-sm border-0" value="10/02/2023" disabled></td>
                 <td> <input type="text" class="form-control form-control-sm border-0" value="johnrenzocrisos@gmail.com"></td>
 
                 </tr>
@@ -382,15 +394,15 @@ display: block;
     </div>
             </div>
             </div>
-
+  
       <!--Modal Body End-->
 
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="text-danger border-0 bg-transparent" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success btn-sm" id="editBtn">Save Changes</button>
+        <button type="submit" name="submit"  class="btn btn-success btn-sm" id="editBtn">Save Changes</button>
       </div>
-
+             </form>
       </div> 
     </div>
   </div>

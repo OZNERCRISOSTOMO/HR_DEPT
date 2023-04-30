@@ -5,6 +5,8 @@ const totalPendingEmployees = document.querySelector(
   ".total-pending-employees"
 );
 const departmentDropdown = document.querySelector(".department-dropdown");
+const sortDropdown = document.querySelector("#byName");
+
 const benefitsContainer = document.querySelector(".benefits-container");
 
 //department
@@ -115,8 +117,87 @@ departmentDropdown.addEventListener("click", function (e) {
         },
 
         success: function (data) {
-          console.log(data);
+          $(".employee-list-wrapper").html("");
           $(".employee-list-wrapper").html(data);
+
+          // Generate text elements after new data is added to the DOM
+          const textElements = document.querySelectorAll(".textToCopy");
+
+          textElements.forEach(function (text) {
+            let clickCount = 0;
+
+            text.addEventListener("click", function () {
+              clickCount++;
+
+              if (clickCount === 1) {
+                // Start a timer to wait for double click
+                setTimeout(function () {
+                  textCopyFunction(text);
+                  clickCount = 0;
+                }, 300);
+              } else if (clickCount === 2) {
+                redirectToSendEmail(text);
+                clickCount = 0;
+              }
+            });
+
+            text.addEventListener("dblclick", function () {
+              redirectToSendEmail(text);
+              clickCount = 0;
+            });
+          });
+        },
+      });
+    }
+  }
+});
+
+sortDropdown.addEventListener("click", function (e) {
+  // Check if the clicked element has an id
+  if (e.target.id) {
+    // Get the id of the clicked element
+    const idName = e.target.id;
+    console.log(idName);
+    const textElements = document.querySelectorAll(".textToCopy");
+
+    if (idName) {
+      $.ajax({
+        url: "../Functions/admin-sortByName.php",
+        type: "POST",
+        data: {
+          name: idName,
+        },
+
+        success: function (data) {
+          $(".employee-list-wrapper").html("");
+          $(".employee-list-wrapper").html(data);
+
+          // Generate text elements after new data is added to the DOM
+          const textElements = document.querySelectorAll(".textToCopy");
+
+          textElements.forEach(function (text) {
+            let clickCount = 0;
+
+            text.addEventListener("click", function () {
+              clickCount++;
+
+              if (clickCount === 1) {
+                // Start a timer to wait for double click
+                setTimeout(function () {
+                  textCopyFunction(text);
+                  clickCount = 0;
+                }, 300);
+              } else if (clickCount === 2) {
+                redirectToSendEmail(text);
+                clickCount = 0;
+              }
+            });
+
+            text.addEventListener("dblclick", function () {
+              redirectToSendEmail(text);
+              clickCount = 0;
+            });
+          });
         },
       });
     }
@@ -337,6 +418,33 @@ $(document).ready(function () {
         success: function (data) {
           console.log(data);
           $(".employee-list-wrapper").html(data);
+
+          // Generate text elements after new data is added to the DOM
+          const textElements = document.querySelectorAll(".textToCopy");
+
+          textElements.forEach(function (text) {
+            let clickCount = 0;
+
+            text.addEventListener("click", function () {
+              clickCount++;
+
+              if (clickCount === 1) {
+                // Start a timer to wait for double click
+                setTimeout(function () {
+                  textCopyFunction(text);
+                  clickCount = 0;
+                }, 300);
+              } else if (clickCount === 2) {
+                redirectToSendEmail(text);
+                clickCount = 0;
+              }
+            });
+
+            text.addEventListener("dblclick", function () {
+              redirectToSendEmail(text);
+              clickCount = 0;
+            });
+          });
         },
       });
     } else {
@@ -350,6 +458,33 @@ $(document).ready(function () {
         success: function (data) {
           console.log(data);
           $(".employee-list-wrapper").html(data);
+
+          // Generate text elements after new data is added to the DOM
+          const textElements = document.querySelectorAll(".textToCopy");
+
+          textElements.forEach(function (text) {
+            let clickCount = 0;
+
+            text.addEventListener("click", function () {
+              clickCount++;
+
+              if (clickCount === 1) {
+                // Start a timer to wait for double click
+                setTimeout(function () {
+                  textCopyFunction(text);
+                  clickCount = 0;
+                }, 300);
+              } else if (clickCount === 2) {
+                redirectToSendEmail(text);
+                clickCount = 0;
+              }
+            });
+
+            text.addEventListener("dblclick", function () {
+              redirectToSendEmail(text);
+              clickCount = 0;
+            });
+          });
         },
       });
     }

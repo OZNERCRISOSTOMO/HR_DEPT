@@ -6,17 +6,16 @@ require '../Classes/database.php';
 $database = new Database();
 $admin = new Admin($database);
 
+
+
 //Getting value of "search" variable from "script.js".
 if (isset($_POST['department'])) {
 
 //Search box value assigning to $name variable.
    $department = $_POST['department'];
 
-    
     $employees = $admin->getEmployeesByDepartment($department);
    
-    
-
     // var_dump($employees);
     // Check if $employees is an array before using it in a loop
     if (is_array($employees)) {
@@ -58,7 +57,7 @@ if (isset($_POST['department'])) {
                                 </div>
 
                                 <div class="d-flex ms-3">
-                                <i class="fa-solid fa-envelope text-primary text pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" name="Email">'.  $employee["email"] .'</p>
+                                <i class="fa-solid fa-envelope text-primary text pe-2"></i> <p class="text d-flex flex-column col-10 textToCopy"  style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" name="Email" id="textToCopy">'.  $employee["email"] .'</p>
                                 </div>
 
                             <div class="d-flex ms-3">
@@ -76,7 +75,9 @@ if (isset($_POST['department'])) {
     }
 }
 
-}else{
-    echo "none";
 }
+
+
+
+
   

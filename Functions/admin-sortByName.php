@@ -6,22 +6,18 @@ require '../Classes/database.php';
 $database = new Database();
 $admin = new Admin($database);
 
-//Getting value of "search" variable from "script.js".
-if (isset($_POST['search'])) {
+
+if (isset($_POST['name'])) {
 
 //Search box value assigning to $name variable.
-   $name = $_POST['search'];
+//    $department = $_POST['name'];
 
-    $employees;
-    if($name == "all"){
-        $employees = $admin->getEmployees();
-    }else{
-        $employees = $admin->searchEmployees($name);
-    }
-    
-
+    $employees = $admin->getEmployeesSorted();
+   
     // var_dump($employees);
-    foreach($employees as $employee){;
+    // Check if $employees is an array before using it in a loop
+    if (is_array($employees)) {
+    foreach($employees as $employee){
 
         $html = ' <div class="card bg-white rounded ms-2 my-2 pt-3 employee-container" style="width: 16rem;" data-bs-toggle="modal"
                          id="view" data-bs-target="#viewmodal" data-employee-id="'. $employee["id"] .'">
@@ -58,7 +54,7 @@ if (isset($_POST['search'])) {
                                 <i class="fa-solid fa-star text-warning pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px;" name="Email">₱ '. number_format($employee["rate_per_hour"] ) .'/hr</p>
                                 </div>
 
-                                 <div class="d-flex ms-3">
+                                <div class="d-flex ms-3">
                                 <i class="fa-solid fa-envelope text-primary text pe-2"></i> <p class="text d-flex flex-column col-10 textToCopy"  style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" name="Email" id="textToCopy">'.  $employee["email"] .'</p>
                                 </div>
 
@@ -75,8 +71,6 @@ if (isset($_POST['search'])) {
   
         echo $html;
     }
-
-}else{
-    echo "none";
 }
-  
+
+}

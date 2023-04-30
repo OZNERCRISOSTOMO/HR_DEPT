@@ -17,11 +17,12 @@ if (isset($_POST['id'])) {
     $data = '
          
     <div class="flex-fill p-2">
-      <img class="rounded-circle mx-auto d-block" src="../Uploads/'. $employee["picture_path"] .'" height="150" width="150" alt="Employee Pic">
+      <img class="rounded-circle mx-auto d-block employeeImage" src="../Uploads/'. $employee["picture_path"] .'" height="150" width="150"  alt="Employee Pic">
       
-      <h2 class="text m-auto text-center" name="EmployeeName">'.  $employee["first_name"] ." ". $employee["last_name"].'</h2>
+      <p class="fs-2 fw-bold mt-2 text-center border-0 p-0 m-0 employee-first-name" name="EmployeeName">'.  $employee["first_name"] .'</p>
+      <p class="fs-2 fw-bold mt-2  text mt-2 text-center border-0 p-0 m-0 employee-last-name">'.  $employee["last_name"].'</p>
       
-      <p class="text text-center">'. ucfirst($employee["department"]) .'</p>
+      <p class="text text-center employee-department-position">'. $employee["department_position"] .'</p>
       <div class="rounded ms-3"></div>
     </div>
     <div class="flex-fill p-2">
@@ -38,15 +39,15 @@ if (isset($_POST['id'])) {
           <tbody>
             <tr>
               <td><p class="text" style=";">0001-AAA</p></td>
-              <td>'.$admin->formatDate($employee["date_hired"] ) .'</td>
-              <td>'.$employee["email"] .'</td>
+              <td class="employee-date-hired">'.$admin->formatDate($employee["date_hired"] ) .'</td>
+              <td class="employee-email">'.$employee["email"] .'</td>
             </tr>
             <tr>
               <th><p class="text" style="opacity: 0.5;">Contact Number </p></th>
               <th><p class="text" style="opacity: 0.5;">Birthdate </p></th>
             </tr>
             <tr>
-              <td>'.$employee["contact"].'</td>
+              <td  class="employee-contact">'.$employee["contact"].'</td>
               <td>21/02/2002</td>
             </tr>
           </tbody>
@@ -62,9 +63,10 @@ if (isset($_POST['id'])) {
           </thead>
           <tbody>
             <tr>
-              <td><p class="text" style=";">0000-0000000-0</p></td>
-              <td>000-000-000-0000</td>
-              <td>0000-0000-0000</td>
+              <td class="">'. ($employee["sss"] ? '<input class="form-check-input employe-sss" type="checkbox" checked disabled>' : '<input class="form-check-input employe-sss" type="checkbox" disabled>') .'</td>
+              <td class="">'. ($employee["pagibig"] ? '<input class="form-check-input employe-pagibig" type="checkbox" checked disabled>' : '<input class="form-check-input" type="checkbox" disabled>') .'</td>
+              <td class="">'. ($employee["philhealth"] ? '<input class="form-check-input employe-philhealth" type="checkbox" checked disabled>' : '<input class="form-check-input" type="checkbox" disabled>') .'</td>
+              <input type="hidden" id="employee-ID" value="'.$employee["id"] .'">
             </tr>
           </tbody>
         </table>
