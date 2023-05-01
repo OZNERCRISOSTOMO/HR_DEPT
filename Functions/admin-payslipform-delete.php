@@ -9,8 +9,11 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
     if (isset($_POST['delete']) && $_POST['delete'] == 'Delete') {
         $id = $_POST['id'];
+
+        echo $id;
+        exit();
         $payslip->deletePayslipform($id);
-        // header("Location: ../admin/prlist.php");
+
     }
 } else {
     header("Location: ../admin/pslist.php");

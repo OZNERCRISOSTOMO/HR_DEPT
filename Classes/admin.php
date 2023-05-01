@@ -767,13 +767,36 @@ public function updatePayroll($id, $code, $start, $end, $type){
        header("Location: ../admin/prlist.php");
 }
 
+public function updatePayslip($id, $employee_name, $position, $branch, $department, $from_date, $to_date, $number_present, $number_overtime){
+    $stmt = $this->database->getConnection()->prepare("UPDATE employee_payslip_form SET employee_name = ?, position = ?, branch = ?, department = ?, from_date = ?, to_date = ? , number_present = ?, , number_overtime = ? WHERE id = ?");
+    $stmt->execute([$employee_name, $position, $branch, $department, $from_date, $to_date, $number_present, $number_overtime]);
+    if (!$stmt->execute([$employee_name, $position, $branch, $department, $from_date, $to_date, $number_present, $number_overtime])) {
+    header("Location: ../admin/pslist.php?error=stmtfail");
+       exit();
+       }
+
+       header("Location: ../admin/pslist.php");
+}
+
+public function deletePayslipform($id) {
+    try {
+        $sql = "DELETE FROM employee_payslip_form WHERE id=?";
+        $stmt= $this->database->getConnection()->prepare($sql);
+        $stmt->execute([$id]);
+
+        if (!$stmt->execute([$id])) {
+            header("Location: ../admin/pslist.php?error=stmtfail");
+               exit();
+        }
+        header("Location: ../admin/pslist.php?id=$id");
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+        return false;
+    }
+}
+
 public function deletePayroll($id) {
     try {
-        // $sql = "DELETE FROM prlist WHERE id = :id";
-        // $stmt = $this->database->getConnection()->prepare($sql);
-        // $stmt->bindParam(':id', $id);
-        // $stmt->execute();
-
         $sql = "DELETE FROM prlist WHERE id=?";
         $stmt= $this->database->getConnection()->prepare($sql);
         $stmt->execute([$id]);
