@@ -147,7 +147,11 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
       }
     ?>
     </tbody>
-    </table>  
+    </table>
+    
+    <form method="POST" action="../Functions/export.php">
+      <input type="submit" name="export" id="export" value="Export">
+    </form>
         </div>
 
 
