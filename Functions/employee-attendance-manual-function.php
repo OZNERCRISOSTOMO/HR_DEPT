@@ -62,8 +62,12 @@ if(isset($_POST['signin'])){
 	            date_default_timezone_set($timezone);
                 $lognow = date('H:i:s');
 
+                $checkifAbsent = "SELECT * FROM attendance WHERE date = '$date_now' AND employee_id = '$id' AND status = 'ONTIME' OR status = 'LATE'";
+                $queryCheckAbsent = $conn->query($checkifAbsent);
+                if($queryCheckAbsent->num_rows > 0){
+
+                
                 // Update the attendace table set time_out to current time.
-                if(($sched == '1' && $srow['time_out'] > $lognow) || ($sched == '2' && $srow['time_in'] < $lognow)){
                 $sql = "UPDATE attendance SET time_out = '$lognow' WHERE id = '".$timeout['uid']."'";
                     if($conn->query($sql)){
                         header("Location: ../Functions/employee-attendance-manual.php?value=Timeout&picture=".$row2['picture_path']."&ID=".$id."&name=".$row['first_name']." ".$row['last_name']."&post=".$row2['position']."&Timeout=".$lognow."&dep=".$row2['department']."");
@@ -163,7 +167,7 @@ if(isset($_POST['signin'])){
                         echo $conn->error;
                     }
                 }else{
-                    header("Location: ../Functions/employee-attendance-manual.php?value=invalidSched");
+                    header("Location: ../Functions/employee-attendance-manual.php?value=absent");
                 }
 
             }else{

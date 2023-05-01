@@ -287,7 +287,7 @@ class Admin {
         // Get today's date
         $today = date('Y-m-d');
 
-        $count = $this->database->getConnection()->query("SELECT count(*) FROM attendance WHERE date = '$today' AND schedule_id = '$id' AND status = 'LATE' OR status = 'ONTIME'")->fetchColumn();
+        $count = $this->database->getConnection()->query("SELECT count(*) FROM attendance WHERE date = '$today' AND status = 'LATE' OR status = 'ONTIME' AND schedule_id = $id")->fetchColumn();
 
         return $count;
 

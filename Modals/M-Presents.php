@@ -53,7 +53,7 @@
     FROM employees
     JOIN employee_details ON employees.id = employee_details.employee_id
     JOIN attendance ON employees.id = attendance.employee_id
-    WHERE employee_details.department = employee_details.department AND attendance.date = '$date_now' AND attendance.status = 'LATE' OR attendance.status = 'ONTIME' AND attendance.schedule_id = $employee";
+    WHERE attendance.date = '$date_now' AND attendance.status = 'LATE' OR attendance.status = 'ONTIME' AND attendance.schedule_id = $employee";
     $result = mysqli_query($conn, $sql);
 
     // check if SELECT statement was successful

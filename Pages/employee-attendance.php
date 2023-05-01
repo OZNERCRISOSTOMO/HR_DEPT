@@ -123,6 +123,40 @@ if(successValue === "employeeNotfound"){
 	setTimeout(function(){
     window.history.back();
    },4000);
+}else if(successValue === "invalidSched"){
+	Swal.fire({
+		icon:'error',
+		title:'Please Follow Your Schedule',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	setTimeout(function(){
+    window.history.back();
+   },4000);
+}else if(successValue === "absent"){
+	Swal.fire({
+		icon:'error',
+		title:'You are Absent for Today!',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	setTimeout(function(){
+    window.history.back();
+   },4000);
 }else if(successValue === "Timein"){
 	const picture = urlParams.get('picture');
 	const id = urlParams.get('ID');

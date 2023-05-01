@@ -46,27 +46,23 @@
             // Get the count of absent days
             $countRow = $countResult->fetch_assoc();
             $count = $countRow["count"];
-            $countWarnings = 0;
-            // Display the count of absent days
-            if($count >= 3){
-              $countWarnings++;
-            }
+          
 
-            if($count >= 3){
+            if($count >= 7){
               echo "<tr><td>".$employee_id."</td>";
               echo "<td>".$idRow['first_name']."</td>";
               echo "<td>".$idRow['last_name']."</td>";
-              echo '<td>Verbal</td></tr>';
+              echo '<td>Suspend</td></tr>';
             }else if($count >= 5){
               echo "<tr><td>".$employee_id."</td>";
               echo "<td>".$idRow['first_name']."</td>";
               echo "<td>".$idRow['last_name']."</td>";
               echo '<td>Written</td></tr>';
-            }elseif($count >= 7){
+            }elseif($count >= 3){
               echo "<tr><td>".$employee_id."</td>";
               echo "<td>".$idRow['first_name']."</td>";
               echo "<td>".$idRow['last_name']."</td>";
-              echo '<td>Suspend</td></tr>';
+              echo '<td>Verbal</td></tr>';
             }
             }
 

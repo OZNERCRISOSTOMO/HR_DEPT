@@ -1,7 +1,9 @@
 <?php
 // start session
 session_start();
-
+$timezone = 'Asia/Manila';
+date_default_timezone_set($timezone);
+$lognow = date('H:i:s');
 
 if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     require '../Classes/admin.php';
@@ -10,9 +12,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     $database = new Database();
     $admin = new Admin($database);
 
-    $timezone = 'Asia/Manila';
-	date_default_timezone_set($timezone);
-    $lognow = date('H:i:s');
+    
 
     if($lognow < "16:30:00"){
         $employee = $admin->selectEmployeeSched('1');
@@ -33,16 +33,16 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         }
     }
 }
-// establish a connection to the MySQL database
 $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
 
-// check if connection was successful
  if (!$conn) {
    die("Connection failed: " . mysqli_connect_error());
 }
+
 $employeeQuery = "SELECT * FROM employees";
 $employeeResult = $conn->query($employeeQuery);
 $countWarnings = 0;
+
 // Step 3: Loop through each employee id and get the count of absent days
 while ($idRow = $employeeResult->fetch_assoc()) {
 // Get the employee id

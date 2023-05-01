@@ -47,7 +47,7 @@
                     if(!$valueEmployee){
                         $count++;
                         $employeeInfo = $admin->findEmployeeById($value);
-                  if (!empty($employeeInfo)) {
+                  if(!empty($employeeInfo)){
                     echo "<tr><td>".$employeeInfo[0]['id']."</td>";
                     echo "<td>".$employeeInfo[0]['first_name']."</td>";
                     echo "<td>".$employeeInfo[0]['last_name']."</td>";
