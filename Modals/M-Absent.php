@@ -36,7 +36,9 @@
         }else if($lognow > "16:30:00"){
             $employee = $admin->selectEmployeeSched('2');
         }
-    
+        $timezone = 'Asia/Manila';
+        date_default_timezone_set($timezone);
+        $date_now = date('Y-m-d');
                 $count = 0;
                 foreach ($employee as $sched) {
                     foreach ($sched as $key => $value) {
@@ -53,6 +55,9 @@
                     echo "<td>".$employeeInfo[0]['last_name']."</td>";
                     echo '<td><span class="badge text-bg-danger">Absent</span></td></tr>';
                     }
+
+
+                    
                     $checkAttendancevalue = "SELECT * FROM attendance WHERE date = '$date_now' AND status = 'ABSENT' AND employee_id = '".$employeeInfo[0]['id']."' AND schedule_id ='".$employeeInfo[0]['schedule_id']."'";
                     $query123 = $conn->query($checkAttendancevalue);
                     if($query123->num_rows > 0){

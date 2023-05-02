@@ -597,7 +597,7 @@ class Admin {
 
         $employee = $this->database->getConnection()->prepare("SELECT * FROM attendance WHERE employee_id = ? AND date = '$today' AND status = 'ONTIME' OR status = 'LATE'");
          $employee->execute([$id]);
-        return $employee->fetch();
+        return $employee->fetchAll();
 
       
 

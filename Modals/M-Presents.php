@@ -60,8 +60,16 @@
     if (mysqli_num_rows($result) > 0) {
         // output data of each row
         while ($row = mysqli_fetch_assoc($result)) {    
+          if($row["time_in"] == "00:00:00"){
+            $timeIn = "No time";
+          }else{
             $timeIn = date('h:i A', strtotime($row["time_in"]));
+          }
+          if($row["time_out"] == "00:00:00"){
+            $timeIn = "No time";
+          }{
             $timeOut = date('h:i A', strtotime($row["time_out"]));
+          }
 
             echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["date"] . "</td><td>" . $timeIn . "</td><td>" . $timeOut . "</td><td>" . $row["status"] . "</td><td>" ."</td></tr>";
         }
