@@ -6,7 +6,8 @@ $database = new Database();
 $admin = new Admin($database);
 
 
-
+if(isset($_POST["submit-create"])){
+        
 $fname = $_POST['employee-name'];
 $position = $_POST['position'];
 $branch = $_POST['branch'];
@@ -98,4 +99,6 @@ if ($admin->checkprlist($prlistid)) {
     $admin->insertEmployeePayslipForm($fname, $position, $branch, $department,  $date, $date1, $present, $overtime, $salary, $sssChecked,$pagibigChecked, $philhealthChecked, $food_allowance, $transpo_allowance, $employeeId);
     $admin->insertEmployeePayslip($fname, $networth, $prlistid, $employeeId);
 }
+}
+
 ?>

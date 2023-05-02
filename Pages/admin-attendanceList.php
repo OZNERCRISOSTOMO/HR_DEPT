@@ -1,7 +1,7 @@
 <?php
 // start session
 session_start();
-if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
+if (isset($_SESSION['admin_id'])) {
     require '../Classes/employee.php';
     require '../Classes/database.php';
     require '../Classes/admin.php';
@@ -9,6 +9,9 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     $database = new Database();
     $attlist = new Employee($database);
     $admin = new Admin($database);
+
+       //get admin data 
+    $adminData = $admin->getAdminById($_SESSION['admin_id']);
 
     $timezone = 'Asia/Manila';
 	  date_default_timezone_set($timezone);

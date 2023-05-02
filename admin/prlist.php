@@ -1,12 +1,16 @@
 <?php
 // start session
 session_start();
-if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
+if (isset($_SESSION['admin_id'])) {
     require '../Classes/admin.php';
     require '../Classes/database.php';
 
     $database = new Database();
     $prlist = new Payroll($database); 
+    $admin = new Admin($database);
+
+       //get admin data 
+    $adminData = $admin->getAdminById($_SESSION['admin_id']);
 } else {
     header("Location: ../index.php");
 }

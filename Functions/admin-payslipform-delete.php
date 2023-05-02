@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
+if (isset($_SESSION['admin_id'])) {
     require '../Classes/admin.php';
     require '../Classes/database.php';
 
@@ -8,11 +8,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
     $payslip = new Payroll($database);
 
     if (isset($_POST['delete']) && $_POST['delete'] == 'Delete') {
-        $id = $_POST['id'];
+        $pslistId = $_POST['pslist-id'];
+        $prlistId = $_POST["prlist-id"];
 
-        echo $id;
-        exit();
-        $payslip->deletePayslipform($id);
+        $payslip->deletePayslipform($pslistId, $prlistId);
 
     }
 } else {

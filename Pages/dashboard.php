@@ -5,14 +5,15 @@ $timezone = 'Asia/Manila';
 date_default_timezone_set($timezone);
 $lognow = date('H:i:s');
 
-if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
+if (isset($_SESSION['admin_id'])) {
     require '../Classes/admin.php';
     require '../Classes/database.php';
 
     $database = new Database();
     $admin = new Admin($database);
 
-    
+    //get admin data 
+    $adminData = $admin->getAdminById($_SESSION['admin_id']);
 
     if($lognow < "16:30:00"){
         $employee = $admin->selectEmployeeSched('1');

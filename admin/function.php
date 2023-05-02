@@ -4,7 +4,8 @@
  require '../Classes/admin.php';
  require '../Classes/database.php';
  
- $prlistId = $_POST["prlist-id"];
+ if(isset($_POST["submit-generate"])){
+     $prlistId = $_POST["prlist-id"];
  $database = new Database();
  $admin = new Admin($database);
  $payslip = new Payroll($database);
@@ -316,7 +317,10 @@
   }
      
 
-header("Location: pslist.php?id=$prlistId");
+header("Location: pslist.php?id=$prlistId&status=generated");
+
+
+ }
 
 
 ?>

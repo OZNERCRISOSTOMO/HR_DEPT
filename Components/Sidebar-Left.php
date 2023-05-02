@@ -56,8 +56,8 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
               
                 <div class="dropdown pb-4">
                     <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../Images/1x1 photo.png" alt="hugenerd" width="37" height="30" class="rounded-circle">
-                        <span class="d-none d-sm-inline opacity-75" style=" font-size:15px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Crisostomo</span>  
+                        <img src="../Uploads/<?php echo $adminData["picture_path"]; ?>" alt="hugenerd" width="37" height="30" class="rounded-circle">
+                        <span class="d-none d-sm-inline opacity-75" style=" font-size:15px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo $adminData["last_name"]; ?></span>  
                         <!----------- Boss yec last name na lng idisplay mo d2 para di gaano mahaba boss ---------- -->
                     </a>
                     <ul class="dropdown-menu dropdown-menu-light text-small shadow">

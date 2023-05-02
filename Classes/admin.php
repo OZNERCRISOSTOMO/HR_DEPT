@@ -197,8 +197,18 @@ class Admin {
         exit();
     }
 
+    // reset the num_hr to 0 in employee_details table 
+    $sql = "UPDATE employee_details SET num_hr = ?, over_time = ? WHERE employee_id = ? ";
+    $stmt = $this->database->getConnection()->prepare($sql);
+
+    // execute statement and check for errors
+    if (!$stmt->execute(['0','0', $employeeId])) {
+        header("Location: ../Pages/employee-register.php?error=stmtfail");
+        exit();
+    }
+
     // if succesful
-    header("Location: ../admin/pslist.php?id=$id");
+    header("Location: ../admin/pslist.php?id=$id&status=created");
     }
 
     public function insertEmployeePayslipForm($fname, $position, $branch, $department,  $date, $date1, $present, $overtime, $salary, $sssChecked,$pagibigChecked, $philhealthChecked, $food_allowance, $transpo_allowance, $employeeId) {
@@ -261,8 +271,8 @@ class Admin {
         unset($this->database);
     }
 
-    public function getAdmin(){
-        $admin = $this->database->getConnection()->query("SELECT * FROM hr_dept WHERE id = 1")->fetch();
+    public function getAdminById($id){
+        $admin = $this->database->getConnection()->query("SELECT * FROM hr_dept WHERE id = '$id'")->fetch();
         return $admin;
         exit();
     }
@@ -778,17 +788,30 @@ public function updatePayslip($id, $employee_name, $position, $branch, $departme
        header("Location: ../admin/pslist.php");
 }
 
-public function deletePayslipform($id) {
+public function deletePayslipform($pslistId, $prlistId) {
     try {
-        $sql = "DELETE FROM employee_payslip_form WHERE id=?";
-        $stmt= $this->database->getConnection()->prepare($sql);
-        $stmt->execute([$id]);
 
-        if (!$stmt->execute([$id])) {
+        //delete employee payslip form 
+        $sql = "DELETE FROM employee_payslip_form WHERE payslip_id=?";
+        $stmt= $this->database->getConnection()->prepare($sql);
+        $stmt->execute([$pslistId]);
+
+        if (!$stmt->execute([$pslistId])) {
             header("Location: ../admin/pslist.php?error=stmtfail");
                exit();
         }
-        header("Location: ../admin/pslist.php?id=$id");
+
+        //delete employee payslip
+        $sql = "DELETE FROM employee_payslip WHERE id=?";
+        $stmt= $this->database->getConnection()->prepare($sql);
+        $stmt->execute([$pslistId]);
+
+        if (!$stmt->execute([$pslistId])) {
+            header("Location: ../admin/pslist.php?error=stmtfail");
+               exit();
+        }
+
+        header("Location: ../admin/pslist.php?id=$prlistId&status=deleted");
     } catch (PDOException $e) {
         echo $e->getMessage();
         return false;

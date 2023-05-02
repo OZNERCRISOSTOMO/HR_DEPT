@@ -7,7 +7,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-         <form action="makepdf.php" method="post" class="offset-md-3 col-md-6" id="myForm">
+         <form action="makepdf.php" method="POST" class="offset-md-3 col-md-6" id="myForm">
                 <p>Fill out the form to generate payslip into PDF</p>
 
                 <div class="row mb-2">
@@ -96,12 +96,13 @@
                     <input type="hidden" id="employee-name" name="employee-name">
                     <input type="hidden" id="prlist-id" name="prlist-id" value="<?php echo $id?>">
                     <input type="hidden" id="employee-id" name="employee-id">
-            </form>
+            
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" name="submit-create" class="btn btn-primary">Save</button>
       </div>
+      </form>
     </div>
   </div>
 </div>

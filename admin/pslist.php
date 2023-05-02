@@ -1,13 +1,16 @@
 <?php
 session_start();
 
-if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
+if (isset($_SESSION['admin_id'])) {
     require '../Classes/admin.php';
     require '../Classes/database.php';
 
     $database = new Database();
     $admin = new Admin($database);
     $payslip = new Payroll($database);
+
+     //get admin data 
+    $adminData = $admin->getAdminById($_SESSION['admin_id']);
     $id = $_GET['id'];
 } else {
     header("Location: ../index.php");
@@ -19,6 +22,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 <head>
     <Title> Payslip List</Title>
     <link rel="icon" type="image/x-icon" href="../Images/Logo 1.svg">
+     <!-- SWEET ALERT -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- BOOSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <!-- Select2 CSS --> 
@@ -99,6 +106,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     <div class="col-2 " style=" justify-content: flex-end;">
                     <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-plus fs-6"></i>Create New</button>
                      <?php include("../Modals/M-pslist.php")?>   
+                     <?php include("../Modals/M-pslist-edit.php")?> 
                 </div>
                     
                 <div class="col-3 " >
@@ -106,7 +114,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     <form action ="function.php" method="POST">
                         <input type="hidden" name="prlist-id" value="<?php echo $id ?>">
                         
-                        <button type="submit" name="submit" class="btn btn-success">
+                        <button type="submit" name="submit-generate" class="btn btn-success">
                             Generate Payslip
                         </button>
               
@@ -169,17 +177,20 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                      <tbody>
                         <?php
                             
-                            
                             $pslist = $payslip->payslipList($id);
-                            if (!empty($pslist)):
+                            if (!empty($pslist)){
                         ?>
-                            <?php foreach($pslist as $list):?>
+                            <?php foreach($pslist as $list) { ?>
                             <tr>
                                 <td><?php echo $list['id']; ?></td>
                                 <td><?php echo $admin->formatDate($list['date_added']); ?></td>
                                 <td><?php echo $list['employee']; ?></td>
                                 <td><?php echo $list['net']; ?></td>
                                 <td>
+                                    <?php if($list["file_path"] == "Not generated")  {?>
+                                             <p><?php echo $list["file_path"] ?></p>
+                                           
+                                    <?php } else { ?> 
                                     <a href="../Uploads/<?php echo $list['file_path'];?>" target="_thapa">
                                                 <?php
                                                 
@@ -191,27 +202,33 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 
                                                 ?>
                                     
-                                    </a>      
+                                    </a>     
+                                    <?php } ?> 
                                 </td>
                                 <td><?php echo $list['prlist_id']; ?></td>
+
                                 <td>
                                 <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
                                 <button id="editButton" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop-edit" type="submit" name="edit" value="Edit">Edit</button>
-                                <?php include("../Modals/M-pslist-edit.php")?> 
+                               
+
                                 <form method="POST" action="../Functions/admin-payslipform-delete.php">
-                                <button class="btn btn-sm btn-danger"  type="submit" name="delete" value="Delete">Delete</button>
-                                <input type="text" name="id" value='<?php echo $list['id']; ?>'>
+                                    <button class="btn btn-sm btn-danger"  type="submit" name="delete" value="Delete">Delete</button>
+                                    <input type="hidden" name="pslist-id" value="<?php echo $list['id']; ?>">  
+                                    <input type="hidden" name="prlist-id" value="<?php echo $id ?>">                              
                                 </form>
+
                                 </td>
                             </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            
-                        <?php endif; ?>
+                            <?php }
+                            } ?>
+               
                         </tbody>
                     </table>
                 </div>
             </div>
+            
+             
        
 <!-- END OF TABLEE -->
 </div>
@@ -231,7 +248,31 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
-    console.log(id);
+    const status = urlParams.get('status');
+
+    //SWEET ALERT DELETED, CREATE , GENERATE
+if (status === "deleted" || status === "created" || status === "generated") {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
+  Toast.fire({
+    icon: "success",
+    title: `${status} Succesfully!`,
+  });
+}
+
+
+
+
 
     const modalSubmitBtn = document.querySelector('#staticBackdrop button[type="submit"]');
         modalSubmitBtn.addEventListener('click', () => {
