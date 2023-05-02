@@ -1,6 +1,22 @@
 
 <?php
 
+session_start();
+$timezone = 'Asia/Manila';
+date_default_timezone_set($timezone);
+$lognow = date('H:i:s');
+
+if (isset($_SESSION['admin_id'])) {
+    require '../Classes/admin.php';
+    require '../Classes/database.php';
+
+    $database = new Database();
+    $admin = new Admin($database);
+
+    //get admin data 
+    $adminData = $admin->getAdminById($_SESSION['admin_id']);
+}
+
 $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
 
 // check if connection was successful
