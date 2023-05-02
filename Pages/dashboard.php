@@ -125,6 +125,7 @@ else {
             z-index: 9999;
         }
 
+
         .d-none{
             display: none;
         }
