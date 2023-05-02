@@ -47,6 +47,11 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                        
                 </li>
 
+
+                <li class="nav-item mb-5 ps-2">
+                    <a href="../Pages/Leave.php" class="text-decoration-none nav_links px-0 align-middle "> <i class='bx bx-clipboard nav_icon'></i> <span class="nav_name">Leave</span> </a>
+                       
+                </li>
                 
     
                     
@@ -63,10 +68,7 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                     <ul class="dropdown-menu dropdown-menu-light text-small shadow">
                        
     
-                        <li><a class="dropdown-item mx-3" href="#">Pending</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
+                      
                         <li>
                         <a href="../Functions/admin-logout.php" class="text-decoration-none  nav_link logout mx-3 align-middle text-black">
                             <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>

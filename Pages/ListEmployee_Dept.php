@@ -85,74 +85,89 @@
 
 			</tbody>
 		</table>
-        <!-- Button trigger modal -->
+    
 
 
-        <!-- Button trigger modal -->
-
-<!-- Modal Employee -->
-      
-
-<!-- Button trigger modal -->
 
 
-<!-- Modal -->
+<!-- Modal Leave -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">File Leave</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         
 
+      <h3 class="text-center pt-4">File Leave</h3>
 
-      <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Type</th>
-      <th scope="col">Date Started</th>
-      <th scope="col">Date Ended</th>
-      <th scope="col">File Leave</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
+<form method="POST" action="ListEmployee_Dept.php" enctype="multipart/form-data">
+
+<div class="container col-10">
+    <div class="row">
+      
+<div class=" col-6 mb-3">
+    <label for="exampleInputname1" class="form-label">Name:</label>
+    <input type="text" class="form-control" id="exampleInputname1" name="name" aria-describedby="nameHelp">
+</div>
+
+<div class="col-6 mb-3">
+    <label for="exampleInputname1" class="form-label">Login ID:</label>
+    <input type="text" class="form-control" id="exampleInputname1" name="loginID" aria-describedby="nameHelp">
+</div>
+
+<div class="col-6 mb-3">
+    <label for="exampleInputname1" class="form-label">Date Started:</label>
+    <input type="date" class="form-control" id="exampleInputname1" name="date_started" aria-describedby="nameHelp">
+</div>
+
+<div class="col-6 mb-3">
+    <label for="exampleInputname1" class="form-label">Date Ended:</label>
+    <input type="date" class="form-control" id="exampleInputname1" name="date_ended"aria-describedby="nameHelp">
+</div>
 
 
-  <tbody>
 
-  <?php
+<div class="col-6 mb-4">
+    <div class="form-label">
+    <label class="form-check-label" for="inlineRadio1">Type: </label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="leave" id="inlineRadio1" value="Vacation Leave">
+    <label class="form-check-label" for="inlineRadio1">Vacation Leave</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="leave" id="inlineRadio2" value="Sick Leave">
+    <label class="form-check-label" for="inlineRadio2">Sick Leave</label>
+    </div>
 
-$query = "SELECT * FROM `leave` ";
-$result = mysqli_query($conn, $query);
+    </div>
 
 
-if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "<tr><td>{$row['ID']}</td><td>{$row['Name']}</td><td>{$row['Type']}</td><td>{$row['date_started']}</td><td>{$row['date_ended']}</td><td>{$row['leave_file']}</td><td><div class='container d-flex gap-2'>
-        <form method='POST' action='../Functions/overtime-accept.php'><button type='submit' name='accept' class='btn btn-success btn-sm w-100 pd-2'>Accept</button></form>
-        <form method='POST' action='../Functions/overtime-accept.php'><button type='button' class='btn btn-danger btn-sm  w-100'>Decline</button>
-        <input type='hidden' name='employee_id' value='{$row['ID']}'></input></form>
-        </div></td></tr>";
-    }
-} else {
-    echo "0 results";
-}
-  ?>
+    <div class="col-6 mb-3">
+    <label for="exampleInputname1" class="form-label">Department:</label>
+    <input type="text" class="form-control" id="exampleInputname1" name="department" aria-describedby="deparment">
+    </div>
 
+ 
+    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+
+ 
+
+</div>
+</div>
 </form>
-  </tbody>
-</table>
 
 
 
-      </div>
+  </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+
+       
       </div>
     </div>
   </div>
