@@ -27,11 +27,15 @@
   <h5 class="text-black mt-4">Holidays Hello Kapatid na renzo</h5>
   <div class="d-grid gap-2 mb-2 ">
 
-  <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#holidayModal">
+  <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#Holiday">
   <i class="fa-solid fa-plus"></i>&nbsp;Add Holiday
 </button>
 <?php include("../Modals/M-Holiday.php")?>  
   </div>
+
+
+
+
 
 
 

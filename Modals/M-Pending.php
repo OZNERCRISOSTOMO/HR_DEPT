@@ -1,7 +1,7 @@
                                                                 <!-- Button trigger modal -->
 
 <!-- Modal -->
-<div class="modal modal-pending fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal  fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">

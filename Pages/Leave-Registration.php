@@ -112,7 +112,7 @@
         </div>
 
 
-        <div class="mb-3">
+        <div class="col-3 mb-4">
             <div class="form-label">
             <label class="form-check-label" for="inlineRadio1">Type: </label>
             </div>
@@ -126,10 +126,28 @@
             </div>
 
             </div>
+
+
+            <div class="col-3 mb-3">
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                   Department
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">HR</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+                </div>
+
+            </div>
       
             <div class="col-5">
             <button type="submit" class="btn btn-primary" name="submit">Submit</button>
         </div>
+
+        
 
                 </div>  
                 </div>
