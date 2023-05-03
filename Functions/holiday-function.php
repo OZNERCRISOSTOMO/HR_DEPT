@@ -24,7 +24,17 @@ if(isset($_POST['hsubmit'])){
         $h_insert_query = $conn->query($h_insert);
 
         if($h_insert_query){
-            echo 'success';
+            $h_select = "SELECT * FROM attendance WHERE date = '$hdate'";
+            $h_select_query = $conn->query($h_select);
+           
+
+            while($row = mysqli_fetch_assoc($h_select_query)){
+
+             $h_update = "UPDATE attendance SET num_hr = num_hr*$hpercent WHERE id = '".$row['id']."'";
+             $double_pay = $conn->query($h_update);
+            }
+
+            header("Location: ../Pages/dashboard.php");
         }
     }
 }

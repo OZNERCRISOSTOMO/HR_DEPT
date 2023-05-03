@@ -605,7 +605,7 @@ class Admin {
              // Get today's date
         $today = date('Y-m-d');
 
-        $employee = $this->database->getConnection()->prepare("SELECT * FROM attendance WHERE employee_id = ? AND date = '$today' AND status = 'ONTIME' OR status = 'LATE'");
+        $employee = $this->database->getConnection()->prepare("SELECT * FROM attendance WHERE employee_id = ? AND date = '$today' AND (status = 'ONTIME' OR status = 'LATE')");
          $employee->execute([$id]);
         return $employee->fetchAll();
 
