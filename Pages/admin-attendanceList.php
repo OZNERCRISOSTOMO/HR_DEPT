@@ -202,7 +202,7 @@ if (isset($_SESSION['admin_id'])) {
       </form>
       <form method="post" action="../Functions/overtime-delete.php">
           <input type="hidden" name="deleteid" id="deleteid" value=<?php echo $row['id']; ?>>
-          <input type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger"  value="Delete">
+          <input type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger" value="Delete">
       </form>
       </td>
     </tr>

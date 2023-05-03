@@ -32,7 +32,7 @@
 				</tr>
 			</thead>
 			<tbody>
-
+      <form method="POST" action="../Functions/edit-schedule.php">
 			<?php
     // establish a connection to the MySQL database
     $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
@@ -73,21 +73,49 @@
             echo "<tr><td>"  . $row["id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["email"] . "</td><td>" . $row["gender"] . "</td><td>" . $schedule . "</td><td>" . $row["contact"] . "</td><td>" . $row["department"] . '</td><td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
             Set Schedule
           </button></td></tr>';
-
-       
+          echo '<input type="hidden" name="a" value="'.$row['id'].'">';
         }
-    } else {
-        echo "0 results";
-    }
-    // close the database connection
-    // mysqli_close($conn); 
+      }
 ?>
 
 			</tbody>
 		</table>
     
 
+<!-- Modal Schedule -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+                              Schedule : 
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" value="1" id="1" name="schedule" required>
+                                    <label class="form-check-label" for="1">8:00 AM - 5:00 PM</label>
+                                </div>
+            
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" value="2" id="2" name="schedule" required>
+                                    <label class="form-check-label" for="2">6:00 PM - 10:00 PM</label>
+                                </div>
+                         
+      </div>
+      <div class="modal-footer">
+        <button type="submit" name="submittt" class="btn btn-primary">Save changes</button>
+  </form>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+
+
+	</div>
 
 
 <!-- Modal Leave -->
@@ -102,7 +130,7 @@
         
 
       <h3 class="text-center pt-4">File Leave</h3>
-<form method="POST" action="../Functions/leave-function.php" enctype="multipart/form-data">
+<form method="POST" action="ListEmployee_Dept.php" enctype="multipart/form-data">
 
 <div class="container col-10">
     <div class="row">
@@ -163,43 +191,6 @@
     </div>
   </div>
 </div>
-
-
-<!-- Modal Schedule -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
- 
-<div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form method="POST">
-                              Schedule : 
-                                <div class="form-check ms-3">
-                                    <input class="form-check-input" type="radio" value="1" id="1" name="schedule" required>
-                                    <label class="form-check-label" for="1">8:00 AM - 5:00 PM</label>
-                                </div>
-            
-                                <div class="form-check ms-3">
-                                    <input class="form-check-input" type="radio" value="2" id="2" name="schedule" required>
-                                    <label class="form-check-label" for="2">6:00 PM - 10:00 PM</label>
-                                </div>
-                         
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-	</div>
 
  
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

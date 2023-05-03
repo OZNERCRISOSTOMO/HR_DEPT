@@ -32,6 +32,8 @@
 
                 $insert_leave = "INSERT INTO `leave` (name, type, date_started, date_ended, Department) VALUES ('$name', '$leave_type', '$date_start', '$date_end', '$dept')";
                 $insert_query = $conn->query($insert_leave);
+
+                header('Location: ../Pages/ListEmployee_Dept.php');
             }else{
                 echo 'Error';
             }
@@ -39,7 +41,6 @@
             $diff_absent = "SELECT DATEDIFF('$date_end', '$date_start') AS days, vacation_leave FROM employee_details";
             $diff_query = $conn->query($diff_absent);
             $diff_row = $diff_query->fetch_assoc();
-
 
 
         }
