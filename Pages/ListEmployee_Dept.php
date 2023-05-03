@@ -70,7 +70,7 @@
                 $schedule = "4:00PM - 10:00PM";  
             } 
             
-            echo "<tr><td>"  . $row["id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["email"] . "</td><td>" . $row["gender"] . "</td><td>" . $schedule . "</td><td>" . $row["contact"] . "</td><td>" . $row["department"] . '</td><td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+            echo "<tr><td>"  . $row["id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["email"] . "</td><td>" . $row["gender"] . "</td><td>" . $schedule . "</td><td>" . $row["contact"] . "</td><td>" . $row["department"] . '</td><td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
             Set Schedule
           </button></td></tr>';
 
@@ -102,18 +102,18 @@
         
 
       <h3 class="text-center pt-4">File Leave</h3>
-<form method="POST" action="ListEmployee_Dept.php" enctype="multipart/form-data">
+<form method="POST" action="../Functions/leave-function.php" enctype="multipart/form-data">
 
 <div class="container col-10">
     <div class="row">
 <div class=" col-6 mb-3">
-    <label for="exampleInputname1" class="form-label">Name:</label>
-    <input type="text" class="form-control" id="exampleInputname1" name="name" aria-describedby="nameHelp">
+    <label for="exampleInputname1" class="form-label">Employee ID:</label>
+    <input type="text" class="form-control" id="exampleInputname1" name="loginID" aria-describedby="nameHelp">
 </div>
 
 <div class="col-6 mb-3">
-    <label for="exampleInputname1" class="form-label">Login ID:</label>
-    <input type="text" class="form-control" id="exampleInputname2" name="loginID" aria-describedby="nameHelp">
+    <label for="exampleInputname1" class="form-label">Name:</label>
+    <input type="text" class="form-control" id="exampleInputname2" name="name" aria-describedby="nameHelp">
 </div>
 
 <div class="col-6 mb-3">
@@ -166,7 +166,7 @@
 
 
 <!-- Modal Schedule -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
  
 <div class="modal-dialog">
     <div class="modal-content">

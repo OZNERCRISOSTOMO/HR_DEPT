@@ -30,6 +30,7 @@ if (isset($_SESSION['admin_id'])) {
 
         if(!$valueEmployee){
             $countPresents++;
+            
         }
     }
 }
@@ -398,7 +399,7 @@ else {
 </div>
 </div>
 
-<script>
+<!-- <script>
 const urlParams=new URLSearchParams(window.location.search);
 const successValue1 =urlParams.get('value')
 
@@ -412,8 +413,20 @@ Swal.fire({
    timerProgressBar: true,
    toast: true,
 
-  });}
-                  </script>
+  });
+}else if(successValue1 === "holiday"){
+Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Successfully add holiday!",
+    showConfirmButton: false,
+    timer: 3000,
+   timerProgressBar: true,
+   toast: true,
+
+  });
+}
+                  </script> -->
 
  <script>
 

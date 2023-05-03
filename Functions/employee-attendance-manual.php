@@ -102,14 +102,6 @@ if ($conn->connect_error) {
 		</form>
 	</div>
 </div>
-<script>
-	window.addEventListener("pageshow", function(event) {
-                var inputEmail = document.getElementById("email");
-				var inputPass = document.getElementById("password");
-                inputEmail.value = "";
-				inputPass.value = "";
-         });
-</script>
 
 </body>
 
@@ -132,9 +124,13 @@ if(successValue === "invalidUser"){
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-	setTimeout(function(){
-    window.history.back();
-   },4000);
+	window.addEventListener('popstate', function(event) {
+		var input1 = document.getElementById("email");
+		var input2 = document.getElementById("password");
+        input1.value = "";
+		input2.value = "";
+		
+	});
 }else if(successValue === "absent"){
 	Swal.fire({
 		icon:'error',
@@ -149,9 +145,13 @@ if(successValue === "invalidUser"){
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-	setTimeout(function(){
-    window.history.back();
-   },4000);
+	window.addEventListener('popstate', function(event) {
+		var input1 = document.getElementById("email");
+		var input2 = document.getElementById("password");
+        input1.value = "";
+		input2.value = "";
+		
+	});
 }else if(successValue === "invalidSched"){
 	Swal.fire({
 		icon:'error',
@@ -166,9 +166,13 @@ if(successValue === "invalidUser"){
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-	setTimeout(function(){
-    window.history.back();
-   },4000);
+	window.addEventListener('popstate', function(event) {
+		var input1 = document.getElementById("email");
+		var input2 = document.getElementById("password");
+        input1.value = "";
+		input2.value = "";
+		
+	});
 }else if(successValue === "invalidPass"){
 	Swal.fire({
 		icon:'error',
@@ -183,9 +187,13 @@ if(successValue === "invalidUser"){
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-	setTimeout(function(){
-    window.history.back();
-   },4000);
+	window.addEventListener('popstate', function(event) {
+		var input1 = document.getElementById("email");
+		var input2 = document.getElementById("password");
+        input1.value = "";
+		input2.value = "";
+		
+	});
 }else if(successValue === "Timein"){
 	const picture = urlParams.get('picture');
 	const id = urlParams.get('ID');
@@ -210,9 +218,13 @@ if(successValue === "invalidUser"){
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-	setTimeout(function(){
-    window.history.back();
-   },4000);
+	window.addEventListener('popstate', function(event) {
+		var input1 = document.getElementById("email");
+		var input2 = document.getElementById("password");
+        input1.value = "";
+		input2.value = "";
+		
+	});
 }else if(successValue === "Timeout"){
 	const picture = urlParams.get('picture');
 	const id = urlParams.get('ID');
@@ -236,9 +248,13 @@ if(successValue === "invalidUser"){
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-	setTimeout(function(){
-    window.history.back();
-   },4000);
+	window.addEventListener('popstate', function(event) {
+		var input1 = document.getElementById("email");
+		var input2 = document.getElementById("password");
+        input1.value = "";
+		input2.value = "";
+		
+	});
 }
 
 </script>

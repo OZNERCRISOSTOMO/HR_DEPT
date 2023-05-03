@@ -94,12 +94,7 @@
 		</form>
 	</div>
 </div>
-<script>
-	window.addEventListener("pageshow", function(event) {
-                var input = document.getElementById("employee");
-                input.value = "";
-         });
-</script>
+
 </body>
 <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -120,9 +115,11 @@ if(successValue === "employeeNotfound"){
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-	setTimeout(function(){
-    window.history.back();
-   },4000);
+	window.addEventListener('popstate', function(event) {
+		var input = document.getElementById("employee");
+        input.value = "";
+		document.getElementById('myInput').focus();
+	});
 }else if(successValue === "invalidSched"){
 	Swal.fire({
 		icon:'error',
@@ -137,9 +134,11 @@ if(successValue === "employeeNotfound"){
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-	setTimeout(function(){
-    window.history.back();
-   },4000);
+	window.addEventListener('popstate', function(event) {
+		var input = document.getElementById("employee");
+        input.value = "";
+		document.getElementById('myInput').focus();
+	});
 }else if(successValue === "absent"){
 	Swal.fire({
 		icon:'error',
@@ -154,9 +153,11 @@ if(successValue === "employeeNotfound"){
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-	setTimeout(function(){
-    window.history.back();
-   },4000);
+	window.addEventListener('popstate', function(event) {
+		var input = document.getElementById("employee");
+        input.value = "";
+		document.getElementById('myInput').focus();
+	});
 }else if(successValue === "Timein"){
 	const picture = urlParams.get('picture');
 	const id = urlParams.get('ID');
@@ -181,9 +182,11 @@ if(successValue === "employeeNotfound"){
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-	setTimeout(function(){
-    window.history.back();
-   },4000);
+	window.addEventListener('popstate', function(event) {
+		var input = document.getElementById("employee");
+        input.value = "";
+		document.getElementById('myInput').focus();
+	});
 }else if(successValue === "Timeout"){
 	const picture = urlParams.get('picture');
 	const id = urlParams.get('ID');
@@ -207,13 +210,11 @@ if(successValue === "employeeNotfound"){
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-	setTimeout(function(){
-    window.history.back();
-
-	window.onload = function() {
-      document.getElementById('employee').value = '';
-    };
-   },4000);
+	window.addEventListener('popstate', function(event) {
+		var input = document.getElementById("employee");
+        input.value = "";
+		document.getElementById('myInput').focus();
+	});
 }
 
 </script>

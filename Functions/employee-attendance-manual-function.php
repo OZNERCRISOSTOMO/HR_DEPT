@@ -44,6 +44,7 @@ if(isset($_POST['signin'])){
             $timezone = 'Asia/Manila';
 	        date_default_timezone_set($timezone);
             $date_now = date('Y-m-d');
+            $name = "".$row['first_name']." ".$row['last_name']."";
 
 
             // Check if the employee has record in Time_in in the current date
@@ -126,7 +127,7 @@ if(isset($_POST['signin'])){
 
                             // Record Overtime in table overTime. 
                         
-                            $overT = "INSERT INTO overTime (employee_id, remarks, date, over_time) VALUES ('$id','Over Time', '$date_now','$int')";
+                            $overT = "INSERT INTO overTime (name, employee_id, remarks, date, over_time) VALUES ('$name', '$id','Over Time', '$date_now','$int')";
                             $conn->query($overT);
                             
                             $time_out = $srow['time_out'];
@@ -158,8 +159,8 @@ if(isset($_POST['signin'])){
                     }else if($srow['time_out'] > $urow['time_out']){
 
                         // Record Undertime in Table overTime
-                        $name = "".$row['first_name']." ".$row['last_name']."";
-                        $undertime = "INSERT INTO overTime (employee_id, name, remarks, date, over_time) VALUES ('$id', '$name', 'Under Time', '$date_now','$int')";
+                        
+                        $undertime = "INSERT INTO overTime (name, employee_id, name, remarks, date, over_time) VALUES ('$name, '$id', '$name', 'Under Time', '$date_now','$int')";
                         $conn->query($undertime);
                     }
                 }

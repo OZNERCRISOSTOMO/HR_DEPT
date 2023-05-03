@@ -267,8 +267,8 @@ if (isset($_SESSION['admin_id'])) {
             $timeIn = date('h:i A', strtotime($row["time_in"]));
           }
           if($row["time_out"] == "00:00:00"){
-            $timeIn = "No time";
-          }{
+            $timeOut = "No time";
+          }else{
             $timeOut = date('h:i A', strtotime($row["time_out"]));
           }
 
@@ -380,7 +380,7 @@ if (isset($_SESSION['admin_id'])) {
     Swal.fire({
 		icon:'success',
     position:'top-end',
-		title:'Over Time of the Employee was Accepted',
+		title:'Accepted',
 		toast:true,
 		showConfirmButton: false,
   		timer: 3000,
@@ -394,7 +394,7 @@ if (isset($_SESSION['admin_id'])) {
     Swal.fire({
 		icon:'error',
     position:'top-end',
-		title:'Over Time of the Employee was Decline',
+		title:'Declined',
 		toast:true,
 		showConfirmButton: false,
   		timer: 3000,
