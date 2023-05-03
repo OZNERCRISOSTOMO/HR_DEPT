@@ -390,9 +390,6 @@ if (isset($_SESSION['admin_id'])) {
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-  setTimeout(function(){
-    window.history.back();
-   },4000);
   }else if(successValue === "delete"){
     Swal.fire({
 		icon:'error',
@@ -407,9 +404,6 @@ if (isset($_SESSION['admin_id'])) {
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	})
-  setTimeout(function(){
-    window.history.back();
-   },4000);
   }
 
   const logoutBtn = document.querySelector(".logout");
