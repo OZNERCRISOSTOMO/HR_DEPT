@@ -24,12 +24,16 @@
       <div class="d-flex me-2 flex-column align-items-center px-1  text-white min-vh-100 position-fixed">
                 
   <div class="w-100">
-  <h5 class="text-black mt-4">Holidays Hello Kapatid na renzo</h5>
-  <div class="d-grid gap-2 mb-2 ">
+ <h5 class="text-black mt-2">Holidays</h5>
+  <div class="d-grid gap-2 mb-2 mt-2">
 
   <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#Holiday">
   <i class="fa-solid fa-plus"></i>&nbsp;Add Holiday
 </button>
+
+
+
+
 <?php include("../Modals/M-Holiday.php")?>  
   </div>
 

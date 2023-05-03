@@ -104,21 +104,21 @@ if (isset($_SESSION['admin_id'])) {
               <td><?php echo $list['end']; ?> </td>
               <td><?php echo $list['type']; ?> </td>
               <td>
-              <div class="container ">
+             
                 <div class="row">
                   <div class="col-3">
               <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
               </div>
-              <div class="col-3">
+              <div class="col-3 m-0 ps-2">
               <button id="editButton" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#EditModal" type="submit" name="edit" value="Edit">Edit</button>
               </div>
-              <div class="col-3">
+              <div class="col-3 p-0 m-0">
               <form method="POST" action="../Functions/admin-payroll-delete.php">
               <button class="btn btn-sm btn-danger" type="submit" name="delete" value="Delete">Delete</button>
               <input type="hidden" name="id" value="<?php echo $list['id']; ?>">
               </form>
               </div>
-              </div>  
+                
               </div>  
               </td>
             </tr>

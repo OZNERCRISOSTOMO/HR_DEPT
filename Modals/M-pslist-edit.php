@@ -13,7 +13,7 @@
                 <div class="row mb-2">
                     <div class="col-md-6" >
                          
-                            <select id='select-employee' name="employee-id" class="select2-container">
+                            <select id='select-employee' name="employee-id" class="select2-container col-11">
                                 <option value="0">Select employee</option>
                            <?php
                                 $employees = $admin->getEmployees();

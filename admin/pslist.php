@@ -208,16 +208,21 @@ if (isset($_SESSION['admin_id'])) {
                                 <td><?php echo $list['prlist_id']; ?></td>
 
                                 <td>
+                                    <div class="row">
+                                        <div class="col-3 ps-1">
                                 <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
+                                </div>
+                                <div class="col-3 px-2">
                                 <button id="editButton" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop-edit" type="submit" name="edit" value="Edit">Edit</button>
-                               
-
+                                </div>
+                                <div class="col-3  px-2">
                                 <form method="POST" action="../Functions/admin-payslipform-delete.php">
                                     <button class="btn btn-sm btn-danger"  type="submit" name="delete" value="Delete">Delete</button>
                                     <input type="hidden" name="pslist-id" value="<?php echo $list['id']; ?>">  
                                     <input type="hidden" name="prlist-id" value="<?php echo $id ?>">                              
                                 </form>
-
+                                </div>
+                                    </div>
                                 </td>
                             </tr>
                             <?php }
