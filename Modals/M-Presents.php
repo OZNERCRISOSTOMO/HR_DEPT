@@ -48,6 +48,8 @@
       $employee = '2';
   }
 
+
+
     // execute a SELECT statement to retrieve data from the table
     $sql = "SELECT employees.first_name, employees.last_name, attendance.*
     FROM employees
@@ -66,12 +68,19 @@
             $timeIn = date('h:i A', strtotime($row["time_in"]));
           }
           if($row["time_out"] == "00:00:00"){
-            $timeIn = "No time";
-          }{
+            $timeOut = "No time";
+          }else{
             $timeOut = date('h:i A', strtotime($row["time_out"]));
           }
 
-            echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["date"] . "</td><td>" . $timeIn . "</td><td>" . $timeOut . "</td><td>" . $row["status"] . "</td><td>" ."</td></tr>";
+
+            if($row["status"] == "ONTIME"){
+                $status = '<span class="badge text-bg-success">Ontime</span>';
+            }
+            else if($row["status"] == "LATE"){
+              $status = '<span class="badge text-bg-danger">Late</span>';
+            }
+            echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["date"] . "</td><td>" . $timeIn . "</td><td>" . $timeOut . "</td><td>" . $status . "</td><td>" ."</td></tr>";
         }
     } else {
         echo "";

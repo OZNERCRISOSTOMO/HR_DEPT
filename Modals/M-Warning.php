@@ -52,17 +52,17 @@
               echo "<tr><td>".$employee_id."</td>";
               echo "<td>".$idRow['first_name']."</td>";
               echo "<td>".$idRow['last_name']."</td>";
-              echo '<td>Suspend</td></tr>';
+              echo '<td><span class="badge text-bg-danger">Suspended</span></td></tr>';
             }else if($count >= 5){
               echo "<tr><td>".$employee_id."</td>";
               echo "<td>".$idRow['first_name']."</td>";
               echo "<td>".$idRow['last_name']."</td>";
-              echo '<td>Written</td></tr>';
+              echo '<td><span class="badge text-bg-warning">Written</span></td></tr>';
             }elseif($count >= 3){
               echo "<tr><td>".$employee_id."</td>";
               echo "<td>".$idRow['first_name']."</td>";
               echo "<td>".$idRow['last_name']."</td>";
-              echo '<td>Verbal</td></tr>';
+              echo '<td><span class="badge text-bg-success">Verbal</span></td></tr>';
             }
             }
 
