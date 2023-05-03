@@ -29,18 +29,22 @@
   <div class="d-grid gap-2">
 
 
-  <form method="POST">
+  <form method="POST" action="../Functions/holiday-function.php">
   <div class="input-group input-group-sm mb-1">
   
-  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Holidays">
+  <input type="text" class="form-control" aria-label="Sizing example input" name="hname" aria-describedby="inputGroup-sizing-sm" placeholder="Holidays">
 </div>
  
 <div class="input-group input-group-sm mb-1">
  
-  <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+  <input type="date" class="form-control" name="hdate" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+</div>
+<div class="input-group input-group-sm mb-1">
+ 
+  <input type="text" class="form-control" name="hpercent" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Percentage">
 </div>
  
-  <button type="submit" class="btn btn-success btn-sm mb-2 w-100">Add Holiday</button>
+  <button type="submit" name="hsubmit" class="btn btn-success btn-sm mb-2 w-100">Add Holiday</button>
 </form>
 
 
@@ -59,13 +63,31 @@
 
 
 <!--buong card to-->
+<?php 
+  $dbServername = "sql985.main-hosting.eu";
+  $dbUsername = "u839345553_sbit3g";
+  $dbPassword = "sbit3gQCU";
+
+  $conn = new mysqli($dbServername, $dbUsername, $dbPassword, 'u839345553_SBIT3G');
+
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$h_display = "SELECT * FROM holiday";
+$h_query = $conn->query($h_display);
+
+while($row = mysqli_fetch_assoc($h_query)){
+?>
+
+
   <div class="card-container mb-2">
     <div class="card" style="width: 100%; height:5rem;">
       <div class="card-body">
-        <h3 class="card-text" style="font-size:16px; font-weight:bold;">Feb 14. 2023</h3>
+        <h3 class="card-text" style="font-size:16px; font-weight:bold;"><?php echo $row['holiday_name'] ?></h3>
         <div class="row">
           <div class="col-6">
-            <h3 class="card-title"style="font-size:13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Valentines Day</h3>
+            <h3 class="card-title"style="font-size:13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><?php echo $row['holiday_date'] ?></h3>
           </div>
           <div class="col-1 ms-2">
             <button class="btn btn-transparent btn-sm border-0 border-none" type="submit">
@@ -81,7 +103,7 @@
       </div>
     </div>
   </div>
-
+<?php } ?>
   
 <!--buong card to-->
 

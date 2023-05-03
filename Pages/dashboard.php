@@ -358,15 +358,15 @@ else {
                                 <div class="col-12 mt-2">
 
                                 <div class="d-flex ms-3">
-                                <i class="fa-solid fa-star text-warning pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px;" name="Email">₱ <?php echo number_format($employee["rate_per_hour"] )?>/hr</p>
+                                <i class="fa-solid fa-star text-warning pe-2"></i><p class="text d-flex flex-column col-10"  style="font-size: 13px;" name="Email">₱ <?php echo number_format($employee["rate_per_hour"] )?>/hr</p>
                                 </div>
 
                                 <div class="d-flex ms-3">
-                                <i class="fa-solid fa-envelope text-primary text pe-2"></i> <p class="text d-flex flex-column col-10 textToCopy"  style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" name="Email" id="textToCopy"><?php echo $employee["email"] ?></p>
+                                <i class="fa-solid fa-envelope text-primary text pe-2"></i><p class="text d-flex flex-column col-10 textToCopy"  style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" name="Email" id="textToCopy"><?php echo $employee["email"] ?></p>
                                 </div>
 
                             <div class="d-flex ms-3">
-                            <i class="fa-solid fa-phone text-success pe-2"></i> <p class="text d-flex flex-column col-10"  style="font-size: 13px;" name="Email"><?php echo $employee["contact"] ?></p>
+                            <i class="fa-solid fa-phone text-success pe-2"></i><p class="text d-flex flex-column col-10"  style="font-size: 13px;" name="Email"><?php echo $employee["contact"] ?></p>
                             </div>
                         
                              </div>
