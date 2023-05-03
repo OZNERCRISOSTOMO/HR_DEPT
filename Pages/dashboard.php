@@ -30,7 +30,6 @@ if (isset($_SESSION['admin_id'])) {
 
         if(!$valueEmployee){
             $countPresents++;
-            $employeeInfo = $admin->findEmployeeById($value);
         }
     }
 }

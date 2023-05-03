@@ -9,7 +9,7 @@
 <body>
 	<div class="container">
 		<h2>Employee List</h2>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
   Leave
 </button>
 
@@ -80,7 +80,7 @@
         echo "0 results";
     }
     // close the database connection
-    // mysqli_close($conn);
+    // mysqli_close($conn); 
 ?>
 
 			</tbody>
@@ -91,7 +91,7 @@
 
 
 <!-- Modal Leave -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -102,12 +102,10 @@
         
 
       <h3 class="text-center pt-4">File Leave</h3>
-
 <form method="POST" action="ListEmployee_Dept.php" enctype="multipart/form-data">
 
 <div class="container col-10">
     <div class="row">
-      
 <div class=" col-6 mb-3">
     <label for="exampleInputname1" class="form-label">Name:</label>
     <input type="text" class="form-control" id="exampleInputname1" name="name" aria-describedby="nameHelp">
@@ -115,17 +113,17 @@
 
 <div class="col-6 mb-3">
     <label for="exampleInputname1" class="form-label">Login ID:</label>
-    <input type="text" class="form-control" id="exampleInputname1" name="loginID" aria-describedby="nameHelp">
+    <input type="text" class="form-control" id="exampleInputname2" name="loginID" aria-describedby="nameHelp">
 </div>
 
 <div class="col-6 mb-3">
     <label for="exampleInputname1" class="form-label">Date Started:</label>
-    <input type="date" class="form-control" id="exampleInputname1" name="date_started" aria-describedby="nameHelp">
+    <input type="date" class="form-control" id="exampleInputname3" name="date_started" aria-describedby="nameHelp">
 </div>
 
 <div class="col-6 mb-3">
     <label for="exampleInputname1" class="form-label">Date Ended:</label>
-    <input type="date" class="form-control" id="exampleInputname1" name="date_ended"aria-describedby="nameHelp">
+    <input type="date" class="form-control" id="exampleInputname4" name="date_ended"aria-describedby="nameHelp">
 </div>
 
 
@@ -158,17 +156,10 @@
 
 </div>
 </div>
-</form>
-
-
+  </form>
 
   </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-
-       
-      </div>
+      
     </div>
   </div>
 </div>
