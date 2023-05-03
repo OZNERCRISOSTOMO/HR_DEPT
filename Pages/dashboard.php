@@ -398,6 +398,23 @@ else {
 </div>
 </div>
 
+<script>
+const urlParams=new URLSearchParams(window.location.search);
+const successValue1 =urlParams.get('value')
+
+if(successValue1 === "delete"){
+Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Deleted!",
+    showConfirmButton: false,
+    timer: 3000,
+   timerProgressBar: true,
+   toast: true,
+
+  });}
+                  </script>
+
  <script>
 
  // Get the dropdown menu element

@@ -1,5 +1,8 @@
 <html>
 <title>Bootstrap demo</title>
+<!-- SWEET ALERT -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"><style>
 
@@ -90,14 +93,19 @@ while($row = mysqli_fetch_assoc($h_query)){
             <h3 class="card-title"style="font-size:13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><?php echo $row['holiday_date'] ?></h3>
           </div>
           <div class="col-1 ms-2">
-            <button class="btn btn-transparent btn-sm border-0 border-none" type="submit">
+              <form method="POST" action="../Functions/holiday-delete.php">
+                <input type="hidden" name="a" value=<?php echo $row['id'];?>>
+            <button class="btn btn-transparent btn-sm border-0 border-none" type="submit" name="delete_holiday">
               <i class="fa-solid text-primary fa-pen-to-square"></i>
             </button>
+
+           
           </div>
           <div class="col-1">
             <button class="btn btn-transparent btn-sm border-0 border-none" type="submit">
               <i class="fa-solid text-danger fa-square-minus"></i>
             </button>
+          </form>
           </div>
         </div>
       </div>
