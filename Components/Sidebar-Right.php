@@ -62,7 +62,7 @@
   
 
 
-<div class="overflow-auto w-100" style="height: 12rem;">
+<div class="overflow-auto w-100" style="height: 10rem;">
 
 
 <!--buong card to-->
@@ -96,14 +96,16 @@ while($row = mysqli_fetch_assoc($h_query)){
               <form method="POST" action="../Functions/holiday-delete.php">
                 <input type="hidden" name="a" value=<?php echo $row['id'];?>>
             <button class="btn btn-transparent btn-sm border-0 border-none" type="submit" name="delete_holiday">
-              <i class="fa-solid text-primary fa-pen-to-square"></i>
+             <i class="fa-solid text-danger fa-square-minus"></i>
             </button>
 
            
           </div>
+
+
           <div class="col-1">
             <button class="btn btn-transparent btn-sm border-0 border-none" type="submit">
-              <i class="fa-solid text-danger fa-square-minus"></i>
+            <i class="fa-solid text-primary fa-pen-to-square"></i>
             </button>
           </form>
           </div>
@@ -123,10 +125,18 @@ while($row = mysqli_fetch_assoc($h_query)){
     
 
     </div>
+    <hr class="p-0 m-0" style="width:100%; color:black;">
 
-    <div class="container1">
+    <div class="container1"> 
+      
     <form   action="../Functions/admin-sendEmail.php" method="POST" enctype="multipart/form-data">
-      <div class="search-select-box mb-2 mt-3  ">                     
+
+<div class="row ">
+
+  <div class="col-2">
+<i class="fa-regular fa-envelope text-black fs-4 mt-2 mb-2 opacity-75"></i>
+</div>
+      <div class="col-10 search-select-box mt-2 mb-2">                     
                         <!-- Dropdown --> 
                         <select id='select-employee' name="employee-id" class="form-control">
                             <option value="0">Select employee</option>
@@ -141,13 +151,18 @@ while($row = mysqli_fetch_assoc($h_query)){
                         </select>
 
                     </div>
+
+
+
+
+                            </div>
             <div class=" input-group input-group-sm">  
                         <input type="text" class="shadow-none form-control" placeholder="Subject" name="subject" autocomplete="off" required>
                     </div>
-                    <div class="mb-2 input-group input-group-sm">
+                    <div class="mb-1 input-group input-group-sm">
                         <textarea class="shadow-none form-control mt-2" name="message"  rows="4" placeholder="Message" autocomplete="off" required style="resize:none;"></textarea>
                     </div>
-                    <div class="mb-2 input-group input-group-sm">
+                    <div class="mb-1 input-group input-group-sm">
                      <input class="shadow-none col-2 form-control" type="file" id="attachment" name="attachment" accept="application/pdf">
                             </div>
                     <input type="hidden" id="" name="">

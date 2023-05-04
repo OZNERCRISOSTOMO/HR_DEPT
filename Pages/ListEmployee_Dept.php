@@ -32,7 +32,6 @@
 				</tr>
 			</thead>
 			<tbody>
-      <form method="POST" action="../Functions/edit-schedule.php">
 			<?php
     // establish a connection to the MySQL database
     $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
@@ -82,9 +81,9 @@
 		</table>
     
 
-<!-- Modal Schedule -->
+
+<!-- Modal Schedule
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
- 
 <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -106,16 +105,15 @@
       </div>
       <div class="modal-footer">
         <button type="submit" name="submittt" class="btn btn-primary">Save changes</button>
-  </form>
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 
 
-	</div>
+
 
 
 <!-- Modal Leave -->
@@ -130,7 +128,7 @@
         
 
       <h3 class="text-center pt-4">File Leave</h3>
-<form method="POST" action="ListEmployee_Dept.php" enctype="multipart/form-data">
+<form method="POST" action="../Functions/leave-function.php">
 
 <div class="container col-10">
     <div class="row">
@@ -178,12 +176,7 @@
     </div>
 
  
-    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-
- 
-
-</div>
-</div>
+    <button type="submit" class="btn btn-primary" name="submitt">Submit</button>
   </form>
 
   </div>
