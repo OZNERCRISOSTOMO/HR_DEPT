@@ -596,7 +596,13 @@ class Admin {
         $employee->execute([$sched]);
         return $employee->fetchAll();
 
-     
+        exit();
+    }
+
+    public function getLoginId($employeeId){
+        $loginId = $this->database->getConnection()->prepare("SELECT login_id FROM employee_login WHERE employee_id = ? ");
+        $loginId->execute([$employeeId]);
+        return $loginId->fetch();
 
         exit();
     }

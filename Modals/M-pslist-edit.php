@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Generate Payslip</h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Payslip</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -13,7 +13,7 @@
                 <div class="row mb-2">
                     <div class="col-md-6" >
                          
-                            <select id='select-employee' name="employee-id" class="select2-container col-11">
+                            <select id='select-employee-edit' name="employee-id" class="select2-container col-11">
                                 <option value="0">Select employee</option>
                            <?php
                                 $employees = $admin->getEmployees();

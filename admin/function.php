@@ -128,9 +128,15 @@
         $grosspay = $totalearn - $totaldeductions; //
         $networth = $totalallowance + $grosspay;
 
+        //get the login_id from employee_login
+        $loginId =  $admin->getLoginId($employeeDetails[0]["employee_id"]);
+    
+        //extract the 4 number and set it as password
+        $password = preg_replace("/[^0-9]/", "", $loginId["login_id"]);
+    
         $mdpf = new \Mpdf\Mpdf(['format' => 'LETTER', 'orientation' => 'P']);
         $mdpf->SetProtection( ['print', 'modify', 'copy', 'annot-forms', 'fill-forms', 'extract', 'assemble', 'print-highres'],
-            $fname, $id, 128);
+            $fname, $password, 128);
         
         $data = '';
         
@@ -313,11 +319,11 @@
         $admin->insertPayslipFilePath($filename, $employeepayslip["employee_id"]);
   
       }
-    // }
+    
   }
      
 
-header("Location: pslist.php?id=$prlistId&status=generated");
+    header("Location: pslist.php?id=$prlistId&status=generated");
 
 
  }

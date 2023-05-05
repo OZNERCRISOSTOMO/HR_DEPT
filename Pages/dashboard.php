@@ -62,7 +62,6 @@ if($counttt >= 3){
   $countWarnings++;
 }
 
-
 }
 }
 else {

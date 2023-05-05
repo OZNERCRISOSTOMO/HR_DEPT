@@ -210,10 +210,18 @@ if (isset($_SESSION['admin_id'])) {
                                 <td>
                                     <div class="row">
                                         <div class="col-3 ps-1">
-                                <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
+                                
+                                        <a href="../Uploads/<?php echo $list['file_path'];?>" target="_thapa" style="color: white; text-decoration: none;">
+                                        <button  type="button" class="btn btn-sm btn-primary" >
+                                            View
+                                            </button>
+                                        </a>
+                            
                                 </div>
                                 <div class="col-3 px-2">
-                                <button id="editButton" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop-edit" type="submit" name="edit" value="Edit">Edit</button>
+                                <button id="editButton" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop-edit" type="submit" name="edit" value="Edit">
+                                    Edit
+                                </button>
                                 </div>
                                 <div class="col-3  px-2">
                                 <form method="POST" action="../Functions/admin-payslipform-delete.php">
@@ -287,6 +295,7 @@ if (status === "deleted" || status === "created" || status === "generated") {
 
 $('#staticBackdrop').on('shown.bs.modal', function() {
   $('#select-employee').select2();
+  $('#select-employee-edit').select2();
 });
 
     $(document).ready(function(){
@@ -346,6 +355,8 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
       
       });
   });
+
+  
 </script>
 
 <script  src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
