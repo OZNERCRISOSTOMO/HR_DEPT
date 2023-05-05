@@ -278,7 +278,7 @@ class Admin {
     }
 
     public function getTotalEmployees(){
-        $count = $this->database->getConnection()->query("SELECT count(*) FROM employees WHERE status = '1' ")->fetchColumn();
+        $count = $this->database->getConnection()->query("SELECT count(status) FROM employees WHERE status = '1'")->fetchColumn();
 
         return $count;
      
@@ -286,7 +286,7 @@ class Admin {
     }
 
     public function getTotalPendingEmployees(){
-        $count = $this->database->getConnection()->query("SELECT count(*) FROM employees WHERE status = '0' ")->fetchColumn();
+        $count = $this->database->getConnection()->query("SELECT count(status) FROM employees WHERE status = '0'")->fetchColumn();
 
         return $count;
 
@@ -304,8 +304,16 @@ class Admin {
         exit();
     }
 
-    public function getAttendance(){
-        
+    public function getEmployee(){
+        $stmt = $this->database->getConnection()->query("SELECT * FROM employees")->fetchAll();
+        return $stmt;
+        exit();
+    }
+
+    public function getTotalWarnings($employee_id){
+        $count = $this->database->getConnection()->query("SELECT COUNT(status) FROM attendance WHERE employee_id = '$employee_id' AND status = 'ABSENT'")->fetchColumn();
+        return $count;
+        exit();
     }
 
    public function getEmployeesByDepartment($department){
