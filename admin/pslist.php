@@ -97,13 +97,13 @@ if (isset($_SESSION['admin_id'])) {
 
             
               
-                        <div class="row d-flex ">
+                <div class="row d-flex ">
 
                             <div class="col-7">
                             <h3 >Payroll Details</h3>
-                </div>
+                    </div>
 
-                    <div class="col-2 " style=" justify-content: flex-end;">
+                <div class="col-2 " style=" justify-content: flex-end;">
                     <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-plus fs-6"></i>Create New</button>
                      <?php include("../Modals/M-pslist.php")?>   
                      <?php include("../Modals/M-pslist-edit.php")?> 
@@ -119,6 +119,11 @@ if (isset($_SESSION['admin_id'])) {
                         </button>
               
                     </form>
+                </div>
+
+                <div class="col-2 ">
+                    <button type="button" class="btn btn-success w-100" >Send To Email</button>
+        
                 </div>
 
                 
@@ -210,16 +215,17 @@ if (isset($_SESSION['admin_id'])) {
                                 <td>
                                     <div class="row">
                                         <div class="col-3 ps-1">
-                                
+                                         <?php if($list["file_path"] != "Not generated"){ ?>
                                         <a href="../Uploads/<?php echo $list['file_path'];?>" target="_thapa" style="color: white; text-decoration: none;">
                                         <button  type="button" class="btn btn-sm btn-primary" >
                                             View
-                                            </button>
+                                        </button>
                                         </a>
-                            
+                                        <?php } ?>
                                 </div>
                                 <div class="col-3 px-2">
-                                <button id="editButton" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop-edit" type="submit" name="edit" value="Edit">
+                                <button id="editButton" class="btn btn-sm btn-success editButton" data-bs-toggle="modal" data-employee-id="<?php echo $list["employee_id"] ?>"
+                                 data-bs-target="#staticBackdrop-edit" type="submit" name="edit" value="Edit">
                                     Edit
                                 </button>
                                 </div>
@@ -260,6 +266,7 @@ if (isset($_SESSION['admin_id'])) {
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
+    const editBtns = document.querySelectorAll(".editButton");
     const id = urlParams.get('id');
     const status = urlParams.get('status');
 
@@ -283,6 +290,72 @@ if (status === "deleted" || status === "created" || status === "generated") {
   });
 }
 
+    // EDIT PAYSLIP
+    editBtns.forEach(function(editBtn) {
+  editBtn.addEventListener("click",function(e){
+    $('#select-employee-edit').select2();
+
+    // Get the employee id 
+    const employeeId = this.getAttribute("data-employee-id")
+
+    // Set the selected value of the dropdown
+    $('#select-employee-edit').val(employeeId).trigger('change');
+        
+    console.log(employeeId);
+  });
+});
+
+  // Edit modal 
+    $('#select-employee-edit').on('change', function() {
+      const selectedValue = $(this).val();
+      
+        if(selectedValue != '0'){
+             $.ajax({
+                  url: "../Functions/admin-payslip.php",
+                  type: "POST",
+                  data: {
+                      id: selectedValue
+                  },
+
+                  success: function(data) {
+                      const [employeeData] = JSON.parse(data)
+                      
+                      $("#employee-id-edit").val(employeeData.employee_id)
+                      $("#department-edit").val(employeeData.department)
+                      $("#salary-edit").val(employeeData.rate_per_hour)
+                       $("#email-edit").val(employeeData.email)
+                       $("#position-edit").val(employeeData.position)
+                       $("#branch-edit").val(employeeData.branch)
+                       $("#present-edit").val(employeeData.num_hr)
+                       $("#overtime-edit").val(employeeData.over_time)
+                       $("#food-allowance-edit").val(employeeData.food_allowance)
+                       $("#transpo-allowance-edit").val(employeeData.transpo_allowance)
+
+                      $("#employee-name-edit").val(employeeData.first_name + " " + employeeData.last_name)
+                       const beneficiaries = [{type:"sss-edit",
+                                               value:employeeData.sss
+                                              },
+                                              {type:"pagibig-edit",
+                                               value:employeeData.pagibig
+                                              },
+                                              {type:"philhealth-edit",
+                                               value:employeeData.philhealth
+                                              }]
+
+                      beneficiaries.forEach(membership =>{
+                          if(membership.value != null){
+                             $(`#${membership.type}`).prop('checked', true);
+                          }else{
+                              $(`#${membership.type}`).prop('checked', false);
+                          }
+                      })
+                
+                  }
+              })
+      }
+    });
+ 
+
 
 
 
@@ -304,7 +377,7 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
   $('#select-employee').select2();
   
 
-  // Read selected option
+  // Create new modal
   $('#select-employee').on('change', function() {
       var selectedValue = $(this).val();
     //   console.log(selectedValue);
