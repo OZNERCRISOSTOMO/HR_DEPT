@@ -122,8 +122,11 @@ if (isset($_SESSION['admin_id'])) {
                 </div>
 
                 <div class="col-2 ">
-                    <button type="button" class="btn btn-success w-100" >Send To Email</button>
-        
+                    <form action="sendEmail.php" method="POST">
+                        <input type="hidden" name="prlist-id" value="<?php echo $id ?>">
+
+                        <button type="submit" name="submit-sendEmail" class="btn btn-success w-100" >Send To Email</button>
+                    </form>
                 </div>
 
                 

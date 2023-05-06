@@ -47,8 +47,42 @@ class Database
         $mail->addAddress($recipient);
         $mail->Subject = $subject;
         $mail->Body = $message;
+
         if($attachment != 'default'){
             $mail->addAttachment($attachment['tmpName'],$attachment['name']);
+        }
+
+        //Send the email
+        if (!$mail->send()) {
+            echo 'Email could not be sent. Error: ' . $mail->ErrorInfo;
+        } 
+    }
+
+    public function sendEmailPayslip($recipient,$subject, $message, $attachment= 'default'){
+       
+        // create a new PHPMailer object
+        $mail = new PHPMailer(true);
+
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = '3gclothingline.noreply@gmail.com';
+        $mail->Password = 'aguqhplqhbhvejvr';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        //recipients
+        $mail->setFrom('3gclothingline.noreply@gmail.com','3gclothingline');
+        $mail->addAddress($recipient);
+        $mail->Subject = $subject;
+        $mail->Body = $message;
+        
+        if($attachment != 'default'){
+             // If attachment is provided, add it to the email
+             $attachmentPath = $attachment['path'];
+             $attachmentName = $attachment['name'];
+             $mail->addAttachment($attachmentPath, $attachmentName);
         }
 
         //Send the email
