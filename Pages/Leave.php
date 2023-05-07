@@ -70,32 +70,55 @@ if (!$conn) {
       <th scope="col">Date Started</th>
       <th scope="col">Date Ended</th>
       <th scope="col">Department</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
      
     </tr>
   </thead>
   <tbody>
 
   <?php
-
 $query = "SELECT * FROM `leave` ";
 $result = mysqli_query($conn, $query);
 
 
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
-        echo "<tr><td>{$row['ID']}</td><td>{$row['Name']}</td><td>{$row['Type']}</td><td>{$row['date_started']}</td><td>{$row['date_ended']}</td><td>{$row['Department']} </td>
-        </tr>";
-    }
-} else {
-    echo "0 results";
-}
   ?>
-
+<tr>
+      <td><?php echo $row['ID']; ?></td>
+      <td><?php echo $row['Name']; ?></td>
+      <td><?php echo $row['Type']; ?></td>
+      <td><?php echo $row['date_started']; ?></td>
+      <td><?php echo $row['date_ended']; ?></td>
+      <td><?php echo $row['Department']; ?></td>
+      <td><?php 
+        if($row['status'] == 0){
+          echo "Pending";
+        }else{
+          echo "Accepted";
+        }
+      ?></td>
+      <td class="d-flex">
+      <form method="post" action="../Functions/leave-accept.php">
+          <input type="hidden" name="acceptid" id="acceptid" value=<?php echo $row['ID']; ?>>
+          <input type="submit" name="acceptbtn" id="acceptbtn" class="btn btn-sm btn-primary" value="Accept">
+      </form>
+      <form method="post" action="../Functions/leave-delete.php">
+          <input type="hidden" name="deleteid" id="deleteid" value=<?php echo $row['ID']; ?>>
+          <input type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger" value="Delete">
+      </form>
+      </td>
+</tr>
 </form>
   </tbody>
+  <?php 
+ }
+}else{
+  echo "0 Results";
+}
+?>
 </table>
-
-
 </div>
 
 

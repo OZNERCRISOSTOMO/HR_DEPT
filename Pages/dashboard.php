@@ -35,47 +35,47 @@ if (isset($_SESSION['admin_id'])) {
     }
 }
 
-$employee1 = $admin->getEmployee();
-$countWarnings1 = 0;
-foreach($employee1 as $list){
-  $employeeID = $list['id'];
+// $employee1 = $admin->getEmployee();
+// $countWarnings1 = 0;
+// foreach($employee1 as $list){
+//   $employeeID = $list['id'];
 
-  $countWarnings = $admin->getTotalWarnings($employeeID);
+//   $countWarnings = $admin->getTotalWarnings($employeeID);
 
-  if($countWarnings >= 3){
-    $countWarnings1++;
-  }
+//   if($countWarnings >= 3){
+//     $countWarnings1++;
+//   }
+
+// }
+$conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
+
+ if (!$conn) {
+   die("Connection failed: " . mysqli_connect_error());
+}
+
+$employeeQuery = "SELECT * FROM employees";
+$employeeResult = $conn->query($employeeQuery);
+$countWarnings = 0;
+
+// Step 3: Loop through each employee id and get the count of absent days
+while ($idRow = $employeeResult->fetch_assoc()) {
+// Get the employee id
+$employee_id = $idRow["id"];
+
+// Execute the SQL query to count absent days for this employee
+$countQuery = "SELECT COUNT(status) as countss FROM attendance WHERE employee_id = '$employee_id' AND status = 'ABSENT'";
+$countResult = $conn->query($countQuery);
+
+// Get the count of absent days
+$countRow = $countResult->fetch_assoc();
+$counttt = $countRow["countss"];
+
+// Display the count of absent days
+if($counttt >= 3){
+  $countWarnings++;
+}
 
 }
-// $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
-
-//  if (!$conn) {
-//    die("Connection failed: " . mysqli_connect_error());
-// }
-
-// $employeeQuery = "SELECT * FROM employees";
-// $employeeResult = $conn->query($employeeQuery);
-// $countWarnings = 0;
-
-// // Step 3: Loop through each employee id and get the count of absent days
-// while ($idRow = $employeeResult->fetch_assoc()) {
-// // Get the employee id
-// $employee_id = $idRow["id"];
-
-// // Execute the SQL query to count absent days for this employee
-// $countQuery = "SELECT COUNT(status) as countss FROM attendance WHERE employee_id = '$employee_id' AND status = 'ABSENT'";
-// $countResult = $conn->query($countQuery);
-
-// // Get the count of absent days
-// $countRow = $countResult->fetch_assoc();
-// $counttt = $countRow["countss"];
-
-// // Display the count of absent days
-// if($counttt >= 3){
-//   $countWarnings++;
-// }
-
-// }
 }
 else {
     header("Location: ../index.php");

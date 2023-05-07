@@ -165,6 +165,9 @@
     <div class="form-check form-check-inline">
     <input class="form-check-input" type="radio" name="leave" id="inlineRadio2" value="Sick Leave">
     <label class="form-check-label" for="inlineRadio2">Sick Leave</label>
+    <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="leave" id="inlineRadio2" value="Other">
+    <label class="form-check-label" for="inlineRadio3">Other</label>
     </div>
 
     </div>
@@ -175,6 +178,10 @@
     <input type="text" class="form-control" id="exampleInputname1" name="department" aria-describedby="deparment">
     </div>
 
+    <div class="col-6 mb-3">
+    <label for="exampleInputname1" class="form-label">Description:</label>
+    <input type="text" class="form-control" id="exampleInputname1" name="description" aria-describedby="description">
+    </div>
  
     <button type="submit" class="btn btn-primary" name="submitt">Submit</button>
   </form>
