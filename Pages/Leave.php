@@ -71,6 +71,7 @@ if (!$conn) {
       <th scope="col">Date Ended</th>
       <th scope="col">Department</th>
       <th scope="col">Status</th>
+      <th scope="col">Description</th>
       <th scope="col">Action</th>
      
     </tr>
@@ -92,6 +93,7 @@ if (mysqli_num_rows($result) > 0) {
       <td><?php echo $row['date_started']; ?></td>
       <td><?php echo $row['date_ended']; ?></td>
       <td><?php echo $row['Department']; ?></td>
+      <td><?php echo $row['description']; ?></td>
       <td><?php 
         if($row['status'] == 0){
           echo "Pending";

@@ -131,6 +131,27 @@ if(successValue === "invalidUser"){
 		input2.value = "";
 		
 	});
+}else if(successValue === "vac"){
+	Swal.fire({
+		icon:'error',
+		title:'Vacation Leave!',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	window.addEventListener('popstate', function(event) {
+		var input1 = document.getElementById("email");
+		var input2 = document.getElementById("password");
+        input1.value = "";
+		input2.value = "";
+		
+	});
 }else if(successValue === "absent"){
 	Swal.fire({
 		icon:'error',

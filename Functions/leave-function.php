@@ -32,13 +32,7 @@
                 $diff_row = $diff_query->fetch_assoc();
 
                 if($leave_type == "Sick Leave"){
-                    if($diff_row['sick_leave'] >= $diff_row['days']){
-                // $update_leave_days = "UPDATE employee_details SET sick_leave = sick_leave - '".$diff_row['days']."' WHERE employee_id = '$id'";
-                // $conn->query($update_leave_days);
-            
-                // $delete_absent = "DELETE FROM attendance WHERE (date BETWEEN '$date_start' AND '$date_end') AND employee_id = '$id'";
-                // $delete_query = $conn->query($delete_absent); 
-
+                    if($diff_row['sick_leave'] >= $diff_row['days']){ 
                     $insert_leave = "INSERT INTO `leave` (name, type, date_started, date_ended, employee_id, Department, description) VALUES ('$name', '$leave_type', '$date_start', '$date_end', '$employee_id', '$dept', '$des')";
                     $insert_query = $conn->query($insert_leave);
 

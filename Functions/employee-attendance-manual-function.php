@@ -63,6 +63,13 @@ if(isset($_POST['signin'])){
 	            date_default_timezone_set($timezone);
                 $lognow = date('H:i:s');
 
+                $checkif = "SELECT * FROM attendance WHERE status ='VACATION LEAVE' AND employee_id = '$id' AND date = '$date_now'";
+                $queryCheck = $conn->query($checkif);
+
+                if($queryCheck->num_row > 0){
+                    header("Location: ../Functions/employee-attendance-manual.php?value=vac");
+                }
+
                 $checkifAbsent = "SELECT * FROM attendance WHERE date = '$date_now' AND employee_id = '$id' AND (status = 'ONTIME' OR status = 'LATE')";
                 $queryCheckAbsent = $conn->query($checkifAbsent);
                 if($queryCheckAbsent->num_rows > 0){
@@ -201,8 +208,13 @@ if(isset($_POST['signin'])){
                     $employeeQuery = "SELECT COUNT(status) as count FROM attendance WHERE employee_id = '$id' AND status = 'ABSENT'";
                     $employeeResult = $conn->query($employeeQuery);
                     $countRow = $employeeResult->fetch_assoc();
+
+                    $vac = "SELECT * FROM attendance WHERE employee_id = '$id' AND status = 'VACATION LEAVE' AND date = '$date_now'";
+                    $vac_query = $conn->query($vac);
                     if($countRow['count'] >= 7){
                             header("Location: ../Pages/employee-attendance.php?value=suspend");
+                        }else if($vac_query->num_rows > 0 ){
+                            header("Location: ../Pages/employee-attendance.php?value=vac");
                         }else{
                             // If the Employee Tap card and not Following on their schedule.
                             if(($sched == '1' && $srow['time_out'] > $lognow) || ($sched == '2' && $srow['time_in'] < $lognow)){
