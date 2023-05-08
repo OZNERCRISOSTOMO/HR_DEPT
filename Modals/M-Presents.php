@@ -1,6 +1,8 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 
     <div class="modal fade" id="presentModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel1">Presents</h1>
@@ -10,17 +12,17 @@
             
           <div class="container">
 		<h2 class="text-center py-2">Attendance Monitoring</h2>
-		<table class="table table-striped">
+		<table class="table table-striped" id="present">
 			<thead>
 				<tr>
 					
 			<th>Employee ID</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
 			<th>Date</th>
-            <th>Time In</th>
-            <th>Time Out</th>
-            <th>Status</th>
+      <th>Time In</th>
+      <th>Time Out</th>
+      <th>Status</th>
         
           
 				</tr>
@@ -80,7 +82,7 @@
             else if($row["status"] == "LATE"){
               $status = '<span class="badge text-bg-danger">Late</span>';
             }
-            echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["date"] . "</td><td>" . $timeIn . "</td><td>" . $timeOut . "</td><td>" . $status . "</td><td>" ."</td></tr>";
+            echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["date"] . "</td><td>" . $timeIn . "</td><td>" . $timeOut . "</td><td>" . $status . "</td></tr>";
         }
     } else {
         echo "";
@@ -103,3 +105,17 @@
       </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script  src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+ $(document).ready(function(){
+    $('#present').DataTable();
+  });
+
+ 
+  
+  
+  
+  </script>

@@ -67,7 +67,13 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-light text-small shadow">
                        
-    
+                    <li>
+                        <a href="../Functions/admin-logout.php" class="text-decoration-none  nav_link logout mx-3 align-middle text-black">
+                        <i class="fa-regular fa-hard-drive mx-2"></i><span class="nav_name">Backup</span>
+                        </a>
+                        </li>
+
+                                <hr>
                       
                         <li>
                         <a href="../Functions/admin-logout.php" class="text-decoration-none  nav_link logout mx-3 align-middle text-black">

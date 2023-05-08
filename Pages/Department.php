@@ -22,7 +22,7 @@
             <th>Time Out</th>
             <th>Status</th>
         
-          
+
 				</tr>
 			</thead>
 			<tbody>
