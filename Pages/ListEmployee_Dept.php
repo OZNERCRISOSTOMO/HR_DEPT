@@ -3,7 +3,9 @@
 <head>
 	<title>Employee</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" />
-
+  <!-- SWEET ALERT -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
  
 <body>
@@ -202,3 +204,52 @@
 
 </body>
 </html>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const successValue = urlParams.get('value');
+    console.log(successValue);
+
+    if(successValue === "invalidUser"){
+	Swal.fire({
+		icon:'error',
+		title:'User Not Found',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	});
+}else if(successValue === "insert"){
+	Swal.fire({
+		icon:'success',
+		title:'File Leave Successfully!',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	});
+}else if(successValue === "invalid"){
+	Swal.fire({
+		icon:'error',
+		title:'File Leave Error!',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	});
+}
+</script>
