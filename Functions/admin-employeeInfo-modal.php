@@ -38,7 +38,7 @@ if (isset($_POST['id'])) {
           </thead>
           <tbody>
             <tr>
-              <td><p class="text" style=";">0001-AAA</p></td>
+              <td class="employee-login-id">'. $employee["login_id"] .'</td>
               <td class="employee-date-hired">'.$admin->formatDate($employee["date_hired"] ) .'</td>
               <td class="employee-email">'.$employee["email"] .'</td>
             </tr>

@@ -10,6 +10,31 @@ const globalId = {
 const departmentDropdown = document.querySelector(".department-dropdown");
 const sortDropdown = document.querySelector("#byName");
 
+const urlParams = new URLSearchParams(window.location.search);
+const status = urlParams.get("status");
+
+//SWEET ALERT DELETED, CREATE , GENERATE
+if (status === "updated") {
+  const capitalizedStatus = status.charAt(0).toUpperCase() + status.slice(1); // Uppercase the first letter of status
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
+  Toast.fire({
+    icon: "success",
+    title: `Updated Succesfully!`,
+  });
+}
+
 // let showLoading = true;
 $(document).ready(function () {
   $(".employeeList-container").on("click", function (e) {
@@ -137,6 +162,8 @@ editModalBtn.addEventListener("click", function () {
   const employeeLastName = document.querySelector(
     ".employee-last-name"
   ).innerHTML;
+  const employeeLoginId =
+    document.querySelector(".employee-login-id").innerHTML;
   const employeeEmail = document.querySelector(".employee-email").innerHTML;
   const employeeDateHired = document.querySelector(
     ".employee-date-hired"
@@ -182,7 +209,7 @@ editModalBtn.addEventListener("click", function () {
               </thead>
               <tbody>
                 <tr>
-                <td> <input type="text" class="form-control form-control-sm border-0"  value="0001-AAA" ></td>
+                <td> <input type="text" class="form-control form-control-sm border-0"  value="${employeeLoginId}" disabled></td>
                 <td> <input type="text" class="form-control form-control-sm border-0" value="${employeeDateHired}" disabled></td>
                 <td> <input type="text" class="form-control form-control-sm border-0" value="${employeeEmail}" name="employee-email"></td>
 

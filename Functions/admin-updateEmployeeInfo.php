@@ -59,7 +59,7 @@ if(isset($_POST['submit'])){
          $admin->checkData($employeeData);
     } 
 
-    header("Location: ../Pages/employee-list.php");
+    header("Location: ../Pages/employee-list.php?status=updated");
        
     
 }

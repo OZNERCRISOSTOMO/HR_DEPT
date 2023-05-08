@@ -274,7 +274,9 @@ if (isset($_SESSION['admin_id'])) {
     const status = urlParams.get('status');
 
     //SWEET ALERT DELETED, CREATE , GENERATE
-if (status === "deleted" || status === "created" || status === "generated") {
+if (status === "deleted" || status === "created" || status === "generated" || status === "edited") {
+    const capitalizedStatus = status.charAt(0).toUpperCase() + status.slice(1); // Uppercase the first letter of status
+
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -289,7 +291,29 @@ if (status === "deleted" || status === "created" || status === "generated") {
 
   Toast.fire({
     icon: "success",
-    title: `${status} Succesfully!`,
+    title: `${capitalizedStatus} Succesfully!`,
+  });
+}
+
+// If all files not generated
+if (status === "notGenerated" ) {
+    const capitalizedStatus = status.charAt(0).toUpperCase() + status.slice(1); // Uppercase the first letter of status
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
+  Toast.fire({
+    icon: "error",
+    title: `Generate files first!`,
   });
 }
 

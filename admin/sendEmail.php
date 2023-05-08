@@ -14,13 +14,22 @@
 
     $employees = $payslip->payslipList($prlistId);
 
-    
+    //check first if all files is generated 
     foreach ($employees as $employee) {
         //check first if file path is generated
         if($employee["file_path"] == "Not generated"){
              header("Location: pslist.php?id=$prlistId&status=notGenerated");
              exit();
         }
+    }
+
+    
+    foreach ($employees as $employee) {
+        //check first if file path is generated
+        // if($employee["file_path"] == "Not generated"){
+        //      header("Location: pslist.php?id=$prlistId&status=notGenerated");
+        //      exit();
+        // }
         
         //get the email of employees
         [$employeeData] = $admin->findEmployeeById($employee['employee_id']);

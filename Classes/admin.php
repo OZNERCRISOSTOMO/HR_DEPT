@@ -197,7 +197,9 @@ class Admin {
         exit();
     }
 
-    // reset the num_hr to 0 in employee_details table 
+    //get the latest data of num_hr and overtime
+ 
+    // reset the num_hr and overtime to 0 and put num_hr and overtime ti ain employee_details table 
     $sql = "UPDATE employee_details SET num_hr = ?, over_time = ? WHERE employee_id = ? ";
     $stmt = $this->database->getConnection()->prepare($sql);
 
@@ -346,8 +348,10 @@ class Admin {
             $employees = $this->database->getConnection()->query($query)->fetchAll();
         }else{
              $query ="SELECT employees.*,employee_details.picture_path,employee_details.department, employee_details.department, employee_details.sss,  employee_details.pagibig, employee_details.philhealth,
-                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position, employee_details.department_position, employee_details.rate_per_hour  FROM employees 
+                                                        employee_details.date_applied,employee_details.date_hired, employee_details.position, employee_details.department_position,
+                                                         employee_details.rate_per_hour, employee_login.login_id  FROM employees 
                                                         JOIN employee_details ON employees.id = employee_details.employee_id
+                                                        JOIN employee_login ON employees.id = employee_login.employee_id
                                                         WHERE employees.status = '1' AND employees.id = $id";
             $employees = $this->database->getConnection()->query($query)->fetch();
         }
@@ -791,15 +795,19 @@ public function updatePayroll($id, $code, $start, $end, $type){
        header("Location: ../admin/prlist.php");
 }
 
-public function updatePayslip($id, $employee_name, $position, $branch, $department, $from_date, $to_date, $number_present, $number_overtime){
-    $stmt = $this->database->getConnection()->prepare("UPDATE employee_payslip_form SET employee_name = ?, position = ?, branch = ?, department = ?, from_date = ?, to_date = ? , number_present = ?, , number_overtime = ? WHERE id = ?");
-    $stmt->execute([$employee_name, $position, $branch, $department, $from_date, $to_date, $number_present, $number_overtime]);
-    if (!$stmt->execute([$employee_name, $position, $branch, $department, $from_date, $to_date, $number_present, $number_overtime])) {
-    header("Location: ../admin/pslist.php?error=stmtfail");
-       exit();
-       }
+public function updatePayslip($employeeId,$branch, $email){
 
-       header("Location: ../admin/pslist.php");
+    $stmt = $this->database->getConnection()->prepare("UPDATE employees AS e
+                                                       INNER JOIN employee_details AS ed ON e.id = ed.employee_id
+                                                       INNER JOIN employee_payslip AS ep ON e.id = ep.employee_id
+                                                       SET e.email = ?, ed.branch = ?, ep.file_path = ?
+                                                       WHERE e.id = ?");
+
+    if (!$stmt->execute([$email, $branch,"Not generated", $employeeId])) {
+        header("Location: ../admin/pslist.php?error=stmtfail");
+       exit();
+    }
+
 }
 
 public function deletePayslipform($pslistId, $prlistId) {
