@@ -152,6 +152,25 @@ if(successValue === "invalidUser"){
 		input2.value = "";
 		
 	});
+}else if(successValue === "suspend"){
+	Swal.fire({
+		icon:'error',
+		title:'You are Suspended! Need to comply a leave.',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	window.addEventListener('popstate', function(event) {
+		var input = document.getElementById("employee");
+        input.value = "";
+		document.getElementById('myInput').focus();
+	});
 }else if(successValue === "invalidSched"){
 	Swal.fire({
 		icon:'error',

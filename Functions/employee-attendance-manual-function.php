@@ -63,7 +63,7 @@ if(isset($_POST['signin'])){
 	            date_default_timezone_set($timezone);
                 $lognow = date('H:i:s');
 
-                $checkifAbsent = "SELECT * FROM attendance WHERE date = '$date_now' AND employee_id = '$id' AND status = 'ONTIME' OR status = 'LATE'";
+                $checkifAbsent = "SELECT * FROM attendance WHERE date = '$date_now' AND employee_id = '$id' AND (status = 'ONTIME' OR status = 'LATE')";
                 $queryCheckAbsent = $conn->query($checkifAbsent);
                 if($queryCheckAbsent->num_rows > 0){
 
@@ -190,18 +190,25 @@ if(isset($_POST['signin'])){
 
                 
                     $name = "".$row['first_name']." ".$row['last_name']."";
-                    // If the Employee Tap card and not Following on their schedule.
-                    if(($sched == '1' && $srow['time_out'] > $lognow) || ($sched == '2' && $srow['time_in'] < $lognow)){
-                        $sql = "INSERT INTO attendance (employee_id, name, date, time_in, status, schedule_id) VALUES ('$id', '$name', '$date_now', '$lognow', '$logstatus', '$sched')";
-					if($conn->query($sql)){
+                    $employeeQuery = "SELECT COUNT(status) as count FROM attendance WHERE employee_id = '$id' AND status = 'ABSENT'";
+                    $employeeResult = $conn->query($employeeQuery);
+                    $countRow = $employeeResult->fetch_assoc();
+                    if($countRow['count'] >= 7){
+                            header("Location: ../Pages/employee-attendance.php?value=suspend");
+                        }else{
+                            // If the Employee Tap card and not Following on their schedule.
+                            if(($sched == '1' && $srow['time_out'] > $lognow) || ($sched == '2' && $srow['time_in'] < $lognow)){
+                                $sql = "INSERT INTO attendance (employee_id, name, date, time_in, status, schedule_id) VALUES ('$id', '$name', '$date_now', '$lognow', '$logstatus', '$sched')";
+					        if($conn->query($sql)){
                         
-                        header("Location: ../Functions/employee-attendance-manual.php?value=Timein&picture=".$row2['picture_path']."&ID=".$id."&name=".$row['first_name']." ".$row['last_name']."&post=".$row2['position']."&Timein=".$lognow."&status=".$logstatus."&dep=".$row2['department']."");
-					}
-					else{
-						echo "Error";
-					}
-                }else{
+                                header("Location: ../Functions/employee-attendance-manual.php?value=Timein&picture=".$row2['picture_path']."&ID=".$id."&name=".$row['first_name']." ".$row['last_name']."&post=".$row2['position']."&Timein=".$lognow."&status=".$logstatus."&dep=".$row2['department']."");
+					        }
+					        else{
+						        echo "Error";
+					        }
+                    }else{
                     header("Location: ../Functions/employee-attendance-manual.php?value=invalidSched");
+                    }
                 }
             }
 

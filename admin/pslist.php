@@ -97,19 +97,19 @@ if (isset($_SESSION['admin_id'])) {
 
             
               
-                <div class="row d-flex ">
+                <div class="row ">
 
-                            <div class="col-7">
+                            <div class="col-5">
                             <h3 >Payroll Details</h3>
                     </div>
 
-                <div class="col-2 " style=" justify-content: flex-end;">
+                <div class="col-2" style=" justify-content: flex-end;">
                     <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-plus fs-6"></i>Create New</button>
                      <?php include("../Modals/M-pslist.php")?>   
                      <?php include("../Modals/M-pslist-edit.php")?> 
                 </div>
                     
-                <div class="col-3 " >
+                <div class="col-3">
 
                     <form action ="function.php" method="POST">
                         <input type="hidden" name="prlist-id" value="<?php echo $id ?>">

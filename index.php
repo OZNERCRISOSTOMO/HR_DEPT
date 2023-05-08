@@ -62,6 +62,8 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                     echo '<p class=""> Email does not exist!!</p>';
                                 }else if ($_GET["error"] == "emptyInput") {
                                     echo '<p class=""> Empty Input</p>';
+                                }else if ($_GET["error"] == "absent") {
+                                    echo '<p class="">Time in First!</p>';
                                 }
                                 echo '</div>';
                             }            

@@ -16,8 +16,13 @@ require '../Classes/database.php';
 
 
     $adminData = $admin->findByEmail($email);
-    
+    $adminID = $adminData['employee_id'];
+    $adminAttendance = $admin->checkAttendance($adminID);
     //check if email exist 
+    if(!$adminAttendance){
+            header("Location:../index.php?error=absent");
+        exit();
+    }
     if(!$adminData){
           header("Location:../index.php?error=errorEmail");
         exit();

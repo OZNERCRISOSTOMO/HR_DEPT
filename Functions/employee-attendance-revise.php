@@ -54,7 +54,7 @@
                 $lognow = date('H:i:s');
 
                 
-                $checkifAbsent = "SELECT * FROM attendance WHERE date = '$date_now' AND employee_id = '$id' AND status = 'ONTIME' OR status = 'LATE'";
+                $checkifAbsent = "SELECT * FROM attendance WHERE date = '$date_now' AND employee_id = '$id' AND (status = 'ONTIME' OR status = 'LATE')";
                 $queryCheckAbsent = $conn->query($checkifAbsent);
                 if($queryCheckAbsent->num_rows > 0){
                 
@@ -83,7 +83,9 @@
                             // Set the value of time_in base on her schedule
                             $time_in = $srow['time_in'];
                         }
-
+                        $double = "SELECT * FROM holiday WHERE holiday_date = '$date_now'";
+                        $double_query = $conn->query($double);
+                        $double_row = $double_query->fetch_assoc();
                         // If the schedule time_out is less than the time_out in attendance table.
                         if($srow['time_out'] < $urow['time_out']){
 
@@ -98,6 +100,7 @@
                                 $hrs = $interval->format('%h');
                                 $mins = $interval->format('%i');
                                 $mins2 = $mins/60;
+                                
                                 $int = $hrs + $mins2;
 
                                 // If the attendance time_out is greater than 10:30 in Second Schedule.
@@ -178,19 +181,25 @@
                     }
 
                     $name = "".$row['first_name']." ".$row['last_name']."";
-
+                    $employeeQuery = "SELECT COUNT(status) as count FROM attendance WHERE employee_id = '$id' AND status = 'ABSENT'";
+                    $employeeResult = $conn->query($employeeQuery);
+                    $countRow = $employeeResult->fetch_assoc();
+                    if($countRow['count'] >= 7){
+                        header("Location: ../Pages/employee-attendance.php?value=suspend");
+                    }else{
                     // If the Employee Tap card and not Following on their schedule.
-                    if(($sched == '1' && $srow['time_out'] > $lognow) || ($sched == '2' && $srow['time_in'] < $lognow)){
-                        $sql = "INSERT INTO attendance (employee_id, name, date, time_in, status, schedule_id) VALUES ('$id', '$name', '$date_now', '$lognow', '$logstatus', '$sched')";
-					if($conn->query($sql)){
-                        
-                        header("Location: ../Pages/employee-attendance.php?value=Timein&picture=".$row2['picture_path']."&ID=".$id."&name=".$row['first_name']." ".$row['last_name']."&post=".$row2['position']."&Timein=".$lognow."&status=".$logstatus."&dep=".$row2['department']."");
-					}
-					else{
-						echo "Error";
-					}
-                }else{
-                    header("Location: ../Pages/employee-attendance.php?value=invalidSched");
+                        if(($sched == '1' && $srow['time_out'] > $lognow) || ($sched == '2' && $srow['time_in'] < $lognow)){
+                            $sql = "INSERT INTO attendance (employee_id, name, date, time_in, status, schedule_id) VALUES ('$id', '$name', '$date_now', '$lognow', '$logstatus', '$sched')";
+                            if($conn->query($sql)){
+                    
+                                header("Location: ../Pages/employee-attendance.php?value=Timein&picture=".$row2['picture_path']."&ID=".$id."&name=".$row['first_name']." ".$row['last_name']."&post=".$row2['position']."&Timein=".$lognow."&status=".$logstatus."&dep=".$row2['department']."");
+                            }
+                        else{
+                            echo "Error";
+                        }
+                    }else{
+                        header("Location: ../Pages/employee-attendance.php?value=invalidSched");
+                    }
                 }
             }
 
