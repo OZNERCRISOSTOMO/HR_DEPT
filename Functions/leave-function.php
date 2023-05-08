@@ -47,7 +47,14 @@
                     header('Location: ../Pages/ListEmployee_Dept.php?value=invalid');
                 }
             }else if($leave_type == "Vacation Leave"){
-            
+                if($diff_row['vacation_leave'] >= $diff_row['days']){
+                    $insert_leave = "INSERT INTO `leave` (name, type, date_started, date_ended, employee_id, Department, description) VALUES ('$name', '$leave_type', '$date_start', '$date_end', '$employee_id', '$dept', '$des')";
+                    $insert_query = $conn->query($insert_leave);
+
+                    header('Location: ../Pages/ListEmployee_Dept.php?value=insert');
+                }else{
+                    header('Location: ../Pages/ListEmployee_Dept.php?value=invalid');
+                }
             }else{
 
         }
