@@ -82,7 +82,7 @@
     die("Connection failed: " . $conn->connect_error);
 }
 
-$h_display = "SELECT * FROM holiday";
+$h_display = "SELECT * FROM holiday ORDER BY percentage DESC";
 $h_query = $conn->query($h_display);
 
 while($row = mysqli_fetch_assoc($h_query)){
@@ -92,10 +92,10 @@ while($row = mysqli_fetch_assoc($h_query)){
   <div class="card-container mb-2">
     <div class="card" style="width: 100%; height:5rem;">
       <div class="card-body">
-        <h3 class="card-text" style="font-size:16px; font-weight:bold;"><?php echo $row['holiday_name'] ?></h3>
+        <h3 class="card-text" style="font-size:16px;font-weight:bold;overflow: hidden;text-overflow: ellipsis;"><?php echo $row['holiday_name'] ?></h3>
         <div class="row">
           <div class="col-7">
-            <h3 class="card-title"style="font-size:13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><?php echo $row['holiday_date'] ?></h3>
+            <h3 class="card-title"style="font-size:13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo $row['holiday_date'] ?></h3>
           </div>
 
           <div class="col-1">
@@ -111,7 +111,6 @@ while($row = mysqli_fetch_assoc($h_query)){
              <i class="fa-solid text-danger fa-square-minus"></i>
             </button>
             </form>
-           
           </div>
 
 

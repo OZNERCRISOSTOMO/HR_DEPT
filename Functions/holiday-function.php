@@ -24,7 +24,7 @@ if(isset($_POST['hsubmit'])){
     $h_query = $conn->query($h_data);
 
     if($h_query->num_rows > 0){
-        echo 'ADik';
+        echo 'Input';
     }else{
         $h_insert = "INSERT INTO holiday (holiday_name, holiday_date, percentage) VALUES ('$holiday', '$hdate', '$value')";
         $h_insert_query = $conn->query($h_insert);
