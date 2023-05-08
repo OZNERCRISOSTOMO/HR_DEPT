@@ -30,7 +30,7 @@
 
             if($query->num_rows > 0 ){
                 $percent = $row2['percentage'];
-                $doublepay = ;
+                $doublepay = 4;
                 $int = $doublepay*$percent;
             }
             echo "$int";

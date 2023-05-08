@@ -21,6 +21,7 @@
      if(isset($_POST['submitt'])){
             $employee = "SELECT * FROM employee_login WHERE login_id = '$id'";
             $employee_query = $conn->query($employee);
+            $employee_row
 
 
             $diff_absent = "SELECT DATEDIFF('$date_end', '$date_start') AS days, sick_leave, vacation_leave FROM employee_details";
