@@ -93,7 +93,6 @@ if(isset($_POST['signin'])){
                             // Set the value of time_in base on her schedule
                             $time_in = $srow['time_in'];
                         }
-
                         // If the schedule time_out is less than the time_out in attendance table.
                         if($srow['time_out'] < $urow['time_out']){
 
@@ -141,7 +140,16 @@ if(isset($_POST['signin'])){
                         $hrs = $interval->format('%h');
                         $mins = $interval->format('%i');
                         $mins2 = $mins/60;
-                        $int = $hrs + $mins2;
+                        $sql_double = "SELECT * FROM holiday WHERE holiday_date = '$date_now'";
+                        $query_double = $conn->query($sql_double);
+                        $row2_double = $query_double->fetch_assoc();
+                        if($query_double->num_rows > 0 ){
+                            $percent = $row2_double['percentage'];
+                            $doublepay = $hrs + $mins2;
+                            $int = $doublepay*$percent;
+                        }else{
+                            $int = $hrs + $mins2;
+                        }
 
                     
                         // If the time_out schedule is Less than the time_out in the attendance.
@@ -160,9 +168,9 @@ if(isset($_POST['signin'])){
 
                         // Record Undertime in Table overTime
                         
-                        $undertime = "INSERT INTO overTime (name, employee_id, name, remarks, date, over_time) VALUES ('$name, '$id', '$name', 'Under Time', '$date_now','$int')";
+                        $undertime = "INSERT INTO overTime (name, employee_id, name, remarks, date, over_time) VALUES ('$name', '$id', '$name', 'Under Time', '$date_now','$int')";
                         $conn->query($undertime);
-                    }
+                    }  
                 }
                     else{
                         echo $conn->error;

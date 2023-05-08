@@ -17,8 +17,13 @@
      $leave_type = $_POST['leave'];
      $dept = $_POST['department'];
 
+     
      if(isset($_POST['submitt'])){
-            $diff_absent = "SELECT DATEDIFF('$date_end', '$date_start') AS days, sick_leave FROM employee_details";
+            $employee = "SELECT * FROM employee_login WHERE login_id = '$id'";
+            $employee_query = $conn->query($employee);
+
+
+            $diff_absent = "SELECT DATEDIFF('$date_end', '$date_start') AS days, sick_leave, vacation_leave FROM employee_details";
             $diff_query = $conn->query($diff_absent);
             $diff_row = $diff_query->fetch_assoc();
 

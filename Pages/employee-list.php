@@ -78,9 +78,9 @@ display: block;
 </head>
 <body style="background-color: #f2f2f2; font-family: Bahnschrift;">
 
+
 <div class="container-fluid">
       <div class="row">
-
 
  <!------------ SIDEBAR ------------ -->
  <div class="col-2 p-0">
@@ -108,9 +108,18 @@ display: block;
         <div class="col-sm pt-2">
             <h5 style="font-weight:bolder;">Employee List</h5>
         </div>
+
+
+          <div class="col-2 ms-5">
+          <button type="button" class="btn btn-success shadow w-100" data-bs-toggle="modal" data-bs-target="#leave"> Leave Balance</button>
+      <?php include("../Modals/M-Leave.php")?>  
+      </div>
                 <div class="col-md row ms-2">
                     <div class="col-sm rounded dropdown text-center ">
-                        <button class="btn bg-white dropdown-toggle fw-bolder container-fluid" type="button" data-bs-toggle="dropdown" id="dropdown"><i class="fa-solid fa-filter px-1"></i><b>Sort By</b></button>
+
+
+
+                        <button class="btn bg-white dropdown-toggle  shadow fw-bolder container-fluid w-100" type="button" data-bs-toggle="dropdown" id="dropdown"><i class="fa-solid fa-filter px-1"></i><b>Sort By</b></button>
                         <ul class="dropdown-menu container-fluid sort-dropdown" id="sort-dropdown">
                             <li><a class="dropdown-item" href="#" id="byName">By Name</a></li>
                             
@@ -136,7 +145,7 @@ display: block;
                             <li><a class="dropdown-item" href="#">By Position</a></li>
                         </ul>
                     </div>
-                    <div class="col-sm input-group">
+                    <div class="col-sm input-group shadow">
                         <span class="input-group-text bg-white border border-end-0 border-0">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>

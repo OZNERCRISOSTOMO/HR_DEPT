@@ -100,7 +100,6 @@
                                 $hrs = $interval->format('%h');
                                 $mins = $interval->format('%i');
                                 $mins2 = $mins/60;
-                                
                                 $int = $hrs + $mins2;
 
                                 // If the attendance time_out is greater than 10:30 in Second Schedule.
@@ -134,8 +133,14 @@
                         $hrs = $interval->format('%h');
                         $mins = $interval->format('%i');
                         $mins2 = $mins/60;
-                        $int = $hrs + $mins2;
-                    
+                        if($double_query->num_rows > 0){
+                            $percent = $double_row['percentage'];
+                            $doublepay = $hrs + $mins2;
+                            $int = $doublepay * $percent;
+                        }else{
+                            $int = $hrs + $mins2;
+                        }
+                            
                         // If the time_out schedule is Less than the time_out in the attendance.
                     if($srow['time_out'] < $urow['time_out']){
                         // If the attendance did not record the number of hour.

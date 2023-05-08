@@ -35,16 +35,16 @@
   <form method="POST" action="../Functions/holiday-function.php">
   <div class="input-group input-group-sm mb-1">
   
-  <input type="text" class="form-control" aria-label="Sizing example input" name="hname" aria-describedby="inputGroup-sizing-sm" placeholder="Holidays">
+  <input type="text" class="form-control" aria-label="Sizing example input" name="hname" aria-describedby="inputGroup-sizing-sm" placeholder="Holidays" required>
 </div>
  
 <div class="input-group input-group-sm mb-1">
  
-  <input type="date" class="form-control" name="hdate" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+  <input type="date" class="form-control" name="hdate" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
 </div>
 <div class="input-group input-group-sm mb-1">
  
-  <input type="text" class="form-control" name="hpercent" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Percentage">
+  <input type="text" class="form-control" name="hpercent" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Percentage" required>
 </div>
  
   <button type="submit" name="hsubmit" class="btn btn-success btn-sm mb-2 w-100">Add Holiday</button>
