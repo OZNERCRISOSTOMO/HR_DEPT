@@ -45,7 +45,7 @@
 <div class="input-group input-group-sm mb-1 ">
  
 <select class="form-select" aria-label="Default select example" name="hpercent" id="hpercent">
-<option selected>Select department</option>
+<option selected>Type of Holiday</option>
 <option value="Regular Holiday">Regular Holiday</option>
 <option value="Special Non-Working Holiday">Special Non-Working Holiday</option>         
 </select>
@@ -92,10 +92,10 @@ while($row = mysqli_fetch_assoc($h_query)){
   <div class="card-container mb-2">
     <div class="card" style="width: 100%; height:5rem;">
       <div class="card-body">
-        <h3 class="card-text" style="font-size:16px;font-weight:bold;overflow: hidden;text-overflow: ellipsis;"><?php echo $row['holiday_name'] ?></h3>
+        <h3 class="card-text" style="font-size:16px;font-weight:bold; overflow: hidden; text-overflow: ellipsis;"><?php echo $row['holiday_name'] ?></h3>
         <div class="row">
           <div class="col-7">
-            <h3 class="card-title"style="font-size:13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo $row['holiday_date'] ?></h3>
+            <h3 class="card-title "style="font-size:13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo $row['holiday_date'] ?></h3>
           </div>
 
           <div class="col-1">
