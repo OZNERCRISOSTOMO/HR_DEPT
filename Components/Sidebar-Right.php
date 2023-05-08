@@ -44,17 +44,11 @@
 </div>
 <div class="input-group input-group-sm mb-1 ">
  
-<div class="dropdown">
-  <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Type of Holiday
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#" name="hpercent">Regular Holiday</a></li>
-    <li><a class="dropdown-item" href="#" name="hpercent">Special Non-Working Holiday</a></li>
-  
-  </ul>
-</div>  
-
+<select class="form-select" aria-label="Default select example" name="hpercent" id="hpercent">
+<option selected>Select department</option>
+<option value="Regular Holiday">Regular Holiday</option>
+<option value="Special Non-Working Holiday">Special Non-Working Holiday</option>         
+</select>
 
 </div>
  

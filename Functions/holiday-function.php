@@ -13,6 +13,12 @@ $holiday = $_POST['hname'];
 $hdate = $_POST['hdate'];
 $hpercent = $_POST['hpercent'];
 
+if($hpercent == "Regular Holiday"){
+    $value = 2;
+}else if($hpercent == "Special Non-Working Holiday"){
+    $value = 1.30;
+}
+
 if(isset($_POST['hsubmit'])){
     $h_data = "SELECT * FROM holiday WHERE holiday_date = '$hdate'";
     $h_query = $conn->query($h_data);
@@ -20,7 +26,7 @@ if(isset($_POST['hsubmit'])){
     if($h_query->num_rows > 0){
         echo 'ADik';
     }else{
-        $h_insert = "INSERT INTO holiday (holiday_name, holiday_date, percentage) VALUES ('$holiday', '$hdate', '$hpercent')";
+        $h_insert = "INSERT INTO holiday (holiday_name, holiday_date, percentage) VALUES ('$holiday', '$hdate', '$value')";
         $h_insert_query = $conn->query($h_insert);
 
         if($h_insert_query){
@@ -34,7 +40,7 @@ if(isset($_POST['hsubmit'])){
              $double_pay = $conn->query($h_update);
             }
 
-            header("Location: ../Pages/dashboard.php?success=Add");
+            header("Location: ../Pages/dashboard.php?success=nyenye");
         }
     }
 }
