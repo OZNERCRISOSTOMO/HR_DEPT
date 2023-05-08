@@ -28,7 +28,7 @@
       <div class="d-flex me-2 flex-column align-items-center px-1  text-white min-vh-100 position-fixed">
                 
   <div class="w-100">
- <h5 class="text-black mt-2">Holidays</h5>
+ <h5 class="text-black mt-2">Holidays Pay</h5>
   <div class="d-grid gap-2">
 
 
@@ -42,9 +42,20 @@
  
   <input type="date" class="form-control" name="hdate" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
 </div>
-<div class="input-group input-group-sm mb-1">
+<div class="input-group input-group-sm mb-1 ">
  
-  <input type="text" class="form-control" name="hpercent" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Percentage" required>
+<div class="dropdown">
+  <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Type of Holiday
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#" name="hpercent">Regular Holiday</a></li>
+    <li><a class="dropdown-item" href="#" name="hpercent">Special Non-Working Holiday</a></li>
+  
+  </ul>
+</div>  
+
+
 </div>
  
   <button type="submit" name="hsubmit" class="btn btn-success btn-sm mb-2 w-100">Add Holiday</button>
@@ -89,10 +100,17 @@ while($row = mysqli_fetch_assoc($h_query)){
       <div class="card-body">
         <h3 class="card-text" style="font-size:16px; font-weight:bold;"><?php echo $row['holiday_name'] ?></h3>
         <div class="row">
-          <div class="col-6">
+          <div class="col-7">
             <h3 class="card-title"style="font-size:13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><?php echo $row['holiday_date'] ?></h3>
           </div>
-          <div class="col-1 ms-2">
+
+          <div class="col-1">
+            <button class="btn btn-transparent btn-sm border-0 border-none" type="submit">
+            
+            </button>
+          
+          </div>
+          <div class="col-1 ">
               <form method="POST" action="../Functions/holiday-delete.php">
                 <input type="hidden" name="a" value=<?php echo $row['id'];?>>
             <button class="btn btn-transparent btn-sm border-0 border-none" type="submit" name="delete_holiday">
@@ -103,12 +121,7 @@ while($row = mysqli_fetch_assoc($h_query)){
           </div>
 
 
-          <div class="col-1">
-            <button class="btn btn-transparent btn-sm border-0 border-none" type="submit">
-            <i class="fa-solid text-primary fa-pen-to-square"></i>
-            </button>
-          
-          </div>
+         
         </div>
       </div>
     </div>
