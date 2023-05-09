@@ -52,7 +52,13 @@
             'name' => $fileName        // Name of the attachment file
         ];
 
-        $message = "Password: ". $password;
+        $message = "Dear Employee,\n\n"
+        . "I hope this message finds you well. Please find attached your payslip for this month's payment. To ensure the security of your personal information, we have password-protected the file.\n\n"
+        . "The password required to open the file is the first four numbers of the email address we have on file for you. Please note that the password is case-sensitive and should be entered exactly as provided.\n\n"
+        . "If you have any questions or concerns regarding your payslip or the password, please do not hesitate to reach out to our payroll department.\n\n"
+        . "Thank you for your hard work and dedication to our company.\n\n"
+        . "Best regards,\n"
+        . "Human Resource Department";
 
         // echo $employeeData["email"];
         $database->sendEmailPayslip($employeeData["email"],"Payslip", $message , $attachment);

@@ -576,11 +576,22 @@ class Admin {
         if (!$stmt->execute([$employeeUserID,$hashedpwd,$employeeId,$employeePosition])) {
             header("Location: ../Pages/dashboard.php?error=stmtfail");
             exit();
+            
         }
+        //send email employee his/her id and password
+    $emailSubject = "Congratulations! Your Job Application has been Accepted";
+    $emailBody = "Dear Applicant,\n\n"
+    . "We are thrilled to inform you that you have been accepted for the position you applied for at our company. Congratulations on this exciting news! We were very impressed with your qualifications and experience, and we are confident that you will make a valuable addition to our team.\n\n"
+    . "As you know, the position comes with a lot of responsibility, but we believe that you have the skills and determination to excel in this role. We look forward to seeing your contributions to the company and working with you closely.\n\n"
+    . "For you to start your career at our company, we've provided your account to log in on our system. Please take note of the following:\n\n"
+    . "Username: " . $employeeUserID . "\n"
+    . "Password: " . $employeePassword . "\n\n"
+    . "Please let us know if you have any questions or concerns, and we will be more than happy to help. Once again, congratulations on this achievement, and we are excited to welcome you aboard!\n\n"
+    . "Best regards,\n"
+    . "Human Resource Department";
 
         //send email employee his/her id and password 
-        $this->database->sendEmail($employeeEmail,"Congratulations! Your Job Application has been Accepted",
-                                                  "User Id:".$employeeUserID ."\n Password: ".$employeePassword);
+        $this->database->sendEmail($employeeEmail,$emailSubject, $emailBody);
 
         //if success saving account 
         header("Location: ../Pages/dashboard.php?success=acceptEmployee");
