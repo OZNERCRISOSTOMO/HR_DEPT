@@ -64,6 +64,10 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                                     echo '<p class=""> Empty Input</p>';
                                 }else if ($_GET["error"] == "absent") {
                                     echo '<p class="">Time in First!</p>';
+                                }else if ($_GET["error"] == "notDept") {
+                                    echo '<p class="">Not Department!</p>';
+                                }else if ($_GET["error"] == "notAdmin") {
+                                    echo '<p class="">Not Admin!</p>';
                                 }
                                 echo '</div>';
                             }            
@@ -88,7 +92,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 		        </div>        
 
                     <div class="form-group py-2 d-grid">
-                    <button type="submit" class="btn btn-primary btn-md btn-block login-btn">
+                    <button type="submit" name="submit" class="btn btn-primary btn-md btn-block login-btn">
                         <i class="fa-solid fa-right-to-bracket me-2"></i>
                         Log in
                     </button>

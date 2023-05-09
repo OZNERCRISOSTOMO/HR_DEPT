@@ -1,6 +1,6 @@
 <?php
 
-if ($_POST['email'] !== '' && $_POST['password'] !== '') {
+if ($_POST['email'] !== '' && $_POST['password'] !== '' && isset($_POST['submit'])){
 
 require '../Classes/admin.php';
 require '../Classes/database.php';
@@ -15,10 +15,18 @@ require '../Classes/database.php';
     $admin = new Admin($database);
 
 
-    $adminData = $admin->findByEmail($email);
-    $adminID = $adminData['employee_id'];
+    $adminData = $admin->login($email);
+    $adminEmpId = $adminData['employee_id'];
+    $adminUser = $adminData['login_id'];
+    $adminPass = $adminData['login_password'];
+    $adminPosition = $adminData['position'];
 
-    $adminAttendance = $admin->checkAttendance($adminID); 
+    $adminDep = $admin->getEmployeeDetails($adminEmpId);
+
+    $dept = $adminDep[0]['department'];
+
+    $adminAttendance = $admin->checkAttendance($adminEmpId); 
+
 
     //check if email exist 
     if(!$adminData){
@@ -26,10 +34,21 @@ require '../Classes/database.php';
         exit();
     }
 
+    $hashed_input_password = password_hash($password, PASSWORD_DEFAULT);
     //check if password not the same  
-    if($adminData['password'] !== $password){
+    if(!password_verify($password, $adminPass)){
         // if not, create variable error 
           header("Location:../index.php?error=errorPassword");
+        exit();
+    }
+    if($dept !== 'human-resource'){
+        // if you are not on the department 
+        header("Location:../index.php?error=notDept");
+        exit();
+    }
+    if($adminPosition !== 'admin'){
+        // if not admin 
+            header("Location:../index.php?error=notAdmin");
         exit();
     }
     if(!$adminAttendance){

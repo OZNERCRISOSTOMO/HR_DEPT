@@ -69,8 +69,8 @@ href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
                        
                               
                       
-                                <li>
-                        <a href="" class="text-decoration-none  nav_link logout mx-3 align-middle text-black">
+                        <li>
+                        <a href="../Functions/backup.php" name = "backup" class="text-decoration-none  nav_link logout mx-3 align-middle text-black">
                             <i class='bx bx-hdd nav_icon'></i> <span class="nav_name">Backup</span>
                         </a>
                         </li>

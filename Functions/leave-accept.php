@@ -40,19 +40,14 @@
             $employee_query = $conn->query($employeee);
             $employee_row = $employee_query->fetch_assoc();
             $name = "".$employee_row['first_name']." ".$employee_row['last_name']."";
+
+
             for ($timestamp = $start; $timestamp <= $end; $timestamp += $interval) {
                 $formatted_date = date('Y-m-d', $timestamp);
 
-                $holiday = "SELECT * FROM holiday WHERE holiday_date = '$formatted_date' AND percentage = 2";
-                $hqueryy = $conn->query($holiday);
-
-                if($hqueryy->num_rows > 0){
-                    $sahod = 8 * 2;
-                }else{
-                    $sahod = 8;
-                }
-                
-                $insertVac = "INSERT INTO attendance (employee_id, name, date, time_in, status, num_hr, schedule_id) VALUES ('".$date['employee_id']."', '$name', '$formatted_date', 'null', 'VACATION LEAVE', '$sahod', '".$employee_row['schedule_id']."')";
+                $sahod = 8;
+                 
+                $insertVac = "INSERT INTO attendance (employee_id, name, date, time_in, status, num_hr, schedule_id) VALUES ('".$date['employee_id']."', '$name', '$formatted_date', 'null', 'VACATION LEAVE', 0, '".$employee_row['schedule_id']."')";
                 $conn->query($insertVac);
 
                 $updateSalary = "UPDATE employee_details SET num_hr = num_hr + $sahod WHERE employee_id = '".$date['employee_id']."'";
