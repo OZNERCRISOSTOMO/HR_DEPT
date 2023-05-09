@@ -84,10 +84,10 @@ if (isset($_SESSION['admin_id'])) {
           <thead>
             <th>ID</th>
             <th>Date Added</th>
-            <th>Code</th>
+            <th>Type</th>
             <th>Start</th>
             <th>End</th>
-            <th>Type</th>
+            <th>Mode</th>
             <th>Action</th>
           </thead>
 

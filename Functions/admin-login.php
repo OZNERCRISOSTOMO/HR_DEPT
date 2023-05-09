@@ -18,7 +18,7 @@ require '../Classes/database.php';
     $adminData = $admin->findByEmail($email);
     $adminID = $adminData['employee_id'];
 
-    // $adminAttendance = $admin->checkAttendance($adminID); 
+    $adminAttendance = $admin->checkAttendance($adminID); 
 
     //check if email exist 
     if(!$adminData){
@@ -32,10 +32,10 @@ require '../Classes/database.php';
           header("Location:../index.php?error=errorPassword");
         exit();
     }
-    // if(!$adminAttendance){
-    //         header("Location:../index.php?error=absent");
-    //     exit();
-    // }
+    if(!$adminAttendance){
+            header("Location:../index.php?error=absent");
+        exit();
+    }
 
      //start session 
     session_start();

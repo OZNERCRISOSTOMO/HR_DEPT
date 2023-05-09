@@ -63,13 +63,6 @@ if(isset($_POST['signin'])){
 	            date_default_timezone_set($timezone);
                 $lognow = date('H:i:s');
 
-                $checkif = "SELECT * FROM attendance WHERE status ='VACATION LEAVE' AND employee_id = '$id' AND date = '$date_now'";
-                $queryCheck = $conn->query($checkif);
-
-                if($queryCheck->num_row > 0){
-                    header("Location: ../Functions/employee-attendance-manual.php?value=vac");
-                }
-
                 $checkifAbsent = "SELECT * FROM attendance WHERE date = '$date_now' AND employee_id = '$id' AND (status = 'ONTIME' OR status = 'LATE')";
                 $queryCheckAbsent = $conn->query($checkifAbsent);
                 if($queryCheckAbsent->num_rows > 0){
