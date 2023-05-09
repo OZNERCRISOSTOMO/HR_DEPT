@@ -52,7 +52,7 @@
 
 </div>
  
-  <button type="submit" name="hsubmit" class="btn btn-success btn-sm mb-2 w-100">Add Holiday</button>
+  <button type="submit" name="hsubmit" id="holiday" class="btn btn-success btn-sm mb-2 w-100">Add Holiday</button>
 </form>
 
 
@@ -190,5 +190,30 @@ while($row = mysqli_fetch_assoc($h_query)){
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
+
+<script>
+  const submitBtn = document.getElementById('holiday');
+
+
+  submitBtn.addEventListener('click', () => {
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+});
+
+Toast.fire({
+  icon: 'success',
+  title: 'Signed in successfully'
+});
+
+});
+</script>
 </body>
 </html>
