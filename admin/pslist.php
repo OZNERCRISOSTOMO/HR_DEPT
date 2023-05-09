@@ -104,7 +104,7 @@ if (isset($_SESSION['admin_id'])) {
                     </div>
 
                 <div class="col-2" style=" justify-content: flex-end;">
-                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-plus fs-6"></i>Create New</button>
+                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-plus fs-6"></i>Add Employee</button>
                      <?php include("../Modals/M-pslist.php")?>   
                      <?php include("../Modals/M-pslist-edit.php")?> 
                 </div>

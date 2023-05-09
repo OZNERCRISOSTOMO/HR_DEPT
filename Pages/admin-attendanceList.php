@@ -144,6 +144,7 @@ if (isset($_SESSION['admin_id'])) {
       }          
           ?> 
       </td>
+   
       <td><?php echo $list['status']; ?> </td>
     </tr>
     <?php
@@ -165,8 +166,9 @@ if (isset($_SESSION['admin_id'])) {
       <tr>
         <th>Employee ID</th>
         <th>Name</th>
+        <th>Department</th>
         <th>Remarks</th>
-        <th>Date</th>
+        <th class="px-5">Date</th>
         <th>Overtime</th>
         <th>Action</th>
       </tr>
@@ -183,15 +185,31 @@ if (isset($_SESSION['admin_id'])) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM overTime";
+
+        //"SELECT employees.*, employee_details.department FROM employees JOIN employee_details ON employees.id = employee_details.employee_id";
+        $sql = "SELECT overTime.*, employee_details.department FROM overTime JOIN employee_details ON overTime.employee_id = employee_details.employee_id";
         $query = $conn->query($sql);
 
         while($row = mysqli_fetch_assoc($query)){
+
+          if ($row['department'] == 'human-resource'){
+            $dept = "Human Resource";
+          }
+          else if ($row['department'] == 'sales'){
+            $dept = "Sales";
+          }
+          else if ($row['department'] == 'warehouse'){
+            $dept = "Warehouse";
+          }
+          else {
+            $dept = "Purchaser";
+          }
 
       ?>
       <tr>
       <td><?php echo $row['employee_id']; ?> </td>
       <td ><?php echo $row['Name']; ?> </td>
+      <td ><?php echo $dept; ?> </td>
       <td><?php echo $row['remarks']; ?> </td>
       <td><?php echo $row['date']; ?> </td>
       <td><?php echo $row['over_time']; ?> </td>
@@ -223,6 +241,7 @@ if (isset($_SESSION['admin_id'])) {
 			     <th>Employee ID</th>
             <th>Firstname</th>
             <th>Lastname</th>
+            <th>Department</th>
 		      	<th>Date</th>
             <th>Time In</th>
             <th>Time Out</th>
@@ -250,7 +269,7 @@ if (isset($_SESSION['admin_id'])) {
     $timezone = 'Asia/Manila';
 	date_default_timezone_set($timezone);
     $date_now = date('Y-m-d');
-    $sql = "SELECT employees.first_name, employees.last_name, attendance.*
+    $sql = "SELECT employees.first_name, employees.last_name, attendance.*, employee_details.department
     FROM employees
     JOIN employee_details ON employees.id = employee_details.employee_id
     JOIN attendance ON employees.id = attendance.employee_id
@@ -272,7 +291,20 @@ if (isset($_SESSION['admin_id'])) {
             $timeOut = date('h:i A', strtotime($row["time_out"]));
           }
 
-            echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["date"] . "</td><td>" . $timeIn . "</td><td>" . $timeOut . "</td><td>" . $row["status"] . "</td></tr>";
+          if($row["department"] == "human-resource"){
+            $dept = "Human Resources";
+          }
+          else if($row["department"] == "sales"){
+            $dept = "Sales";
+          }
+          else if($row["department"] == "warehouse"){
+            $dept = "Warehouse";
+          }
+          else{
+            $dept = "Purchaser";
+          }
+
+            echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $dept . "</td><td>" . $row["date"] . "</td><td>" . $timeIn . "</td><td>" . $timeOut . "</td><td>" . $row["status"] . "</td></tr>";
         }
     } else {
         echo "";
@@ -296,6 +328,7 @@ if (isset($_SESSION['admin_id'])) {
 			      <th>Employee ID</th>
             <th>Firstname</th>
             <th>Lastname</th>
+            <th>Department</th>
             <th>Status</th>
         
           
@@ -316,14 +349,27 @@ if (isset($_SESSION['admin_id'])) {
 
                 //check in attendance if exist 
                 $valueEmployee = $admin->checkAttendance($value);
-
+                $employeeD = $admin->getEmployeeDetails($value);
                 if(!$valueEmployee){
                     $count++;
                     $employeeInfo = $admin->findEmployeeById($value);
               if (!empty($employeeInfo)) {
+                if($employeeD[0]['department'] == "human-resource"){
+                  $dept = "Human Resource";
+                }
+                else if($employeeD[0]['department']  == "sales"){
+                  $dept = "Sales";
+                }
+                else if($employeeD[0]['department'] == "warehouse"){
+                  $dept = "Warehouse";
+                }
+                else {
+                  $dept = "Purchaser";
+                }
                 echo "<tr><td>".$employeeInfo[0]['id']."</td>";
                 echo "<td>".$employeeInfo[0]['first_name']."</td>";
                 echo "<td>".$employeeInfo[0]['last_name']."</td>";
+                echo "<td>".$dept."</td>";
                 echo '<td>Absent</td>';
               
                 }

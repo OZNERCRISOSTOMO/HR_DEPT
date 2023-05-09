@@ -58,7 +58,7 @@ if (!$conn) {
 
 
 
-<div class="container">
+<div class="container-fluid">
 
 <h4 class="fw-bolder">Leave</h4>
 <table class="table table-striped" id="leave">
@@ -67,11 +67,12 @@ if (!$conn) {
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Type</th>
-      <th scope="col">Date Started</th>
-      <th scope="col">Date Ended</th>
+      <th scope="col px-5">Date Started</th>
+      <th scope="col px-5">Date Ended</th>
       <th scope="col">Department</th>
-      <th scope="col">Status</th>
       <th scope="col">Description</th>
+      <th scope="col">Status</th>
+
       <th scope="col">Action</th>
      
     </tr>
