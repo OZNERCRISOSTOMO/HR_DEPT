@@ -31,6 +31,10 @@
 
             $update_stat = "UPDATE `leave` SET status = 1 WHERE id = '$id'";
             $conn->query($update_stat);
+
+            
+
+
         }else if($date['Type'] == "Vacation Leave"){
             $start = strtotime($date_start);
             $end = strtotime($date_end);
@@ -44,8 +48,6 @@
 
             for ($timestamp = $start; $timestamp <= $end; $timestamp += $interval) {
                 $formatted_date = date('Y-m-d', $timestamp);
-
-                $sahod = 8;
                  
                 $insertVac = "INSERT INTO attendance (employee_id, name, date, time_in, status, num_hr, schedule_id) VALUES ('".$date['employee_id']."', '$name', '$formatted_date', 'null', 'VACATION LEAVE', 0, '".$employee_row['schedule_id']."')";
                 $conn->query($insertVac);
@@ -56,5 +58,8 @@
 
             $update_stat = "UPDATE `leave` SET status = 1 WHERE id = '$id'";
             $conn->query($update_stat);
+
+            $update_leave_days = "UPDATE employee_details SET vacation_leave = vacation_leave - '".$diff_row['days']."' WHERE employee_id = '$id'";
+            $conn->query($update_leave_days);
         }
      }
