@@ -16,11 +16,15 @@ $date = $_POST['date-from'];
 $date1 = $_POST['date-to'];
 $present = $_POST['present'];
 $overtime = $_POST['overtime'];
-$salary = $_POST['salary'];
+$ratePerHour = $_POST['salary'];
 $prlistid = $_POST['prlist-id'];
 $employeeId = $_POST['employee-id'];
 $food_allowance = $_POST['food-allowance'];
 $transpo_allowance = $_POST['transpo-allowance'];
+
+
+$totalAllowance = $food_allowance + $transpo_allowance;
+$salary = $ratePerHour * ($present + $overtime);
 
 $sss = "";
 $philhealth = "";
@@ -55,7 +59,7 @@ if(isset($_POST['sss'])){
 
 isset($_POST['sss']);
 if (filter_has_var(INPUT_POST, 'sss')) {
-        $num1 = $_POST['salary'];       
+        $num1 = $salary;       
         $sss_result = $num1 * 0.045;
 }
 else {
@@ -63,7 +67,7 @@ else {
 }
 
 if (filter_has_var(INPUT_POST, 'philhealth')) {
-        $num1 = $_POST['salary'];
+        $num1 = $salary; 
         $phil_result = $num1 * 0.045;
 }
 else {
@@ -71,7 +75,7 @@ else {
 }
 
 if (filter_has_var(INPUT_POST, 'pagibig')) {
-        $num1 = $_POST['salary'];
+        $num1 = $salary; 
 
         if ($num1 <= 1499){
             $love_result = $num1 * 0.02;
@@ -90,8 +94,33 @@ else {
         $love_result = '0 - not a member';
 }
 
+        $tax = $salary;
 
-$networth = $salary - ($sss_result + $phil_result + $love_result);
+        if ($tax <= 10000) {
+            $tax = $salary * 0.05;
+        }
+        else if ($tax >=10001 || $tax <=30000) {
+            $tax = $salary * 0.10;
+        }
+        else if ($tax >=30001 || $tax <=70000) {
+            $tax = $salary * 0.15;
+        }
+        else if ($tax >=70001 || $tax <=140000) {
+            $tax = $salary * 0.20;
+        }
+        else if ($tax >=140001 || $tax <=250000) {
+            $tax = $salary * 0.25;
+        }
+        else if ($tax >=250001 || $tax <=500000) {
+            $tax = $salary * 0.30;
+        }
+        else $tax = ($tax >=500001) ? $salary * 0.32 : 'error';
+
+
+        // $networth = $salary - ($sss_result + $phil_result + $love_result) ;
+        $totaldeductions = $sss_result + $phil_result + $love_result + $tax;
+        $grosspay = $salary - $totaldeductions; //
+        $networth = $totalAllowance + $grosspay;
 
 
 

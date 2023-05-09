@@ -220,14 +220,14 @@ class Admin {
     //get the latest data of num_hr and overtime
  
     // reset the num_hr and overtime to 0 and put num_hr and overtime ti ain employee_details table 
-    $sql = "UPDATE employee_details SET num_hr = ?, over_time = ? WHERE employee_id = ? ";
-    $stmt = $this->database->getConnection()->prepare($sql);
+    // $sql = "UPDATE employee_details SET num_hr = ?, over_time = ? WHERE employee_id = ? ";
+    // $stmt = $this->database->getConnection()->prepare($sql);
 
-    // execute statement and check for errors
-    if (!$stmt->execute(['0','0', $employeeId])) {
-        header("Location: ../Pages/employee-register.php?error=stmtfail");
-        exit();
-    }
+    // // execute statement and check for errors
+    // if (!$stmt->execute(['0','0', $employeeId])) {
+    //     header("Location: ../Pages/employee-register.php?error=stmtfail");
+    //     exit();
+    // }
 
     // if succesful
     header("Location: ../admin/pslist.php?id=$id&status=created");
@@ -886,6 +886,19 @@ public function payslipList($prlistid){
     //fetch the employeeID
     $pslist = $stmt->fetchAll();
     return $pslist;
+}
+
+public function calculateTotalHourAndOvertime($date, $date1, $employeeId)
+{
+    $stmt = $this->database->getConnection()->prepare("SELECT SUM(num_hr) as sahod, SUM(over_time) as overtime FROM attendance WHERE date BETWEEN :dateFrom AND :dateTo AND employee_id = :employeeId");
+
+    if (!$stmt->execute(array(':dateFrom' => $date, ':dateTo' => $date1, ':employeeId' => $employeeId))) {
+        // Handle the execution failure here
+        return false;
+    }
+ 
+    $totalHours = $stmt->fetch();
+    return $totalHours;
 }
 }
 

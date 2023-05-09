@@ -407,38 +407,46 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
   // Create new modal
   $('#select-employee').on('change', function() {
       var selectedValue = $(this).val();
-    //   console.log(selectedValue);
+      const fromDate = $('#date-from').val();
+    const toDate = $('#date-to').val();
+      console.log(selectedValue,fromDate,toDate);
       if(selectedValue != '0'){
              $.ajax({
                   url: "../Functions/admin-payslip.php",
                   type: "POST",
                   data: {
-                      id: selectedValue
+                      id: selectedValue,
+                      dateFrom : fromDate,
+                      dateTo : toDate
                   },
 
                   success: function(data) {
-                      const [employeeData] = JSON.parse(data)
-                      
-                      $("#employee-id").val(employeeData.employee_id)
-                      $("#department").val(employeeData.department)
-                      $("#salary").val(employeeData.rate_per_hour)
-                       $("#email").val(employeeData.email)
-                       $("#position").val(employeeData.position)
-                       $("#branch").val(employeeData.branch)
-                       $("#present").val(employeeData.num_hr)
-                       $("#overtime").val(employeeData.over_time)
-                       $("#food-allowance").val(employeeData.food_allowance)
-                       $("#transpo-allowance").val(employeeData.transpo_allowance)
+                    var jsonString = data;
+                    var parsedData = JSON.parse(jsonString);
+                    console.log(parsedData)
+                    console.log(parsedData.employeeData[0].id)
+                      $("#employee-id").val(parsedData.employeeData[0].id)
+                      $("#department").val(parsedData.employeeData[0].department)
+                      $("#salary").val(parsedData.employeeData[0].rate_per_hour)
+                       $("#email").val(parsedData.employeeData[0].email)
+                       $("#position").val(parsedData.employeeData[0].position)
+                       $("#branch").val(parsedData.employeeData[0].branch)
 
-                      $("#employee-name").val(employeeData.first_name + " " + employeeData.last_name)
+                       $("#present").val(parsedData.data.sahod)
+                       $("#overtime").val(parsedData.data.overtime)
+
+                       $("#food-allowance").val(parsedData.employeeData[0].food_allowance)
+                       $("#transpo-allowance").val(parsedData.employeeData[0].transpo_allowance)
+
+                      $("#employee-name").val(parsedData.employeeData[0].first_name + " " + parsedData.employeeData[0].last_name)
                        const beneficiaries = [{type:"sss",
-                                               value:employeeData.sss
+                                               value:parsedData.employeeData[0].sss
                                               },
                                               {type:"pagibig",
-                                               value:employeeData.pagibig
+                                               value:parsedData.employeeData[0].pagibig
                                               },
                                               {type:"philhealth",
-                                               value:employeeData.philhealth
+                                               value:parsedData.employeeData[0].philhealth
                                               }]
 
                       beneficiaries.forEach(membership =>{

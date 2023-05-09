@@ -51,9 +51,14 @@
         $department = $employeepayslip['department'];
         $date = $employeepayslip['from_date'];
         $date1 = $employeepayslip['to_date'];
-        $num_hr = $employeeDetails[0]['num_hr'];
+      
 
-        $overtime = $employeeDetails[0]['over_time'];
+        $dataCalculate  = $payslip->calculateTotalHourAndOvertime($date,$date1,$id);
+        $num_hr = $dataCalculate["sahod"];
+        $overtime = $dataCalculate["overtime"];
+        
+        
+
         $ratePerHour = $employeeDetails[0]['rate_per_hour']; 
         $food = $employeeDetails[0]['food_allowance'];
         $transpo = $employeeDetails[0]['transpo_allowance'];
