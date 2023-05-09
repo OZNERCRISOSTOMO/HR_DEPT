@@ -21,6 +21,7 @@
 			<th>Employee ID</th>
             <th>Firstname</th>
             <th>Lastname</th>
+            <th>Department</th>
             <th>Status</th>
 				</tr>
 			</thead>
@@ -52,10 +53,26 @@
                     if(!$valueEmployee){
                         $count++;
                         $employeeInfo = $admin->findEmployeeById($value);
+
+                        $employeeD = $admin->getEmployeeDetails($value);
+                        
                   if(!empty($employeeInfo)){
+                    if($employeeD[0]['department'] == "human-resource"){
+                      $dept = "Human Resource";
+                    }
+                    else if($employeeD[0]['department']  == "sales"){
+                      $dept = "Sales";
+                    }
+                    else if($employeeD[0]['department'] == "warehouse"){
+                      $dept = "Warehouse";
+                    }
+                    else {
+                      $dept = "Purchaser";
+                    }
                     echo "<tr><td>".$employeeInfo[0]['id']."</td>";
                     echo "<td>".$employeeInfo[0]['first_name']."</td>";
                     echo "<td>".$employeeInfo[0]['last_name']."</td>";
+                    echo "<td>".$dept."</td>";
                     echo '<td><span class="badge text-bg-danger">Absent</span></td></tr>';
                     }
 

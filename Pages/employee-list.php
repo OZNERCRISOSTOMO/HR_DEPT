@@ -145,11 +145,11 @@ display: block;
                             <li><a class="dropdown-item" href="#">By Position</a></li>
                         </ul>
                     </div>
-                    <div class="col-sm input-group shadow">
+                    <div class="col-sm input-group">
                         <span class="input-group-text bg-white border border-end-0 border-0">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
-                        <input type="text" class="form-control border-0 border shadow-none border-start-0" id="search" autocomplete="off">
+                        <input type="text" class="form-control border-0 border  border-start-0" id="search" autocomplete="off">
                     </div>
                 </div>
         </div>

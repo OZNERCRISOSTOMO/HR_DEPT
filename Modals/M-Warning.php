@@ -20,6 +20,7 @@
         <th>Employee ID</th>
               <th>Firstname</th>
               <th>Lastname</th>
+              <th>Department</th>
         <th>Warnings</th>
           </tr>
         </thead>
@@ -33,8 +34,10 @@
                die("Connection failed: " . mysqli_connect_error());
             }
 
-            $employeeQuery = "SELECT * FROM employees";
+            $employeeQuery = "SELECT employees.*, employee_details.department FROM employees JOIN employee_details ON employees.id = employee_details.employee_id";
             $employeeResult = $conn->query($employeeQuery);
+
+
 
             // Step 3: Loop through each employee id and get the count of absent days
             while ($idRow = $employeeResult->fetch_assoc()) {
@@ -48,22 +51,38 @@
             // Get the count of absent days
             $countRow = $countResult->fetch_assoc();
             $count = $countRow["count"];
-          
+              
+            if ($idRow['department'] == "human-resource"){
+              $dept = "Human Resource";
+            }
+            else if($idRow['department'] == "sales"){
+              $dept = "Sales";
+            }
+            else if($idRow['department'] == "warehouse"){
+              $dept = "Warehouse";
+            }
+            else 
+            {
+              $dept = "Purchaser";
+            }
 
             if($count >= 7){
               echo "<tr><td>".$employee_id."</td>";
               echo "<td>".$idRow['first_name']."</td>";
               echo "<td>".$idRow['last_name']."</td>";
+              echo "<td>".$dept."</td>";
               echo '<td><span class="badge text-bg-danger">Suspended</span></td></tr>';
             }else if($count >= 5){
               echo "<tr><td>".$employee_id."</td>";
               echo "<td>".$idRow['first_name']."</td>";
               echo "<td>".$idRow['last_name']."</td>";
+              echo "<td>".$dept."</td>";
               echo '<td><span class="badge text-bg-warning">Written</span></td></tr>';
             }elseif($count >= 3){
               echo "<tr><td>".$employee_id."</td>";
               echo "<td>".$idRow['first_name']."</td>";
               echo "<td>".$idRow['last_name']."</td>";
+              echo "<td>".$dept."</td>";
               echo '<td><span class="badge text-bg-success">Verbal</span></td></tr>';
             }
             }

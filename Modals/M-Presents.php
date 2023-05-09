@@ -22,6 +22,7 @@
 			<th>Date</th>
       <th>Time In</th>
       <th>Time Out</th>
+      <th>Department</th>
       <th>Status</th>
         
           
@@ -53,7 +54,7 @@
 
 
     // execute a SELECT statement to retrieve data from the table
-    $sql = "SELECT employees.first_name, employees.last_name, attendance.*
+    $sql = "SELECT employees.first_name, employees.last_name, attendance.*, employee_details.department
     FROM employees
     JOIN employee_details ON employees.id = employee_details.employee_id
     JOIN attendance ON employees.id = attendance.employee_id
@@ -82,7 +83,20 @@
             else if($row["status"] == "LATE"){
               $status = '<span class="badge text-bg-danger">Late</span>';
             }
-            echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["date"] . "</td><td>" . $timeIn . "</td><td>" . $timeOut . "</td><td>" . $status . "</td></tr>";
+
+            if($row["department"] == "human-resource"){
+              $dept = "Human Resources";
+            }
+            else if($row["department"] == "sales"){
+              $dept = "Sales";
+            }
+            else if($row["department"] == "warehouse"){
+              $dept = "Warehouse";
+            }
+            else{
+              $dept = "Purchaser";
+            }
+            echo "<tr><td>"  . $row["employee_id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["date"] . "</td><td>" . $timeIn . "</td><td>" . $timeOut . "</td><td>" . $dept."</td><td>" . $status . "</td></tr>";
         }
     } else {
         echo "";
