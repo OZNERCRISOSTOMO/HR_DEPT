@@ -10,11 +10,10 @@ date_default_timezone_set($timezone);
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
-$empid = $_POST['id'];
-if(isset($_POST['archive'])){
-    $updateStat = "UPDATE prlist SET Status = '0'  WHERE id='$empid'";
+$empid = $_GET['id'];
+    $updateStat = "UPDATE prlist SET Status = '1'  WHERE id='$empid'";
     $updateQuery = $conn->query($updateStat);
 
     header("Location: ../admin/prlist.php");
-}
+
 ?>

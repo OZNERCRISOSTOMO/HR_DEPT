@@ -76,6 +76,69 @@ if (isset($_SESSION['admin_id'])) {
               <button class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#PayrollModal"><i class="fa-solid fa-plus"></i> Create New</button>
             
             </div>
+
+            <div class="col-2"> 
+              
+              <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              List of Archive
+            </button>
+
+<!-- Modal -->
+<div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <table id="prlist" class="table table-borderless table-striped text-center mt-3 align-middle">
+          <thead>
+            <th>ID</th>
+            <th>Date Added</th>
+            <th>Code</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Type</th>
+            <th>Action</th>
+          </thead>
+
+          <tbody>
+            <?php
+              $arlist = $prlist->ArchiveList();
+              foreach($arlist as $list){
+            ?>
+            <tr>
+              <td><?php echo $list['id']; ?> </td>
+              <td><?php echo $list['date']; ?> </td>
+              <td><?php echo $list['code']; ?> </td>
+              <td><?php echo $list['start']; ?> </td>
+              <td><?php echo $list['end']; ?> </td>
+              <td><?php echo $list['type']; ?> </td>
+              <td>
+             
+                <div class="row">
+                  <div class="col-3">
+              <button onclick="location.href='../Functions/admin-payroll-restore.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">Restore</button>
+              </div>
+              </td>
+              </tr>
+              <?php
+              }
+            ?>
+             </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+            </div>
               </div>
         <!----End---->
 
@@ -84,10 +147,10 @@ if (isset($_SESSION['admin_id'])) {
           <thead>
             <th>ID</th>
             <th>Date Added</th>
-            <th>Type</th>
+            <th>Code</th>
             <th>Start</th>
             <th>End</th>
-            <th>Mode</th>
+            <th>Type</th>
             <th>Action</th>
           </thead>
 
@@ -114,7 +177,7 @@ if (isset($_SESSION['admin_id'])) {
               </div>
               <div class="col-3 p-0 m-0">
               <form method="POST" action="../Functions/admin-payroll-delete.php">
-              <button class="btn btn-sm btn-danger" type="submit" name="delete" value="Delete">Delete</button>
+              <button class="btn btn-sm btn-danger" type="submit" name="archive" class="archive" id="archive">Archive</button>
               <input type="hidden" name="id" value="<?php echo $list['id']; ?>">
               </form>
               </div>
@@ -158,6 +221,7 @@ if (isset($_SESSION['admin_id'])) {
                 $("#editType").val(type);
               });
             });
+
           </script>
 
         <!----Modal---->
