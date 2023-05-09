@@ -55,7 +55,7 @@
                         $employeeInfo = $admin->findEmployeeById($value);
 
                         $employeeD = $admin->getEmployeeDetails($value);
-                        
+
                   if(!empty($employeeInfo)){
                     if($employeeD[0]['department'] == "human-resource"){
                       $dept = "Human Resource";

@@ -119,7 +119,7 @@
 
                             // Record Overtime in table overTime 
                             
-                            $overT = "INSERT INTO overTime (name, employee_id, remarks, date, over_time) VALUES ('$name', '$id','Over Time', '$date_now','$int')";
+                            $overT = "INSERT INTO overTime (name, employee_id, remarks, date, over_time) VALUES ('$name', '$id','Over Time', '$date_now',$int)";
                             $conn->query($overT);
                             
                             $time_out = $srow['time_out'];
@@ -146,7 +146,7 @@
                         // If the attendance did not record the number of hour.
                         if($urow['num_hr'] == 0){
                         // Add the total number of hour
-                        $sql = "UPDATE attendance SET num_hr = '$int' WHERE id = '".$timeout['uid']."'";
+                        $sql = "UPDATE attendance SET num_hr = $int WHERE id = '".$timeout['uid']."'";
 						$conn->query($sql);
 
                         $sql123 = "UPDATE employee_details SET num_hr = num_hr + $int WHERE employee_id = $id";
@@ -157,7 +157,7 @@
 
                         // Record Undertime in Table overTime
                         
-                        $undertime = "INSERT INTO overTime (name, employee_id, name, remarks, date, over_time) VALUES ('$name', '$id', 'Under Time', '$date_now','$int')";
+                        $undertime = "INSERT INTO overTime (name, employee_id, name, remarks, date, over_time) VALUES ('$name', '$id', 'Under Time', '$date_now', $int)";
                         $conn->query($undertime);
                     }
                 }

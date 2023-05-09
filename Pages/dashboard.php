@@ -76,6 +76,22 @@ if($counttt >= 3){
 }
 
 }
+
+
+  $dateString = date('Y-m-d');
+    $month = date('m', strtotime($dateString));
+    $backup_file = "u839345553_SBIT3G_".$month.".sql";
+
+    $filePath = '../backups/'.$backup_file.'';
+    $currentMonth = date('n');
+    if (file_exists($filePath) || $currentMonth % 4 != 0) {
+      $display = 'none';
+    }else if($currentMonth % 4 == 0){
+      $display = 'block';
+    }    
+
+
+
 }
 else {
     header("Location: ../index.php");
@@ -192,7 +208,9 @@ else {
                             setInterval(updateTime, 1000);
                         </script> 
                         <span id="datetime"></span>  
-                        </h5>  
+                        </h5>
+                         <h5 id="payday" style="display:none;">It's Pay Day</h5>
+                         <h5 id="backup" style="display:<?php echo $display; ?>;">You Need To Back Up your File!</h5> 
                     </div>
                     <!---------------------------->
                       
@@ -411,7 +429,7 @@ else {
 </div>
 </div>
 
-<!-- <script>
+<script>
 const urlParams=new URLSearchParams(window.location.search);
 const successValue1 =urlParams.get('value')
 
@@ -430,7 +448,7 @@ Swal.fire({
 Swal.fire({
     position: "top-end",
     icon: "success",
-    title: "Successfully add holiday!",
+    title: "Successfully Add holiday!",
     showConfirmButton: false,
     timer: 3000,
    timerProgressBar: true,
@@ -438,7 +456,7 @@ Swal.fire({
 
   });
 }
-                  </script> -->
+                  </script>
 
  <script>
 
@@ -462,6 +480,21 @@ Swal.fire({
 //     }
 //   }
 // }
+// Get current date
+let currentDate = new Date();
+
+// Check if today is the 15th day of the month
+if (currentDate.getDate() === 15) {
+  // Display SweetAlert notification for 15th day of the month
+  document.getElementById("payday").style.display = "block";
+}
+
+// Check if today is the last day of the month
+let lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+if (currentDate.getDate() === lastDayOfMonth) {
+  // Display SweetAlert notification for last day of the month
+  document.getElementById("payday").style.display = "block";
+}
 
 
 

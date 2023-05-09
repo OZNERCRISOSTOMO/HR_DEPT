@@ -40,7 +40,7 @@ if(isset($_POST['hsubmit'])){
              $double_pay = $conn->query($h_update);
             }
 
-            header("Location: ../Pages/dashboard.php?success=nyenye");
+            header("Location: ../Pages/dashboard.php?value=holiday");
         }
     }
 }

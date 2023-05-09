@@ -319,7 +319,7 @@ class Admin {
         // Get today's date
         $today = date('Y-m-d');
 
-        $count = $this->database->getConnection()->query("SELECT count(*) FROM attendance WHERE date = '$today' AND (status = 'LATE' OR status = 'ONTIME') AND schedule_id = $id")->fetchColumn();
+        $count = $this->database->getConnection()->query("SELECT count(*) FROM attendance WHERE date = '$today' AND (status = 'LATE' OR status = 'ONTIME' OR status = 'VACATION LEAVE') AND schedule_id = $id")->fetchColumn();
 
         return $count;
 
@@ -654,7 +654,7 @@ class Admin {
              // Get today's date
         $today = date('Y-m-d');
 
-        $employee = $this->database->getConnection()->prepare("SELECT * FROM attendance WHERE employee_id = ? AND date = '$today' AND (status = 'ONTIME' OR status = 'LATE')");
+        $employee = $this->database->getConnection()->prepare("SELECT * FROM attendance WHERE employee_id = ? AND date = '$today' AND (status = 'ONTIME' OR status = 'LATE' OR status = 'VACATION LEAVE')");
          $employee->execute([$id]);
         return $employee->fetchAll();
 

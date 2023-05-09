@@ -80,7 +80,7 @@ if (!$conn) {
   <tbody>
 
   <?php
-$query = "SELECT * FROM `leave` ";
+$query = "SELECT * FROM `leave` WHERE status = 0";
 $result = mysqli_query($conn, $query);
 
 
