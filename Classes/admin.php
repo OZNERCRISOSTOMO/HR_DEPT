@@ -778,7 +778,7 @@ class Payroll{
         $this->date =  date('Y-m-d H:i:s');
     }
 public function payrollList(){
-        $prlist =  $this->database->getConnection()->query("SELECT * FROM prlist")->fetchAll();
+        $prlist =  $this->database->getConnection()->query("SELECT * FROM prlist WHERE Status = 1")->fetchAll();
         return $prlist;
         exit();
 }
@@ -860,22 +860,21 @@ public function deletePayslipform($pslistId, $prlistId) {
     }
 }
 
-public function deletePayroll($id) {
-    try {
-        $sql = "DELETE FROM prlist WHERE id=?";
-        $stmt= $this->database->getConnection()->prepare($sql);
-        $stmt->execute([$id]);
+public function archivePayroll($id) {
+    $stmt = $this->database->getConnection()->prepare("UPDATE prlist SET Status = '0'  WHERE id=?");
+    
 
+         //if execution fail
         if (!$stmt->execute([$id])) {
-            header("Location: ../admin/prlist.php?error=stmtfail");
-               exit();
+            header("Location: ../prlist.php?error=stmtfail");
+            exit();
         }
-        header("Location: ../admin/prlist.php");
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-        return false;
+
+         // if succesful
+         header("Location: ../Pages/prlist.php");
+
     }
-}
+
 public function payslipList($prlistid){
     $stmt = $this->database->getConnection()->prepare("SELECT * FROM employee_payslip WHERE prlist_id=?");
     //if execution fail
@@ -899,6 +898,13 @@ public function calculateTotalHourAndOvertime($date, $date1, $employeeId)
  
     $totalHours = $stmt->fetch();
     return $totalHours;
+}
+
+public function ArchiveList(){
+    $prlist =  $this->database->getConnection()->query("SELECT * FROM prlist WHERE Status = 0")->fetchAll();
+    return $prlist;
+    exit();
+
 }
 }
 
