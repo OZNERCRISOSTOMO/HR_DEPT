@@ -155,8 +155,18 @@
 </div>
 
 
+<div class="col-6 mb-3">
+    <label for="exampleInputname1" class="form-label">Department:</label>
+    <input type="text" class="form-control" id="exampleInputname1" name="department" aria-describedby="deparment">
+    </div>
 
-<div class="col-6 mb-4">
+    <div class="col-6 mb-3">
+    <label for="exampleInputname1" class="form-label">Description:</label>
+    <input type="text" class="form-control" id="exampleInputname1" name="description" aria-describedby="description">
+    </div>
+
+
+<div class="col-12 mb-4">
     <div class="form-label">
     <label class="form-check-label" for="inlineRadio1">Type: </label>
     </div>
@@ -174,18 +184,12 @@
 
     </div>
 
-
-    <div class="col-6 mb-3">
-    <label for="exampleInputname1" class="form-label">Department:</label>
-    <input type="text" class="form-control" id="exampleInputname1" name="department" aria-describedby="deparment">
+   <div class="col-8 text-center  m-auto justify-content-center m-auto">
+   <button type="submit" class="btn btn-primary  w-100 " name="submitt">Submit</button>
     </div>
-
-    <div class="col-6 mb-3">
-    <label for="exampleInputname1" class="form-label">Description:</label>
-    <input type="text" class="form-control" id="exampleInputname1" name="description" aria-describedby="description">
-    </div>
+   
  
-    <button type="submit" class="btn btn-primary" name="submitt">Submit</button>
+
   </form>
 
   </div>
