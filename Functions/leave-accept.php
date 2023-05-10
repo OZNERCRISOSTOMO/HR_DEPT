@@ -29,10 +29,12 @@
 
         $num = intval($diff_row['days']);
         
-        $email = "SELECT * FROM employees WHERE id = '".$date['employee_id']."'";
+        $email = "SELECT employees.*,employee_details.position FROM employees JOIN employee_details ON employees.id = employee_details.employee_id WHERE employees.id = '".$date['employee_id']."'";
         $email_query = $conn->query($email);
         $email_row = $email_query->fetch_assoc();
-        // var_dump($email_row);
+        
+        $message = "Dear ".$email_row['position']." ".$email_row['first_name']." ".$email_row['last_name'].",\n\nWe are writing to inform you that your request for a vacation leave from ".$date_start." to ".$date_end." has been approved. We appreciate your effort in giving us enough notice and arranging the necessary coverage while you are away.\n\nWe hope that this vacation will give you the rest and relaxation that you need to come back to work refreshed and ready to take on new challenges. If you have any questions or concerns before your vacation, please feel free to get in touch with your supervisor or HR representative.\n\nEnjoy your time off, and we look forward to your return!\n\nBest regards,\nHuman Resource Department\nShine\nShine Tacsiat";
+
         if($date['Type'] == "Sick Leave"){
             $update_leave_days = "UPDATE employee_details SET sick_leave = sick_leave-$num WHERE employee_id = '".$date['employee_id']."'";
             $update = $conn->query($update_leave_days);
@@ -44,9 +46,7 @@
             $conn->query($update_stat);
             if($update){
                 header("Location: ../Pages/Leave.php?success=accepted");
-
-                $mess = "";
-                $database->sendEmail($email_row['email'],$date['Type'],"Accepted");
+                $database->sendEmail($email_row['email'],$date['Type']." Approval",$message);
             }
 
 
@@ -64,7 +64,7 @@
             for ($timestamp = $start; $timestamp <= $end; $timestamp += $interval) {
                 $formatted_date = date('Y-m-d', $timestamp);
                  
-                $insertVac = "INSERT INTO attendance (employee_id, name, date, time_in, status, num_hr, schedule_id) VALUES ('".$date['employee_id']."', '$name', '$formatted_date', 'null', 'VACATION LEAVE', 0, '".$employee_row['schedule_id']."')";
+                $insertVac = "INSERT INTO attendance (employee_id, name, date, time_in, status, num_hr, schedule_id) VALUES ('".$date['employee_id']."', '$name', '$formatted_date', 'null', 'VACATION LEAVE', 8, '".$employee_row['schedule_id']."')";
                 $conn->query($insertVac);
 
             }
@@ -77,7 +77,7 @@
 
             if($update){
                 header("Location: ../Pages/Leave.php?success=accepted");
-                $database->sendEmail($email_row['email'],$date['Type'],"Accepted");
+                $database->sendEmail($email_row['email'],$date['Type']." Approval",$message);
             }
         }else{
             
@@ -89,7 +89,7 @@
 
             if($update){
                 header("Location: ../Pages/Leave.php?success=accepted");
-                $database->sendEmail($email_row['email'],$date['Type'],"Accepted");
+                $database->sendEmail($email_row['email'],$date['Type']." Approval",$message);
             }
         }
      }

@@ -118,7 +118,7 @@ if (mysqli_num_rows($result) > 0) {
   <?php 
  }
 }else{
-  echo "0 Results";
+  
 }
 ?>
 </table>
