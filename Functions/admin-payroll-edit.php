@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
+if (isset($_SESSION['admin_id']) ) {
     require '../Classes/admin.php';
     require '../Classes/database.php';
 
@@ -15,9 +15,13 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
         $type = $_POST['editType'];
 
         // echo $id;
+        // echo "</br>";
         // echo $code;
+        // echo "</br>";
         // echo $start;
+        // echo "</br>";
         // echo $end;
+        // echo "</br>";
         // echo $type;
     
         $payroll->updatePayroll($id, $code, $start, $end, $type);

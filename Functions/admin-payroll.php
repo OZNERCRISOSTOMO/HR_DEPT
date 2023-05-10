@@ -14,7 +14,7 @@ if(isset($_POST['submit'])){
         'type' => trim($_POST["type"]),
     );
     $payroll->Insertpayroll($prlist);
-    header("Location: ../admin/prlist.php?");
+    header("Location: ../admin/prlist.php?status=created");
     // var_dump($prlist);
 }
 ?>

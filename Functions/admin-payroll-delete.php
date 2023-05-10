@@ -15,6 +15,6 @@ if(isset($_POST['archive'])){
     $updateStat = "UPDATE prlist SET Status = '0'  WHERE id='$empid'";
     $updateQuery = $conn->query($updateStat);
 
-    header("Location: ../admin/prlist.php");
+    header("Location: ../admin/prlist.php?status=archived");
 }
 ?>

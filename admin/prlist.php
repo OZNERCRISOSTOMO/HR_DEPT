@@ -334,6 +334,31 @@ if (isset($_SESSION['admin_id'])) {
 
   </script>
 <script>
+   const urlParams = new URLSearchParams(window.location.search);
+   const status = urlParams.get('status');
+
+     //SWEET ALERT archived , edit , create
+if (status === "archived" || status === "created" || status === "generated" || status === "updated") {
+    const capitalizedStatus = status.charAt(0).toUpperCase() + status.slice(1); // Uppercase the first letter of status
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
+  Toast.fire({
+    icon: "success",
+    title: `${capitalizedStatus} Succesfully!`,
+  });
+}
+
 document.getElementById('type').addEventListener('change', function() {
   var customOption = document.getElementById('type').value;
   var customTypeContainer = document.getElementById('customTypeContainer');

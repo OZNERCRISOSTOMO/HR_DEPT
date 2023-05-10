@@ -843,13 +843,13 @@ public function Insertpayroll($prlist){
 }
 public function updatePayroll($id, $code, $start, $end, $type){
     $stmt = $this->database->getConnection()->prepare("UPDATE prlist SET code = ?, start = ?, end = ?, type = ? WHERE id = ?");
-    $stmt->execute([$code, $start, $end, $type, $id]);
+
     if (!$stmt->execute([$code, $start, $end, $type, $id])) {
     header("Location: ../admin/prlist.php?error=stmtfail");
        exit();
        }
 
-       header("Location: ../admin/prlist.php");
+       header("Location: ../admin/prlist.php?status=updated");
 }
 
 public function updatePayslip($employeeId,$branch, $email){
