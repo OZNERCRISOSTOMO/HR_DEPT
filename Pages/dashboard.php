@@ -77,21 +77,55 @@ if($counttt >= 3){
 
 }
 
-
+// simula dito
   $dateString = date('Y-m-d');
+
+  $dayh = "SELECT * FROM holiday WHERE holiday_date = '$dateString'";
+  $dayhh = $conn->query($dayh);
+  $dayhhh = $dayhh->fetch_assoc();
+
     $month = date('m', strtotime($dateString));
+
     $backup_file = "u839345553_SBIT3G_".$month.".sql";
 
     $filePath = '../backups/'.$backup_file.'';
     $currentMonth = date('n');
-    if (file_exists($filePath) || $currentMonth % 4 != 0) {
-      $display = 'none';
-    }else if($currentMonth % 4 == 0){
-      $display = 'block';
-    }    
 
+    if($currentMonth % 4 == 0) {
+      $backup = 'block';
+    }else if(file_exists($filePath) || $currentMonth % 4 != 0){
+      $backup = 'none';
+    }
 
+    $dayOfMonth = date('d');
 
+    if ($dayOfMonth == 15 || $dayOfMonth == date('t')) {
+      $payday = 'block';
+  } else {
+     $payday = 'none';
+  }
+
+  if($dayhh->num_rows > 0){
+    $hday = $dayhhh['holiday_name'];
+    $hdayd = 'block';
+  }else{
+    $hdayd = 'none';
+  }
+
+  $countNotif = 0;
+
+  if($backup === 'block'){
+    $countNotif++;
+  }
+
+  if($payday === 'block'){
+    $countNotif++;
+  }
+  
+  if($hdayd === 'block'){
+    $countNotif++;
+  }
+  //end
 }
 else {
     header("Location: ../index.php");
@@ -209,8 +243,23 @@ else {
                         </script> 
                         <span id="datetime"></span>  
                         </h5>
-                         <h5 id="payday" style="display:none;">It's Pay Day</h5>
-                         <h5 id="backup" style="display:<?php echo $display; ?>;">You Need To Back Up your File!</h5> 
+
+
+
+                        <div class="dropdown">
+  <button class="btn btn-transparent dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <i class="fa-solid fa-bell"></i>  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    <?php echo $countNotif; ?>
+    <span class="visually-hidden">unread messages</span> </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#" id="payday" style="display:<?php echo $payday; ?>;">PayDay</a></li>
+    <li><a class="dropdown-item" href="#" id="backup" style="display:<?php echo $backup; ?>;">You Need To Back Up your File!</a></li>
+    <li><a class="dropdown-item" href="#" id="holiday" style="display:<?php echo $hdayd; ?>;">It's <?php echo $hday; ?></a></li>
+    
+  </ul>
+</div>
+
+                     
                     </div>
                     <!---------------------------->
                       
@@ -481,20 +530,20 @@ Swal.fire({
 //   }
 // }
 // Get current date
-let currentDate = new Date();
+// let currentDate = new Date();
 
-// Check if today is the 15th day of the month
-if (currentDate.getDate() === 15) {
-  // Display SweetAlert notification for 15th day of the month
-  document.getElementById("payday").style.display = "block";
-}
+// // Check if today is the 15th day of the month
+// if (currentDate.getDate() === 15) {
+//   // Display SweetAlert notification for 15th day of the month
+//   document.getElementById("payday").style.display = "block";
+// }
 
-// Check if today is the last day of the month
-let lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
-if (currentDate.getDate() === lastDayOfMonth) {
-  // Display SweetAlert notification for last day of the month
-  document.getElementById("payday").style.display = "block";
-}
+// // Check if today is the last day of the month
+// let lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+// if (currentDate.getDate() === lastDayOfMonth) {
+//   // Display SweetAlert notification for last day of the month
+//   document.getElementById("payday").style.display = "block";
+// }
 
 
 

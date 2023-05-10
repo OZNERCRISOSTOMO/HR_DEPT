@@ -11,14 +11,17 @@
     $month = date('m', strtotime($dateString));
     $backup_file = "u839345553_SBIT3G_".$month.".sql";
 
-    echo $backup_file;
     $filePath = '../backups/'.$backup_file.'';
-    echo $filePath;
-    if (file_exists($filePath)) {
-      echo 'File exists!';
-    } else {
-      echo 'File does not exist.';
-    }    
+    $currentMonth = date('n');
+    echo $currentMonth;
+    if($currentMonth % 4 == 0) {
+      $backup = 'block';
+    }else if(file_exists($filePath)){
+      $backup = 'none';
+    }else{
+      $backup = 'none';
+    }
+    echo $backup;
     ?>
 </body>
 </html>
