@@ -9,8 +9,9 @@ if (isset($_SESSION['admin_id'])) {
     $admin = new Admin($database);
     $payslip = new Payroll($database);
 
-     //get admin data 
-    $adminData = $admin->getAdminById($_SESSION['admin_id']);
+      //get admin data 
+    $adminData = $admin->btnPic($_SESSION['admin_id']);
+
     $id = $_GET['id'];
 } else {
     header("Location: ../index.php");
@@ -335,38 +336,47 @@ if (status === "notGenerated" ) {
   // Edit modal 
     $('#select-employee-edit').on('change', function() {
       const selectedValue = $(this).val();
+      const fromDate = $('#date-from').val();
+    const toDate = $('#date-to').val();
       
         if(selectedValue != '0'){
              $.ajax({
                   url: "../Functions/admin-payslip.php",
                   type: "POST",
                   data: {
-                      id: selectedValue
+                      id: selectedValue,
+                      dateFrom : fromDate,
+                      dateTo : toDate
+                      
                   },
 
                   success: function(data) {
-                      const [employeeData] = JSON.parse(data)
-                      
-                      $("#employee-id-edit").val(employeeData.employee_id)
-                      $("#department-edit").val(employeeData.department)
-                      $("#salary-edit").val(employeeData.rate_per_hour)
-                       $("#email-edit").val(employeeData.email)
-                       $("#position-edit").val(employeeData.position)
-                       $("#branch-edit").val(employeeData.branch)
-                       $("#present-edit").val(employeeData.num_hr)
-                       $("#overtime-edit").val(employeeData.over_time)
-                       $("#food-allowance-edit").val(employeeData.food_allowance)
-                       $("#transpo-allowance-edit").val(employeeData.transpo_allowance)
+                    var jsonString = data;
+                    var parsedData = JSON.parse(jsonString);
+                    console.log(parsedData)
+                    console.log(parsedData.data.sahod)
+                      $("#employee-id").val(parsedData.employeeData[0].id)
+                      $("#department").val(parsedData.employeeData[0].department)
+                      $("#salary").val(parsedData.employeeData[0].rate_per_hour)
+                       $("#email").val(parsedData.employeeData[0].email)
+                       $("#position").val(parsedData.employeeData[0].position)
+                       $("#branch").val(parsedData.employeeData[0].branch)
 
-                      $("#employee-name-edit").val(employeeData.first_name + " " + employeeData.last_name)
+                       $("#present").val("12312")
+                       $("#overtime").val("123123")
+
+                       $("#food-allowance").val(parsedData.employeeData[0].food_allowance)
+                       $("#transpo-allowance").val(parsedData.employeeData[0].transpo_allowance)
+
+                      $("#employee-name").val(parsedData.employeeData[0].first_name + " " + parsedData.employeeData[0].last_name)
                        const beneficiaries = [{type:"sss-edit",
-                                               value:employeeData.sss
+                                               value:parsedData.employeeData[0].sss 
                                               },
                                               {type:"pagibig-edit",
-                                               value:employeeData.pagibig
+                                               value:parsedData.employeeData[0].pagibig 
                                               },
                                               {type:"philhealth-edit",
-                                               value:employeeData.philhealth
+                                               value:parsedData.employeeData[0].philhealth 
                                               }]
 
                       beneficiaries.forEach(membership =>{
