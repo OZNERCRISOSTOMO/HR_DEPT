@@ -13,8 +13,8 @@ if (isset($_SESSION['admin_id'])) {
     $admin = new Admin($database);
 
     //get admin data 
-    $adminData = $admin->getAdminById($_SESSION['admin_id']);
-
+    $adminData = $admin->getEmployeeDetails($_SESSION['admin_id']);
+    
     if($lognow < "16:30:00"){
         $employee = $admin->selectEmployeeSched('1');
     }else if($lognow > "16:30:00"){

@@ -294,7 +294,7 @@ class Admin {
     }
 
     public function getAdminById($id){
-        $admin = $this->database->getConnection()->query("SELECT * FROM hr_dept WHERE id = '$id'")->fetch();
+        $admin = $this->database->getConnection()->query("SELECT * FROM employee_login WHERE id = '$id'")->fetch();
         return $admin;
         exit();
     }

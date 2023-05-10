@@ -16,16 +16,23 @@ require '../Classes/database.php';
 
 
     $adminData = $admin->login($email);
+
+    //SELECT * FROM employee_login WHERE login_id='2026AMIT';
+
     $adminEmpId = $adminData['employee_id'];
     $adminUser = $adminData['login_id'];
     $adminPass = $adminData['login_password'];
     $adminPosition = $adminData['position'];
 
     $adminDep = $admin->getEmployeeDetails($adminEmpId);
+    //SELECT * FROM employee_details WHERE employee_id = $adminEmpID";
 
     $dept = $adminDep[0]['department'];
+    // human-resource
 
-    $adminAttendance = $admin->checkAttendance($adminEmpId); 
+    $adminAttendance = $admin->checkAttendance($adminEmpId);
+    //SELECT * FROM attendance WHERE employee_id = $adminEmpId AND date = 'date_now' 
+    //AND (status = 'ONTIME' OR status = 'LATE' OR status = 'VACATION LEAVE'); 
 
 
     //check if email exist 
@@ -58,7 +65,7 @@ require '../Classes/database.php';
 
      //start session 
     session_start();
-    $_SESSION["admin_id"] = $adminData["id"];
+    $_SESSION["admin_id"] = $adminEmpId;
 
     header("Location: ../Pages/dashboard.php");
     exit();
