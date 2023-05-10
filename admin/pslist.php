@@ -337,7 +337,7 @@ if (status === "notGenerated" ) {
     $('#select-employee-edit').on('change', function() {
       const selectedValue = $(this).val();
       const fromDate = $('#date-from').val();
-    const toDate = $('#date-to').val();
+      const toDate = $('#date-to').val();
       
         if(selectedValue != '0'){
              $.ajax({
@@ -354,21 +354,21 @@ if (status === "notGenerated" ) {
                     var jsonString = data;
                     var parsedData = JSON.parse(jsonString);
                     console.log(parsedData)
-                    console.log(parsedData.data.sahod)
-                      $("#employee-id").val(parsedData.employeeData[0].id)
-                      $("#department").val(parsedData.employeeData[0].department)
-                      $("#salary").val(parsedData.employeeData[0].rate_per_hour)
-                       $("#email").val(parsedData.employeeData[0].email)
-                       $("#position").val(parsedData.employeeData[0].position)
-                       $("#branch").val(parsedData.employeeData[0].branch)
+                    console.log('taena',parsedData.data.sahod)
+                      $("#employee-id-edit").val(parsedData.employeeData[0].id)
+                      $("#department-edit").val(parsedData.employeeData[0].department)
+                      $("#salary-edit").val(parsedData.employeeData[0].rate_per_hour)
+                       $("#email-edit").val(parsedData.employeeData[0].email)
+                       $("#position-edit").val(parsedData.employeeData[0].position)
+                       $("#branch-edit").val(parsedData.employeeData[0].branch)
 
-                       $("#present").val("12312")
-                       $("#overtime").val("123123")
+                       $("#present-edit").val("12312")
+                       $("#overtime-edit").val("123123")
 
-                       $("#food-allowance").val(parsedData.employeeData[0].food_allowance)
-                       $("#transpo-allowance").val(parsedData.employeeData[0].transpo_allowance)
+                       $("#food-allowance-edit").val(parsedData.employeeData[0].food_allowance)
+                       $("#transpo-allowance-edit").val(parsedData.employeeData[0].transpo_allowance)
 
-                      $("#employee-name").val(parsedData.employeeData[0].first_name + " " + parsedData.employeeData[0].last_name)
+                      $("#employee-name-edit").val(parsedData.employeeData[0].first_name + " " + parsedData.employeeData[0].last_name)
                        const beneficiaries = [{type:"sss-edit",
                                                value:parsedData.employeeData[0].sss 
                                               },
@@ -395,7 +395,7 @@ if (status === "notGenerated" ) {
 
 
 
-
+// ==========================================
 
     const modalSubmitBtn = document.querySelector('#staticBackdrop button[type="submit"]');
         modalSubmitBtn.addEventListener('click', () => {
@@ -433,8 +433,9 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
                   success: function(data) {
                     var jsonString = data;
                     var parsedData = JSON.parse(jsonString);
-                    console.log(parsedData)
-                    console.log(parsedData.employeeData[0].id)
+                    // console.log(parsedData)
+                    // console.log(parsedData.employeeData[0].id)
+                    console.log("real data",parsedData)
                       $("#employee-id").val(parsedData.employeeData[0].id)
                       $("#department").val(parsedData.employeeData[0].department)
                       $("#salary").val(parsedData.employeeData[0].rate_per_hour)
@@ -442,8 +443,8 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
                        $("#position").val(parsedData.employeeData[0].position)
                        $("#branch").val(parsedData.employeeData[0].branch)
 
-                       $("#present").val(parsedData.data.sahod)
-                       $("#overtime").val(parsedData.data.overtime)
+                       $("#present").val(parsedData.data.sahod != null ? parsedData.data.sahod : 0)
+                       $("#overtime").val(parsedData.data.overtime != null ? parsedData.data.overtime : 0)
 
                        $("#food-allowance").val(parsedData.employeeData[0].food_allowance)
                        $("#transpo-allowance").val(parsedData.employeeData[0].transpo_allowance)

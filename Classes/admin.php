@@ -826,8 +826,8 @@ public function payrollDetails($id){
 }
 
 public function Insertpayroll($prlist){
-    $sql = "INSERT INTO prlist (date, code, start, end, type)
-       VALUES (?,?,?,?,?);";
+    $sql = "INSERT INTO prlist (date, code, start, end, type,Status)
+       VALUES (?,?,?,?,?,?);";
 
    $stmt = $this->database->getConnection()->prepare($sql);
 
@@ -835,8 +835,8 @@ public function Insertpayroll($prlist){
     $prlist['code'],
     $prlist['start'],
     $prlist['end'],
-    $prlist['type']
-    ])) {
+    $prlist['type'],
+    1])) {
     header("Location: ../admin/prlist.php?error=stmtfail");
        exit();
        }
