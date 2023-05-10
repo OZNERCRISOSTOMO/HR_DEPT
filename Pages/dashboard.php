@@ -536,7 +536,7 @@ else {
 
 <script>
 const urlParams=new URLSearchParams(window.location.search);
-const successValue1 =urlParams.get('value')
+const successValue1 = urlParams.get('value')
 
 if(successValue1 === "delete"){
 Swal.fire({
@@ -549,7 +549,9 @@ Swal.fire({
    toast: true,
 
   });
-}else if(successValue1 === "holiday"){
+}
+
+if(successValue1 === "holiday"){
 Swal.fire({
     position: "top-end",
     icon: "success",
