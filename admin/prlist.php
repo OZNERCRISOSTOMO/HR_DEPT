@@ -10,7 +10,7 @@ if (isset($_SESSION['admin_id'])) {
     $admin = new Admin($database);
 
        //get admin data 
-    $adminData = $admin->getAdminById($_SESSION['admin_id']);
+    $adminData = $admin->btnPic($_SESSION['admin_id']);
 } else {
     header("Location: ../index.php");
 }

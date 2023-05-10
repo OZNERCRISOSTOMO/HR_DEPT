@@ -44,6 +44,8 @@
             $conn->query($update_stat);
             if($update){
                 header("Location: ../Pages/Leave.php?success=accepted");
+
+                $mess = "";
                 $database->sendEmail($email_row['email'],$date['Type'],"Accepted");
             }
 

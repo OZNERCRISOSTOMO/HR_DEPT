@@ -11,7 +11,7 @@ if (isset($_SESSION['admin_id'])) {
     $admin = new Admin($database);
 
        //get admin data 
-    $adminData = $admin->getAdminById($_SESSION['admin_id']);
+    $adminData = $admin->btnPic($_SESSION['admin_id']);
 
     $timezone = 'Asia/Manila';
 	  date_default_timezone_set($timezone);
@@ -252,13 +252,6 @@ if (isset($_SESSION['admin_id'])) {
 			</thead>
 			<tbody>
 			<?php
-    // establish a connection to the MySQL database
-    $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
-
-    // check if connection was successful
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
     
     if($lognow < "16:30:00"){
       $employee = '1';
@@ -273,7 +266,7 @@ if (isset($_SESSION['admin_id'])) {
     FROM employees
     JOIN employee_details ON employees.id = employee_details.employee_id
     JOIN attendance ON employees.id = attendance.employee_id
-    WHERE employee_details.department = employee_details.department AND attendance.date = '$date_now' AND attendance.schedule_id = $employee AND (attendance.status = 'LATE' OR attendance.status = 'ONTIME') AND employees.status = '1'";
+    WHERE employee_details.department = employee_details.department AND attendance.date = '$date_now' AND attendance.schedule_id = $employee AND (attendance.status = 'LATE' OR attendance.status = 'ONTIME')";
     $result = mysqli_query($conn, $sql);
 
     // check if SELECT statement was successful

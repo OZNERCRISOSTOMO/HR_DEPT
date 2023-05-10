@@ -54,11 +54,37 @@ class Admin {
 
     
     }
+    public function btnPic($id){
+        
+        // prepare the SQL statement using the database property
+      $stmt = $this->database->getConnection()->prepare("SELECT employees.*,employee_details.picture_path FROM employees
+                                                    JOIN employee_details ON employees.id = employee_details.employee_id
+                                                   WHERE employees.id=?");
+
+       //if execution fail
+      if (!$stmt->execute([$id])) {
+          header("Location: ../index.php?error=stmtfail");
+          exit();
+      }
+
+      //fetch the result
+      $result = $stmt->fetchAll();
+      
+        //if has result return it, else return false
+      if ($result) {
+          return $result;
+      } else {
+          $result = false;
+          return $result;
+      }
+
+    
+  }
      public function findEmployeeById($id){
+
         
           // prepare the SQL statement using the database property
-        $stmt = $this->database->getConnection()->prepare("SELECT * FROM employees
-                                                     WHERE id=?");
+        $stmt = $this->database->getConnection()->prepare("SELECT * FROM employees WHERE schedule_id = '1' AND id=?");
 
          //if execution fail
         if (!$stmt->execute([$id])) {
@@ -294,7 +320,7 @@ class Admin {
     }
 
     public function getAdminById($id){
-        $admin = $this->database->getConnection()->query("SELECT * FROM employee_login WHERE id = '$id'")->fetch();
+        $admin = $this->database->getConnection()->query("SELECT * FROM hr_dept WHERE id = '$id'")->fetch();
         return $admin;
         exit();
     }
@@ -319,7 +345,7 @@ class Admin {
         // Get today's date
         $today = date('Y-m-d');
 
-        $count = $this->database->getConnection()->query("SELECT count(*) FROM attendance WHERE date = '$today' AND (status = 'LATE' OR status = 'ONTIME' OR status = 'VACATION LEAVE') AND schedule_id = $id")->fetchColumn();
+        $count = $this->database->getConnection()->query("SELECT count(*) FROM attendance WHERE date = '$today' AND (status = 'LATE' OR status = 'ONTIME' OR status = 'VACATION LEAVE') AND schedule_id = '$id'")->fetchColumn();
 
         return $count;
 
@@ -327,7 +353,7 @@ class Admin {
     }
 
     public function getEmployee(){
-        $stmt = $this->database->getConnection()->query("SELECT * FROM employees")->fetchAll();
+        $stmt = $this->database->getConnection()->query("SELECT * FROM employees WHERE status = '1'")->fetchAll();
         return $stmt;
         exit();
     }
@@ -635,7 +661,7 @@ class Admin {
         unset($this->database);
     }
     public function selectEmployeeSched($sched){
-        $employee = $this->database->getConnection()->prepare("SELECT id FROM employees WHERE schedule_id = ? AND status = '1'");
+        $employee = $this->database->getConnection()->prepare("SELECT id FROM employees WHERE schedule_id = ?");
         $employee->execute([$sched]);
         return $employee->fetchAll();
 

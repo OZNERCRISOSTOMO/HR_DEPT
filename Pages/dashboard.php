@@ -13,7 +13,7 @@ if (isset($_SESSION['admin_id'])) {
     $admin = new Admin($database);
 
     //get admin data 
-    $adminData = $admin->getEmployeeDetails($_SESSION['admin_id']);
+    $adminData = $admin->btnPic($_SESSION['admin_id']);
     
     if($lognow < "16:30:00"){
         $employee = $admin->selectEmployeeSched('1');
@@ -35,18 +35,18 @@ if (isset($_SESSION['admin_id'])) {
     }
 }
 
-// $employee1 = $admin->getEmployee();
-// $countWarnings1 = 0;
-// foreach($employee1 as $list){
-//   $employeeID = $list['id'];
+$employee1 = $admin->getEmployee();
+$countWarnings1 = 0;
+foreach($employee1 as $list){
+  $employeeID = $list['id'];
 
-//   $countWarnings = $admin->getTotalWarnings($employeeID);
+  $countWarnings = $admin->getTotalWarnings($employeeID);
 
-//   if($countWarnings >= 3){
-//     $countWarnings1++;
-//   }
+  if($countWarnings >= 3){
+    $countWarnings1++;
+  }
 
-// }
+}
 $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
 
  if (!$conn) {
