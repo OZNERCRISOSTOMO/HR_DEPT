@@ -97,7 +97,7 @@
                         if($srow['time_out'] < $urow['time_out']){
 
                             // If the attendance time_out is greater than 4:30 in First Schedule.
-                            if($srow['schedule_id'] === '1' && $urow['time_out'] > '16:30:00'){
+                            if($srow['schedule_id'] === '1' && $urow['time_out'] > '15:30:00'){
 
                                 // Calculate Overtime
                                 $overtime1 = '16:30:00';
@@ -110,7 +110,7 @@
                                 $int = $hrs + $mins2;
 
                                 // If the attendance time_out is greater than 10:30 in Second Schedule.
-                            }else if($srow['schedule_id'] === '2' && $urow['time_out'] > '22:30:00'){
+                            }else if($srow['schedule_id'] === '2' && $urow['time_out'] > '23:30:00'){
                                 
                                 // Calculate Overtime
                                 $overtime1 = '22:30:00';
@@ -192,10 +192,10 @@
 					$squery = $conn->query($sql);
 					$srow = $squery->fetch_assoc();
 
-                    if($srow['time_in'] == '08:00:00'){
-                        $logstatus = ('08:30:00' > $lognow)? 'ONTIME':'LATE';
+                    if($srow['time_in'] == '07:00:00'){
+                        $logstatus = ('07:30:00' > $lognow)? 'ONTIME':'LATE';
                     }else if($srow['time_in'] == '16:00:00'){
-                        $logstatus = ('16:30:00' > $lognow)? 'ONTIME':'LATE';
+                        $logstatus = ('15:30:00' > $lognow)? 'ONTIME':'LATE';
                     }
 
                     $name = "".$row['first_name']." ".$row['last_name']."";

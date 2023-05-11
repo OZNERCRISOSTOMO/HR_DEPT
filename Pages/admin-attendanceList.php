@@ -253,9 +253,9 @@ if (isset($_SESSION['admin_id'])) {
 			<tbody>
 			<?php
     
-    if($lognow < "16:30:00"){
+    if($lognow < "15:30:00"){
       $employee = '1';
-  }else if($lognow > "16:30:00"){
+  }else if($lognow > "15:30:00"){
       $employee = '2';
   }
     // execute a SELECT statement to retrieve data from the table
@@ -266,7 +266,7 @@ if (isset($_SESSION['admin_id'])) {
     FROM employees
     JOIN employee_details ON employees.id = employee_details.employee_id
     JOIN attendance ON employees.id = attendance.employee_id
-    WHERE employee_details.department = employee_details.department AND attendance.date = '$date_now' AND attendance.schedule_id = $employee AND (attendance.status = 'LATE' OR attendance.status = 'ONTIME')";
+    WHERE employee_details.department = employee_details.department AND attendance.date = '$date_now' AND attendance.schedule_id = $employee AND (attendance.status = 'LATE' OR attendance.status = 'ONTIME' OR attendance.status = 'VACATION LEAVE' OR attendance.status = 'MATERNITY LEAVE' OR attendance.status = 'PATERNITY LEAVE')";
     $result = mysqli_query($conn, $sql);
 
     // check if SELECT statement was successful

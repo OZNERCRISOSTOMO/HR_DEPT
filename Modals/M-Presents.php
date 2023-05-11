@@ -45,9 +45,9 @@
     $date_now = date('Y-m-d');
 
 
-    if($lognow < "16:30:00"){
+    if($lognow < "15:30:00"){
       $employee = '1';
-  }else if($lognow > "16:30:00"){
+  }else if($lognow > "15:30:00"){
       $employee = '2';
   }
 
@@ -58,7 +58,7 @@
     FROM employees
     JOIN employee_details ON employees.id = employee_details.employee_id
     JOIN attendance ON employees.id = attendance.employee_id
-    WHERE attendance.date = '$date_now' AND (attendance.status = 'LATE' OR attendance.status = 'ONTIME' OR attendance.status = 'VACATION LEAVE') AND attendance.schedule_id = '$employee'";
+    WHERE attendance.date = '$date_now' AND (attendance.status = 'LATE' OR attendance.status = 'ONTIME' OR attendance.status = 'VACATION LEAVE' OR attendance.status = 'MATERNITY LEAVE' OR attendance.status = 'PATERNITY LEAVE') AND attendance.schedule_id = '$employee'";
     $result = mysqli_query($conn, $sql);
    
     // check if SELECT statement was successful

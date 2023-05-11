@@ -212,7 +212,7 @@ if(successValue === "invalidUser"){
 }else if(successValue === "suspend"){
 	Swal.fire({
 		icon:'error',
-		title:'You are Suspended! Need to comply a leave.',
+		title:'You are Suspended! Need to comply Notice of Explanation!',
 		toast:true,
 		position:'top-end',
 		showConfirmButton: false,
@@ -231,7 +231,7 @@ if(successValue === "invalidUser"){
 }else if(successValue === "invalidSched"){
 	Swal.fire({
 		icon:'error',
-		title:'Please Follow Your Schedule',
+		title:'Please Follow Your Schedule!',
 		toast:true,
 		position:'top-end',
 		showConfirmButton: false,

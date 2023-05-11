@@ -91,10 +91,11 @@ if($counttt >= 3){
     $filePath = '../backups/'.$backup_file.'';
     $currentMonth = date('n');
 
+    if(file_exists($filePath) || $currentMonth % 4 != 0){
+      $backup = 'none';
+    }
     if($currentMonth % 4 == 0) {
       $backup = 'block';
-    }else if(file_exists($filePath) || $currentMonth % 4 != 0){
-      $backup = 'none';
     }
 
     $dayOfMonth = date('d');

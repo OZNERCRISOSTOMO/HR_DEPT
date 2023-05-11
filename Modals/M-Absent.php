@@ -35,9 +35,9 @@
        die("Connection failed: " . mysqli_connect_error());
    }
 
-        if($lognow < "16:30:00"){
+        if($lognow < "15:30:00"){
             $employee = $admin->selectEmployeeSched('1');
-        }else if($lognow > "16:30:00"){
+        }else if($lognow > "15:30:00"){
             $employee = $admin->selectEmployeeSched('2');
         }
         $timezone = 'Asia/Manila';
@@ -84,32 +84,12 @@
             
                     
                   }else{
-                    if($lognow > '16:00:00' && $employeeInfo[0]['schedule_id'] == '1'){
-                      $holiday = "SELECT * FROM holiday WHERE holiday_date = '$date_now' AND percentage = 2";
-                      $hquery = $conn->query($holiday);
-                      if($hquery->num_rows > 0 ){
-                        $insertAbsent = "INSERT INTO attendance (name, employee_id, date, time_in, status, time_out, num_hr, schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now', 'null', 'ABSENT', 'null', '8','1')";
-                        $conn->query($insertAbsent);
-
-                        $updateTotalhr = "UPDATE employee_details SET num_hr = num_hr + 8 WHERE employee_id = '".$employeeInfo[0]['id']."'";
-                        $conn->query($updateTotalhr);
-                      }else{
-                        $insertAbsent = "INSERT INTO attendance (name, employee_id, date, time_in, status, time_out, num_hr, schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now', 'null', 'ABSENT', 'null', '0','1')";
-                        $conn->query($insertAbsent);
-                      }
-                    }else if($lognow >= '22:00:00' && $employeeInfo[0]['schedule_id'] == '2'){
-                      $holiday = "SELECT * FROM holiday WHERE holiday_date = '$date_now'";
-                      $hquery = $conn->query($holiday);
-                      if($hquery->num_rows > 0 ){
-                        $insertAbsent = "INSERT INTO attendance (name, employee_id, date, time_in, status, time_out, num_hr, schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now', 'null', 'ABSENT', 'null', '8','2')";
-                        $conn->query($insertAbsent);
-
-                        $updateTotalhr = "UPDATE employee_details SET num_hr = num_hr + 8 WHERE employee_id = '".$employeeInfo[0]['id']."'";
-                        $conn->query($updateTotalhr);
-                      }else{
-                        $insertAbsent = "INSERT INTO attendance (name, employee_id, date, time_in, status, time_out, num_hr, schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now', 'null', 'ABSENT', 'null', '0','2')";
-                        $conn->query($insertAbsent);
-                      }
+                    if($lognow > '15:00:00' && $employeeInfo[0]['schedule_id'] == '1'){
+                      $insertAbsent = "INSERT INTO attendance (name, employee_id, date,time_in, status, time_out , schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now', 'null', 'ABSENT', 'null','1')";
+                      $conn->query($insertAbsent);
+                    }else if($lognow >= '23:00:00' && $employeeInfo[0]['schedule_id'] == '2'){
+                      $insertAbsent = "INSERT INTO attendance (name, employee_id, date,time_in, status, time_out , schedule_id) VALUES ('".$employeeInfo[0]['first_name']." ".$employeeInfo[0]['last_name']."','".$employeeInfo[0]['id']."', '$date_now', 'null','ABSENT', 'null', '2')";
+                      $conn->query($insertAbsent);
                   }
                   }
                 }
