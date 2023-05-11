@@ -6,6 +6,7 @@
  
  if(isset($_POST["submit-generate"])){
      $prlistId = $_POST["prlist-id"];
+     $prlistType = $_POST["prlist-type"];
  $database = new Database();
  $admin = new Admin($database);
  $payslip = new Payroll($database);
@@ -51,11 +52,23 @@
         $department = $employeepayslip['department'];
         $date = $employeepayslip['from_date'];
         $date1 = $employeepayslip['to_date'];
-      
+         
+        $num_hr = 0;
+        $overtime = 0;
 
-        $dataCalculate  = $payslip->calculateTotalHourAndOvertime($date,$date1,$id);
-        $num_hr = $dataCalculate["sahod"];
-        $overtime = $dataCalculate["overtime"];
+        if($prlistType == "resignation" || $prlistType == "termination"){
+            $num_hr = $employeeDetails[0]['num_hr']; 
+            $overtime = $employeeDetails[0]['over_time']; 
+        }
+
+        if($prlistType == "semimonthly" || $prlistType == "monthly"){
+    
+            $dataCalculate  = $payslip->calculateTotalHourAndOvertime($date,$date1,$id);
+            $num_hr = $dataCalculate["sahod"] ?? 0 ;
+            $overtime = $dataCalculate["overtime"] ?? 0;
+        
+        }
+        
         
         
 
@@ -328,7 +341,7 @@
   }
      
 
-    header("Location: pslist.php?id=$prlistId&status=generated");
+    header("Location: pslist.php?id=$prlistId&status=generated&type=$prlistType");
 
 
  }

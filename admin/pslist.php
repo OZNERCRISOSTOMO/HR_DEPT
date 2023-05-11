@@ -115,7 +115,8 @@ if (isset($_SESSION['admin_id'])) {
 
                     <form action ="function.php" method="POST">
                         <input type="hidden" name="prlist-id" value="<?php echo $id ?>">
-                        
+                        <input type="hidden" name="prlist-type" value="<?php echo $prlistType ?>">
+
                         <button type="submit" name="submit-generate" class="btn btn-success">
                             Generate Payslip
                         </button>
@@ -366,8 +367,8 @@ if (status === "notGenerated" ) {
                        $("#position-edit").val(parsedData.employeeData[0].position)
                        $("#branch-edit").val(parsedData.employeeData[0].branch)
 
-                       $("#present-edit").val("12312")
-                       $("#overtime-edit").val("123123")
+                       $("#present-edit").val(parsedData.data.sahod)
+                       $("#overtime-edit").val(parsedData.data.overtime)
 
                        $("#food-allowance-edit").val(parsedData.employeeData[0].food_allowance)
                        $("#transpo-allowance-edit").val(parsedData.employeeData[0].transpo_allowance)
@@ -496,17 +497,25 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
 
           success:function(data){
             var parsedData = JSON.parse(data);
+
+            //date hired
             var datetime = parsedData.date_hired;
             var date = new Date(datetime);
             date.setHours(0, 0, 0, 0); // Set the time to midnight
-
             var dateString = date.toISOString().split('T')[0];
-
-            var currentDate = new Date();
-          var currentDateFormatted = currentDate.toISOString().split('T')[0];
             $('#date-from').val(dateString);
+            
+            //date now 
+            var currentDate = new Date();
+            var currentDateFormatted = currentDate.toISOString().split('T')[0];
             $('#date-to').val(currentDateFormatted );
+
+
             // console.log('date hired',dateString)
+            //present
+            $("#present").val(parsedData.num_hr)
+            //overtime
+            $("#overtime").val(parsedData.over_time)
           }
 
         })
@@ -539,8 +548,8 @@ if(selectedValue != '0'){
                $("#position").val(parsedData.employeeData[0].position)
                $("#branch").val(parsedData.employeeData[0].branch)
 
-               $("#present").val(parsedData.data.sahod != null ? parsedData.data.sahod : 0)
-               $("#overtime").val(parsedData.data.overtime != null ? parsedData.data.overtime : 0)
+              //  $("#present").val(parsedData.data.sahod != null ? parsedData.data.sahod : 0)
+              //  $("#overtime").val(parsedData.data.overtime != null ? parsedData.data.overtime : 0)
 
                $("#food-allowance").val(parsedData.employeeData[0].food_allowance)
                $("#transpo-allowance").val(parsedData.employeeData[0].transpo_allowance)

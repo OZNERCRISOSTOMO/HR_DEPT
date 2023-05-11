@@ -943,7 +943,7 @@ public function calculateTotalHourAndOvertime($date, $date1, $employeeId)
 
 public function getEmployeeDateHired($employeeId)
 {
-    $stmt = $this->database->getConnection()->prepare("SELECT date_hired FROM employee_details WHERE employee_id = ? ");
+    $stmt = $this->database->getConnection()->prepare("SELECT date_hired,num_hr,over_time FROM employee_details WHERE employee_id = ? ");
 
     if (!$stmt->execute([$employeeId])) {
         // Handle the execution failure here
