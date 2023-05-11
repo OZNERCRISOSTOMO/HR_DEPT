@@ -27,6 +27,10 @@ if (isset($_POST['deleteid'])) {
         $date_start = $date['date_started'];
         header("Location: ../Pages/Leave.php?success=deleted");
 
+        $email = "SELECT employees.*,employee_details.position FROM employees JOIN employee_details ON employees.id = employee_details.employee_id WHERE employees.id = '".$date['employee_id']."'";
+        $email_query = $conn->query($email);
+        $email_row = $email_query->fetch_assoc();
+
 
         $message = "Dear Employee,
 
