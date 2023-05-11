@@ -194,7 +194,7 @@
 
                     if($srow['time_in'] == '07:00:00'){
                         $logstatus = ('07:30:00' > $lognow)? 'ONTIME':'LATE';
-                    }else if($srow['time_in'] == '16:00:00'){
+                    }else if($srow['time_in'] == '15:00:00'){
                         $logstatus = ('15:30:00' > $lognow)? 'ONTIME':'LATE';
                     }
 
