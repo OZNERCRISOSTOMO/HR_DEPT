@@ -110,10 +110,7 @@ display: block;
         </div>
 
 
-          <div class="col-2 ms-5">
-          <button type="button" class="btn btn-success shadow w-100" data-bs-toggle="modal" data-bs-target="#leave"> Leave Balance</button>
-      <?php include("../Modals/M-Leave.php")?>  
-      </div>
+      
                 <div class="col-md row ms-2">
                     <div class="col-sm rounded dropdown text-center ">
 

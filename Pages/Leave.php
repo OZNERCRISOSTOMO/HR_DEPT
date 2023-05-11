@@ -58,25 +58,33 @@ if (!$conn) {
 
 
 
+
+
+<div class="container mb-4">
+  <div class="row">
+
+  <div class="col-9">
+
+    <h5>Leave</h5>
+</div>
+
+  <div class="col-3">
+  
+  <button type="button" class="btn btn-success shadow w-100" data-bs-toggle="modal" data-bs-target="#leave"> Leave Balance</button>
+        <?php include("../Modals/M-Leave.php")?>  
+  </div>
+
+</div>
+</div>
+
 <div class="container-fluid">
 
-<div class="container">
-<div class="row">
 
-<div class="col-9">
-<h4 class="fw-bolder">Leave</h4>
-</div>
 
-<div class="col-3">
-  
-<button type="button" class="btn btn-success shadow w-100" data-bs-toggle="modal" data-bs-target="#leave"> Leave Balance</button>
-      <?php include("../Modals/M-Leave.php")?>  
-</div>
 
-</div>
-</div>
 
-<table class="table table-striped" id="leave">
+
+<table class="table table-striped" id="leave1">
   <thead>
     <tr>
       <th scope="col">ID</th>
@@ -137,7 +145,7 @@ if (mysqli_num_rows($result) > 0) {
 ?>
 </table>
 </div>
-
+</div>
 
 
 
@@ -162,7 +170,7 @@ if (mysqli_num_rows($result) > 0) {
 
 <script>
  $(document).ready(function(){
-    $('#leave').DataTable();
+    $('#leave1').DataTable();
   });
 
  
