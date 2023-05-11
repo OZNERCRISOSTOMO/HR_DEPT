@@ -100,7 +100,7 @@
                             if($srow['schedule_id'] === '1' && $urow['time_out'] > '15:30:00'){
 
                                 // Calculate Overtime
-                                $overtime1 = '16:30:00';
+                                $overtime1 = '15:30:00';
                                 $time_out = new DateTime($urow['time_out']);
                                 $overT = new DateTime($overtime1);
                                 $interval = $time_out->diff($overT);
@@ -110,18 +110,6 @@
                                 $int = $hrs + $mins2;
 
                                 // If the attendance time_out is greater than 10:30 in Second Schedule.
-                            }else if($srow['schedule_id'] === '2' && $urow['time_out'] > '23:30:00'){
-                                
-                                // Calculate Overtime
-                                $overtime1 = '22:30:00';
-                                $time_out = new DateTime($urow['time_out']);
-                                $overT = new DateTime($overtime1);
-                                $interval = $time_out->diff($overT);
-                                $hrs = $interval->format('%h');
-                                $mins = $interval->format('%i');
-                                $mins2 = $mins/60;
-                                $int = $hrs + $mins2;
-
                             }
 
                             // Record Overtime in table overTime 
