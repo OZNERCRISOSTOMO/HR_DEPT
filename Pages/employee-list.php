@@ -308,7 +308,7 @@ display: block;
 
             <form id="delete-employee-form" action="../Functions/admin-deleteEmployeeInfo.php" method="POST">
               <input type="hidden" name="employee-id" id="employee-id">
-              <button type="submit" name="submit" class="btn btn-danger btn-sm" id="delete-btn"> Delete </button>
+              <button type="submit" name="submit" class="btn btn-danger btn-sm" id="delete-btn"> Resign </button>
             </form>
 
             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editmodal" id="editModalBtn">Edit</button>

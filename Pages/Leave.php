@@ -173,10 +173,38 @@ if (mysqli_num_rows($result) > 0) {
     $('#leave1').DataTable();
   });
 
- 
-  
-  
-  
+  const urlParams = new URLSearchParams(window.location.search);
+  const successValue = urlParams.get('value');
+
+  if(successValue === "accepted"){
+    Swal.fire({
+		icon:'success',
+    position:'top-end',
+		title:'Accepted',
+		toast:true,
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+  }else if(successValue === "deleted"){
+    Swal.fire({
+		icon:'error',
+    position:'top-end',
+		title:'Declined',
+		toast:true,
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+  }
   </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
