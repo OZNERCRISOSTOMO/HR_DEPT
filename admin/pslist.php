@@ -551,8 +551,8 @@ if(selectedValue != '0'){
               //  $("#present").val(parsedData.data.sahod != null ? parsedData.data.sahod : 0)
               //  $("#overtime").val(parsedData.data.overtime != null ? parsedData.data.overtime : 0)
 
-               $("#food-allowance").val(parsedData.employeeData[0].food_allowance)
-               $("#transpo-allowance").val(parsedData.employeeData[0].transpo_allowance)
+               $("#food-allowance").val(0)
+               $("#transpo-allowance").val(0)
 
               $("#employee-name").val(parsedData.employeeData[0].first_name + " " + parsedData.employeeData[0].last_name)
                const beneficiaries = [{type:"sss",

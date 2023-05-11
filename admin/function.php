@@ -73,8 +73,13 @@
         
 
         $ratePerHour = $employeeDetails[0]['rate_per_hour']; 
-        $food = $employeeDetails[0]['food_allowance'];
-        $transpo = $employeeDetails[0]['transpo_allowance'];
+        $food = 0;
+        $transpo = 0;
+
+        if($prlistType == "semimonthly" || $prlistType == "monthly"){
+            $food = $employeeDetails[0]['food_allowance'];
+            $transpo = $employeeDetails[0]['transpo_allowance'];
+        }
 
         $sss = $employeepayslip['sss']; 
         $philhealth = $employeepayslip['philhealth']; 
@@ -145,6 +150,17 @@
         $totaldeductions = $sss_result + $phil_result + $love_result + $tax;
         $grosspay = $totalearn - $totaldeductions; //
         $networth = $totalallowance + $grosspay;
+
+        if($prlistType == "resignation" || $prlistType == "termination"){
+            $dateHired = $date;
+            $dateNow = $date1; // Get the current date
+            
+            $yearsDiff = date('Y', strtotime($dateNow)) - date('Y', strtotime($dateHired));
+            
+            if ($yearsDiff != 0) {
+                $networth = $networth / $yearsDiff;
+            }
+        }
 
         //get the login_id from employee_login
         $loginId =  $admin->getLoginId($employeeDetails[0]["employee_id"]);
