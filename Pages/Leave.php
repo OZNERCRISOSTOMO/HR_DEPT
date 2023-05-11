@@ -60,7 +60,22 @@ if (!$conn) {
 
 <div class="container-fluid">
 
+<div class="container">
+<div class="row">
+
+<div class="col-9">
 <h4 class="fw-bolder">Leave</h4>
+</div>
+
+<div class="col-3">
+  
+<button type="button" class="btn btn-success shadow w-100" data-bs-toggle="modal" data-bs-target="#leave"> Leave Balance</button>
+      <?php include("../Modals/M-Leave.php")?>  
+</div>
+
+</div>
+</div>
+
 <table class="table table-striped" id="leave">
   <thead>
     <tr>
@@ -72,7 +87,6 @@ if (!$conn) {
       <th scope="col">Department</th>
       <th scope="col">Description</th>
       <th scope="col">Status</th>
-
       <th scope="col">Action</th>
      
     </tr>

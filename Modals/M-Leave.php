@@ -22,10 +22,10 @@
         <th>Department</th>
         <th>Sick Leave</th>
         <th>Vacation Leave</th>
-        
+<!--         
         <th>Total Salary</th>
        
-        <th>Total Over Time</th>
+        <th>Total Over Time</th> -->
       </tr>
       </thead>
       <tbody>
@@ -57,9 +57,9 @@
       <td><?php echo $employee_row['sick_leave']; ?> </td>
       <td><?php echo $employee_row['vacation_leave']; ?> </td>
       
-      <td><?php echo $total_salary; ?> </td>
+      <!-- <td><?php echo $total_salary; ?> </td>
       
-      <td><?php echo $total_overtime; ?> </td>
+      <td><?php echo $total_overtime; ?> </td> -->
     </tr>
     <?php
       }

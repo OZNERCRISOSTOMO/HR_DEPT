@@ -73,7 +73,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                             }            
                         ?> 
                     <div class="form-group py-2" >
-			            <label for="exampleInputEmail1" class="form-label fw-bolder">Email</label>
+			            <label for="exampleInputEmail1" class="form-label fw-bolder">Username</label>
                             <div class="input-group">
                                 <div class="input-group-text bg-white border border-end-0 border-0"><i class="fa-solid fa-user"></i></div>
                                     <input type="text" class="form-control border-0 border shadow-none border-start-0" name="email" placeholder="Email" autocomplete="off" required="required">

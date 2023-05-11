@@ -35,7 +35,7 @@
   <form method="POST" action="../Functions/holiday-function.php">
   <div class="input-group input-group-sm mb-1">
   
-  <input type="text" class="form-control" aria-label="Sizing example input" name="hname" aria-describedby="inputGroup-sizing-sm" placeholder="Holidays" required>
+  <input type="text" class="form-control" aria-label="Sizing example input" name="hname" aria-describedby="inputGroup-sizing-sm" placeholder="Enter Holiday Title" required>
 </div>
  
 <div class="input-group input-group-sm mb-1">
