@@ -127,6 +127,7 @@ if (isset($_SESSION['admin_id'])) {
                 <div class="col-2 ">
                     <form action="sendEmail.php" method="POST">
                         <input type="hidden" name="prlist-id" value="<?php echo $id ?>">
+                        <input type="hidden" name="prlist-type" value="<?php echo $prlistType ?>">
 
                         <button type="submit" name="submit-sendEmail" class="btn btn-success w-100" >Send To Email</button>
                     </form>

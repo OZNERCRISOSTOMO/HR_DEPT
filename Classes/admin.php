@@ -106,6 +106,28 @@ class Admin {
       
     }
 
+    public function getEmployeeEmail($employeeId){
+        // prepare the SQL statement using the database property
+        $stmt = $this->database->getConnection()->prepare("SELECT email FROM employees WHERE  id=?");
+
+         //if execution fail
+        if (!$stmt->execute([$employeeId])) {
+            header("Location: ../index.php?error=stmtfail");
+            exit();
+        }
+
+        //fetch the result
+        $result = $stmt->fetch();
+        
+          //if has result return it, else return false
+        if ($result) {
+            return $result;
+        } else {
+            $result = false;
+            return $result;
+        }
+    }
+
     public function  deleteEmployeeById($id){
           // prepare the SQL statement using the database property
         $stmt = $this->database->getConnection()->prepare("UPDATE employees SET status = '2'  WHERE id=?");

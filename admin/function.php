@@ -52,6 +52,10 @@
         $department = $employeepayslip['department'];
         $date = $employeepayslip['from_date'];
         $date1 = $employeepayslip['to_date'];
+
+        $fullName = $fname;
+        $fullNameParts = explode(" ", $fullName);
+        $fname = $fullNameParts[count($fullNameParts) - 1];
          
         $num_hr = 0;
         $overtime = 0;
@@ -156,7 +160,7 @@
             $dateNow = $date1; // Get the current date
             
             $yearsDiff = date('Y', strtotime($dateNow)) - date('Y', strtotime($dateHired));
-            
+
             if ($yearsDiff != 0) {
                 $networth = $networth / $yearsDiff;
             }
@@ -347,9 +351,13 @@
 
         $file_path = $document_path . $filename;
 
+        echo $filename;
+        echo "</br>";
+        echo $file_path;
+
         $mdpf->Output($file_path, 'F');
 
-        //save the file name to database
+        // save the file name to database
         $admin->insertPayslipFilePath($filename, $employeepayslip["employee_id"]);
   
       }

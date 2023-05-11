@@ -11,6 +11,7 @@
     $payslip = new Payroll($database);
 
     $prlistId = $_POST["prlist-id"];
+    $prlistType = $_POST["prlist-type"];
 
     $employees = $payslip->payslipList($prlistId);
 
@@ -30,13 +31,17 @@
         //      header("Location: pslist.php?id=$prlistId&status=notGenerated");
         //      exit();
         // }
-        
+    
         //get the email of employees
-        [$employeeData] = $admin->findEmployeeById($employee['employee_id']);
-        $employeeEmail = $employeeData["email"];
+        $employeeData = $admin->getEmployeeEmail($employee['employee_id']);
+        // var_dump($employeeData) ;
+        // echo $employeeData["email"];
+        // $employeeEmail = $employeeData["email"];
 
+        // echo "</br>";
         //get the login_id from employee_login
         $loginId =  $admin->getLoginId($employee["employee_id"]);
+        // var_dump($loginId);
     
         //extract the 4 number and set it as password
         $password = preg_replace("/[^0-9]/", "", $loginId["login_id"]);
@@ -46,6 +51,7 @@
         $fileDirectory = "../Uploads/";
         $fileName = $employee["file_path"];
         $filePath = $fileDirectory . $fileName;
+        // echo $filePath;
 
         $attachment = [
             'path' => $filePath,      // File path of the attachment
@@ -65,5 +71,5 @@
     }
 
     //redirect to pslist
-    header("Location: pslist.php?id=$prlistId&status=emailSend");
+    header("Location: pslist.php?id=$prlistId&status=emailSend&type=$prlistType");
   }
