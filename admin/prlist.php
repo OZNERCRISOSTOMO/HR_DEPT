@@ -147,10 +147,10 @@ if (isset($_SESSION['admin_id'])) {
           <thead>
             <th>ID</th>
             <th>Date Added</th>
-            <th>Code</th>
+            <th>Type</th>
             <th>Start</th>
             <th>End</th>
-            <th>Type</th>
+            <th>Mode</th>
             <th>Action</th>
           </thead>
 
@@ -170,7 +170,7 @@ if (isset($_SESSION['admin_id'])) {
              
                 <div class="row">
                   <div class="col-3">
-              <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">View</button>
+              <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>&type=<?php echo $list['type']?>' " type="button" class="btn btn-sm btn-primary">View</button>
               </div>
               <div class="col-3 m-0 ps-2">
               <button id="editButton" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#EditModal" type="submit" name="edit" value="Edit">Edit</button>
@@ -240,12 +240,12 @@ if (isset($_SESSION['admin_id'])) {
 
                   <div class="form-group mb-3">
                     <label for="start" class="fw-bold">Cut-off Start Date</label>
-                    <input type="date" name="start" class="form-control shadow-none">
+                    <input type="date" name="start" class="form-control shadow-none" id="cut-off-start">
                   </div>
 
                   <div class="form-group mb-3">
                     <label for="end" class="fw-bold">Cut-off End Date</label>
-                    <input type="date" name="end" class="form-control shadow-none">
+                    <input type="date" name="end" class="form-control shadow-none"  id="cut-off-end">
                   </div>
 
                   <div class="form-group mb-3">
@@ -254,12 +254,16 @@ if (isset($_SESSION['admin_id'])) {
                         <option value="" selected>Choose an option</option>
                         <option value="semimonthly">Semi-Monthly</option>
                         <option value="monthly">Monthly</option>
-                        <option value="custom">Custom</option>
+                        <option value="custom">Other</option>
                         </select>
                         <!-- Add an input field for the custom option -->
                         <div class="mt-2" id="customTypeContainer" style="display: none;">
-                          <input type="text" class="form-control" id="customType" name="customType" placeholder="Enter custom type">
-                          <button type="button" class="btn btn-primary mt-2" id="saveCustomType">Save Custom Type</button>
+                        <select class="form-select shadow-none" id="type2" name="type2">
+                        <option value="" selected>Choose an option</option>
+                        <option value="resignation">Resignation</option>
+                        <option value="termination">Termination</option>
+                        </select>
+                        
                         </div>
                   </div>
               </div>
@@ -364,6 +368,10 @@ document.getElementById('type').addEventListener('change', function() {
   var customTypeContainer = document.getElementById('customTypeContainer');
   if (customOption === 'custom') {
     customTypeContainer.style.display = 'block';
+    document.getElementById("cut-off-end").disabled = true;
+    document.getElementById("cut-off-start").disabled = true;
+
+
   } else {
     customTypeContainer.style.display = 'none';
   }

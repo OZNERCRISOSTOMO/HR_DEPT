@@ -208,7 +208,7 @@ class Admin {
 
     // }
 
-    public function insertEmployeePayslip($employee, $net, $id,$employeeId){
+    public function insertEmployeePayslip($employee, $net, $id,$employeeId,$prlistType){
 
 
         // prepare insert statement for employee table
@@ -256,7 +256,7 @@ class Admin {
     // }
 
     // if succesful
-    header("Location: ../admin/pslist.php?id=$id&status=created");
+    header("Location: ../admin/pslist.php?id=$id&status=created&type=$prlistType");
     }
 
     public function insertEmployeePayslipForm($fname, $position, $branch, $department,  $date, $date1, $present, $overtime, $salary, $sssChecked,$pagibigChecked, $philhealthChecked, $food_allowance, $transpo_allowance, $employeeId) {
@@ -871,7 +871,7 @@ public function updatePayslip($employeeId,$branch, $email){
 
 }
 
-public function deletePayslipform($pslistId, $prlistId) {
+public function deletePayslipform($pslistId, $prlistId,$prlistType) {
     try {
 
         //delete employee payslip form 
@@ -894,7 +894,7 @@ public function deletePayslipform($pslistId, $prlistId) {
                exit();
         }
 
-        header("Location: ../admin/pslist.php?id=$prlistId&status=deleted");
+        header("Location: ../admin/pslist.php?id=$prlistId&status=deleted&type=$prlistType");
     } catch (PDOException $e) {
         echo $e->getMessage();
         return false;
@@ -939,6 +939,19 @@ public function calculateTotalHourAndOvertime($date, $date1, $employeeId)
  
     $totalHours = $stmt->fetch();
     return $totalHours;
+}
+
+public function getEmployeeDateHired($employeeId)
+{
+    $stmt = $this->database->getConnection()->prepare("SELECT date_hired FROM employee_details WHERE employee_id = ? ");
+
+    if (!$stmt->execute([$employeeId])) {
+        // Handle the execution failure here
+        return false;
+    }
+ 
+    $date_hired = $stmt->fetch();
+    return $date_hired;
 }
 
 public function ArchiveList(){

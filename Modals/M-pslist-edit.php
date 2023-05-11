@@ -96,6 +96,7 @@
                     <input type="hidden" id="employee-name-edit" name="employee-name">
                     <input type="hidden" id="prlist-id" name="prlist-id" value="<?php echo $id?>">
                     <input type="hidden" id="employee-id-edit" name="employee-id">
+                    <input type="hidden" name="prslist-type" value="<?php echo $prlistType; ?>">    
             
       </div>
         <div class="modal-footer">

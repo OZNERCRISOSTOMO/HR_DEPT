@@ -13,6 +13,7 @@ if (isset($_SESSION['admin_id'])) {
     $adminData = $admin->btnPic($_SESSION['admin_id']);
 
     $id = $_GET['id'];
+    $prlistType = $_GET['type'];
 } else {
     header("Location: ../index.php");
     exit();
@@ -237,7 +238,8 @@ if (isset($_SESSION['admin_id'])) {
                                 <form method="POST" action="../Functions/admin-payslipform-delete.php">
                                     <button class="btn btn-sm btn-danger"  type="submit" name="delete" value="Delete">Delete</button>
                                     <input type="hidden" name="pslist-id" value="<?php echo $list['id']; ?>">  
-                                    <input type="hidden" name="prlist-id" value="<?php echo $id ?>">                              
+                                    <input type="hidden" name="prlist-id" value="<?php echo $id ?>"> 
+                                    <input type="hidden" name="prslist-type" value="<?php echo $prlistType; ?>">                                
                                 </form>
                                 </div>
                                     </div>
@@ -273,7 +275,9 @@ if (isset($_SESSION['admin_id'])) {
     const editBtns = document.querySelectorAll(".editButton");
     const id = urlParams.get('id');
     const status = urlParams.get('status');
+    const type = urlParams.get('type');
 
+    console.log(type)
     //SWEET ALERT DELETED, CREATE , GENERATE
 if (status === "deleted" || status === "created" || status === "generated" || status === "edited") {
     const capitalizedStatus = status.charAt(0).toUpperCase() + status.slice(1); // Uppercase the first letter of status
@@ -416,9 +420,13 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
 
   // Create new modal
   $('#select-employee').on('change', function() {
+
+    if(type == "semimonthly" || type == "monthly"){
       var selectedValue = $(this).val();
-      const fromDate = $('#date-from').val();
-    const toDate = $('#date-to').val();
+
+        const fromDate = $('#date-from').val();
+        const toDate = $('#date-to').val();
+
       console.log(selectedValue,fromDate,toDate);
       if(selectedValue != '0'){
              $.ajax({
@@ -471,6 +479,96 @@ $('#staticBackdrop').on('shown.bs.modal', function() {
                   }
               })
       }
+    }
+
+    if(type == "resignation" || type == "termination"){
+      var selectedValue = $(this).val();
+      console.log(selectedValue)
+
+      //get the date hired using ajax and store in variable 
+      if(selectedValue != 0){
+        $.ajax({
+          url: "../Functions/admin-payslip-resignation.php",
+          type: "POST",
+          data: {
+              id: selectedValue
+          },
+
+          success:function(data){
+            var parsedData = JSON.parse(data);
+            var datetime = parsedData.date_hired;
+            var date = new Date(datetime);
+            date.setHours(0, 0, 0, 0); // Set the time to midnight
+
+            var dateString = date.toISOString().split('T')[0];
+
+            var currentDate = new Date();
+          var currentDateFormatted = currentDate.toISOString().split('T')[0];
+            $('#date-from').val(dateString);
+            $('#date-to').val(currentDateFormatted );
+            // console.log('date hired',dateString)
+          }
+
+        })
+      }
+
+  const fromDate = $('#date-from').val();
+  const toDate = $('#date-to').val();
+
+    console.log(selectedValue);
+if(selectedValue != '0'){
+     $.ajax({
+          url: "../Functions/admin-payslip.php",
+          type: "POST",
+          data: {
+              id: selectedValue,
+              dateFrom : fromDate,
+              dateTo : toDate
+          },
+
+          success: function(data) {
+            var jsonString = data;
+            var parsedData = JSON.parse(jsonString);
+            // console.log(parsedData)
+            // console.log(parsedData.employeeData[0].id)
+            console.log("real data",parsedData)
+              $("#employee-id").val(parsedData.employeeData[0].id)
+              $("#department").val(parsedData.employeeData[0].department)
+              $("#salary").val(parsedData.employeeData[0].rate_per_hour)
+               $("#email").val(parsedData.employeeData[0].email)
+               $("#position").val(parsedData.employeeData[0].position)
+               $("#branch").val(parsedData.employeeData[0].branch)
+
+               $("#present").val(parsedData.data.sahod != null ? parsedData.data.sahod : 0)
+               $("#overtime").val(parsedData.data.overtime != null ? parsedData.data.overtime : 0)
+
+               $("#food-allowance").val(parsedData.employeeData[0].food_allowance)
+               $("#transpo-allowance").val(parsedData.employeeData[0].transpo_allowance)
+
+              $("#employee-name").val(parsedData.employeeData[0].first_name + " " + parsedData.employeeData[0].last_name)
+               const beneficiaries = [{type:"sss",
+                                       value:parsedData.employeeData[0].sss
+                                      },
+                                      {type:"pagibig",
+                                       value:parsedData.employeeData[0].pagibig
+                                      },
+                                      {type:"philhealth",
+                                       value:parsedData.employeeData[0].philhealth
+                                      }]
+
+              beneficiaries.forEach(membership =>{
+                  if(membership.value != null){
+                     $(`#${membership.type}`).prop('checked', true);
+                  }else{
+                      $(`#${membership.type}`).prop('disabled', true);
+                  }
+              })
+        
+          }
+      })
+}
+    }
+      
       
       });
   });

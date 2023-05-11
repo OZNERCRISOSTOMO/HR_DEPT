@@ -21,6 +21,7 @@ $prlistid = $_POST['prlist-id'];
 $employeeId = $_POST['employee-id'];
 $food_allowance = $_POST['food-allowance'];
 $transpo_allowance = $_POST['transpo-allowance'];
+$prlistType = $_POST["prslist-type"];
 
 
 $totalAllowance = $food_allowance + $transpo_allowance;
@@ -126,7 +127,7 @@ else {
 
 if ($admin->checkprlist($prlistid)) {
     $admin->insertEmployeePayslipForm($fname, $position, $branch, $department,  $date, $date1, $present, $overtime, $salary, $sssChecked,$pagibigChecked, $philhealthChecked, $food_allowance, $transpo_allowance, $employeeId);
-    $admin->insertEmployeePayslip($fname, $networth, $prlistid, $employeeId);
+    $admin->insertEmployeePayslip($fname, $networth, $prlistid, $employeeId,$prlistType);
 }
 }
 
