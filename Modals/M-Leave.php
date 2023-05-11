@@ -55,8 +55,8 @@
       <td><?php echo $employee_row['department']; ?> </td>
       <td><?php echo $employee_row['sick_leave']; ?> </td>
       <td><?php echo $employee_row['vacation_leave']; ?> </td>
-      <td><?php echo $employee_row['vacation_leave']; ?> </td>
-      <td><?php echo $employee_row['vacation_leave']; ?> </td>
+      <td><?php echo $employee_row['maternity_leave']; ?> </td>
+      <td><?php echo $employee_row['paternity_leave']; ?> </td>
    
     </tr>
     <?php

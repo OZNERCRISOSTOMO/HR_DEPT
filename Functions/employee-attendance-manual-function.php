@@ -63,9 +63,10 @@ if(isset($_POST['signin'])){
 	            date_default_timezone_set($timezone);
                 $lognow = date('H:i:s');
 
-                $checkifAbsent = "SELECT * FROM attendance WHERE date = '$date_now' AND employee_id = '$id' AND (status = 'ONTIME' OR status = 'LATE')";
+                $checkifAbsent = "SELECT * FROM attendance WHERE date = '$date_now' AND employee_id = '$id' AND (status = 'ONTIME' OR status = 'LATE' OR status = 'VACATION LEAVE' OR status = 'MATERNITY LEAVE' OR status = 'PATERNITY LEAVE')";
                 $queryCheckAbsent = $conn->query($checkifAbsent);
-                if($queryCheckAbsent->num_rows > 0){
+                $ifAbsent_row = $queryCheckAbsent->fetch_assoc();
+                if($ifAbsent_row['status'] == 'ONTIME' || $ifAbsent_row['status'] == 'LATE'){
 
                 
                 // Update the attendace table set time_out to current time.
@@ -175,6 +176,12 @@ if(isset($_POST['signin'])){
                     else{
                         echo $conn->error;
                     }
+                }elseif($ifAbsent_row['status'] == 'VACATION LEAVE'){
+                    header("Location: ../Functions/employee-attendance-manual.php?value=vleave");
+                }elseif($ifAbsent_row['status'] == 'MATERNITY LEAVE'){
+                    header("Location: ../Functions/employee-attendance-manual.php?value=mleave");
+                }elseif($ifAbsent_row['status'] == 'PATERNITY LEAVE'){
+                    header("Location: ../Functions/employee-attendance-manual.php?value=pleave");
                 }else{
                     header("Location: ../Functions/employee-attendance-manual.php?value=absent");
                 }

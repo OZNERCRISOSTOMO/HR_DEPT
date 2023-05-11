@@ -120,6 +120,63 @@ if(successValue === "employeeNotfound"){
         input.value = "";
 		document.getElementById('myInput').focus();
 	});
+}else if(successValue === "vleave"){
+	Swal.fire({
+		icon:'error',
+		title:'You are on Vacation Leave Today!',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	window.addEventListener('popstate', function(event) {
+		var input = document.getElementById("employee");
+        input.value = "";
+		document.getElementById('myInput').focus();
+	});
+}else if(successValue === "mleave"){
+	Swal.fire({
+		icon:'error',
+		title:'You are on Maternity Leave Today!',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	window.addEventListener('popstate', function(event) {
+		var input = document.getElementById("employee");
+        input.value = "";
+		document.getElementById('myInput').focus();
+	});
+}else if(successValue === "pleave"){
+	Swal.fire({
+		icon:'error',
+		title:'You are on Paternity Leave Today!',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	window.addEventListener('popstate', function(event) {
+		var input = document.getElementById("employee");
+        input.value = "";
+		document.getElementById('myInput').focus();
+	});
 }else if(successValue === "suspend"){
 	Swal.fire({
 		icon:'error',

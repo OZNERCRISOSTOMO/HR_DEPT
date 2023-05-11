@@ -16,6 +16,7 @@
      if(isset($_POST['employee'])){
 
         $employee = $_POST['employee'];
+
         
         // Check if the RFID existing
         $sql1 = "SELECT * FROM RFID_card WHERE serial_number = '$employee'";
@@ -36,6 +37,11 @@
             $date_now = date('Y-m-d');
             $name = "".$row['first_name']." ".$row['last_name']."";
 
+            // $leave = "SELECT * FROM attendance WHERE date = '$date_now' AND status = 'VACATION LEAVE' AND employee_id = '".$row1['employee_id']."'";
+            // $leave_q = $conn->query($leave);
+            // if($leave_q->num_rows > 0){
+            //     header("Location: ../Pages/employee-attendance.php?value=leave");
+            // }
 
             // Check if the employee has record in Time_in in the current date
             $sql3 = "SELECT *,attendance.id AS uid FROM attendance WHERE employee_id = '$id' AND date = '$date_now' AND time_in IS NOT NULL";
@@ -54,9 +60,10 @@
                 $lognow = date('H:i:s');
 
                 
-                $checkifAbsent = "SELECT * FROM attendance WHERE date = '$date_now' AND employee_id = '$id' AND (status = 'ONTIME' OR status = 'LATE')";
+                $checkifAbsent = "SELECT * FROM attendance WHERE date = '$date_now' AND employee_id = '$id' AND (status = 'ONTIME' OR status = 'LATE' OR status = 'VACATION LEAVE' OR status = 'MATERNITY LEAVE' OR status = 'PATERNITY LEAVE')";
                 $queryCheckAbsent = $conn->query($checkifAbsent);
-                if($queryCheckAbsent->num_rows > 0){
+                $ifAbsent_row = $queryCheckAbsent->fetch_assoc();
+                if($ifAbsent_row['status'] == 'ONTIME' || $ifAbsent_row['status'] == 'LATE'){
                 
                 // Update the attendace table set time_out to current time.
                 $sql = "UPDATE attendance SET time_out = '$lognow' WHERE id = '".$timeout['uid']."'";
@@ -164,6 +171,12 @@
                     else{
                         echo $conn->error;
                     }
+                }elseif($ifAbsent_row['status'] == 'VACATION LEAVE'){
+                    header("Location: ../Pages/employee-attendance.php?value=vleave");
+                }elseif($ifAbsent_row['status'] == 'MATERNITY LEAVE'){
+                    header("Location: ../Pages/employee-attendance.php?value=mleave");
+                }elseif($ifAbsent_row['status'] == 'PATERNITY LEAVE'){
+                    header("Location: ../Pages/employee-attendance.php?value=pleave");
                 }else{
                     header("Location: ../Pages/employee-attendance.php?value=absent");
                 }

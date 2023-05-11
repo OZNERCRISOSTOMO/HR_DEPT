@@ -177,6 +177,15 @@
     <div class="form-check form-check-inline">
     <input class="form-check-input" type="radio" name="leave" id="inlineRadio2" value="Sick Leave">
     <label class="form-check-label" for="inlineRadio2">Sick Leave</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="leave" id="inlineRadio2" value="Maternity Leave">
+    <label class="form-check-label" for="inlineRadio2">Maternity Leave</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="leave" id="inlineRadio2" value="Paternity Leave">
+    <label class="form-check-label" for="inlineRadio2">Paternity Leave</label>
+    </div>
     <div class="form-check form-check-inline">
     <input class="form-check-input" type="radio" name="leave" id="inlineRadio2" value="Other">
     <label class="form-check-label" for="inlineRadio3">Other</label>

@@ -534,7 +534,7 @@ else {
 </div>
 </div>
 
-<script>
+<!-- <script>
 const urlParams=new URLSearchParams(window.location.search);
 const successValue1 = urlParams.get('value')
 
@@ -563,7 +563,7 @@ Swal.fire({
 
   });
 }
-                  </script>
+                  </script> -->
 
  <script>
 

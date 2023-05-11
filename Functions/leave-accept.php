@@ -33,7 +33,7 @@
         $email_query = $conn->query($email);
         $email_row = $email_query->fetch_assoc();
         
-        $message = "Dear ".$email_row['position']." ".$email_row['first_name']." ".$email_row['last_name'].",\n\nWe are writing to inform you that your request for a vacation leave from ".$date_start." to ".$date_end." has been approved. We appreciate your effort in giving us enough notice and arranging the necessary coverage while you are away.\n\nWe hope that this vacation will give you the rest and relaxation that you need to come back to work refreshed and ready to take on new challenges. If you have any questions or concerns before your vacation, please feel free to get in touch with your supervisor or HR representative.\n\nEnjoy your time off, and we look forward to your return!\n\nBest regards,\nHuman Resource Department\nShine\nShine Tacsiat";
+        $message = "Dear ".$email_row['first_name']." ".$email_row['last_name'].",\n\nWe are writing to inform you that your request for a ".$date['Type']." from ".$date_start." to ".$date_end." has been approved. We appreciate your effort in giving us enough notice and arranging the necessary coverage while you are away.\n\nWe hope that this vacation will give you the rest and relaxation that you need to come back to work refreshed and ready to take on new challenges. If you have any questions or concerns before your vacation, please feel free to get in touch with your supervisor or HR representative.\n\nEnjoy your time off, and we look forward to your return!\n\nBest regards,\nHuman Resource Department\nShine\nShine Tacsiat";
 
         if($date['Type'] == "Sick Leave"){
             $update_leave_days = "UPDATE employee_details SET sick_leave = sick_leave-$num WHERE employee_id = '".$date['employee_id']."'";
@@ -73,6 +73,64 @@
             $conn->query($update_stat);
 
             $update_leave_days = "UPDATE employee_details SET vacation_leave = vacation_leave - $num WHERE employee_id = '".$date['employee_id']."'";
+            $update = $conn->query($update_leave_days);
+
+            if($update){
+                header("Location: ../Pages/Leave.php?success=accepted");
+                $database->sendEmail($email_row['email'],$date['Type']." Approval",$message);
+            }
+        }else if($date['Type'] == "Paternity Leave"){
+            $start = strtotime($date_start);
+            $end = strtotime($date_end);
+            $interval = 86400;
+
+            $employeee = "SELECT * FROM employees WHERE id = '".$date['employee_id']."'";
+            $employee_query = $conn->query($employeee);
+            $employee_row = $employee_query->fetch_assoc();
+            $name = "".$employee_row['first_name']." ".$employee_row['last_name']."";
+
+
+            for ($timestamp = $start; $timestamp <= $end; $timestamp += $interval) {
+                $formatted_date = date('Y-m-d', $timestamp);
+                 
+                $insertVac = "INSERT INTO attendance (employee_id, name, date, time_in, status, num_hr, schedule_id) VALUES ('".$date['employee_id']."', '$name', '$formatted_date', 'null', 'PATERNITY LEAVE', 8, '".$employee_row['schedule_id']."')";
+                $conn->query($insertVac);
+
+            }
+
+            $update_stat = "UPDATE `leave` SET status = 1 WHERE id = '$id'";
+            $conn->query($update_stat);
+
+            $update_leave_days = "UPDATE employee_details SET paternity_leave = paternity_leave - $num WHERE employee_id = '".$date['employee_id']."'";
+            $update = $conn->query($update_leave_days);
+
+            if($update){
+                header("Location: ../Pages/Leave.php?success=accepted");
+                $database->sendEmail($email_row['email'],$date['Type']." Approval",$message);
+            }
+        }else if($date['Type'] == "Maternity Leave"){
+            $start = strtotime($date_start);
+            $end = strtotime($date_end);
+            $interval = 86400;
+
+            $employeee = "SELECT * FROM employees WHERE id = '".$date['employee_id']."'";
+            $employee_query = $conn->query($employeee);
+            $employee_row = $employee_query->fetch_assoc();
+            $name = "".$employee_row['first_name']." ".$employee_row['last_name']."";
+
+
+            for ($timestamp = $start; $timestamp <= $end; $timestamp += $interval) {
+                $formatted_date = date('Y-m-d', $timestamp);
+                 
+                $insertVac = "INSERT INTO attendance (employee_id, name, date, time_in, status, num_hr, schedule_id) VALUES ('".$date['employee_id']."', '$name', '$formatted_date', 'null', 'MATERNITY LEAVE', 8, '".$employee_row['schedule_id']."')";
+                $conn->query($insertVac);
+
+            }
+
+            $update_stat = "UPDATE `leave` SET status = 1 WHERE id = '$id'";
+            $conn->query($update_stat);
+
+            $update_leave_days = "UPDATE employee_details SET maternity_leave = maternity_leave - $num WHERE employee_id = '".$date['employee_id']."'";
             $update = $conn->query($update_leave_days);
 
             if($update){
