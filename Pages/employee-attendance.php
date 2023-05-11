@@ -76,9 +76,9 @@
 	
 	<div class="col-sm-5 m-auto my-5 shadow-lg p-4 rounded align-items-center">
 		<img src="../Images/Attendance-logo.png" class="mx-auto d-block mb-3" height="150" width="150">
-		<form action="../Functions/employee-attendance-revise.php" method="POST">
+		<form action="../Functions/employee-attendance-revise.php" method="POST" autofocus>
 			<div class="form-group has-feedback mb-3">
-					<input type="text" class="form-control input-lg shadow-none" id="employee" name="employee" autofocus autocomplete="off" >
+					<input type="text" class="form-control input-lg shadow-none" id="employee" name="employee" maxlength="10" pattern="\d{10}" autofocus autocomplete="off" >
 					<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
 			</div>
 		</form>
@@ -245,17 +245,20 @@ if(successValue === "employeeNotfound"){
 	
 	Swal.fire({
 		html:'<div><img src="../Uploads/'+picture+'" style="position:absolute;top:25px;left:50px;height:90px;width:90px;" class="img-fluid m-0 rounded-circle">'+
-		'<p>Name: '+name+'</p>'+
+		'<p style="color:black;font-weight:700px;">Name: '+name+'</p>'+
 		'<p>Department: '+dept+'</p>'+
 		'<p>Position: '+post+'</p></div>',
-		footer:'<h1 class="bi bi-check-circle-fill text-success" style="position:absolute;top:175px;left:70px;"></h1>'+
-				'Time In Recorded<br>'+timein+'<br>'+status,
+		footer:'Time In Recorded<br>'+timein+'<br>'+status,
 		showConfirmButton: false,
   		timer: 3000,
   		timerProgressBar: true,
+		toast:true,
+		position:'top-end',
   		didOpen: (toast) => {
     	toast.addEventListener('mouseenter', Swal.stopTimer)
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+		toast.style.top = '50px';
+    	toast.style.left = `calc(50% - ${toast.offsetWidth / 2}px)`;
   		}
 	})
 	window.addEventListener('popstate', function(event) {
@@ -273,17 +276,20 @@ if(successValue === "employeeNotfound"){
 	
 	Swal.fire({
 		html:'<div><img src="../Uploads/'+picture+'" style="position:absolute;top:25px;left:50px;height:90px;width:90px;" class="img-fluid m-0 rounded-circle">'+
-		'<p>Name: '+name+'</p>'+
+		'<p style="color:black;font-weight:700px;">Name: '+name+'</p>'+
 		'<p>Department: '+dept+'</p>'+
 		'<p>Position: '+post+'</p></div>',
-		footer:'<h1 class="bi bi-check-circle-fill text-success" style="position:absolute;top:175px;left:70px;"></h1>'+
-				'Time Out Recorded<br>'+timeout,
+		footer:'Time Out Recorded<br>'+timeout,
 		showConfirmButton: false,
   		timer: 3000,
   		timerProgressBar: true,
+		toast:true,
+		position:'top-end',
   		didOpen: (toast) => {
     	toast.addEventListener('mouseenter', Swal.stopTimer)
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+		 toast.style.top = '50px';
+    toast.style.left = `calc(50% - ${toast.offsetWidth / 2}px)`;
   		}
 	})
 	window.addEventListener('popstate', function(event) {
@@ -293,6 +299,14 @@ if(successValue === "employeeNotfound"){
 	});
 }
 
+
+const numberInput = document.getElementById('employee');
+
+numberInput.addEventListener('input', function() {
+  let value = this.value;
+  value = value.replace(/[^0-9]/g, ''); // remove non-numeric characters
+  this.value = value;
+});
 </script>
 
 <!--Keme->

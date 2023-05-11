@@ -19,7 +19,7 @@
 
         
         // Check if the RFID existing
-        $sql1 = "SELECT * FROM RFID_card WHERE serial_number = '$employee'";
+        $sql1 = "SELECT * FROM RFID_card WHERE serial_number = '$employee' AND employee_id != 0";
         $query1 = $conn->query($sql1);
         $row1 = $query1->fetch_assoc();
 
