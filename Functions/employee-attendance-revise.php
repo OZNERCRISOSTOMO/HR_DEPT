@@ -164,7 +164,7 @@
 
                         // Record Undertime in Table overTime
                         
-                        $undertime = "INSERT INTO overTime (name, employee_id, name, remarks, date, over_time) VALUES ('$name', '$id', 'Under Time', '$date_now', $int)";
+                        $undertime = "INSERT INTO overTime (name, employee_id, remarks, date, over_time) VALUES ('$name', '$id', 'Under Time', '$date_now', $int)";
                         $conn->query($undertime);
                     }
                 }

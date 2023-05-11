@@ -98,7 +98,7 @@ if(isset($_POST['signin'])){
                         if($srow['time_out'] < $urow['time_out']){
 
                             // If the attendance time_out is greater than 4:30 in First Schedule.
-                            if($srow['schedule_id'] === '1' && $urow['time_out'] > '16:30:00'){
+                            if($srow['schedule_id'] === '1' && $urow['time_out'] > '15:30:00'){
 
                                 // Calculate Overtime
                                 $overtime1 = '16:30:00';
@@ -111,7 +111,7 @@ if(isset($_POST['signin'])){
                                 $int = $hrs + $mins2;
 
                                 // If the attendance time_out is greater than 10:30 in Second Schedule.
-                            }else if($srow['schedule_id'] === '2' && $urow['time_out'] > '22:30:00'){
+                            }else if($srow['schedule_id'] === '2' && $urow['time_out'] > '23:30:00'){
                                 
                                 // Calculate Overtime
                                 $overtime1 = '22:30:00';
@@ -169,7 +169,7 @@ if(isset($_POST['signin'])){
 
                         // Record Undertime in Table overTime
                         
-                        $undertime = "INSERT INTO overTime (name, employee_id, name, remarks, date, over_time) VALUES ('$name', '$id', '$name', 'Under Time', '$date_now','$int')";
+                        $undertime = "INSERT INTO overTime (Name, employee_id, remarks, date, over_time) VALUES ('$name', '$id', 'Under Time', '$date_now','$int')";
                         $conn->query($undertime);
                     }  
                 }
@@ -197,9 +197,9 @@ if(isset($_POST['signin'])){
 					$squery = $conn->query($sql);
 					$srow = $squery->fetch_assoc();
 
-                    if($srow['time_in'] == '08:00:00'){
+                    if($srow['time_in'] == '07:00:00'){
                         $logstatus = ('08:30:00' > $lognow)? 'ONTIME':'LATE';
-                    }else if($srow['time_in'] == '16:00:00'){
+                    }else if($srow['time_in'] == '15:00:00'){
                         $logstatus = ('16:30:00' > $lognow)? 'ONTIME':'LATE';
                     }
 

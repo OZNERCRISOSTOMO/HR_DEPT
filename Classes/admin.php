@@ -84,7 +84,7 @@ class Admin {
 
         
           // prepare the SQL statement using the database property
-        $stmt = $this->database->getConnection()->prepare("SELECT * FROM employees WHERE schedule_id = '1' AND id=?");
+        $stmt = $this->database->getConnection()->prepare("SELECT * FROM employees WHERE status = '1' AND id=?");
 
          //if execution fail
         if (!$stmt->execute([$id])) {

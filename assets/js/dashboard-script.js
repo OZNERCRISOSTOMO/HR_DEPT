@@ -526,7 +526,7 @@ logoutBtn.addEventListener("click", function (e) {
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, Log me out",
+    confirmButtonText: "Yes",
     reverseButtons: true,
   }).then((result) => {
     if (result.isConfirmed) {
