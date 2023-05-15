@@ -230,7 +230,11 @@ else {
         <div class="main col-lg-12" >
     
                 <!--Time and Date-->
-                <div class="container-fluid d-flex justify-content-center align-items-center mt-4">
+                <div class="container-fluid d-flex ">
+
+             
+
+                  <div class="m-auto justify-content-center align-items-center mt-4">
                         <h5 style="font-weight:bolder;"> 
                         <script>                   
                             function updateTime() {
@@ -243,23 +247,75 @@ else {
                         </script> 
                         <span id="datetime"></span>  
                         </h5>
+                          </div>
 
+                          <div class=" justify-content-end mt-3">
+                        <div class="dropdown ">
+                        <button class="btn btn-transparent " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fs-5 fa-solid fa-bell"></i>  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                          <?php echo $countNotif; ?>
+                          <span class="visually-hidden">unread messages</span> </button>
 
+                        <ul class="dropdown-menu w-auto" style="max-width: 30rem;">
+                          <li class="dropdown-item" id="payday" style="display:<?php echo $payday; ?>;">
+                            <div class="list-group-item text-wrap px-2" style="width: 20rem;">
+                            <div class="container-fluid d-flex">
+                              <div class="row d-flex">
+                                <div class="col-2 p-0 m-0 d-flex justify-content-center align-items-center">  <i class="fa-solid fa-money-check" style="font-size: 40px;"></i>
+                              </div>
+                              
+                                <div class="col-10">
+                                  <p class=" p-0 m-0">Payday Alert</p>
+                                  <small class="text-muted">It's payday for your employees! It's time to set their salaries."</small>
+                                  </div>
+                          </div>
+                          </div>
+                          
+                          </li>
+                            <hr>
+                          <li class="dropdown-item"  id="backup" style="display:<?php echo $backup; ?>;">
+                          
+                          
+                          <div class="list-group-item text-wrap px-2" style="width: 20rem;">
+                            <div class="container-fluid d-flex">
+                              <div class="row d-flex">
+                                <div class="col-2 p-0 m-0 d-flex justify-content-center align-items-center">  <i class="fa-solid fa-database" style="font-size: 40px;"></i>
+                              </div>
+                              
+                                <div class="col-10">
+                                  <p class=" p-0 m-0"> You Need To Back Up your File</p>
+                                  <small class="text-muted">Don't risk losing important data. Take a few minutes to back up your files now."</small>
+                                  </div>
+                          </div>
+                          </div>
+                          
+                          
+                          
+                        </li>
 
-                        <div class="dropdown">
-  <button class="btn btn-transparent dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-  <i class="fa-solid fa-bell"></i>  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-    <?php echo $countNotif; ?>
-    <span class="visually-hidden">unread messages</span> </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#" id="payday" style="display:<?php echo $payday; ?>;">PayDay</a></li>
-    <li><a class="dropdown-item" href="#" id="backup" style="display:<?php echo $backup; ?>;">You Need To Back Up your File!</a></li>
-    <li><a class="dropdown-item" href="#" id="holiday" style="display:<?php echo $hdayd; ?>;">It's <?php echo $hday; ?></a></li>
-    
-  </ul>
-</div>
+                        <hr>
+                          <li class="dropdown-item"  id="holiday" style="display:<?php echo $hdayd; ?>;">
+                          <div class="list-group-item text-wrap px-2" style="width: 20rem;">
+                            <div class="container-fluid d-flex">
+                              <div class="row d-flex">
+                                <div class="col-2 p-0 m-0 d-flex justify-content-center align-items-center">  <i class="fa-regular fa-calendar" style="font-size: 40px;"></i>
+                              </div>
+                              
+                                <div class="col-10">
+                                  <p class=" p-0 m-0"> Holiday announcement</p>
+                                  <small class="text-muted">It's <?php echo $hday; ?> with holiday pays, Enjoy your day!."</small>
+                                  </div>
+                          </div>
+                          </div>
+                          
+                        
+                        </li>
+                          
+                        </ul>
+                      </div>
+                      </div>
 
-                     
+                        
                     </div>
                     <!---------------------------->
                       
