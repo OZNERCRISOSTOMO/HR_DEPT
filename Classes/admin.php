@@ -106,6 +106,32 @@ class Admin {
       
     }
 
+     public function findEmployeeByEmail($email){
+
+        
+          // prepare the SQL statement using the database property
+        $stmt = $this->database->getConnection()->prepare("SELECT * FROM employees WHERE status = '1' AND email=?");
+
+         //if execution fail
+        if (!$stmt->execute([$email])) {
+            header("Location: ../index.php?error=stmtfail");
+            exit();
+        }
+
+        //fetch the result
+        $result = $stmt->fetchAll();
+        
+          //if has result return it, else return false
+        if ($result) {
+            return $result;
+        } else {
+            $result = false;
+            return $result;
+        }
+
+      
+    }
+
     public function getEmployeeEmail($employeeId){
         // prepare the SQL statement using the database property
         $stmt = $this->database->getConnection()->prepare("SELECT email FROM employees WHERE  id=?");
@@ -402,6 +428,26 @@ class Admin {
 
     return $employees;
 }
+
+    public function updateAdminPassword($newPassword,$id){
+        // prepared statement
+         $stmt = $this->database->getConnection()->prepare("UPDATE employee_login SET login_password = ? WHERE employee_id = ?");
+
+         //status
+        $update = false;
+
+        //if execution fail
+        if (!$stmt->execute([$newPassword,$id])) {
+            header("Location: ../Pages/employee-register.php?error=stmtfail");
+            $update = false;
+            exit();
+        }else{
+            $update = true;
+        }
+
+
+        return $update;
+    }
 
     public function getEmployees($id = ""){
         $query = "";
