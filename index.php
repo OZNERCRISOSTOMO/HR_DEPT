@@ -52,7 +52,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
 	        <div class="container col-9 shadow-lg p-4 login-container"> 
 	            <div class="login-form ">
                     <form action="Functions/admin-login.php" method="POST">
-                    <h4 class="text-center">Company Name</h4>   
+                    <h4 class="text-center">3G CLOTHING</h4>   
                     <?php
                             if (isset($_GET["error"])) {
                                 echo '<div class="container rounded shadow text-center p-3 text-danger" style="background-color: #ff9694;">';
@@ -98,7 +98,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     </button>
                     </div>
                 </form>
-                <a href="Pages/admin-forgotPassword.php">Forgot password?</a>
+                <a class="d-flex justify-content-center align-items-center" href="Pages/admin-forgotPassword.php">Forgot password?</a>
 		    </div>
             
             <!-- Loading spinner container -->
