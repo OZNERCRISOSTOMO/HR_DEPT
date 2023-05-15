@@ -29,7 +29,7 @@
             <th>Gender</th>
             <th>Schedule</th>
             <th>Contact</th>
-            <th>Department</th>
+            <th>Position</th>
             <th>Action</th>
 				</tr>
 			</thead>
@@ -48,10 +48,10 @@
    
 
 
-    $sql = "SELECT employees.*, employee_details.department
+    $sql = "SELECT employees.*, employee_details.department_position
     FROM employees
     JOIN employee_details ON employees.id = employee_details.employee_id
-    WHERE employee_details.department = 'sales'";
+    WHERE employee_details.department = 'purchaser'";
     $result = mysqli_query($conn, $sql);
 
 
@@ -64,53 +64,33 @@
           $sql = "SELECT * FROM schedule WHERE id = '".$row['id']."'";
 
             if ($row["schedule_id"] == '1') {
-                $schedule = "8:00AM - 4:00PM";
+                $schedule = "7:00AM - 3:00PM";
             } 
 
             else if ($row["schedule_id"] == '2') {
-                $schedule = "4:00PM - 10:00PM";  
+                $schedule = "3:00PM - 11:00PM";  
             } 
-            
-            echo "<tr><td>"  . $row["id"] . "</td><td>" . $row["first_name"] . "</td><td>" . $row["last_name"] . "</td><td>" . $row["email"] . "</td><td>" . $row["gender"] . "</td><td>" . $schedule . "</td><td>" . $row["contact"] . "</td><td>" . $row["department"] . '</td><td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-            Set Schedule
-          </button></td></tr>';
-          echo '<input type="hidden" name="a" value="'.$row['id'].'">';
-        }
-      }
-?>
+           ?>
+            <tr>
+                <td><?php echo $row["id"]?></td>
+                <td><?php echo $row["first_name"]?></td>
+                <td><?php echo $row["last_name"]?></td>
+                <td><?php echo $row["email"]?></td>
+                <td><?php echo $row["gender"]?></td>
+                <td><?php echo $schedule?></td>
+                <td><?php echo $row["contact"]?></td>
+                <td><?php echo $row["department_position"]?></td>
+                <td><input type="hidden" name="card-number" value=<?php echo $row['id']?>>
+                <button type="button" onclick="location.href='../Pages/setschedule.php?id=<?php echo $row['id']?>'" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                Set Schedule
+              </button>
+            </td>
+          </tr>
+<?php } } ?>
 
 			</tbody>
 		</table>
     
-
-
-<!-- Modal Schedule -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-                              Schedule : 
-                                <div class="form-check ms-3">
-                                    <input class="form-check-input" type="radio" value="1" id="1" name="schedule" required>
-                                    <label class="form-check-label" for="1">8:00 AM - 5:00 PM</label>
-                                </div>
-            
-                                <div class="form-check ms-3">
-                                    <input class="form-check-input" type="radio" value="2" id="2" name="schedule" required>
-                                    <label class="form-check-label" for="2">6:00 PM - 10:00 PM</label>
-                                </div>
-                         
-      </div>
-      <div class="modal-footer">
-        <button type="submit" name="submittt" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div> 
 
 
 

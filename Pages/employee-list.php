@@ -107,11 +107,21 @@ display: block;
         <div class="row">
         <div class="col-sm pt-2">
             <h5 style="font-weight:bolder;">Employee List</h5>
+
+      
         </div>
+
+        <div class="col-sm">
+        <button type="button" class="btn btn-primary order-last shadow" data-bs-toggle="modal" data-bs-target="#Resign">
+      Resigned Employees
+</button>
+<?php include("../Modals/M-Resign.php")?>   
+</div>
 
 
       
                 <div class="col-md row ms-2">
+                  
                     <div class="col-sm rounded dropdown text-center ">
 
 
