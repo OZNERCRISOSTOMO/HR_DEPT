@@ -374,7 +374,7 @@ class Admin {
     }
 
     public function getTotalEmployees(){
-        $count = $this->database->getConnection()->query("SELECT count(status) FROM employees WHERE status = '1'")->fetchColumn();
+        $count = $this->database->getConnection()->query("SELECT count(*) FROM employees WHERE status = '1'")->fetchColumn();
 
         return $count;
      
@@ -382,7 +382,7 @@ class Admin {
     }
 
     public function getTotalPendingEmployees(){
-        $count = $this->database->getConnection()->query("SELECT count(status) FROM employees WHERE status = '0'")->fetchColumn();
+        $count = $this->database->getConnection()->query("SELECT count(*) FROM employees WHERE status = '0'")->fetchColumn();
 
         return $count;
 

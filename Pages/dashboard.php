@@ -49,10 +49,6 @@ foreach($employee1 as $list){
 }
 $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
 
- if (!$conn) {
-   die("Connection failed: " . mysqli_connect_error());
-}
-
 $employeeQuery = "SELECT * FROM employees";
 $employeeResult = $conn->query($employeeQuery);
 $countWarnings = 0;

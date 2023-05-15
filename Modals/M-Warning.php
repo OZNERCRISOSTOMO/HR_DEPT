@@ -34,7 +34,7 @@
                die("Connection failed: " . mysqli_connect_error());
             }
 
-            $employeeQuery = "SELECT employees.*, employee_details.department FROM employees JOIN employee_details ON employees.id = employee_details.employee_id";
+            $employeeQuery = "SELECT employees.*, employee_details.department FROM employees JOIN employee_details ON employees.id = employee_details.employee_id WHERE employees.status = '1'";
             $employeeResult = $conn->query($employeeQuery);
 
 
@@ -72,6 +72,7 @@
               echo "<td>".$idRow['last_name']."</td>";
               echo "<td>".$dept."</td>";
               echo '<td><span class="badge text-bg-danger">Suspended</span></td></tr>';
+              
             }else if($count >= 5){
               echo "<tr><td>".$employee_id."</td>";
               echo "<td>".$idRow['first_name']."</td>";

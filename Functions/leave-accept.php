@@ -39,7 +39,7 @@
             $update_leave_days = "UPDATE employee_details SET sick_leave = sick_leave-$num WHERE employee_id = '".$date['employee_id']."'";
             $update = $conn->query($update_leave_days);
             
-            $delete_absent = "DELETE FROM attendance WHERE (date BETWEEN '$date_start' AND '$date_end') AND employee_id = '".$date['employee_id']."'";
+            $delete_absent = "DELETE FROM attendance WHERE (date BETWEEN '$date_start' AND '$date_end') AND status = 'ABSENT' AND employee_id = '".$date['employee_id']."'";
             $delete_query = $conn->query($delete_absent);
 
             $update_stat = "UPDATE `leave` SET status = 1 WHERE id = '$id'";

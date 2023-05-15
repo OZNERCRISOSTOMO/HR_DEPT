@@ -1,4 +1,4 @@
-<?php
+ <?php
     
     $timezone = 'Asia/Manila';
 	date_default_timezone_set($timezone);
@@ -105,6 +105,25 @@ if(successValue === "employeeNotfound"){
 	Swal.fire({
 		icon:'error',
 		title:'User Not Found',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	window.addEventListener('popstate', function(event) {
+		var input = document.getElementById("employee");
+        input.value = "";
+		document.getElementById('myInput').focus();
+	});
+}else if(successValue === "absentYesterday"){
+	Swal.fire({
+		icon:'error',
+		title:'You are absent Yesterday!',
 		toast:true,
 		position:'top-end',
 		showConfirmButton: false,
@@ -288,8 +307,8 @@ if(successValue === "employeeNotfound"){
   		didOpen: (toast) => {
     	toast.addEventListener('mouseenter', Swal.stopTimer)
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
-		 toast.style.top = '50px';
-    toast.style.left = `calc(50% - ${toast.offsetWidth / 2}px)`;
+		toast.style.top = '50px';
+    	toast.style.left = `calc(50% - ${toast.offsetWidth / 2}px)`;
   		}
 	})
 	window.addEventListener('popstate', function(event) {

@@ -95,7 +95,7 @@ if(isset($_POST['signin'])){
                             $time_in = $srow['time_in'];
                         }
                         // If the schedule time_out is less than the time_out in attendance table.
-                        if($srow['time_out'] < $urow['time_out']){
+                        if($srow['time_out'] < $urow['time_out'] && $srow['schedule_id'] === '1'){
 
                             // If the attendance time_out is greater than 4:30 in First Schedule.
                             if($srow['schedule_id'] === '1' && $urow['time_out'] > '15:30:00'){
@@ -170,7 +170,7 @@ if(isset($_POST['signin'])){
                 }elseif($ifAbsent_row['status'] == 'PATERNITY LEAVE'){
                     header("Location: ../Functions/employee-attendance-manual.php?value=pleave");
                 }else{
-                    header("Location: ../Functions/employee-attendance-manual.php?value=absent");
+                    header("Location: ../Functions/employee-attendance-manual.php?value=invalidSched");
                 }
 
             }else{
@@ -185,7 +185,7 @@ if(isset($_POST['signin'])){
 					$srow = $squery->fetch_assoc();
 
                     if($srow['time_in'] == '07:00:00'){
-                        $logstatus = ('08:30:00' > $lognow)? 'ONTIME':'LATE';
+                        $logstatus = ('07:30:00' > $lognow)? 'ONTIME':'LATE';
                     }else if($srow['time_in'] == '15:00:00'){
                         $logstatus = ('15:30:00' > $lognow)? 'ONTIME':'LATE';
                     }
@@ -196,12 +196,14 @@ if(isset($_POST['signin'])){
                     $employeeResult = $conn->query($employeeQuery);
                     $countRow = $employeeResult->fetch_assoc();
 
-                    $vac = "SELECT * FROM attendance WHERE employee_id = '$id' AND status = 'VACATION LEAVE' AND date = '$date_now'";
-                    $vac_query = $conn->query($vac);
+                    $yesterday = date('Y-m-d', strtotime('-1 day'));
+                    $absent_yesterday = "SELECT * FROM attendance WHERE employee_id = '$id' AND status = 'ABSENT' AND date = '$yesterday'";
+                    $absent_query = $conn->query($absent_yesterday);
+
                     if($countRow['count'] >= 7){
-                            header("Location: ../Pages/employee-attendance.php?value=suspend");
-                        }else if($vac_query->num_rows > 0 ){
-                            header("Location: ../Pages/employee-attendance.php?value=vac");
+                            header("Location: ../Functions/employee-attendance-manual.php?value=suspend");
+                        }elseif($absent_query->num_rows > 0){
+                            header("Location: ../Functions/employee-attendance-manual.php?value=absentYesterday");
                         }else{
                             // If the Employee Tap card and not Following on their schedule.
                             if(($sched == '1' && $srow['time_out'] > $lognow) || ($sched == '2' && $srow['time_in'] < $lognow)){
