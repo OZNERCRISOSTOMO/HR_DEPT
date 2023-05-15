@@ -393,7 +393,7 @@ class Admin {
         // Get today's date
         $today = date('Y-m-d');
 
-        $count = $this->database->getConnection()->query("SELECT count(*) FROM attendance WHERE date = '$today' AND (status = 'LATE' OR status = 'ONTIME' OR status = 'VACATION LEAVE') AND schedule_id = '$id'")->fetchColumn();
+        $count = $this->database->getConnection()->query("SELECT count(*) FROM attendance WHERE date = '$today' AND (status = 'LATE' OR status = 'ONTIME' OR status = 'VACATION LEAVE' OR status = 'MATERNITY LEAVE' OR status = 'PATERNITY LEAVE') AND schedule_id = '$id'")->fetchColumn();
 
         return $count;
 
@@ -552,6 +552,14 @@ class Admin {
     
 
      public function acceptEmployee($employeeData){
+        $employee = $this->getPendingEmployees;
+        if($employee['gender'] == 'female'){
+            $ml = 90;
+            $pl = 0;
+        }elseif($employee['gender'] == 'male'){
+            $ml = 0;
+            $pl = 7;
+        }
             // prepared statement
          $stmt = $this->database->getConnection()->prepare("UPDATE employees AS e
                                                       INNER JOIN employee_details AS ed ON e.id = ed.employee_id
@@ -559,7 +567,6 @@ class Admin {
                                                        ed.position = ?, ed.department_position = ?, ed.employee_type = ?,  ed.branch = ? , ed.vacation_leave = ? ,
                                                         ed.sick_leave = ? , ed.maternity_leave = ?, ed.paternity_leave = ?, ed.health_insurance = ?, ed.christmas_bonus = ?, ed.food_allowance = ?, ed.transpo_allowance = ? 
                                                       WHERE e.id = ?");
-
         //if execution fail
         if (!$stmt->execute([$employeeData['schedule'],
                             '1',              
@@ -573,9 +580,9 @@ class Admin {
                              $employeeData['vacationLeave'],
                              $employeeData['sickLeave'],
                              
-                             90,
+                             $ml,
                              
-                             7,
+                             $pl,
                              $employeeData['healthInsurance'],
                              $employeeData['christmasBonus'],
                              $employeeData['foodAllowance'],

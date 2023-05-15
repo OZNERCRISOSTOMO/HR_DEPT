@@ -330,9 +330,9 @@ if (isset($_SESSION['admin_id'])) {
 			<tbody>
       <?php
 
-    if($lognow < "16:30:00"){
+    if($lognow < "15:30:00"){
         $employee = $admin->selectEmployeeSched('1');
-    }else if($lognow > "16:30:00"){
+    }else if($lognow > "15:30:00"){
         $employee = $admin->selectEmployeeSched('2');
     }
 

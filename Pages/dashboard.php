@@ -15,9 +15,9 @@ if (isset($_SESSION['admin_id'])) {
     //get admin data 
     $adminData = $admin->btnPic($_SESSION['admin_id']);
     
-    if($lognow < "16:30:00"){
+    if($lognow < "15:30:00"){
         $employee = $admin->selectEmployeeSched('1');
-    }else if($lognow > "16:30:00"){
+    }else if($lognow > "15:30:00"){
         $employee = $admin->selectEmployeeSched('2');
     }
 
@@ -336,9 +336,9 @@ else {
                                     <button type="button" class=" btn ps-0 btn-light shadow btn-md p-2 w-100 vh-100 text-secondary" style="max-width: 200px; max-height:  50px;" data-bs-toggle="modal" data-bs-target="#presentModal">
                                     <span class="p-2 text-black" style="font-size: 18px;">
                                     <?php 
-                                    if($lognow < "16:30:00"){
+                                    if($lognow < "15:30:00"){
                                         echo $admin->getTotalPresent('1');
-                                    }else if($lognow > "16:30:00"){
+                                    }else if($lognow > "15:30:00"){
                                         echo $admin->getTotalPresent('2');
                                     }
                                     ?> 
