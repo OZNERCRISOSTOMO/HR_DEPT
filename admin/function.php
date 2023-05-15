@@ -41,7 +41,7 @@
         $paytype = '';
 
         foreach($prlist as $list):
-            $paycode = $list['code'];
+            $paycode = $list['id'];
             $paytype = $list['type'];
          endforeach;
         
@@ -208,7 +208,7 @@
                     <tr>
                         <td class="column" style="font-weight: bold;">Employee Name: </td>
                         <td class="column">'. $fname .'</td>
-                        <td class="column" style="font-weight: bold;">Payroll Code: </td>
+                        <td class="column" style="font-weight: bold;">Payroll ID: </td>
                         <td class="column">'. $paycode .'</td>
                     </tr>
                     

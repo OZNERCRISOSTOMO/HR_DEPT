@@ -144,7 +144,7 @@ if (isset($_SESSION['admin_id'])) {
                         <div class="row" style="display: flex; justify-content: flex-end;">
                         
                         <div class="col-3">
-                            <div class="btn btn-md shadow-sm btn-light w-100  text-black">  Code: <?php echo $list['code']; ?></div>
+                            <div class="btn btn-md shadow-sm btn-light w-100  text-black"> Payroll ID: <?php echo $list['id']; ?></div>
                             </div>
 
                             <div class="col-3">

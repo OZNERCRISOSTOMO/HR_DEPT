@@ -899,19 +899,19 @@ public function payrollList(){
         exit();
 }
 public function payrollDetails($id){
-    $prlist = $this->database->getConnection()->prepare("SELECT code, start, end, type FROM prlist WHERE id=?");
+    $prlist = $this->database->getConnection()->prepare("SELECT id, start, end, type FROM prlist WHERE id=?");
     $prlist->execute([$id]);
     return $prlist->fetchAll();
 }
 
 public function Insertpayroll($prlist){
-    $sql = "INSERT INTO prlist (date, code, start, end, type,Status)
+    $sql = "INSERT INTO prlist (date, id, start, end, type,Status)
        VALUES (?,?,?,?,?,?);";
 
    $stmt = $this->database->getConnection()->prepare($sql);
 
    if (!$stmt->execute([$this->date,
-    $prlist['code'],
+    $prlist['id'],
     $prlist['start'],
     $prlist['end'],
     $prlist['type'],
@@ -921,7 +921,7 @@ public function Insertpayroll($prlist){
        }
 }
 public function updatePayroll($id, $code, $start, $end, $type){
-    $stmt = $this->database->getConnection()->prepare("UPDATE prlist SET code = ?, start = ?, end = ?, type = ? WHERE id = ?");
+    $stmt = $this->database->getConnection()->prepare("UPDATE prlist SET id = ?, start = ?, end = ?, type = ? WHERE id = ?");
 
     if (!$stmt->execute([$code, $start, $end, $type, $id])) {
     header("Location: ../admin/prlist.php?error=stmtfail");
