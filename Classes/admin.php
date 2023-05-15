@@ -156,7 +156,7 @@ class Admin {
 
     public function  deleteEmployeeById($id){
           // prepare the SQL statement using the database property
-        $stmt = $this->database->getConnection()->prepare("UPDATE employees SET status = '2'  WHERE id=?");
+        $stmt = $this->database->getConnection()->prepare("UPDATE employees SET status = '3'  WHERE id=?");
 
          //if execution fail
         if (!$stmt->execute([$id])) {
