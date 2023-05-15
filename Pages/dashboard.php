@@ -363,7 +363,7 @@ else {
                             <div class="col">
                 
                                      <button type="button" class="btn ps-0  btn-light shadow btn-md p-2 w-100  vh-100  text-secondary" style="max-width: 200px; max-height:  50px;"   data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                                    <span class="p-2 text-black" style="font-size: 18px;"><?php echo $admin->getTotalPendingEmployees(); ?> </span>  Pending
+                                    <span class="p-2 text-black" style="font-size: 18px;"><?php echo $admin->getTotalPendingEmployees(); ?></span>  Pending
                                     <span ><i class=" text-secondary fa-solid fa-circle-info p-0" style="font-size: 18px;"></i></span>
                                     </button>
 
