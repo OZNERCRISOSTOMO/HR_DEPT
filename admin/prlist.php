@@ -97,7 +97,6 @@ if (isset($_SESSION['admin_id'])) {
           <thead>
             <th>ID</th>
             <th>Date Added</th>
-            <th>Code</th>
             <th>Start</th>
             <th>End</th>
             <th>Type</th>
@@ -112,7 +111,6 @@ if (isset($_SESSION['admin_id'])) {
             <tr>
               <td><?php echo $list['id']; ?> </td>
               <td><?php echo $list['date']; ?> </td>
-              <td><?php echo $list['code']; ?> </td>
               <td><?php echo $list['start']; ?> </td>
               <td><?php echo $list['end']; ?> </td>
               <td><?php echo $list['type']; ?> </td>
@@ -147,10 +145,9 @@ if (isset($_SESSION['admin_id'])) {
           <thead>
             <th>ID</th>
             <th>Date Added</th>
-            <th>Type</th>
             <th>Start</th>
             <th>End</th>
-            <th>Mode</th>
+            <th>Type</th>
             <th>Action</th>
           </thead>
 
@@ -162,7 +159,6 @@ if (isset($_SESSION['admin_id'])) {
             <tr>
               <td><?php echo $list['id']; ?> </td>
               <td><?php echo $list['date']; ?> </td>
-              <td><?php echo $list['code']; ?> </td>
               <td><?php echo $list['start']; ?> </td>
               <td><?php echo $list['end']; ?> </td>
               <td><?php echo $list['type']; ?> </td>
@@ -207,7 +203,6 @@ if (isset($_SESSION['admin_id'])) {
                 var row = $(this).closest("tr");
                 var id = row.find("td:eq(0)").text().trim();
                 var date = row.find("td:eq(1)").text().trim();
-                var code = row.find("td:eq(2)").text().trim();
                 var start = row.find("td:eq(3)").text().trim();
                 var end = row.find("td:eq(4)").text().trim();
                 var type = row.find("td:eq(5)").text().trim();
@@ -215,7 +210,6 @@ if (isset($_SESSION['admin_id'])) {
                 // Set the modal values
                 $("#editId").val(id);
                 $("#editDate").val(date);
-                $("#editCode").val(code);
                 $("#editStart").val(start);
                 $("#editEnd").val(end);
                 $("#editType").val(type);
@@ -233,10 +227,6 @@ if (isset($_SESSION['admin_id'])) {
               </div>
               <div class="modal-body">
                 <form id="prForm" name="payroll" role="form" action="../Functions/admin-payroll.php" method="POST">
-                  <div class="form-group mb-3">
-                    <label for="code" class="fw-bold">Payroll Code</label>
-                    <input type="text" name="code" class="form-control shadow-none">
-                  </div>
 
                   <div class="form-group mb-3">
                     <label for="start" class="fw-bold">Cut-off Start Date</label>
@@ -291,10 +281,6 @@ if (isset($_SESSION['admin_id'])) {
                     <input type="hidden" id="editId" name="editId">
                     <label for="editDate">Date</label>
                     <input type="date" class="form-control" id="editDate" name="editDate">
-                  </div>
-                  <div class="form-group mb-3">
-                    <label for="editCode">Code</label>
-                    <input type="text" class="form-control" id="editCode" name="editCode">
                   </div>
                   <div class="form-group mb-3">
                     <label for="editStart">Start</label>
