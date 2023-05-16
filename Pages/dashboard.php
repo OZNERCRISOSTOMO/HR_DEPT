@@ -47,7 +47,7 @@ foreach($employee1 as $list){
   }
 
 }
-$conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
+// $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
 
 // $employeeQuery = "SELECT * FROM employees";
 // $employeeResult = $conn->query($employeeQuery);
@@ -73,55 +73,55 @@ $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU
 
 // }
 
-// simula dito
-  $dateString = date('Y-m-d');
+// START OF NOTIFICATION
+  // $dateString = date('Y-m-d');
 
-  $dayh = "SELECT * FROM holiday WHERE holiday_date = '$dateString'";
-  $dayhh = $conn->query($dayh);
-  $dayhhh = $dayhh->fetch_assoc();
+  // $dayh = "SELECT * FROM holiday WHERE holiday_date = '$dateString'";
+  // $dayhh = $conn->query($dayh);
+  // $dayhhh = $dayhh->fetch_assoc();
 
-    $month = date('m', strtotime($dateString));
+  //   $month = date('m', strtotime($dateString));
 
-    $backup_file = "u839345553_SBIT3G_".$month.".sql";
+  //   $backup_file = "u839345553_SBIT3G_".$month.".sql";
 
-    $filePath = '../backups/'.$backup_file.'';
-    $currentMonth = date('n');
+  //   $filePath = '../backups/'.$backup_file.'';
+  //   $currentMonth = date('n');
 
-    if(file_exists($filePath) || $currentMonth % 4 != 0){
-      $backup = 'none';
-    }
-    if($currentMonth % 4 == 0) {
-      $backup = 'block';
-    }
+  //   if(file_exists($filePath) || $currentMonth % 4 != 0){
+  //     $backup = 'none';
+  //   }
+  //   if($currentMonth % 4 == 0) {
+  //     $backup = 'block';
+  //   }
 
-    $dayOfMonth = date('d');
+  //   $dayOfMonth = date('d');
 
-    if ($dayOfMonth == 15 || $dayOfMonth == date('t')) {
-      $payday = 'block';
-  } else {
-     $payday = 'none';
-  }
+  //   if ($dayOfMonth == 15 || $dayOfMonth == date('t')) {
+  //     $payday = 'block';
+  // } else {
+  //    $payday = 'none';
+  // }
 
-  if($dayhh->num_rows > 0){
-    $hday = $dayhhh['holiday_name'];
-    $hdayd = 'block';
-  }else{
-    $hdayd = 'none';
-  }
+  // if($dayhh->num_rows > 0){
+  //   $hday = $dayhhh['holiday_name'];
+  //   $hdayd = 'block';
+  // }else{
+  //   $hdayd = 'none';
+  // }
 
-  $countNotif = 0;
+  // $countNotif = 0;
 
-  if($backup === 'block'){
-    $countNotif++;
-  }
+  // if($backup === 'block'){
+  //   $countNotif++;
+  // }
 
-  if($payday === 'block'){
-    $countNotif++;
-  }
+  // if($payday === 'block'){
+  //   $countNotif++;
+  // }
   
-  if($hdayd === 'block'){
-    $countNotif++;
-  }
+  // if($hdayd === 'block'){
+  //   $countNotif++;
+  // }
   //end
 }
 else {
