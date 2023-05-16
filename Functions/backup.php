@@ -41,7 +41,9 @@ foreach($tables as $table){
     $return .= "\n\n\n";
 }
 
-$handle = fopen('backup1.sql', 'w+');
+$date = date('Y-m-d');
+
+$handle = fopen($date.'.sql', 'w+');
 fwrite($handle, $return);
 fclose($handle);
 echo "Successfully Backup";
