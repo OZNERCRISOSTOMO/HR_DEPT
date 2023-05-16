@@ -741,7 +741,7 @@ class Admin {
         unset($this->database);
     }
     public function selectEmployeeSched($sched){
-        $employee = $this->database->getConnection()->prepare("SELECT id FROM employees WHERE schedule_id = ?");
+        $employee = $this->database->getConnection()->prepare("SELECT id FROM employees WHERE status = '1' AND schedule_id = ?");
         $employee->execute([$sched]);
         return $employee->fetchAll();
 
