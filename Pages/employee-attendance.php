@@ -101,7 +101,7 @@
     const successValue = urlParams.get('value');
     console.log(successValue);
 
-if(successValue === "employeeNotfound"){
+if(successValue === "invalidUser"){
 	Swal.fire({
 		icon:'error',
 		title:'User Not Found',
@@ -124,6 +124,25 @@ if(successValue === "employeeNotfound"){
 	Swal.fire({
 		icon:'error',
 		title:'You are absent Yesterday!',
+		toast:true,
+		position:'top-end',
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+	window.addEventListener('popstate', function(event) {
+		var input = document.getElementById("employee");
+        input.value = "";
+		document.getElementById('myInput').focus();
+	});
+}else if(successValue === "invalidPass"){
+	Swal.fire({
+		icon:'error',
+		title:'Wrong Password!',
 		toast:true,
 		position:'top-end',
 		showConfirmButton: false,

@@ -17,7 +17,7 @@
      
      if(isset($_POST['acceptbtn'])){
         $id = $_POST['acceptid'];
-        $overtime1 = "SELECT * FROM `leave` WHERE id = $id";
+        $overtime1 = "SELECT * FROM leave_p WHERE id = $id";
         $queryko = $conn->query($overtime1);
         $date = $queryko->fetch_assoc();
         $date_end = $date['date_ended'];
@@ -42,7 +42,7 @@
             $delete_absent = "DELETE FROM attendance WHERE (date BETWEEN '$date_start' AND '$date_end') AND status = 'ABSENT' AND employee_id = '".$date['employee_id']."'";
             $delete_query = $conn->query($delete_absent);
 
-            $update_stat = "UPDATE `leave` SET status = 1 WHERE id = '$id'";
+            $update_stat = "UPDATE leave_p SET status = 1 WHERE id = '$id'";
             $conn->query($update_stat);
             if($update){
                 header("Location: ../Pages/Leave.php?success=accepted");
@@ -69,7 +69,7 @@
 
             }
 
-            $update_stat = "UPDATE `leave` SET status = 1 WHERE id = '$id'";
+            $update_stat = "UPDATE leave_p SET status = 1 WHERE id = '$id'";
             $conn->query($update_stat);
 
             $update_leave_days = "UPDATE employee_details SET vacation_leave = vacation_leave - $num WHERE employee_id = '".$date['employee_id']."'";
@@ -98,7 +98,7 @@
 
             }
 
-            $update_stat = "UPDATE `leave` SET status = 1 WHERE id = '$id'";
+            $update_stat = "UPDATE leave_p SET status = 1 WHERE id = '$id'";
             $conn->query($update_stat);
 
             $update_leave_days = "UPDATE employee_details SET paternity_leave = paternity_leave - $num WHERE employee_id = '".$date['employee_id']."'";
@@ -127,7 +127,7 @@
 
             }
 
-            $update_stat = "UPDATE `leave` SET status = 1 WHERE id = '$id'";
+            $update_stat = "UPDATE leave_p SET status = 1 WHERE id = '$id'";
             $conn->query($update_stat);
 
             $update_leave_days = "UPDATE employee_details SET maternity_leave = maternity_leave - $num WHERE employee_id = '".$date['employee_id']."'";
@@ -142,7 +142,7 @@
             $delete_absent = "DELETE FROM attendance WHERE (date BETWEEN '$date_start' AND '$date_end') AND employee_id = '".$date['employee_id']."'";
             $delete_query = $conn->query($delete_absent);
 
-            $update_stat = "UPDATE `leave` SET status = 1 WHERE id = '$id'";
+            $update_stat = "UPDATE leave_p SET status = 1 WHERE id = '$id'";
             $update = $conn->query($update_stat);
 
             if($update){

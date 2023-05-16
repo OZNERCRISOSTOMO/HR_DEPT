@@ -221,7 +221,7 @@
 
         }else{
             // Employee Not found
-            header("Location: ../Pages/employee-attendance.php?value=employeeNotfound");
+            header("Location: ../Pages/employee-attendance.php?value=invalidUser");
         }
      }else{
 

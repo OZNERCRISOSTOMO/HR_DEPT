@@ -21,7 +21,7 @@ if (isset($_POST['deleteid'])) {
     $date = $queryko->fetch_assoc();
 
     if (isset($_POST['deletebtn'])) {
-        $query = "DELETE FROM `leave` WHERE id = '$id'";
+        $query = "DELETE FROM leave_p WHERE id = '$id'";
         $conn->query($query);
         $date_end = $date['date_ended'];
         $date_start = $date['date_started'];

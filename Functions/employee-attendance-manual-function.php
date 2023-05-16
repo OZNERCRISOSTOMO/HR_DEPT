@@ -72,7 +72,7 @@ if(isset($_POST['signin'])){
                 // Update the attendace table set time_out to current time.
                 $sql = "UPDATE attendance SET time_out = '$lognow' WHERE id = '".$timeout['uid']."'";
                     if($conn->query($sql)){
-                        header("Location: ../Functions/employee-attendance-manual.php?value=Timeout&picture=".$row2['picture_path']."&ID=".$id."&name=".$row['first_name']." ".$row['last_name']."&post=".$row2['position']."&Timeout=".$lognow."&dep=".$row2['department']."");
+                        header("Location: ../Pages/employee-attendance.php?value=Timeout&picture=".$row2['picture_path']."&ID=".$id."&name=".$row['first_name']." ".$row['last_name']."&post=".$row2['position']."&Timeout=".$lognow."&dep=".$row2['department']."");
 
                         // Get the value of table attendance.
                         $attendance = "SELECT * FROM attendance WHERE id = '".$timeout['uid']."'";
@@ -164,13 +164,13 @@ if(isset($_POST['signin'])){
                         echo $conn->error;
                     }
                 }elseif($ifAbsent_row['status'] == 'VACATION LEAVE'){
-                    header("Location: ../Functions/employee-attendance-manual.php?value=vleave");
+                    header("Location: ../Pages/employee-attendance.php?value=vleave");
                 }elseif($ifAbsent_row['status'] == 'MATERNITY LEAVE'){
-                    header("Location: ../Functions/employee-attendance-manual.php?value=mleave");
+                    header("Location: ../Pages/employee-attendance.php?value=mleave");
                 }elseif($ifAbsent_row['status'] == 'PATERNITY LEAVE'){
-                    header("Location: ../Functions/employee-attendance-manual.php?value=pleave");
+                    header("Location: ../Pages/employee-attendance.php?value=pleave");
                 }else{
-                    header("Location: ../Functions/employee-attendance-manual.php?value=invalidSched");
+                    header("Location: ../Pages/employee-attendance.php?value=invalidSched");
                 }
 
             }else{
@@ -204,29 +204,29 @@ if(isset($_POST['signin'])){
                             if(($sched == '1' && $srow['time_out'] > $lognow) || ($sched == '2' && $srow['time_in'] < $lognow)){
                                 
                                 if($countRow['count'] >= 7){
-                                    header("Location: ../Functions/employee-attendance-manual.php?value=suspend");
+                                    header("Location: ../Pages/employee-attendance.php?value=suspend");
                                 }elseif($absent_query->num_rows > 0){
-                                    header("Location: ../Functions/employee-attendance-manual.php?value=absentYesterday");
+                                    header("Location: ../Pages/employee-attendance.php?value=absentYesterday");
                                 }else{
                                 $sql = "INSERT INTO attendance (employee_id, name, date, time_in, status, schedule_id) VALUES ('$id', '$name', '$date_now', '$lognow', '$logstatus', '$sched')";
 					            if($conn->query($sql)){
                         
-                                header("Location: ../Functions/employee-attendance-manual.php?value=Timein&picture=".$row2['picture_path']."&ID=".$id."&name=".$row['first_name']." ".$row['last_name']."&post=".$row2['position']."&Timein=".$lognow."&status=".$logstatus."&dep=".$row2['department']."");
+                                header("Location: ../Pages/employee-attendance.php?value=Timein&picture=".$row2['picture_path']."&ID=".$id."&name=".$row['first_name']." ".$row['last_name']."&post=".$row2['position']."&Timein=".$lognow."&status=".$logstatus."&dep=".$row2['department']."");
 					            }else{
 						        echo "Error";
 					            }
                             }
                             }else{
-                                header("Location: ../Functions/employee-attendance-manual.php?value=invalidSched");
+                                header("Location: ../Pages/employee-attendance.php?value=invalidSched");
                             }
                 
             }
 
         }else{
             // Employee Not found
-            header("Location: ../Functions/employee-attendance-manual.php?value=invalidPass");
+            header("Location: ../Pages/employee-attendance.php?value=invalidPass");
         }
     } else {
-        header("Location: ../Functions/employee-attendance-manual.php?value=invalidUser");
+        header("Location: ../Pages/employee-attendance.php?value=invalidUser");
     }
 }

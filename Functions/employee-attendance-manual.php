@@ -110,266 +110,266 @@ if ($conn->connect_error) {
     const successValue = urlParams.get('value');
     console.log(successValue);
 
-if(successValue === "invalidUser"){
-	Swal.fire({
-		icon:'error',
-		title:'User Not Found',
-		toast:true,
-		position:'top-end',
-		showConfirmButton: false,
-  		timer: 3000,
-  		timerProgressBar: true,
-		didOpen: (toast) => {
-    	toast.addEventListener('mouseenter', Swal.stopTimer)
-    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-  		}
-	})
-	window.addEventListener('popstate', function(event) {
-		var input1 = document.getElementById("email");
-		var input2 = document.getElementById("password");
-        input1.value = "";
-		input2.value = "";
+// if(successValue === "invalidUser"){
+// 	Swal.fire({
+// 		icon:'error',
+// 		title:'User Not Found',
+// 		toast:true,
+// 		position:'top-end',
+// 		showConfirmButton: false,
+//   		timer: 3000,
+//   		timerProgressBar: true,
+// 		didOpen: (toast) => {
+//     	toast.addEventListener('mouseenter', Swal.stopTimer)
+//     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+//   		}
+// 	})
+// 	window.addEventListener('popstate', function(event) {
+// 		var input1 = document.getElementById("email");
+// 		var input2 = document.getElementById("password");
+//         input1.value = "";
+// 		input2.value = "";
 		
-	});
-}else if(successValue === "vleave"){
-	Swal.fire({
-		icon:'error',
-		title:'You are on Vacation Leave Today!',
-		toast:true,
-		position:'top-end',
-		showConfirmButton: false,
-  		timer: 3000,
-  		timerProgressBar: true,
-		didOpen: (toast) => {
-    	toast.addEventListener('mouseenter', Swal.stopTimer)
-    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-  		}
-	})
-	window.addEventListener('popstate', function(event) {
-		var input = document.getElementById("employee");
-        input.value = "";
-		document.getElementById('myInput').focus();
-	});
-}else if(successValue === "mleave"){
-	Swal.fire({
-		icon:'error',
-		title:'You are on Maternity Leave Today!',
-		toast:true,
-		position:'top-end',
-		showConfirmButton: false,
-  		timer: 3000,
-  		timerProgressBar: true,
-		didOpen: (toast) => {
-    	toast.addEventListener('mouseenter', Swal.stopTimer)
-    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-  		}
-	})
-	window.addEventListener('popstate', function(event) {
-		var input = document.getElementById("employee");
-        input.value = "";
-		document.getElementById('myInput').focus();
-	});
-}else if(successValue === "vleave"){
-	Swal.fire({
-		icon:'error',
-		title:'You are on Vacation Leave Today!',
-		toast:true,
-		position:'top-end',
-		showConfirmButton: false,
-  		timer: 3000,
-  		timerProgressBar: true,
-		didOpen: (toast) => {
-    	toast.addEventListener('mouseenter', Swal.stopTimer)
-    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-  		}
-	})
-	window.addEventListener('popstate', function(event) {
-		var input = document.getElementById("employee");
-        input.value = "";
-		document.getElementById('myInput').focus();
-	});
-}else if(successValue === "absentYesterday"){
-	Swal.fire({
-		icon:'error',
-		title:'You are absent Yesterday!',
-		toast:true,
-		position:'top-end',
-		showConfirmButton: false,
-  		timer: 3000,
-  		timerProgressBar: true,
-		didOpen: (toast) => {
-    	toast.addEventListener('mouseenter', Swal.stopTimer)
-    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-  		}
-	})
-	window.addEventListener('popstate', function(event) {
-		var input = document.getElementById("employee");
-        input.value = "";
-		document.getElementById('myInput').focus();
-	});
-}else if(successValue === "pleave"){
-	Swal.fire({
-		icon:'error',
-		title:'You are on Paternity Leave Today!',
-		toast:true,
-		position:'top-end',
-		showConfirmButton: false,
-  		timer: 3000,
-  		timerProgressBar: true,
-		didOpen: (toast) => {
-    	toast.addEventListener('mouseenter', Swal.stopTimer)
-    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-  		}
-	})
-	window.addEventListener('popstate', function(event) {
-		var input = document.getElementById("employee");
-        input.value = "";
-		document.getElementById('myInput').focus();
-	});
-}else if(successValue === "absent"){
-	Swal.fire({
-		icon:'error',
-		title:'You are Absent for Today!',
-		toast:true,
-		position:'top-end',
-		showConfirmButton: false,
-  		timer: 3000,
-  		timerProgressBar: true,
-		didOpen: (toast) => {
-    	toast.addEventListener('mouseenter', Swal.stopTimer)
-    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-  		}
-	})
-	window.addEventListener('popstate', function(event) {
-		var input1 = document.getElementById("email");
-		var input2 = document.getElementById("password");
-        input1.value = "";
-		input2.value = "";
+// 	});
+// }else if(successValue === "vleave"){
+// 	Swal.fire({
+// 		icon:'error',
+// 		title:'You are on Vacation Leave Today!',
+// 		toast:true,
+// 		position:'top-end',
+// 		showConfirmButton: false,
+//   		timer: 3000,
+//   		timerProgressBar: true,
+// 		didOpen: (toast) => {
+//     	toast.addEventListener('mouseenter', Swal.stopTimer)
+//     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+//   		}
+// 	})
+// 	window.addEventListener('popstate', function(event) {
+// 		var input = document.getElementById("employee");
+//         input.value = "";
+// 		document.getElementById('myInput').focus();
+// 	});
+// }else if(successValue === "mleave"){
+// 	Swal.fire({
+// 		icon:'error',
+// 		title:'You are on Maternity Leave Today!',
+// 		toast:true,
+// 		position:'top-end',
+// 		showConfirmButton: false,
+//   		timer: 3000,
+//   		timerProgressBar: true,
+// 		didOpen: (toast) => {
+//     	toast.addEventListener('mouseenter', Swal.stopTimer)
+//     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+//   		}
+// 	})
+// 	window.addEventListener('popstate', function(event) {
+// 		var input = document.getElementById("employee");
+//         input.value = "";
+// 		document.getElementById('myInput').focus();
+// 	});
+// }else if(successValue === "vleave"){
+// 	Swal.fire({
+// 		icon:'error',
+// 		title:'You are on Vacation Leave Today!',
+// 		toast:true,
+// 		position:'top-end',
+// 		showConfirmButton: false,
+//   		timer: 3000,
+//   		timerProgressBar: true,
+// 		didOpen: (toast) => {
+//     	toast.addEventListener('mouseenter', Swal.stopTimer)
+//     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+//   		}
+// 	})
+// 	window.addEventListener('popstate', function(event) {
+// 		var input = document.getElementById("employee");
+//         input.value = "";
+// 		document.getElementById('myInput').focus();
+// 	});
+// }else if(successValue === "absentYesterday"){
+// 	Swal.fire({
+// 		icon:'error',
+// 		title:'You are absent Yesterday!',
+// 		toast:true,
+// 		position:'top-end',
+// 		showConfirmButton: false,
+//   		timer: 3000,
+//   		timerProgressBar: true,
+// 		didOpen: (toast) => {
+//     	toast.addEventListener('mouseenter', Swal.stopTimer)
+//     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+//   		}
+// 	})
+// 	window.addEventListener('popstate', function(event) {
+// 		var input = document.getElementById("employee");
+//         input.value = "";
+// 		document.getElementById('myInput').focus();
+// 	});
+// }else if(successValue === "pleave"){
+// 	Swal.fire({
+// 		icon:'error',
+// 		title:'You are on Paternity Leave Today!',
+// 		toast:true,
+// 		position:'top-end',
+// 		showConfirmButton: false,
+//   		timer: 3000,
+//   		timerProgressBar: true,
+// 		didOpen: (toast) => {
+//     	toast.addEventListener('mouseenter', Swal.stopTimer)
+//     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+//   		}
+// 	})
+// 	window.addEventListener('popstate', function(event) {
+// 		var input = document.getElementById("employee");
+//         input.value = "";
+// 		document.getElementById('myInput').focus();
+// 	});
+// }else if(successValue === "absent"){
+// 	Swal.fire({
+// 		icon:'error',
+// 		title:'You are Absent for Today!',
+// 		toast:true,
+// 		position:'top-end',
+// 		showConfirmButton: false,
+//   		timer: 3000,
+//   		timerProgressBar: true,
+// 		didOpen: (toast) => {
+//     	toast.addEventListener('mouseenter', Swal.stopTimer)
+//     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+//   		}
+// 	})
+// 	window.addEventListener('popstate', function(event) {
+// 		var input1 = document.getElementById("email");
+// 		var input2 = document.getElementById("password");
+//         input1.value = "";
+// 		input2.value = "";
 		
-	});
-}else if(successValue === "suspend"){
-	Swal.fire({
-		icon:'error',
-		title:'You are Suspended! Need to comply Notice of Explanation!',
-		toast:true,
-		position:'top-end',
-		showConfirmButton: false,
-  		timer: 3000,
-  		timerProgressBar: true,
-		didOpen: (toast) => {
-    	toast.addEventListener('mouseenter', Swal.stopTimer)
-    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-  		}
-	})
-	window.addEventListener('popstate', function(event) {
-		var input = document.getElementById("employee");
-        input.value = "";
-		document.getElementById('myInput').focus();
-	});
-}else if(successValue === "invalidSched"){
-	Swal.fire({
-		icon:'error',
-		title:'Please Follow Your Schedule!',
-		toast:true,
-		position:'top-end',
-		showConfirmButton: false,
-  		timer: 3000,
-  		timerProgressBar: true,
-		didOpen: (toast) => {
-    	toast.addEventListener('mouseenter', Swal.stopTimer)
-    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-  		}
-	})
-	window.addEventListener('popstate', function(event) {
-		var input1 = document.getElementById("email");
-		var input2 = document.getElementById("password");
-        input1.value = "";
-		input2.value = "";
+// 	});
+// }else if(successValue === "suspend"){
+// 	Swal.fire({
+// 		icon:'error',
+// 		title:'You are Suspended! Need to comply Notice of Explanation!',
+// 		toast:true,
+// 		position:'top-end',
+// 		showConfirmButton: false,
+//   		timer: 3000,
+//   		timerProgressBar: true,
+// 		didOpen: (toast) => {
+//     	toast.addEventListener('mouseenter', Swal.stopTimer)
+//     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+//   		}
+// 	})
+// 	window.addEventListener('popstate', function(event) {
+// 		var input = document.getElementById("employee");
+//         input.value = "";
+// 		document.getElementById('myInput').focus();
+// 	});
+// }else if(successValue === "invalidSched"){
+// 	Swal.fire({
+// 		icon:'error',
+// 		title:'Please Follow Your Schedule!',
+// 		toast:true,
+// 		position:'top-end',
+// 		showConfirmButton: false,
+//   		timer: 3000,
+//   		timerProgressBar: true,
+// 		didOpen: (toast) => {
+//     	toast.addEventListener('mouseenter', Swal.stopTimer)
+//     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+//   		}
+// 	})
+// 	window.addEventListener('popstate', function(event) {
+// 		var input1 = document.getElementById("email");
+// 		var input2 = document.getElementById("password");
+//         input1.value = "";
+// 		input2.value = "";
 		
-	});
-}else if(successValue === "invalidPass"){
-	Swal.fire({
-		icon:'error',
-		title:'Wrong Password',
-		toast:true,
-		position:'top-end',
-		showConfirmButton: false,
-  		timer: 3000,
-  		timerProgressBar: true,
-		didOpen: (toast) => {
-    	toast.addEventListener('mouseenter', Swal.stopTimer)
-    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-  		}
-	})
-	window.addEventListener('popstate', function(event) {
-		var input1 = document.getElementById("email");
-		var input2 = document.getElementById("password");
-        input1.value = "";
-		input2.value = "";
+// 	});
+// }else if(successValue === "invalidPass"){
+// 	Swal.fire({
+// 		icon:'error',
+// 		title:'Wrong Password',
+// 		toast:true,
+// 		position:'top-end',
+// 		showConfirmButton: false,
+//   		timer: 3000,
+//   		timerProgressBar: true,
+// 		didOpen: (toast) => {
+//     	toast.addEventListener('mouseenter', Swal.stopTimer)
+//     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+//   		}
+// 	})
+// 	window.addEventListener('popstate', function(event) {
+// 		var input1 = document.getElementById("email");
+// 		var input2 = document.getElementById("password");
+//         input1.value = "";
+// 		input2.value = "";
 		
-	});
-}else if(successValue === "Timein"){
-	const picture = urlParams.get('picture');
-	const id = urlParams.get('ID');
-	const name = urlParams.get('name');
-	const post = urlParams.get('post');
-	const timein = urlParams.get('Timein');
-	const status = urlParams.get('status');
-	const dept =urlParams.get('dep');
+// 	});
+// }else if(successValue === "Timein"){
+// 	const picture = urlParams.get('picture');
+// 	const id = urlParams.get('ID');
+// 	const name = urlParams.get('name');
+// 	const post = urlParams.get('post');
+// 	const timein = urlParams.get('Timein');
+// 	const status = urlParams.get('status');
+// 	const dept =urlParams.get('dep');
 	
-	Swal.fire({
-		html:'<div><img src="../Uploads/'+picture+'" style="position:absolute;top:25px;left:50px;height:90px;width:90px;" class="img-fluid m-0 rounded-circle">'+
-		'<p>Name: '+name+'</p>'+
-		'<p>Department: '+dept+'</p>'+
-		'<p>Position: '+post+'</p></div>',
-		footer:'<h1 class="bi bi-check-circle-fill text-success" style="position:absolute;top:175px;left:70px;"></h1>'+
-				'Time In Recorded<br>'+timein+'<br>'+status,
-		showConfirmButton: false,
-  		timer: 3000,
-  		timerProgressBar: true,
-  		didOpen: (toast) => {
-    	toast.addEventListener('mouseenter', Swal.stopTimer)
-    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-  		}
-	})
-	window.addEventListener('popstate', function(event) {
-		var input1 = document.getElementById("email");
-		var input2 = document.getElementById("password");
-        input1.value = "";
-		input2.value = "";
+// 	Swal.fire({
+// 		html:'<div><img src="../Uploads/'+picture+'" style="position:absolute;top:25px;left:50px;height:90px;width:90px;" class="img-fluid m-0 rounded-circle">'+
+// 		'<p>Name: '+name+'</p>'+
+// 		'<p>Department: '+dept+'</p>'+
+// 		'<p>Position: '+post+'</p></div>',
+// 		footer:'<h1 class="bi bi-check-circle-fill text-success" style="position:absolute;top:175px;left:70px;"></h1>'+
+// 				'Time In Recorded<br>'+timein+'<br>'+status,
+// 		showConfirmButton: false,
+//   		timer: 3000,
+//   		timerProgressBar: true,
+//   		didOpen: (toast) => {
+//     	toast.addEventListener('mouseenter', Swal.stopTimer)
+//     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+//   		}
+// 	})
+// 	window.addEventListener('popstate', function(event) {
+// 		var input1 = document.getElementById("email");
+// 		var input2 = document.getElementById("password");
+//         input1.value = "";
+// 		input2.value = "";
 		
-	});
-}else if(successValue === "Timeout"){
-	const picture = urlParams.get('picture');
-	const id = urlParams.get('ID');
-	const name = urlParams.get('name');
-	const post = urlParams.get('post');
-	const timeout = urlParams.get('Timeout');
-	const dept =urlParams.get('dep');
+// 	});
+// }else if(successValue === "Timeout"){
+// 	const picture = urlParams.get('picture');
+// 	const id = urlParams.get('ID');
+// 	const name = urlParams.get('name');
+// 	const post = urlParams.get('post');
+// 	const timeout = urlParams.get('Timeout');
+// 	const dept =urlParams.get('dep');
 	
-	Swal.fire({
-		html:'<div><img src="../Uploads/'+picture+'" style="position:absolute;top:25px;left:50px;height:90px;width:90px;" class="img-fluid m-0 rounded-circle">'+
-		'<p>Name: '+name+'</p>'+
-		'<p>Department: '+dept+'</p>'+
-		'<p>Position: '+post+'</p></div>',
-		footer:'<h1 class="bi bi-check-circle-fill text-success" style="position:absolute;top:175px;left:70px;"></h1>'+
-				'Time Out Recorded<br>'+timeout,
-		showConfirmButton: false,
-  		timer: 3000,
-  		timerProgressBar: true,
-  		didOpen: (toast) => {
-    	toast.addEventListener('mouseenter', Swal.stopTimer)
-    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-  		}
-	})
-	window.addEventListener('popstate', function(event) {
-		var input1 = document.getElementById("email");
-		var input2 = document.getElementById("password");
-        input1.value = "";
-		input2.value = "";
+// 	Swal.fire({
+// 		html:'<div><img src="../Uploads/'+picture+'" style="position:absolute;top:25px;left:50px;height:90px;width:90px;" class="img-fluid m-0 rounded-circle">'+
+// 		'<p>Name: '+name+'</p>'+
+// 		'<p>Department: '+dept+'</p>'+
+// 		'<p>Position: '+post+'</p></div>',
+// 		footer:'<h1 class="bi bi-check-circle-fill text-success" style="position:absolute;top:175px;left:70px;"></h1>'+
+// 				'Time Out Recorded<br>'+timeout,
+// 		showConfirmButton: false,
+//   		timer: 3000,
+//   		timerProgressBar: true,
+//   		didOpen: (toast) => {
+//     	toast.addEventListener('mouseenter', Swal.stopTimer)
+//     	toast.addEventListener('mouseleave', Swal.resumeTimer)
+//   		}
+// 	})
+// 	window.addEventListener('popstate', function(event) {
+// 		var input1 = document.getElementById("email");
+// 		var input2 = document.getElementById("password");
+//         input1.value = "";
+// 		input2.value = "";
 		
-	});
-}
+// 	});
+// }
 
 </script>
 </html>

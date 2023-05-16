@@ -15,14 +15,37 @@ if (isset($_SESSION['admin_id'])) {
 
     //get admin data 
     $adminData = $admin->btnPic($_SESSION['admin_id']);
+
+    $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
+
+    $year = "SELECT * FROM hr_year WHERE id = 1";
+    $yquery = $conn->query($year);
+    $yrow = $yquery->fetch_assoc();
+
+    $currentYear = date('Y');
+    $employees = "SELECT id, gender FROM employees WHERE status = '1'";
+    $empquery = $conn->query($employees);
+
+    if($currentYear !== $yrow['year_now']){
+      $updateYear = "UPDATE hr_year SET year_now = '$currentYear'";
+      $updateQuery = $conn->query($updateYear);
+
+      while($emprow = mysqli_fetch_assoc($empquery)){
+        $employee_id = $emprow['id'];
+        if($emprow['gender'] == 'male'){
+          $updateLeaveBal = "UPDATE employee_details SET vacation_leave = 15, sick_leave = 60, maternity_leave = 0, paternity_leave = 7 WHERE employee_id = $employee_id";
+        }elseif($emprow['gender'] == 'female'){
+          $updateLeaveBal = "UPDATE employee_details SET vacation_leave = 15, sick_leave = 60, maternity_leave = 90, paternity_leave = 0 WHERE employee_id = $employee_id";
+        }
+
+        $conn->query($updateLeaveBal);
+
+      }
+    }
+}else{
+  header("Location: ../index.php");
 }
 
-$conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
-
-// check if connection was successful
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
 
 
 ?>
