@@ -27,12 +27,14 @@ if (!$conn) {
       <th scope="col">Firstname</th>
       <th scope="col">Lastname</th>
       <th scope="col">Email</th>
+      <th score="col">Date Hired</th> 
+      <th scope="col">Date Resign</th>
     </tr>
   </thead>
   <tbody>
 
   <?php 
-  $query = "SELECT * FROM `employees` WHERE status = '3'";
+  $query = "SELECT employees.*, employee_details.date_hired FROM employees JOIN employee_details ON employees.id = employee_details.employee_id WHERE employees.status = '3'";
   $result = $conn->query($query);
   
    while($resign = mysqli_fetch_assoc($result)){
@@ -44,6 +46,8 @@ if (!$conn) {
       <td><?php echo $resign['first_name']?></td>
       <td><?php echo $resign['last_name']?></td>
       <td><?php echo $resign['email']?></td>
+      <td><?php echo $resign['date_hired']?></td>
+      <td><?php echo $resign['date_resign']?></td>
     </tr>
    <?php } ?>
   </tbody>

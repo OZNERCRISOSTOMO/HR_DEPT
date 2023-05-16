@@ -155,9 +155,10 @@ class Admin {
     }
 
     public function  deleteEmployeeById($id){
+        $date_now1 = date("Y-m-d");
           // prepare the SQL statement using the database property
-        $stmt = $this->database->getConnection()->prepare("UPDATE employees SET status = '3'  WHERE id=?");
-
+        $stmt = $this->database->getConnection()->prepare("UPDATE employees SET status = '3', date_resign='$date_now1'  WHERE id=?");
+        
          //if execution fail
         if (!$stmt->execute([$id])) {
             header("Location: ../index.php?error=stmtfail");

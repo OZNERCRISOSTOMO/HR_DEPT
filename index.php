@@ -98,7 +98,7 @@ if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) {
                     </button>
                     </div>
                 </form>
-                <a class="d-flex justify-content-center align-items-center" href="Pages/admin-forgotPassword.php">Forgot password?</a>
+                <a class="d-flex justify-content-center align-items-center text-secondary text-decoration-none" href="Pages/admin-forgotPassword.php">Forgot password?</a>
 		    </div>
             
             <!-- Loading spinner container -->

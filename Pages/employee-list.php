@@ -2,6 +2,7 @@
 // start session
 session_start();
 
+
 if (isset($_SESSION['admin_id'])) {
     require '../Classes/admin.php';
     require '../Classes/database.php';
