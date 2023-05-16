@@ -10,10 +10,13 @@
  
 <body>
 	<div class="container">
-		<h2>Employee List</h2>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-  Leave
+
+  <div class="d-flex py-4">
+		<h2 class="pe-2">Employee List</h2>
+    <button type="button" class="btn btn-primary shadow" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+  File Leave
 </button>
+</div>
 
 
 
@@ -22,14 +25,15 @@
 			<thead>
 				<tr>
 					
-			<th>Employee ID</th>
+			    <th>Employee ID</th>
             <th>Firstname</th>
             <th>Lastname</th>
-			<th>Email</th>
+		    	<th>Email</th>
             <th>Gender</th>
             <th>Schedule</th>
-            <th>Contact</th>
             <th>Position</th>
+            <th>Date</th>
+            <th>Status</th>
             <th>Action</th>
 				</tr>
 			</thead>
@@ -48,20 +52,42 @@
    
 
 
-    $sql = "SELECT employees.*, employee_details.department_position
+    $sql = "SELECT employees.*, employee_details.department_position ,employee_details.employee_id As empid
     FROM employees
     JOIN employee_details ON employees.id = employee_details.employee_id
     WHERE employee_details.department = 'purchaser'";
     $result = mysqli_query($conn, $sql);
 
-
+    $dateString = date('Y-m-d');
    
     $schedule = "";
     // check if SELECT statement was successful
     if (mysqli_num_rows($result) > 0) {
         // output data of each row
         while ($row = mysqli_fetch_assoc($result)) {
-          $sql = "SELECT * FROM schedule WHERE id = '".$row['id']."'";
+          $sql1 = "SELECT * FROM attendance WHERE employee_id = '".$row['empid']."' AND date='$dateString' AND (status = 'ONTIME' OR status = 'LATE' OR status = 'VACATION LEAVE' OR status = 'MATERNITY LEAVE' OR status = 'PATERNITY LEAVE')";
+          $result1 = $conn->query($sql1);
+          $row1 = $result1->fetch_assoc();
+
+         
+          if($result1->num_rows > 0){
+          if ($row1["status"] == 'ONTIME' || $row1["status"] == 'LATE'){
+            $status = "PRESENT";
+          }
+          elseif ($row1["status"] == 'VACATION LEAVE'){
+            $status = "VACATION LEAVE";
+          }
+          elseif ($row1["status"] == 'MATERNITY LEAVE'){
+            $status = "MATERNITY LEAVE";
+          }
+          elseif ($row1["status"] == 'PATERNITY LEAVE'){
+            $status = "PATERNITY LEAVE";
+          }
+        }else{
+          $status = "ABSENT";
+        }
+
+          
 
             if ($row["schedule_id"] == '1') {
                 $schedule = "7:00AM - 3:00PM";
@@ -78,8 +104,9 @@
                 <td><?php echo $row["email"]?></td>
                 <td><?php echo $row["gender"]?></td>
                 <td><?php echo $schedule?></td>
-                <td><?php echo $row["contact"]?></td>
                 <td><?php echo $row["department_position"]?></td>
+                <td><?php echo $dateString?></td>
+                <td><?php echo $status?></td>
                 <td><input type="hidden" name="card-number" value=<?php echo $row['id']?>>
                 <button type="button" onclick="location.href='../Pages/setschedule.php?id=<?php echo $row['id']?>'" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                 Set Schedule
@@ -146,30 +173,18 @@
     </div>
 
 
+    
+
 <div class="col-12 mb-4">
-    <div class="form-label">
-    <label class="form-check-label" for="inlineRadio1">Type: </label>
-    </div>
-    <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="leave" id="inlineRadio1" value="Vacation Leave">
-    <label class="form-check-label" for="inlineRadio1">Vacation Leave</label>
-    </div>
-    <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="leave" id="inlineRadio2" value="Sick Leave">
-    <label class="form-check-label" for="inlineRadio2">Sick Leave</label>
-    </div>
-    <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="leave" id="inlineRadio2" value="Maternity Leave">
-    <label class="form-check-label" for="inlineRadio2">Maternity Leave</label>
-    </div>
-    <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="leave" id="inlineRadio2" value="Paternity Leave">
-    <label class="form-check-label" for="inlineRadio2">Paternity Leave</label>
-    </div>
-    <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="leave" id="inlineRadio2" value="Other">
-    <label class="form-check-label" for="inlineRadio3">Other</label>
-    </div>
+<select  name="leave" class="form-control">
+            <option  value="0">Select employee</option>
+                    <option value="Vacation Leave">Vacation Leave</option>
+                    <option value="Sick Leave">Sick Leave</option>
+                    <option value="Maternity Leave">Maternity Leave</option>
+                    <option value="Paternity Leave">Paternity Leave</option>
+                    <option value="Reason for Absent">Reason for Absent</option>
+                    <option value="Notice of Explanation">Notice of Explanation</option>
+          </select>
 
     </div>
 

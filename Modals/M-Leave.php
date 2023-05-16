@@ -48,11 +48,22 @@
             while($employee_row = mysqli_fetch_assoc($employee_query)){
               $total_salary = $employee_row['num_hr'] * $employee_row['rate_per_hour'];
               $total_overtime = $employee_row['over_time'] * $employee_row['rate_per_hour'];
+
+            if ($employee_row['department'] == 'human-resource'){
+              $dept = "Human Resource";
+            }
+            else if($employee_row['department'] == 'sales'){
+              $dept = "Sales";
+            }
+            else if($employee_row['department'] == 'purchaser'){
+              $dept = "Purchaser";
+            }
+            else $dept = "Warehouse";
         ?>
       <tr>
       <td><?php echo $employee_row['employee_id']; ?> </td>
       <td><?php echo $employee_row['first_name'];?> <?php echo $employee_row['last_name'];?></td>
-      <td><?php echo $employee_row['department']; ?> </td>
+      <td><?php echo $dept; ?> </td>
       <td><?php echo $employee_row['sick_leave']; ?> </td>
       <td><?php echo $employee_row['vacation_leave']; ?> </td>
       <td><?php echo $employee_row['maternity_leave']; ?> </td>
