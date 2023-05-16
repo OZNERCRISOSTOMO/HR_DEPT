@@ -291,7 +291,7 @@ if(successValue === "invalidUser"){
   		timer: 3000,
   		timerProgressBar: true,
 		toast:true,
-		position:'top-end',
+		position:'center',
   		didOpen: (toast) => {
     	toast.addEventListener('mouseenter', Swal.stopTimer)
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -322,7 +322,7 @@ if(successValue === "invalidUser"){
   		timer: 3000,
   		timerProgressBar: true,
 		toast:true,
-		position:'top-end',
+		position:'center',
   		didOpen: (toast) => {
     	toast.addEventListener('mouseenter', Swal.stopTimer)
     	toast.addEventListener('mouseleave', Swal.resumeTimer)

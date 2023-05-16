@@ -125,7 +125,7 @@ if (isset($_SESSION['admin_id'])) {
   <tbody>
 
   <?php
-$query = "SELECT * FROM `leave` WHERE status = 0";
+$query = "SELECT * FROM leave_p WHERE status = 0";
 $result = mysqli_query($conn, $query);
 
 

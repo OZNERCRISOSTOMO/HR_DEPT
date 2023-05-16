@@ -72,7 +72,6 @@
               echo "<td>".$idRow['last_name']."</td>";
               echo "<td>".$dept."</td>";
               echo '<td><span class="badge text-bg-danger">Suspended</span></td></tr>';
-              
             }else if($count >= 5){
               echo "<tr><td>".$employee_id."</td>";
               echo "<td>".$idRow['first_name']."</td>";
