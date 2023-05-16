@@ -195,13 +195,15 @@
                     $absent_yesterday = "SELECT * FROM attendance WHERE employee_id = '$id' AND status = 'ABSENT' AND date = '$yesterday'";
                     $absent_query = $conn->query($absent_yesterday);
                     
-                    if($countRow['count'] >= 7){
-                        header("Location: ../Pages/employee-attendance.php?value=suspend");
-                    }elseif($absent_query->num_rows > 0){
-                        header("Location: ../Pages/employee-attendance.php?value=absentYesterday");
-                    }else{
+                    
                     // If the Employee Tap card and not Following on their schedule.
                         if(($sched == '1' && $srow['time_out'] > $lognow) || ($sched == '2' && $srow['time_in'] < $lognow)){
+
+                            if($countRow['count'] >= 7){
+                                header("Location: ../Pages/employee-attendance.php?value=suspend");
+                            }elseif($absent_query->num_rows > 0){
+                                header("Location: ../Pages/employee-attendance.php?value=absentYesterday");
+                            }else{
                             $sql = "INSERT INTO attendance (employee_id, name, date, time_in, status, schedule_id) VALUES ('$id', '$name', '$date_now', '$lognow', '$logstatus', '$sched')";
                             if($conn->query($sql)){
                     
@@ -210,6 +212,7 @@
                         else{
                             echo "Error";
                         }
+                    }
                     }else{
                         header("Location: ../Pages/employee-attendance.php?value=invalidSched");
                     }

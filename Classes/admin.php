@@ -760,7 +760,7 @@ class Admin {
              // Get today's date
         $today = date('Y-m-d');
 
-        $employee = $this->database->getConnection()->prepare("SELECT * FROM attendance WHERE employee_id = ? AND date = '$today' AND (status = 'ONTIME' OR status = 'LATE' OR status = 'VACATION LEAVE' OR status = 'MATERNITYLEAVE' OR status = 'PATERNITY LEAVE')");
+        $employee = $this->database->getConnection()->prepare("SELECT * FROM attendance WHERE employee_id = ? AND date = '$today' AND (status = 'ONTIME' OR status = 'LATE' OR status = 'VACATION LEAVE' OR status = 'MATERNITY LEAVE' OR status = 'PATERNITY LEAVE')");
          $employee->execute([$id]);
         return $employee->fetchAll();
 

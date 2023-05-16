@@ -18,4 +18,6 @@ $command = "mysqldump --opt -h $db_host -u $db_user -p$db_pass $db_name > $file/
 exec($command);
 
 header("Location: ../Pages/dashboard.php?value=backup");
+
+
 ?>

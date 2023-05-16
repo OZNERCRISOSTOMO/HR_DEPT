@@ -49,29 +49,29 @@ foreach($employee1 as $list){
 }
 $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");
 
-$employeeQuery = "SELECT * FROM employees";
-$employeeResult = $conn->query($employeeQuery);
-$countWarnings = 0;
+// $employeeQuery = "SELECT * FROM employees";
+// $employeeResult = $conn->query($employeeQuery);
+// $countWarnings = 0;
 
-// Step 3: Loop through each employee id and get the count of absent days
-while ($idRow = $employeeResult->fetch_assoc()) {
-// Get the employee id
-$employee_id = $idRow["id"];
+// // Step 3: Loop through each employee id and get the count of absent days
+// while ($idRow = $employeeResult->fetch_assoc()) {
+// // Get the employee id
+// $employee_id = $idRow["id"];
 
-// Execute the SQL query to count absent days for this employee
-$countQuery = "SELECT COUNT(status) as countss FROM attendance WHERE employee_id = '$employee_id' AND status = 'ABSENT'";
-$countResult = $conn->query($countQuery);
+// // Execute the SQL query to count absent days for this employee
+// $countQuery = "SELECT COUNT(status) as countss FROM attendance WHERE employee_id = '$employee_id' AND status = 'ABSENT'";
+// $countResult = $conn->query($countQuery);
 
-// Get the count of absent days
-$countRow = $countResult->fetch_assoc();
-$counttt = $countRow["countss"];
+// // Get the count of absent days
+// $countRow = $countResult->fetch_assoc();
+// $counttt = $countRow["countss"];
 
-// Display the count of absent days
-if($counttt >= 3){
-  $countWarnings++;
-}
+// // Display the count of absent days
+// if($counttt >= 3){
+//   $countWarnings++;
+// }
 
-}
+// }
 
 // simula dito
   $dateString = date('Y-m-d');
@@ -346,7 +346,7 @@ else {
 
                             <div class="col">
                                     <button type="button" class=" btn ps-0 btn-light shadow btn-md p-2 w-100 vh-100 text-secondary" style="max-width: 200px;max-height:  50px;" data-bs-toggle="modal" data-bs-target="#absentModal">
-                                    <span class="p-2 text-black"  style="font-size: 18px;"><?php echo "$countPresents" ?> </span>Absents 
+                                    <span class="p-2 text-black"  style="font-size: 18px;"><?php echo $countPresents ?> </span>Absents 
                                     <span ><i class=" text-danger fa-solid fa-circle-info p-0" style="font-size: 18px;" ></i></span>
                                     </button>
                                     <?php include("../Modals/M-Absent.php")?>  
@@ -354,7 +354,7 @@ else {
 
                             <div class="col">
                                     <button type="button" class="btn  ps-0 btn-light shadow btn-md p-2 w-100 vh-100 text-secondary" style="max-width: 200px; max-height:  50px;"  data-bs-toggle="modal" data-bs-target="#WarningModal">
-                                    <span class="p-2 text-black" style="font-size: 18px;"><?php echo "$countWarnings" ?></span> Warnings 
+                                    <span class="p-2 text-black" style="font-size: 18px;"><?php echo $countWarnings1 ?></span>Warnings 
                                     <span ><i class=" text-warning fa-solid fa-circle-info  p-0"  style="font-size: 18px;"></i></span>
                                     </button>
                                     <?php include("../Modals/M-Warning.php")?>  
