@@ -80,7 +80,7 @@ if (isset($_SESSION['admin_id'])) {
             <div class="col-2"> 
               
               <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-secondary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
               List of Archive
             </button>
 
