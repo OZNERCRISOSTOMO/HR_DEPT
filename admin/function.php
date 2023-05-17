@@ -52,7 +52,8 @@
         $department = $employeepayslip['department'];
         $date = $employeepayslip['from_date'];
         $date1 = $employeepayslip['to_date'];
-
+        
+        $fullNamePayslip = $fname;
         $fullName = $fname;
         $fullNameParts = explode(" ", $fullName);
         $fname = $fullNameParts[count($fullNameParts) - 1];
@@ -204,7 +205,7 @@
                 <tbody>
                     <tr>
                         <td class="column" style="font-weight: bold;">Employee Name: </td>
-                        <td class="column">'. $fname .'</td>
+                        <td class="column">'. $fullNamePayslip .'</td>
                         <td class="column" style="font-weight: bold;">Payroll ID: </td>
                         <td class="column">'. $paycode .'</td>
                     </tr>
