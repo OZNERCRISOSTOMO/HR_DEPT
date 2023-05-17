@@ -75,6 +75,7 @@
 		
 	
 	<div class="col-sm-5 m-auto my-5 shadow-lg p-4 rounded align-items-center">
+
 		<img src="../Images/Attendance-logo.png" class="mx-auto d-block mb-3" height="150" width="150">
 		<form action="../Functions/employee-attendance-revise.php" method="POST" autofocus>
 			<div class="form-group has-feedback mb-3">
@@ -282,10 +283,12 @@ if(successValue === "invalidUser"){
 	const dept =urlParams.get('dep');
 	
 	Swal.fire({
-		html:'<div><img src="../Uploads/'+picture+'" style="position:absolute;top:25px;left:50px;height:90px;width:90px;" class="img-fluid m-0 rounded-circle">'+
+		html:
+		'<center><img src="../Uploads/'+picture+'" style="height:90px;width:90px;" class="img-fluid mb-4 rounded-circle"></center>'+
+		'<div>'+
 		'<p style="color:black;font-weight:700px;">Name: '+name+'</p>'+
-		'<p>Department: '+dept+'</p>'+
-		'<p>Position: '+post+'</p></div>',
+		'<p style="color:black;font-weight:700px;">Department: '+dept+'</p>'+
+		'<p style="color:black;font-weight:700px;">Position: '+post+'</p></div>',
 		footer:'Time In Recorded<br>'+timein+'<br>'+status,
 		showConfirmButton: false,
   		timer: 3000,
@@ -313,10 +316,12 @@ if(successValue === "invalidUser"){
 	const dept =urlParams.get('dep');
 	
 	Swal.fire({
-		html:'<div><img src="../Uploads/'+picture+'" style="position:absolute;top:25px;left:50px;height:90px;width:90px;" class="img-fluid m-0 rounded-circle">'+
+		html:
+		'<center><img src="../Uploads/'+picture+'" style="height:90px;width:90px;" class="img-fluid mb-4 rounded-circle"></center>'+
+		'<div>'+
 		'<p style="color:black;font-weight:700px;">Name: '+name+'</p>'+
-		'<p>Department: '+dept+'</p>'+
-		'<p>Position: '+post+'</p></div>',
+		'<p style="color:black;font-weight:700px;">Department: '+dept+'</p>'+
+		'<p style="color:black;font-weight:700px;">Position: '+post+'</p></div>',
 		footer:'Time Out Recorded<br>'+timeout,
 		showConfirmButton: false,
   		timer: 3000,

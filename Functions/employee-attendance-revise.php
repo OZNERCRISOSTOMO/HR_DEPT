@@ -217,9 +217,8 @@
                         header("Location: ../Pages/employee-attendance.php?value=invalidSched");
                     }
                 }
-            }
-
-        }else{
+            
+            }else{
             // Employee Not found
             header("Location: ../Pages/employee-attendance.php?value=invalidUser");
         }

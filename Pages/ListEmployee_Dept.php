@@ -217,7 +217,7 @@
     const successValue = urlParams.get('value');
     console.log(successValue);
 
-    if(successValue === "invalidUser"){
+if(successValue === "invalidUser"){
 	Swal.fire({
 		icon:'error',
 		title:'User Not Found',
@@ -259,5 +259,19 @@
     	toast.addEventListener('mouseleave', Swal.resumeTimer)
   		}
 	});
-}
+}else if(successValue === "prior"){
+    Swal.fire({
+		icon:'error',
+    position:'top-end',
+		title:'Error: 7 Days Prior',
+		toast:true,
+		showConfirmButton: false,
+  		timer: 3000,
+  		timerProgressBar: true,
+		didOpen: (toast) => {
+    	toast.addEventListener('mouseenter', Swal.stopTimer)
+    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+  		}
+	})
+  }
 </script>

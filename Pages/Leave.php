@@ -154,7 +154,7 @@ if (mysqli_num_rows($result) > 0) {
       </form>
       <form method="post" action="../Functions/leave-delete.php">
           <input type="hidden" name="deleteid" id="deleteid" value=<?php echo $row['ID']; ?>>
-          <input type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger" value="Delete">
+          <input type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger" value="Declined">
       </form>
       </td>
 </tr>

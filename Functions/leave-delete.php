@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 
 if (isset($_POST['deleteid'])) {
     $id = $_POST['deleteid'];
-    $overtime1 = "SELECT * FROM `leave` WHERE id = $id";
+    $overtime1 = "SELECT * FROM leave_p WHERE id = $id";
     $queryko = $conn->query($overtime1);
     $date = $queryko->fetch_assoc();
 
