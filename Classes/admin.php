@@ -553,14 +553,30 @@ class Admin {
     
 
      public function acceptEmployee($employeeData){
-        $employee = $this->getPendingEmployees;
+
+   
+        //get employee gender
+         // prepare the SQL statement using the database property
+        $stmt = $this->database->getConnection()->prepare("SELECT gender FROM employees WHERE  id=?");
+
+         //if execution fail
+        if (!$stmt->execute([$employeeData['employeeId']])) {
+            header("Location: ../index.php?error=stmtfail");
+            exit();
+        }
+
+
+        //fetch the result
+        $employee = $stmt->fetch();
+        $ml = 0;
+        $pl = 0;
         if($employee['gender'] == 'female'){
             $ml = 90;
-            $pl = 0;
-        }elseif($employee['gender'] == 'male'){
-            $ml = 0;
+        }
+        if($employee['gender'] == 'male'){
             $pl = 7;
         }
+
             // prepared statement
          $stmt = $this->database->getConnection()->prepare("UPDATE employees AS e
                                                       INNER JOIN employee_details AS ed ON e.id = ed.employee_id
@@ -579,13 +595,11 @@ class Admin {
                              $employeeData['type'],
                              $employeeData['branch'],
                              $employeeData['vacationLeave'],
-                             $employeeData['sickLeave'],
-                             
-                             $ml,
-                             
+                             $employeeData['sickLeave'],                            
+                             $ml,                           
                              $pl,
-                             $employeeData['healthInsurance'],
-                             $employeeData['christmasBonus'],
+                             0,
+                             0,
                              $employeeData['foodAllowance'],
                              $employeeData['transpoAllowance'],
                              $employeeData['employeeId']
@@ -643,12 +657,12 @@ class Admin {
         }
         }
 
-        //save account to database
+        // save account to database
         $this->saveEmployeeIDAndPassword($employeeAccount[0],$employeeAccount[1],$employeeData['employeeEmail'],$employeeData['employeeId'],$employeeData['position']);
 
 
 
-        //if success go to dashboard
+        // if success go to dashboard
         header("Location: ../Pages/dashboard.php");
 
         exit();

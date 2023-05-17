@@ -163,7 +163,7 @@
                                       <input type="hidden" class="form-control sick-leave" id="sick-leave" name="sick-leave" value="60" >
                                 </div>
                                 
-                                <div class="col-6 align-self-end ms-3">
+                                <!-- <div class="col-6 align-self-end ms-3">
                                     <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="1" id="health-insurance" name="health-insurance" checked >
                                     <label class="form-check-label" for="health-insurance"> Health insurance </label>
@@ -173,7 +173,7 @@
                                     <input class="form-check-input" type="checkbox" value="1" id="christmas-bonus" name="christmas-bonus" checked >
                                      <label class="form-check-label" for="christmas-bonus"> Chrirstmas Bonus </label >
                                 </div> 
-                                </div>
+                                </div> -->
 
                                 <h5>Allowance</h5>
                                  <div class="form-check">
