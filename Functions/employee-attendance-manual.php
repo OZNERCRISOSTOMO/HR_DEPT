@@ -74,7 +74,7 @@ if ($conn->connect_error) {
                 <label for="exampleInputEmail1" class="form-label fw-bolder">Login ID:</label>
                     <div class="input-group">
                         <div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-user"></i></div>
-                            <input type="text" class="form-control shadow-none border-left-0" name="email" id="email" placeholder="Email" required="required" autocomplete="off">
+                            <input type="text" class="form-control shadow-none border-left-0" name="email" id="email" placeholder="Enter Username " required="required" autocomplete="off">
                         </div>
                     </div>
                 
@@ -82,7 +82,7 @@ if ($conn->connect_error) {
 		            <label for="examplePassword" class="form-label fw-bolder">Password</label>
 		                <div class="input-group">
 			                <div class="input-group-text bg-transparent border-right-0"><i class="fa-solid fa-lock"></i></div>
-                            <input type="password" class="form-control shadow-none border-left-0" name="password" id="password" placeholder="Password" required="required" autocomplete="off">
+                            <input type="password" class="form-control shadow-none border-left-0" name="password" id="password" placeholder="Enter Password" required="required" autocomplete="off">
 		                </div>
 		        </div> 
 
