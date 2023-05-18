@@ -27,6 +27,7 @@
             if($employee_query->num_rows > 0 ){
                 $employee_row = $employee_query->fetch_assoc();
                 $employee_id = $employee_row['employee_id'];
+                
                 $diff_absent = "SELECT DATEDIFF('$date_end', '$date_start') AS days, sick_leave, vacation_leave FROM employee_details WHERE employee_id = '$employee_id'";
                 $diff_query = $conn->query($diff_absent);
                 $diff_row = $diff_query->fetch_assoc();
