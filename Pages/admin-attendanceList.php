@@ -24,7 +24,7 @@ if (isset($_SESSION['admin_id'])) {
 <!DOCTYPE html>
 <html>
 <head>
-<Title> Attendance</Title>
+<Title>Attendance</Title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="../Images/Logo 1.svg">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -89,13 +89,13 @@ if (isset($_SESSION['admin_id'])) {
                         <a class="nav-link text-dark active" href="#tab1" data-bs-toggle="tab">History</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="#tab2" data-bs-toggle="tab">Over/Undertime</a>
+                        <a class="nav-link text-dark" href="#tab2" data-bs-toggle="tab">Overtime/Undertime</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="#tab3" data-bs-toggle="tab">Recent</a>
+                        <a class="nav-link text-dark" href="#tab3" data-bs-toggle="tab">Present This Day</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="#tab4" data-bs-toggle="tab">Absents</a>
+                        <a class="nav-link text-dark" href="#tab4" data-bs-toggle="tab">Absent This Day</a>
                       </li>
                     </ul>
 
@@ -153,11 +153,33 @@ if (isset($_SESSION['admin_id'])) {
     </tbody>
     </table>
     
-    <form method="POST" action="../Functions/export.php">
-      <input type="submit" name="export" id="export" value="Export">
-    </form>
-        </div>
+    <!-- Button trigger Export modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportModal">
+<i class="fa-solid fa-file-export me-2"></i>Export Attendance Data as .csv
+</button>
 
+<!-- Export Modal -->
+<div class="modal fade " id="exportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><b>Are you sure you want to export?</b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5>Exporting this will remove the current data in the History table</h5  >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-white text-danger" data-bs-dismiss="modal">Cancel</button>
+        <form method="POST" action="../Functions/export.php">
+      <button class="btn btn-primary" type="submit" name="export" id="export"><i class="fa-solid fa-check me-2"></i>Yes</button>
+    </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
 
          <!------------ Table 2 Overtime / Undertime------------ -->
         <div class="tab-pane fade" id="tab2">
@@ -213,15 +235,17 @@ if (isset($_SESSION['admin_id'])) {
       <td><?php echo $row['remarks']; ?> </td>
       <td><?php echo $row['date']; ?> </td>
       <td><?php echo $row['over_time']; ?> </td>
-      <td class="d-flex">
-      <form method="post" action="../Functions/overtime-accept.php">
+      <td>
+      <div class="d-flex justify-content-center">
+      <form method="post" action="../Functions/overtime-accept.php" class="ms-2">
           <input type="hidden" name="acceptid" id="acceptid" value=<?php echo $row['id']; ?>>
-          <input type="submit" name="acceptbtn" id="acceptbtn" class="btn btn-sm btn-primary" value="Accept">
+          <button type="submit" name="acceptbtn" id="acceptbtn" class="btn btn-sm btn-primary d-flex justify-content-center align-items-center"><i class="fa-solid fa-check me-2"></i>Accept</button>
       </form>
-      <form method="post" action="../Functions/overtime-delete.php">
+      <form method="post" action="../Functions/overtime-delete.php" class="ms-2">
           <input type="hidden" name="deleteid" id="deleteid" value=<?php echo $row['id']; ?>>
-          <input type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger" value="Delete">
+          <button type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger  d-flex justify-content-center align-items-center"><i class="fa-solid fa-xmark me-2"></i>Decline</button>
       </form>
+      </div>
       </td>
     </tr>
     <?php

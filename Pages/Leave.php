@@ -88,12 +88,12 @@ if (isset($_SESSION['admin_id'])) {
 
   <div class="col-9">
 
-    <h5>Leave</h5>
+  <h4><b>Leave</b>  </h4>
 </div>
 
   <div class="col-3">
   
-  <button type="button" class="btn btn-success shadow w-100" data-bs-toggle="modal" data-bs-target="#leave"> Leave Balance</button>
+  <button type="button" class="btn btn-success shadow w-100" data-bs-toggle="modal" data-bs-target="#leave"><i class="fa-solid fa-layer-group me-2"></i>Leave Balance</button>
         <?php include("../Modals/M-Leave.php")?>  
   </div>
 
@@ -101,20 +101,14 @@ if (isset($_SESSION['admin_id'])) {
 </div>
 
 <div class="container-fluid">
-
-
-
-
-
-
-<table class="table table-striped" id="leave1">
+<table class="table table-striped " id="leave1">
   <thead>
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Type</th>
-      <th scope="col px-5">Date Started</th>
-      <th scope="col px-5">Date Ended</th>
+      <th scope="col">Date Started</th>
+      <th scope="col">Date Ended</th>
       <th scope="col">Department</th>
       <th scope="col">Description</th>
       <th scope="col">Status</th>
@@ -147,15 +141,17 @@ if (mysqli_num_rows($result) > 0) {
           echo "Accepted";
         }
       ?></td>
-      <td class="d-flex">
+      <td>
+      <div class="d-flex justify-content-center">
       <form method="post" action="../Functions/leave-accept.php">
           <input type="hidden" name="acceptid" id="acceptid" value=<?php echo $row['ID']; ?>>
-          <input type="submit" name="acceptbtn" id="acceptbtn" class="btn btn-sm btn-primary" value="Accept">
+          <button type="submit" name="acceptbtn" id="acceptbtn" class="btn btn-sm btn-primary d-flex justify-content-center align-items-center me-2"><i class="fa-solid fa-check me-2"></i>Accept</button>
       </form>
       <form method="post" action="../Functions/leave-delete.php">
           <input type="hidden" name="deleteid" id="deleteid" value=<?php echo $row['ID']; ?>>
-          <input type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger" value="Declined">
+          <button type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger d-flex justify-content-center align-items-center me-2"><i class="fa-solid fa-xmark me-2"></i>Decline</button>
       </form>
+      </div>
       </td>
 </tr>
 </form>

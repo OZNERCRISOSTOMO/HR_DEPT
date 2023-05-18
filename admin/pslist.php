@@ -93,46 +93,35 @@ if (isset($_SESSION['admin_id'])) {
             </div>
             <!------End----->
 
-<div class="container">
+<div class="container-fluid p-0">
         <div class="row">
-            <div class="col-xl-12 mt-3 ">
+                <div class="col-5">
+                <h4><b>Payroll Details</b></h4>
+                  </div>
+                    
 
-            
-              
-                <div class="row ">
-
-                            <div class="col-5">
-                            <h3 >Payroll Details</h3>
-                    </div>
-
-                <div class="col-2" style=" justify-content: flex-end;">
-                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-plus fs-6"></i>Add Employee</button>
+                <div class="col-7 d-flex justify-content-end align-items-center">
+                    <button type="button" style="white-space: nowrap;" class="btn btn-success d-flex justify-content-center align-items-center me-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-user-plus me-2"></i>Add Employee</button>
                      <?php include("../Modals/M-pslist.php")?>   
                      <?php include("../Modals/M-pslist-edit.php")?> 
-                </div>
-                    
-                <div class="col-3">
+                
 
                     <form action ="function.php" method="POST">
                         <input type="hidden" name="prlist-id" value="<?php echo $id ?>">
                         <input type="hidden" name="prlist-type" value="<?php echo $prlistType ?>">
-
-                        <button type="submit" name="submit-generate" class="btn btn-success">
-                            Generate Payslip
+                        <button type="submit" name="submit-generate" class="btn btn-secondary d-flex justify-content-center align-items-center me-2">
+                        <i class="fa-solid fa-envelope-open-text me-2"></i>Generate Payslip
                         </button>
-              
                     </form>
-                </div>
-
-                <div class="col-2 ">
+                
                     <form action="sendEmail.php" method="POST">
                         <input type="hidden" name="prlist-id" value="<?php echo $id ?>">
                         <input type="hidden" name="prlist-type" value="<?php echo $prlistType ?>">
 
-                        <button type="submit" name="submit-sendEmail" class="btn btn-success w-100" >Send To Email</button>
+                        <button type="submit" name="submit-sendEmail" style="white-space: nowrap;" class="btn btn-primary d-flex justify-content-center align-items-center"><i class="fa-solid fa-paper-plane me-2"></i> Send To Email</button>
                     </form>
                 </div>
-
+</div>
                 
                 <div class="container-fluid mb-3 mt-3">
                 <?php
@@ -164,7 +153,7 @@ if (isset($_SESSION['admin_id'])) {
 
                     <?php endforeach; ?>
                     </div>
-            </div>
+            
 
                     </div>        
 
@@ -220,30 +209,24 @@ if (isset($_SESSION['admin_id'])) {
                                 <td><?php echo $list['prlist_id']; ?></td>
 
                                 <td>
-                                    <div class="row">
-                                        <div class="col-3 ps-1">
+                                    <div class="d-flex justify-content-center">
                                          <?php if($list["file_path"] != "Not generated"){ ?>
                                         <a href="../Uploads/<?php echo $list['file_path'];?>" target="_thapa" style="color: white; text-decoration: none;">
-                                        <button  type="button" class="btn btn-sm btn-primary" >
-                                            View
+                                        <button  type="button" class="btn btn-sm btn-primary d-flex justify-content-center align-items-center me-2" >
+                                        <i class="fa-solid fa-eye me-2"></i>View
                                         </button>
                                         </a>
                                         <?php } ?>
-                                </div>
-                                <div class="col-3 px-2">
-                                <button id="editButton" class="btn btn-sm btn-success editButton" data-bs-toggle="modal" data-employee-id="<?php echo $list["employee_id"] ?>"
+                                <button id="editButton" class="btn btn-sm btn-success editButton d-flex justify-content-center align-items-center me-2" data-bs-toggle="modal" data-employee-id="<?php echo $list["employee_id"] ?>"
                                  data-bs-target="#staticBackdrop-edit" type="submit" name="edit" value="Edit">
-                                    Edit
+                                 <i class="fa-solid fa-pen-to-square me-2"></i>Edit
                                 </button>
-                                </div>
-                                <div class="col-3  px-2">
                                 <form method="POST" action="../Functions/admin-payslipform-delete.php">
-                                    <button class="btn btn-sm btn-danger"  type="submit" name="delete" value="Delete">Delete</button>
+                                    <button class="btn btn-sm btn-danger d-flex justify-content-center align-items-center me-2 text-align-center"  type="submit" name="delete"><i class="fa-solid fa-xmark me-2"></i>Delete</button>
                                     <input type="hidden" name="pslist-id" value="<?php echo $list['id']; ?>">  
                                     <input type="hidden" name="prlist-id" value="<?php echo $id ?>"> 
                                     <input type="hidden" name="prslist-type" value="<?php echo $prlistType; ?>">                                
                                 </form>
-                                </div>
                                     </div>
                                 </td>
                             </tr>
