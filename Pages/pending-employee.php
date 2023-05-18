@@ -6,19 +6,19 @@
       
                 </div>
 
-                    <div class="pending-employee-list-wrapper">
+                    <div class="pending-employee-list">
                         <table class="table">
                             <thead>
                                 <tr class="text-center">
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
+                                    <th scope="col" style="width: 200px;">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Contact No</th>
-                                    <th scope="col">Resume</th>
+                                    <th  class="d-flex" scope="col">Resume</th>
                                      <th scope="col">Picture</th>
-                                    <th scope="col">Date Applied</th>
-                                    <th scope="col">Action</th>
+                                    <th  scope="col" style="width: 200px;">Date Applied</th>
+                                    <th scope="col" style="width: 300px; max-height:30px;"  >Action</th>
                                 </tr>
                             </thead>
                             <tbody class="action">
@@ -29,12 +29,12 @@
 
                                     echo '<tr>';
                                         echo '<th scope="row">1 </th>';
-                                        echo '<td>'. $employee["first_name"] ." ". $employee["last_name"] .'</td>';
+                                        echo '<td class="text-center d-flex"  style="width: 200px;">'. $employee["first_name"] ." ". $employee["last_name"] .'</td>';
                                         echo '<td>'. $employee["email"] .'</td>';
                                         echo '<td>'. $employee["gender"] .'</td>';
                                         echo '<td>'. $employee["contact"] .'</td>';
                                     ?>
-                                        <td>
+                                        <td style="width: 200px;">
                                             <a href="../Uploads/<?php echo $employee['resume_path']?>" target="_thapa">
                                                 <?php echo $employee['resume_name']?>
                                             </a>
@@ -48,12 +48,14 @@
                                      <?php
                                          echo '<td>'. $admin->formatDate($employee["date_applied"]) .'</td>';
                                      ?>
-                                        <td>
+                                        <td >
                                             <input type="hidden" name="employee_id" value="<?php echo $employee["id"] ?>">
                                             <input type="hidden" name="employee_email" value="<?php echo $employee["email"] ?>">
                                             <input type="hidden" name="employee_lastname" value="<?php echo $employee["last_name"] ?>">
-                                            <button type="button" class="btn btn-success acceptBtn"> <i class="fa-solid fa-check me-2"></i> Hire</button>
-                                            <button type="button" class="btn btn-danger declineBtn"> <i class="fa-solid fa-x me-2"></i>Reject</button>
+                                            <div class="d-flex">
+                                            <button type="button" class="btn btn-success acceptBtn d-flex"> <i class="fa-solid fa-check me-2"></i> Hire</button>
+                                            <button type="button" class="btn btn-danger declineBtn d-flex"> <i class="fa-solid fa-x me-2"></i>Reject</button>
+                                    </div>
                                         </td>
                                      <?php
                                     echo "</tr>";

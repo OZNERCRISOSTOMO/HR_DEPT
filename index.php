@@ -76,7 +76,7 @@ if (isset($_SESSION['admin_id'])) {
 			            <label for="exampleInputEmail1" class="form-label fw-bolder">Username</label>
                             <div class="input-group">
                                 <div class="input-group-text bg-white border border-end-0 border-0"><i class="fa-solid fa-user"></i></div>
-                                    <input type="text" class="form-control border-0 border shadow-none border-start-0" name="email" placeholder="Username" autocomplete="off" required="required">
+                                    <input type="text" class="form-control border-0 border shadow-none border-start-0" name="email" placeholder="Enter Username" autocomplete="off" required="required">
                                 </div>
                             </div>
                     </div>
@@ -86,7 +86,7 @@ if (isset($_SESSION['admin_id'])) {
 
 		        <div class="input-group">
 			        <div class="input-group-text bg-white border border-end-0 border-0"><i class="fa-solid fa-lock"></i></div>
-                        <input type="password" class="form-control border-0 border shadow-none border-start-0" name="password" placeholder="Password" required="required">
+                        <input type="password" class="form-control border-0 border shadow-none border-start-0" name="password" placeholder="Enter Password" required="required">
 		
 		            </div>
 		        </div>        
