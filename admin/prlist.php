@@ -117,8 +117,10 @@ if (isset($_SESSION['admin_id'])) {
               <td>
                 <div class="row d-flex">
                   <div class="col justify-content-center">
-                    <button data-bs-toggle="modal" data-bs-target="#restoreModal" class="btn btn-sm btn-success">Restore
+                    <button  data-bs-toggle="modal" data-bs-target="#restoreModal" data-prlist-id="<?php echo $list['id']; ?>" class="btn btn-sm btn-success restore-btn">
+                      Restore
                     </button>
+
                   </div>
 
                   
@@ -157,8 +159,13 @@ if (isset($_SESSION['admin_id'])) {
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-default text-danger border border-end-0 border-0" data-bs-dismiss="modal">Cancel</button>
-        <button class="btn btn-sm btn-success" onclick="location.href='../Functions/admin-payroll-restore.php?id=<?php echo $list['id']?>'" type="button">Restore</button>
+        <form action="../Functions/admin-payroll-restore.php" method="POST">
+          <button type="button" class="btn btn-default text-danger border border-end-0 border-0" data-bs-dismiss="modal">Cancel</button>
+          <input type="hidden" name="prlist-id" id="prlist-id-hidden">
+          <!-- <button class="btn btn-sm btn-success" onclick="location.href='../Functions/admin-payroll-restore.php?id=<?php echo $list['id']?>'" type="button">Restore</button> -->
+          <button type="submit" name="submit-restore" class="btn btn-sm btn-success">Restore</button>
+        </form>
+
       </div>
     </div>
   </div>
@@ -228,9 +235,9 @@ if (isset($_SESSION['admin_id'])) {
                 var row = $(this).closest("tr");
                 var id = row.find("td:eq(0)").text().trim();
                 var date = row.find("td:eq(1)").text().trim();
-                var start = row.find("td:eq(3)").text().trim();
-                var end = row.find("td:eq(4)").text().trim();
-                var type = row.find("td:eq(5)").text().trim();
+                var start = row.find("td:eq(2)").text().trim();
+                var end = row.find("td:eq(3)").text().trim();
+                var type = row.find("td:eq(4)").text().trim();
 
                 // Set the modal values
                 $("#editId").val(id);
@@ -387,6 +394,16 @@ document.getElementById('type').addEventListener('change', function() {
     customTypeContainer.style.display = 'none';
   }
 });
+
+const restoreBtns = document.getElementsByClassName("restore-btn");
+
+for (var i = 0; i < restoreBtns.length; i++) {
+  restoreBtns[i].addEventListener("click", function() {
+    var dataPrListId = this.getAttribute("data-prlist-id");
+    
+    $("#prlist-id-hidden").val(dataPrListId);
+  });
+}
 
 document.getElementById('saveCustomType').addEventListener('click', function() {
   var customType = document.getElementById('customType').value;

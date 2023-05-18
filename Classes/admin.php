@@ -935,10 +935,10 @@ public function Insertpayroll($prlist){
        exit();
        }
 }
-public function updatePayroll($id, $code, $start, $end, $type){
-    $stmt = $this->database->getConnection()->prepare("UPDATE prlist SET id = ?, start = ?, end = ?, type = ? WHERE id = ?");
+public function updatePayroll($id,  $start, $end, $type){
+    $stmt = $this->database->getConnection()->prepare("UPDATE prlist SET  start = ?, end = ?, type = ? WHERE id = ?");
 
-    if (!$stmt->execute([$code, $start, $end, $type, $id])) {
+    if (!$stmt->execute([ $start, $end, $type, $id])) {
     header("Location: ../admin/prlist.php?error=stmtfail");
        exit();
        }

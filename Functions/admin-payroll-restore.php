@@ -10,10 +10,15 @@ date_default_timezone_set($timezone);
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
-$empid = $_GET['id'];
-    $updateStat = "UPDATE prlist SET Status = '1'  WHERE id='$empid'";
+if(isset($_POST["submit-restore"])){
+    $prlistId = $_POST["prlist-id"];
+    echo $prlistId;
+    // $empid = $_GET['id'];
+    $updateStat = "UPDATE prlist SET Status = '1'  WHERE id='$prlistId'";
     $updateQuery = $conn->query($updateStat);
 
     header("Location: ../admin/prlist.php");
+}
+
 
 ?>

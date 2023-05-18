@@ -9,7 +9,7 @@ if (isset($_SESSION['admin_id']) ) {
 
     if (isset($_POST['editSubmit'])) {
         $id = $_POST['editId'];
-        $code = $_POST['editCode'];
+        // $code = $_POST['editCode'];
         $start = $_POST['editStart'];
         $end = $_POST['editEnd'];
         $type = $_POST['editType'];
@@ -24,7 +24,7 @@ if (isset($_SESSION['admin_id']) ) {
         // echo "</br>";
         // echo $type;
     
-        $payroll->updatePayroll($id, $code, $start, $end, $type);
+        $payroll->updatePayroll($id,$start, $end, $type);
      
     }
 } else {
