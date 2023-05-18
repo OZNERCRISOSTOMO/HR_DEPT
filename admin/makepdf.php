@@ -97,25 +97,22 @@ else {
 
         $tax = $salary;
 
-        if ($tax <= 10000) {
-            $tax = $salary * 0.05;
+        if ($tax <= 20833) {
+            $tax = $totalearn * 0.00;
         }
-        else if ($tax >=10001 || $tax <=30000) {
-            $tax = $salary * 0.10;
+        else if ($tax >=20834 || $tax <=33332) {
+            $tax = $totalearn * 0.15;
         }
-        else if ($tax >=30001 || $tax <=70000) {
-            $tax = $salary * 0.15;
+        else if ($tax >=33333 || $tax <=66666) {
+            $tax = ($totalearn * 0.20) + 1875; //20% of totalearn + 1875
         }
-        else if ($tax >=70001 || $tax <=140000) {
-            $tax = $salary * 0.20;
+        else if ($tax >=66667 || $tax <=166666) {
+            $tax = ($totalearn * 0.25) + 8541.80;
         }
-        else if ($tax >=140001 || $tax <=250000) {
-            $tax = $salary * 0.25;
+        else if ($tax >=166667|| $tax <=666666) {
+            $tax = ($totalearn * 0.30) + 33541.80;
         }
-        else if ($tax >=250001 || $tax <=500000) {
-            $tax = $salary * 0.30;
-        }
-        else $tax = ($tax >=500001) ? $salary * 0.32 : 'error';
+        else $tax = ($tax >=666667) ? ($totalearn * 0.35) + 183541.80 : 'error';
 
 
         // $networth = $salary - ($sss_result + $phil_result + $love_result) ;
