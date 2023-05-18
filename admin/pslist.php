@@ -93,7 +93,7 @@ if (isset($_SESSION['admin_id'])) {
             </div>
             <!------End----->
 
-<div class="container-fluid p-0">
+            <div class="container-fluid p-0">
         <div class="row">
                 <div class="col-5">
                 <h4><b>Payroll Details</b></h4>
@@ -158,6 +158,7 @@ if (isset($_SESSION['admin_id'])) {
                     </div>        
 
                     <div>
+
                     
                     
                 
@@ -210,23 +211,29 @@ if (isset($_SESSION['admin_id'])) {
 
                                 <td>
                                     <div class="d-flex justify-content-center">
+                                        
                                          <?php if($list["file_path"] != "Not generated"){ ?>
                                         <a href="../Uploads/<?php echo $list['file_path'];?>" target="_thapa" style="color: white; text-decoration: none;">
                                         <button  type="button" class="btn btn-sm btn-primary d-flex justify-content-center align-items-center me-2" >
-                                        <i class="fa-solid fa-eye me-2"></i>View
+                                        <i class="fa-solid fa-eye  me-2"></i>  View
                                         </button>
                                         </a>
                                         <?php } ?>
+                            
+                               
                                 <button id="editButton" class="btn btn-sm btn-success editButton d-flex justify-content-center align-items-center me-2" data-bs-toggle="modal" data-employee-id="<?php echo $list["employee_id"] ?>"
                                  data-bs-target="#staticBackdrop-edit" type="submit" name="edit" value="Edit">
                                  <i class="fa-solid fa-pen-to-square me-2"></i>Edit
                                 </button>
+                                
+                               
                                 <form method="POST" action="../Functions/admin-payslipform-delete.php">
-                                    <button class="btn btn-sm btn-danger d-flex justify-content-center align-items-center me-2 text-align-center"  type="submit" name="delete"><i class="fa-solid fa-xmark me-2"></i>Delete</button>
+                                    <button class="btn btn-sm btn-danger d-flex justify-content-center align-items-center me-2"  type="submit" name="delete" value="Delete"><i class="fa-solid fa-xmark me-2"></i>Delete</button>
                                     <input type="hidden" name="pslist-id" value="<?php echo $list['id']; ?>">  
                                     <input type="hidden" name="prlist-id" value="<?php echo $id ?>"> 
                                     <input type="hidden" name="prslist-type" value="<?php echo $prlistType; ?>">                                
                                 </form>
+                              
                                     </div>
                                 </td>
                             </tr>

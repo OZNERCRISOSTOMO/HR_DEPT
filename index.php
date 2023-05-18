@@ -76,7 +76,7 @@ if (isset($_SESSION['admin_id'])) {
 			            <label for="exampleInputEmail1" class="form-label fw-bolder">Username</label>
                             <div class="input-group">
                                 <div class="input-group-text bg-white border border-end-0 border-0"><i class="fa-solid fa-user"></i></div>
-                                    <input type="text" class="form-control border-0 border shadow-none border-start-0" name="email" placeholder="Email" autocomplete="off" required="required">
+                                    <input type="text" class="form-control border-0 border shadow-none border-start-0" name="email" placeholder="Username" autocomplete="off" required="required">
                                 </div>
                             </div>
                     </div>

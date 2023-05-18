@@ -1,12 +1,15 @@
-     <div class="pending-employee-list ">
+    
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    
+    <div class="pending-employee-list ">
         <div>
-            <h1>Pending Employees</h1>
+      
                 </div>
 
                     <div class="pending-employee-list-wrapper">
                         <table class="table">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
@@ -49,8 +52,8 @@
                                             <input type="hidden" name="employee_id" value="<?php echo $employee["id"] ?>">
                                             <input type="hidden" name="employee_email" value="<?php echo $employee["email"] ?>">
                                             <input type="hidden" name="employee_lastname" value="<?php echo $employee["last_name"] ?>">
-                                            <button type="button" class="btn btn-outline-success acceptBtn"> Accept</button>
-                                            <button type="button" class="btn btn-outline-danger declineBtn">Decline</button>
+                                            <button type="button" class="btn btn-success acceptBtn"> <i class="fa-solid fa-check me-2"></i> Hire</button>
+                                            <button type="button" class="btn btn-danger declineBtn"> <i class="fa-solid fa-x me-2"></i>Reject</button>
                                         </td>
                                      <?php
                                     echo "</tr>";
@@ -66,7 +69,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Assign Employee</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                             
@@ -101,7 +104,7 @@
                             
                             <!--===== POSITION ====== -->
                             <div class="mb-3 d-flex">
-                                Position : 
+                                Role : 
                                 <div class="form-check ms-3">
                                     <input class="form-check-input" type="radio" value="employee" id="employee" name="position" required>
                                     <label class="form-check-label" for="employee">Employee</label>
@@ -115,6 +118,7 @@
 
                                    <!--==== POSITION DROPDOWN ===== -->
                             <div class="mb-3">
+                                Position:
                                 <select class="form-select" aria-label="Default select example" name="department-position" id="department-position" required>
                                 <option selected>Select position</option>
         
@@ -126,19 +130,19 @@
                                 Schedule : 
                                 <div class="form-check ms-3">
                                     <input class="form-check-input" type="radio" value="1" id="1" name="schedule" required>
-                                    <label class="form-check-label" for="1">8:00 AM - 5:00 PM</label>
+                                    <label class="form-check-label" for="1">7:00 AM - 3:00 PM</label>
                                 </div>
             
                                 <div class="form-check ms-3">
                                     <input class="form-check-input" type="radio" value="2" id="2" name="schedule" required>
-                                    <label class="form-check-label" for="2">6:00 PM - 10:00 PM</label>
+                                    <label class="form-check-label" for="2">3:00 PM - 11:00 PM</label>
                                 </div>
                             </div>
                             
                               <!--==== BRANCH ======== -->
                             <div class="mb-3">
                                 <label for="branch" class="col-form-label">Branch</label>
-                                <input type="text" class="form-control" id="branch" name="branch" required>
+                                <input type="text" class="form-control" id="branch" name="branch" autocomplete="off" required>
                             </div>
 
               
@@ -153,7 +157,7 @@
                             <div class="col-12 mb-4 benefits-container">
                                 
                                 <div class="col-6">
-                                     <h4>Benefits</h4>     
+                                     <h5>Leave</h5>     
                                     <label for="vacation-leave" class="col-form-label">Vacation leave</label>
                                     <input type="number" class="form-control" id="vacation-leave" name="vacation-leave" value="15" disabled>
                                     <input type="hidden" class="form-control vacation-leave" id="vacation-leave" name="vacation-leave" value="15" >
@@ -175,7 +179,7 @@
                                 </div> 
                                 </div> -->
 
-                                <h5>Allowance</h5>
+                                <h5 class="mt-3">Allowance</h5>
                                  <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="0" id="food-allowance" name="food-allowance" checked >
                                      <label class="form-check-label" for="food-allowance"> Food allowance </label  >
@@ -190,6 +194,7 @@
                             
                             <!-- BENEFICARIES -->
                             <div class="col-12 ">
+                            <h5>Benefits</h5> 
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="sss" id="sss" name="beneficiaries[]">
                                     <label class="form-check-label" for="sss"> SSS </label>
