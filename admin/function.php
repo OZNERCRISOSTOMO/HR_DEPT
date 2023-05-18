@@ -90,7 +90,7 @@
         $philhealth = $employeepayslip['philhealth']; 
         $pagibig = $employeepayslip['pagibig']; 
 
-        $totalearn = ($ratePerHour * $num_hr) + $overtime; //salary rate * number of hours completed
+        $totalearn = $ratePerHour * ($num_hr + $overtime); //salary rate * number of hours completed
         $totalallowance = $food + $transpo;
         
 

@@ -98,21 +98,21 @@ else {
         $tax = $salary;
 
         if ($tax <= 20833) {
-            $tax = $totalearn * 0.00;
+            $tax = $salary * 0.00;
         }
         else if ($tax >=20834 || $tax <=33332) {
-            $tax = $totalearn * 0.15;
+            $tax = $salary * 0.15;
         }
         else if ($tax >=33333 || $tax <=66666) {
-            $tax = ($totalearn * 0.20) + 1875; //20% of totalearn + 1875
+            $tax = ($salary * 0.20) + 1875; //20% of totalearn + 1875
         }
         else if ($tax >=66667 || $tax <=166666) {
-            $tax = ($totalearn * 0.25) + 8541.80;
+            $tax = ($salary * 0.25) + 8541.80;
         }
         else if ($tax >=166667|| $tax <=666666) {
-            $tax = ($totalearn * 0.30) + 33541.80;
+            $tax = ($salary * 0.30) + 33541.80;
         }
-        else $tax = ($tax >=666667) ? ($totalearn * 0.35) + 183541.80 : 'error';
+        else $tax = ($tax >=666667) ? ($salary * 0.35) + 183541.80 : 'error';
 
 
         // $networth = $salary - ($sss_result + $phil_result + $love_result) ;
@@ -120,8 +120,7 @@ else {
         $grosspay = $salary - $totaldeductions; //
         $networth = $totalAllowance + $grosspay;
 
-
-
+    
 if ($admin->checkprlist($prlistid)) {
     $admin->insertEmployeePayslipForm($fname, $position, $branch, $department,  $date, $date1, $present, $overtime, $salary, $sssChecked,$pagibigChecked, $philhealthChecked, $food_allowance, $transpo_allowance, $employeeId);
     $admin->insertEmployeePayslip($fname, $networth, $prlistid, $employeeId,$prlistType);
