@@ -18,7 +18,7 @@
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-6 col-xl-8 order-2 order-lg-1">
 
-                <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-2">Job Registration</p>
+                <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-2">Applicant Registration</p>
                 <?php
                 if (isset($_GET["error"])) {
                     echo '<div class="container rounded shadow text-center p-2 text-danger mb-2" style="background-color: #ff9694;">';

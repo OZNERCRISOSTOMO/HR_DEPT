@@ -248,7 +248,7 @@ else {
 
                           <div class=" justify-content-end mt-3">
                         <div class="dropdown ">
-                        <button class="btn btn-transparent " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-transparent border border-end-0 border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fs-5 fa-solid fa-bell"></i>  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                           <?php echo $countNotif; ?>
                           <span class="visually-hidden">unread messages</span> </button>

@@ -28,7 +28,7 @@
       <div class="d-flex me-2 flex-column align-items-center px-1  text-white min-vh-100 position-fixed">
                 
   <div class="w-100">
- <h5 class="text-black mt-2">Holidays Pay</h5>
+ <h5 class="text-black mt-2 text-center">Holiday List</h5>
   <div class="d-grid gap-2">
 
 
@@ -92,7 +92,7 @@ while($row = mysqli_fetch_assoc($h_query)){
   <div class="card-container mb-2">
     <div class="card" style="width: 100%; height:5rem;">
       <div class="card-body">
-        <h3 class="card-text" style="font-size:16px;font-weight:bold; overflow: hidden; text-overflow: ellipsis;"><?php echo $row['holiday_name'] ?></h3>
+        <h4 class="card-text" style="font-size:14px; font-weight:bold; overflow: hidden; text-overflow: ellipsis;"><?php echo $row['holiday_name'] ?></h4>
         <div class="row">
           <div class="col-7">
             <h3 class="card-title "style="font-size:13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo $row['holiday_date'] ?></h3>
@@ -137,11 +137,11 @@ while($row = mysqli_fetch_assoc($h_query)){
       
     <form   action="../Functions/admin-sendEmail.php" method="POST" enctype="multipart/form-data">
 
-<div class="row ">
+<div class="row d-flex justify-content-center align-items-center">
 
   <div class="col-2">
-<i class="fa-regular fa-envelope text-black fs-4 mt-2 mb-2 opacity-75"></i>
-</div>
+    <i class="fa-regular fa-envelope text-black fs-4 mt-2 mb-2 opacity-75"></i>
+  </div>
       <div class="col-10 search-select-box mt-2 mb-2">                     
                         <!-- Dropdown --> 
                         <select id='select-employee' name="employee-id" class="form-control">
@@ -169,11 +169,11 @@ while($row = mysqli_fetch_assoc($h_query)){
                         <textarea class="shadow-none form-control mt-2" name="message"  rows="4" placeholder="Message" autocomplete="off" required style="resize:none;"></textarea>
                     </div>
                     <div class="mb-1 input-group input-group-sm">
-                     <input class="shadow-none col-2 form-control" type="file" id="attachment" name="attachment" accept="application/pdf">
+                     <input class="shadow-none col-2 form-control mt-2" type="file" id="attachment" name="attachment" accept="application/pdf">
                             </div>
                     <input type="hidden" id="" name="">
                     <div class="d-grid gap-2 ">
-                    <button  class="shadow-none btn btn-primary btn-sm" name="submit" id="send-email"><i class="fa-solid fa-paper-plane me-2"></i> Send</button>
+                    <button  class="shadow-none btn btn-primary btn-sm mt-2" name="submit" id="send-email"><i class="fa-solid fa-paper-plane me-2"></i> Send</button>
                             </div>  
             </form>
             </div>     

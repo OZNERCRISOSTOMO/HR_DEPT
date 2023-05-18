@@ -2,29 +2,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 <div class="modal fade" id="WarningModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel1">Warnings</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel1">Warnings <i class=" text-warning fa-solid fa-circle-info p-0"></i></h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
           <div class="modal-body">
             
             <div class="container">
-      <h2 class="text-center py-2">Attendance Monitoring</h2>
       <table class="table table-striped" id="warning">
         <thead>
           <tr>
             
-        <th>Employee ID</th>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Department</th>
-        <th>Warnings</th>
+              <th class="text-center">Employee ID</th>
+              <th class="text-center">Firstname</th>
+              <th class="text-center">Lastname</th>
+              <th class="text-center">Department</th>
+              <th class="text-center">Warnings</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="text-center">
           <?php
             // establish a connection to the MySQL database
             $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");

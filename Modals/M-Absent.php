@@ -5,27 +5,26 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 <div class="modal fade" id="absentModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel1">Absents</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel1">Absents Today <i class=" text-danger fa-solid fa-circle-info p-0"></i></h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             
           <div class="container">
-		<h2 class="text-center">Attendance Monitoring</h2>
 		<table id="attendanceTable" class="table table-striped">
 			<thead>
 				<tr>
-			<th>Employee ID</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Department</th>
-            <th>Status</th>
+			      <th class="text-center">Employee ID</th>
+            <th class="text-center">Firstname</th>
+            <th class="text-center">Lastname</th>
+            <th class="text-center">Department</th>
+            <th class="text-center">Status</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="text-center">
       <?php
    // establish a connection to the MySQL database
    $conn = mysqli_connect("sql985.main-hosting.eu", "u839345553_sbit3g", "sbit3gQCU", "u839345553_SBIT3G");

@@ -66,41 +66,41 @@ if (isset($_SESSION['admin_id'])) {
 
       <div class="container-fluid ms-3">
         <!--Create New Button-->
-        <div class="container ">
+        <div class="container">
           <?php echo $deleteMsg??''; ?>
           <div class="row mt-2 mb-3">
-            <div class="col-2">
-            <h4 class="fw-bolder">Payroll List</h4>
+            <div class="col-8">
+              <h4 class="fw-bolder">Payroll List</h4>
             </div>
-            <div class="col-2"> 
-              <button class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#PayrollModal"><i class="fa-solid fa-plus"></i> Create New</button>
             
+            <div class="col-4 d-flex justify-content-end">
+              <!--Create New Button-->
+                <button class="btn btn-primary btn-sm fw-bolder me-2" data-bs-toggle="modal" data-bs-target="#PayrollModal"><i class="fa-solid fa-plus"></i> Create New</button>
+
+              <!-- List of Archive Button trigger modal -->           
+                <button type="button" class="btn btn-secondary btn-sm fw-bolder" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-list-ul"></i>
+                  List of Archive
+                </button>
             </div>
 
-            <div class="col-2"> 
-              
-              <!-- Button trigger modal -->
-            <button type="button" class="btn btn-secondary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              List of Archive
-            </button>
-
-<!-- Modal -->
+<!-- Modal for List of Archive-->
 <div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">List of Archive</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+
       <div class="modal-body">
       <table id="prlist" class="table table-borderless table-striped text-center mt-3 align-middle">
           <thead>
-            <th>ID</th>
-            <th>Date Added</th>
-            <th>Start</th>
-            <th>End</th>
-            <th>Type</th>
-            <th>Action</th>
+            <th class="text-center">ID</th>
+            <th class="text-center">Date Added</th>
+            <th class="text-center">Start</th>
+            <th class="text-center">End</th>
+            <th class="text-center">Type</th>
+            <th class="text-center">Action</th>
           </thead>
 
           <tbody>
@@ -115,11 +115,16 @@ if (isset($_SESSION['admin_id'])) {
               <td><?php echo $list['end']; ?> </td>
               <td><?php echo $list['type']; ?> </td>
               <td>
-             
-                <div class="row">
-                  <div class="col-3">
-              <button onclick="location.href='../Functions/admin-payroll-restore.php?id=<?php echo $list['id']?>'" type="button" class="btn btn-sm btn-primary">Restore</button>
-              </div>
+                <div class="row d-flex">
+                  <div class="col justify-content-center">
+                    <button data-bs-toggle="modal" data-bs-target="#restoreModal" class="btn btn-sm btn-success">Restore
+                    </button>
+                  </div>
+
+                  
+
+                  
+                </div>
               </td>
               </tr>
               <?php
@@ -127,14 +132,37 @@ if (isset($_SESSION['admin_id'])) {
             ?>
              </tbody>
         </table>
-
+              
       </div>
       <div class="modal-footer">
       </div>
     </div>
   </div>
+
 </div>
 
+
+<!--Restore Modal-->
+<div class="modal fade" id="restoreModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Are you sure you want to restore this data?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body text-center">
+          Restoring this payroll data will remove back to the payroll list. Please review the
+          implications carefully, before proceeding.
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default text-danger border border-end-0 border-0" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-sm btn-success" onclick="location.href='../Functions/admin-payroll-restore.php?id=<?php echo $list['id']?>'" type="button">Restore</button>
+      </div>
+    </div>
+  </div>
+</div>
 
             </div>
               </div>
@@ -165,20 +193,17 @@ if (isset($_SESSION['admin_id'])) {
               <td>
              
                 <div class="row">
-                  <div class="col-3">
-              <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>&type=<?php echo $list['type']?>' " type="button" class="btn btn-sm btn-primary">View</button>
-              </div>
-              <div class="col-3 m-0 ps-2">
-              <button id="editButton" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#EditModal" type="submit" name="edit" value="Edit">Edit</button>
-              </div>
-              <div class="col-3 p-0 m-0">
-              <form method="POST" action="../Functions/admin-payroll-delete.php">
-              <button class="btn btn-sm btn-danger" type="submit" name="archive" class="archive" id="archive">Archive</button>
-              <input type="hidden" name="id" value="<?php echo $list['id']; ?>">
-              </form>
-              </div>
-                
-              </div>  
+                  <div class="d-flex justify-content-center align-items-center">
+                    <button onclick="location.href='../admin/pslist.php?id=<?php echo $list['id']?>&type=<?php echo $list['type']?>' " type="button" class="btn btn-sm btn-primary me-2"><i class="fa-regular fa-eye"></i> View</button>
+  
+                    <button id="editButton" class="btn btn-sm btn-success me-2" data-bs-toggle="modal" data-bs-target="#EditModal" type="submit" name="edit" value="Edit"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+              
+                    <form method="POST" action="../Functions/admin-payroll-delete.php">
+                      <button class="btn btn-sm btn-danger" type="submit" name="archive" class="archive" id="archive"><i class="fa-solid fa-inbox"></i> Archive</button>
+                      <input type="hidden" name="id" value="<?php echo $list['id']; ?>">
+                    </form>
+                  </div>  
+                </div>  
               </td>
             </tr>
             <?php
