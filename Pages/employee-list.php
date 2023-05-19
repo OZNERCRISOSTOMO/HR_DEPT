@@ -99,24 +99,22 @@ display: block;
         </div>
 
     <div class="container mt-3">
-        <div class="row">
-        <div class="col-sm pt-2">
-            <h5 style="font-weight:bolder;">Employee List</h5>
-
-      
+        <div class="row d-flex">
+        <div class="col-sm-3 pt-2">
+            <h5 style="font-weight:bolder;">Employee List</h5>     
         </div>
 
-        <div class="col-sm">
-        <button type="button" class="btn btn-primary order-last shadow" data-bs-toggle="modal" data-bs-target="#Resign">
-      Resigned Employees
-      </button>
-<?php include("../Modals/M-Resign.php")?>   
-</div>
+                <div class="col-sm-9 row">
+                  <!--Resigned Employees Button-->
+                  <div class="col-sm">
+                          <button type="button" class="btn btn-secondary order-last shadow" style="white-space: nowrap;"data-bs-toggle="modal" data-bs-target="#Resign">
+                          <i class="fa-solid fa-swatchbook"></i>
+                            Resigned Employees
+                          </button>
+                          <?php include("../Modals/M-Resign.php")?>   
+                      </div>
 
-
-                <!--DROPDOWN-->
-                <div class="col-md row ms-2">
-                  
+                    <!--Sort-->
                     <div class="col-sm rounded dropdown text-center ">
                         <button class="btn bg-white dropdown-toggle  shadow fw-bolder container-fluid w-100" type="button" data-bs-toggle="dropdown" id="dropdown"><i class="fa-solid fa-filter px-1"></i><b>Sort By</b></button>
                         <ul class="dropdown-menu container-fluid sort-dropdown" id="sort-dropdown">
@@ -144,18 +142,19 @@ display: block;
                             <li><a class="dropdown-item" href="#">By Position</a></li>
                         </ul>
                     </div>
-
-                          <!--SEARCH BAR-->
-                          <div class="col-sm input-group">
-                              <span class="input-group-text bg-white border border-end-0 border-0">
-                                  <i class="fa-solid fa-magnifying-glass"></i>
-                              </span>
-                              <input type="text" class="form-control border-0 border  border-start-0" id="search" autocomplete="off">
-                          </div>
+                    <div class="col-sm input-group w-100">
+                        <span class="input-group-text bg-white border border-end-0 border-0">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        <input type="text" class="form-control border-0 border border-start-0" id="search" autocomplete="off" style="white-space: nowrap;">
+                    </div>
                 </div>
         </div>
     </div>
     <!-----End----->
+
+  
+
  
     <!-----Employee List----->
     <div class="container-fluid ms-3 p-3 mt-3 employeeList-container align-content-center m-auto d-block ">
@@ -395,7 +394,7 @@ display: block;
               </thead>
               <tbody>
                 <tr>
-                  <td> <input type="text" class="form-control border-0" value="0000-0000000-0"></p></td>
+                  <td> <input type="text" class="form-control border-0" value="0000-0000000-0" ></p></td>
                   <td> <input type="text" class="form-control border-0" value="000-000-000-0000"></td>
                   <td> <input type="text" class="form-control border-0" value="0000-0000-0000"></td>
             </tr>

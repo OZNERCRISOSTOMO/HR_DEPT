@@ -23,12 +23,12 @@ if (!$conn) {
       <table class="table">
   <thead>
     <tr>
-      <th scope="col">Employee ID</th>
+      <th scope="col" style="white-space: nowrap;">Employee ID</th>
       <th scope="col">Firstname</th>
       <th scope="col">Lastname</th>
       <th scope="col">Email</th>
-      <th score="col">Date Hired</th> 
-      <th scope="col">Date Resign</th>
+      <th score="col" style="white-space: nowrap;">Date Hired</th> 
+      <th scope="col" style="white-space: nowrap;">Date Resign</th>
     </tr>
   </thead>
   <tbody>
