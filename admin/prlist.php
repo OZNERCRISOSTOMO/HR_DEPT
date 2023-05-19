@@ -272,7 +272,7 @@ if (isset($_SESSION['admin_id'])) {
 
                   <div class="form-group mb-3">
                     <label for="type" class="fw-bold">Payroll Type</label>
-                      <select class="form-select shadow-none" id="type" name="type">
+                      <select class="form-select shadow-none" id="type" name="type" required>
                         <option value="" selected>Choose an option</option>
                         <option value="semimonthly">Semi-Monthly</option>
                         <option value="monthly">Monthly</option>
@@ -324,7 +324,7 @@ if (isset($_SESSION['admin_id'])) {
                   </div>
                   <div class="form-group mb-3">
                     <label for="editType">Type</label>
-                    <select class="form-control" id="editType" name="editType">
+                    <select class="form-control" id="editType" name="editType" required>
                     <option value="monthly">Monthly</option>
                     <option value="semimonthly">Semi-Monthly</option>
                         </select>
