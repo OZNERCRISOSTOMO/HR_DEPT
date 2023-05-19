@@ -384,7 +384,7 @@
 
 <div class="col-12 mb-4">
 <select  name="leave" class="form-control" id="leave-dropdown">
-            <option  value="0">Type of Leave</option>
+            <option  value="0">Select employee</option>
                     <option value="Vacation Leave">Vacation Leave</option>
                     <option value="Sick Leave">Sick Leave</option>
                     <option value="Maternity Leave">Maternity Leave</option>
