@@ -93,7 +93,7 @@ if (isset($_SESSION['admin_id'])) {
 
   <div class="col-3">
   
-  <button type="button" class="btn btn-success shadow w-100" data-bs-toggle="modal" data-bs-target="#leave"><i class="fa-solid fa-layer-group me-2"></i>Leave Balance</button>
+  <button type="button" class="btn btn-success shadow btn-md mx-0 float-end" data-bs-toggle="modal" data-bs-target="#leave"><i class="fa-solid fa-layer-group me-2"></i>Leave Balance</button>
         <?php include("../Modals/M-Leave.php")?>  
   </div>
 
@@ -104,15 +104,15 @@ if (isset($_SESSION['admin_id'])) {
 <table class="table table-striped " id="leave1">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Type</th>
-      <th scope="col">Date Started</th>
-      <th scope="col">Date Ended</th>
-      <th scope="col">Department</th>
-      <th scope="col">Description</th>
-      <th scope="col">Status</th>
-      <th scope="col">Action</th>
+      <th scope="col" class="text-center">ID</th>
+      <th scope="col" class="text-center">Name</th>
+      <th scope="col" class="text-center">Type</th>
+      <th scope="col" class="text-center" style="white-space: nowrap;">Date Started</th>
+      <th scope="col" class="text-center" style="white-space: nowrap;">Date Ended</th>
+      <th scope="col" class="text-center">Department</th>
+      <th scope="col" class="text-center">Description</th>
+      <th scope="col" class="text-center">Status</th>
+      <th scope="col" class="text-center">Action</th>
      
     </tr>
   </thead>
