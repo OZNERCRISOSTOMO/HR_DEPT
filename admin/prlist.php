@@ -154,7 +154,7 @@ if (isset($_SESSION['admin_id'])) {
       </div>
 
       <div class="modal-body text-center">
-          Restoring this payroll data will remove back to the payroll list. Please review the
+          Restoring this payroll data will be move back to the payroll list. Please review the
           implications carefully, before proceeding.
       </div>
 
