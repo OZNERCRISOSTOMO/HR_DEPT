@@ -18,11 +18,11 @@
         <div class="container col-7 shadow  bg-white p-5 rounded">
        <div class="text-center mb-3"> <i class="fa-solid fa-lock" style="font-size: 120px;"></i></div>
 <h3 class="mb-2 text-center">Forgot Your password?</h3>
-<p class="px-5 text-muted mb-4">Enter the email associated with your account and it will confirm you account before you change it.</p>
+<p class="px-5 text-muted mb-4 text-center">Enter the email associated with your account and we will give you a new password.</p>
 
 <form action="../Functions/admin-confirmEmail.php" method="POST" >
     <label for="exampleInputEmail1" class="form-label">Email Address:</label>
-    <input class="form-control mb-2 " type="email" placeholder="Input email" name="email" required stlye="width: 100px;">
+    <input class="form-control mb-2 " type="email" placeholder="Input email" name="email" required stlye="width: 100px;" autocomplete="off">
     
     <input class="btn btn-primary w-100 shadow" type="submit" name="submit" value="Confirm email" data-bs-toggle="modal" data-bs-target="#forget"> 
     
