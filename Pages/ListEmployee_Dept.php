@@ -74,7 +74,7 @@
             // echo "</br>";
 
              //check department if has more than 3 leave 
-            $selectDepartment = "SELECT COUNT(department) FROM leave_p WHERE Department = '$dept'";
+            $selectDepartment = "SELECT COUNT(department) FROM leave_p WHERE Department = '$dept' AND status = 0";
             $resultDepartment = mysqli_query($conn, $selectDepartment);
             
             $count = 0;
@@ -91,7 +91,7 @@
                 header("Location: $url");
             }else{
 
-             $diff_absent = "SELECT DATEDIFF('$date_end', '$date_start') AS days, sick_leave, vacation_leave FROM employee_details WHERE employee_id = '$employee_id'";
+             $diff_absent = "SELECT DATEDIFF('$date_end', '$date_start') AS days, sick_leave, vacation_leave, paternity_leave, maternity_leave FROM employee_details WHERE employee_id = '$employee_id'";
                 $diff_query = $conn->query($diff_absent);
                 $diff_row = $diff_query->fetch_assoc();
 
@@ -127,9 +127,9 @@
                     $insert_leave = "INSERT INTO leave_p (name, type, date_started, date_ended, employee_id, Department, description) VALUES ('$name', '$leave_type', '$date_start', '$date_end', '$employee_id', '$dept', '$des')";
                     $insert_query = $conn->query($insert_leave);
 
-                    header('Location: Pages/ListEmployee_Dept.php?value=insert');
+                    header('Location: ListEmployee_Dept.php?value=insert');
                 }else{
-                    header('Location: Pages/ListEmployee_Dept.php?value=invalid');
+                  header('Location: ListEmployee_Dept.php?value=invalid');
                 }
             }else{
                 $insert_leave = "INSERT INTO leave_p (name, type, date_started, date_ended, employee_id, Department, description) VALUES ('$name', '$leave_type', '$date_start', '$date_end', '$employee_id', '$dept', '$des')";
@@ -353,7 +353,7 @@
 
 <div class="col-6 mb-3">
     <label for="exampleInputname1" class="form-label">Employee ID:</label>
-    <input type="text" class="form-control" id="loginID-disabled" name="name" aria-describedby="nameHelp" disabled>
+    <input type="text" class="form-control" id="loginID-disabled" name="loginID" aria-describedby="nameHelp" disabled>
     <input type="hidden" class="form-control" id="loginID" name="loginID" aria-describedby="nameHelp">
 </div>
 
@@ -383,8 +383,8 @@
     
 
 <div class="col-12 mb-4">
-<select  name="leave" class="form-control" id="leave-dropdown">
-            <option  value="0">Select employee</option>
+<select name="leave" class="form-control" id="leave-dropdown">
+            <option  value="0">Type of Leave</option> 
                     <option value="Vacation Leave">Vacation Leave</option>
                     <option value="Sick Leave">Sick Leave</option>
                     <option value="Maternity Leave">Maternity Leave</option>
@@ -502,7 +502,7 @@ dateEnded.setAttribute('min', minimumDateString);
 leaveDropdown.addEventListener('change', function() {
     var selectedValue = leaveDropdown.value;
     
-    if (selectedValue === 'Sick Leave') {
+    if (selectedValue === 'Sick Leave' || selectedValue === 'Reason for Absent' || selectedValue === 'Notice of Explanation') {
         dateStarted.removeAttribute('min');
         dateEnded.removeAttribute('min');
     } else {
