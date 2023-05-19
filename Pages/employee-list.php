@@ -97,13 +97,7 @@ display: block;
             </script>    
             </h5>  
         </div>
-    <!------End----->
 
-    <!-----Title----->
-      
-    <!-----End----->
-    
-    <!-----Filter and Search Employee ----->
     <div class="container mt-3">
         <div class="row">
         <div class="col-sm pt-2">
@@ -115,18 +109,15 @@ display: block;
         <div class="col-sm">
         <button type="button" class="btn btn-primary order-last shadow" data-bs-toggle="modal" data-bs-target="#Resign">
       Resigned Employees
-</button>
+      </button>
 <?php include("../Modals/M-Resign.php")?>   
 </div>
 
 
-      
+                <!--DROPDOWN-->
                 <div class="col-md row ms-2">
                   
                     <div class="col-sm rounded dropdown text-center ">
-
-
-
                         <button class="btn bg-white dropdown-toggle  shadow fw-bolder container-fluid w-100" type="button" data-bs-toggle="dropdown" id="dropdown"><i class="fa-solid fa-filter px-1"></i><b>Sort By</b></button>
                         <ul class="dropdown-menu container-fluid sort-dropdown" id="sort-dropdown">
                             <li><a class="dropdown-item" href="#" id="byName">By Name</a></li>
@@ -153,12 +144,14 @@ display: block;
                             <li><a class="dropdown-item" href="#">By Position</a></li>
                         </ul>
                     </div>
-                    <div class="col-sm input-group">
-                        <span class="input-group-text bg-white border border-end-0 border-0">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </span>
-                        <input type="text" class="form-control border-0 border  border-start-0" id="search" autocomplete="off">
-                    </div>
+
+                          <!--SEARCH BAR-->
+                          <div class="col-sm input-group">
+                              <span class="input-group-text bg-white border border-end-0 border-0">
+                                  <i class="fa-solid fa-magnifying-glass"></i>
+                              </span>
+                              <input type="text" class="form-control border-0 border  border-start-0" id="search" autocomplete="off">
+                          </div>
                 </div>
         </div>
     </div>

@@ -75,7 +75,7 @@ if (isset($_SESSION['admin_id'])) {
 
   <div div class="container ">
     <div class="row">
-      <h4 class="fw-bolder">Attendance</h4>
+      <h4><b>Attendance</b></h4>
       <div class="col-8 d-flex pr-3">
   
                   </div>
@@ -92,10 +92,10 @@ if (isset($_SESSION['admin_id'])) {
                         <a class="nav-link text-dark" href="#tab2" data-bs-toggle="tab">Overtime/Undertime</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="#tab3" data-bs-toggle="tab">Present This Day</a>
+                        <a class="nav-link text-dark" href="#tab3" data-bs-toggle="tab">Presents Today</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="#tab4" data-bs-toggle="tab">Present This Day</a>
+                        <a class="nav-link text-dark" href="#tab4" data-bs-toggle="tab">Absents Today</a>
                       </li>
                     </ul>
 
@@ -107,11 +107,11 @@ if (isset($_SESSION['admin_id'])) {
         <table id="history" class="table table-striped table-borderless align-middle text-center">
     <thead>
       <tr>
-        <th>Employee ID</th>
+        <th style="white-space: nowrap;">Employee ID</th>
         <th>Name</th>
         <th>Date</th>
-        <th>Time IN</th>
-        <th>Time OUT</th>
+        <th style="white-space: nowrap;">Time In</th>
+        <th style="white-space: nowrap;">Time Out</th>
         <th>Status</th>
       </tr>
       </thead>
@@ -153,9 +153,7 @@ if (isset($_SESSION['admin_id'])) {
     </tbody>
     </table>
     
-    <form method="POST" action="../Functions/export.php">
-      <input type="submit" name="export" id="export" value="Export">
-    </form>
+    
         </div>
 
 
@@ -164,7 +162,7 @@ if (isset($_SESSION['admin_id'])) {
         <table id="overtime" class="table table-striped table-borderless align-middle text-center mb-2">
     <thead>
       <tr>
-        <th>Employee ID</th>
+        <th style="white-space: nowrap;">Employee ID</th>
         <th>Name</th>
         <th>Department</th>
         <th>Remarks</th>
@@ -213,15 +211,17 @@ if (isset($_SESSION['admin_id'])) {
       <td><?php echo $row['remarks']; ?> </td>
       <td><?php echo $row['date']; ?> </td>
       <td><?php echo $row['over_time']; ?> </td>
-      <td class="d-flex">
+      <td>
+      <div class="d-flex justify-content-center">
       <form method="post" action="../Functions/overtime-accept.php">
           <input type="hidden" name="acceptid" id="acceptid" value=<?php echo $row['id']; ?>>
-          <input type="submit" name="acceptbtn" id="acceptbtn" class="btn btn-sm btn-primary" value="Accept">
+          <button type="submit" name="acceptbtn" id="acceptbtn" class="btn btn-sm btn-primary me-2 d-flex justify-content-center align-items-center"><i class="fa-solid fa-check me-2"></i>Accept</button>
       </form>
       <form method="post" action="../Functions/overtime-delete.php">
           <input type="hidden" name="deleteid" id="deleteid" value=<?php echo $row['id']; ?>>
-          <input type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger" value="Delete">
+          <button type="submit" name="deletebtn" id="deletebtn" class="btn btn-sm btn-danger me-2  d-flex justify-content-center align-items-center"><i class="fa-solid fa-xmark me-2"></i>Decline</button>
       </form>
+        </div>
       </td>
     </tr>
     <?php
@@ -232,19 +232,19 @@ if (isset($_SESSION['admin_id'])) {
         </div>
  <!------------ Table 2 End ------------ -->
 
- <!------------ Table 3 Recents------------ -->
+ <!------------ Table 3 Present Today------------ -->
         <div class="tab-pane fade" id="tab3">
         <table id="recents" class="table table-striped">
 			<thead>
 				<tr>
 					
-			     <th>Employee ID</th>
+			     <th style="white-space: nowrap;">Employee ID</th>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Department</th>
 		      	<th>Date</th>
-            <th>Time In</th>
-            <th>Time Out</th>
+            <th style="white-space: nowrap;">Time In</th>
+            <th style="white-space: nowrap;">Time Out</th>
             <th>Status</th>
         
           
