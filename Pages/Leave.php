@@ -1,7 +1,6 @@
-
 <?php
-
 session_start();
+
 $timezone = 'Asia/Manila';
 date_default_timezone_set($timezone);
 $lognow = date('H:i:s');
@@ -20,14 +19,18 @@ if (isset($_SESSION['admin_id'])) {
 
     $year = "SELECT * FROM hr_year WHERE id = 1";
     $yquery = $conn->query($year);
-    $yrow = $yquery->fetch_assoc();
+    $yrow = $yquery ? $yquery->fetch_assoc() : null;
 
     $currentYear = date('Y');
     $employees = "SELECT id, gender FROM employees WHERE status = '1'";
     $empquery = $conn->query($employees);
+    $storedYear = $yrow['year_now'] ?? null;
 
-    if($currentYear !== $yrow['year_now']){
-      $updateYear = "UPDATE hr_year SET year_now = '$currentYear'";
+    if($storedYear === null){
+      $insertYear = "INSERT INTO hr_year (id, year_now) VALUES (1, '$currentYear')";
+      $conn->query($insertYear);
+    }elseif($currentYear !== $storedYear){
+      $updateYear = "UPDATE hr_year SET year_now = '$currentYear' WHERE id = 1";
       $updateQuery = $conn->query($updateYear);
 
       while($emprow = mysqli_fetch_assoc($empquery)){

@@ -44,12 +44,32 @@
                     $sched = $row['schedule_id'];
                     $lognow = date('H:i:s');
                     $sql = "SELECT * FROM schedule WHERE id = '$sched'";
-					$squery = $conn->query($sql);
-					$srow = $squery->fetch_assoc();
+						$squery = $conn->query($sql);
+						$srow = $squery ? $squery->fetch_assoc() : null;
+
+                    // Guard against missing/invalid schedule rows.
+                    if(!$srow || !isset($srow['time_in'], $srow['time_out'])){
+                        echo "Invalid schedule setup for this employee.";
+                        echo "<script>
+                                setTimeout(function(){
+                                    window.history.back();
+                                }, 3000);
+                            </script>";
+                        exit();
+                    }
+
                     if($srow['time_in'] == '08:00:00'){
                         $logstatus = ('08:30:00' > $lognow)? 'ontime':'late';
                     }else if($srow['time_in'] == '17:00:00'){
                         $logstatus = ('17:30:00' > $lognow)? 'ontime':'late';
+                    }else{
+                        echo "Invalid schedule setup for this employee.";
+                        echo "<script>
+                                setTimeout(function(){
+                                    window.history.back();
+                                }, 3000);
+                            </script>";
+                        exit();
                     }
 					
                     if($lognow > $srow['time_in']){
