@@ -1,0 +1,59 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hr_dept_app
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      TZ: Asia/Manila
+    networks:
+      - hr_dept_net
+
+  db:
+    image: mariadb:10.4
+    container_name: hr_dept_db
+    restart: unless-stopped
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      TZ: Asia/Manila
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: u839345553_SBIT3G
+      MARIADB_USER: u839345553_sbit3g
+      MARIADB_PASSWORD: sbit3gQCU
+    volumes:
+      - hr_dept_db_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+      - ./Functions/backup1.sql:/seed/backup1.sql:ro
+      - ./config/sbit3g.sql:/seed/config_sbit3g.sql:ro
+    networks:
+      hr_dept_net:
+        aliases:
+          - sql985.main-hosting.eu
+
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    container_name: hr_dept_phpmyadmin
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+      UPLOAD_LIMIT: 128M
+    networks:
+      - hr_dept_net
+
+volumes:
+  hr_dept_db_data:
+
+networks:
+  hr_dept_net:
+    driver: bridge
