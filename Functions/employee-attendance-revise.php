@@ -177,13 +177,22 @@
                     $sched = $row['schedule_id'];
                     $lognow = date('H:i:s');
                     $sql = "SELECT * FROM schedule WHERE id = '$sched'";
-					$squery = $conn->query($sql);
-					$srow = $squery->fetch_assoc();
+						$squery = $conn->query($sql);
+						$srow = $squery ? $squery->fetch_assoc() : null;
+
+                    // Guard against missing/invalid schedule rows.
+                    if(!$srow || !isset($srow['time_in'], $srow['time_out'])){
+                        header("Location: ../Pages/employee-attendance.php?value=invalidSched");
+                        exit();
+                    }
 
                     if($srow['time_in'] == '07:00:00'){
                         $logstatus = ('07:30:00' > $lognow)? 'ONTIME':'LATE';
                     }else if($srow['time_in'] == '15:00:00'){
                         $logstatus = ('15:30:00' > $lognow)? 'ONTIME':'LATE';
+                    }else{
+                        header("Location: ../Pages/employee-attendance.php?value=invalidSched");
+                        exit();
                     }
 
                     $name = "".$row['first_name']." ".$row['last_name']."";
