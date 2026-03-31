@@ -36,7 +36,7 @@ docker compose up -d --build
 ## Create Admin Login (phpMyAdmin)
 1. Generate a bcrypt hash from the running app container:
 ```bash
-docker compose exec app php -r 'echo password_hash("YourStrongPass123!", PASSWORD_DEFAULT), PHP_EOL;'
+docker compose exec app php -r 'echo password_hash("Password123!", PASSWORD_DEFAULT), PHP_EOL;'
 ```
 2. Copy the output hash and run this SQL in phpMyAdmin (`u839345553_SBIT3G` database):
 ```sql
@@ -79,5 +79,4 @@ COMMIT;
   - database: `u839345553_SBIT3G`
   - username: `u839345553_sbit3g`
   - password: `sbit3gQCU`
-- This avoids mass editing old PHP files just for local revival.
 
